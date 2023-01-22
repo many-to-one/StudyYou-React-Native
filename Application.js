@@ -3,14 +3,10 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Home from './src/navbar_pages/Home';
 import Login from './src/navbar_pages/Login';
-import { AuthProvider } from './src/context/AuthContext';
 
-const Stack = createNativeStackNavigator();
-
-function App() {
+const Application = () => {
   return (
-    <AuthProvider>
-      <NavigationContainer>
+    <NavigationContainer>
       <Stack.Navigator>
         <Stack.Screen 
         name="Login" 
@@ -40,8 +36,7 @@ function App() {
         />
       </Stack.Navigator>
       </NavigationContainer>
-     </AuthProvider>
-  );
+  )
 }
 
-export default App;
+export default Application
