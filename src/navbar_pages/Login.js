@@ -1,30 +1,28 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { View, Text, Button, StyleSheet, TextInput } from 'react-native'
 import AuthButton from '../buttons/AuthButton'
-import { AuthContext } from '../context/AuthContext'
-import Test from './Test'
+import { AuthContext, login, User } from '../context/AuthContext'
 
 const Login = ({ navigation }) => {
 
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const {username} = useContext(AuthContext);
+  // const user = 'Alex'
 
   const LoginApi = async () => {
-    const resp = await fetch("/users/login/", {
-      method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body:JSON.stringify({
-          email: email,
-          password: password,
-      })
-    })
+    
+    try {
+      await login(email, password);
+    } catch (error) {
+      console.error('error', error);
+    }
       
   }
         return (
           <View style={styles.container}>
             <View>
+                <Text style={styles.text}>Hi {username} </Text>
               <TextInput 
                 onChangeText={(text) => setEmail(text)}
                 style={styles.input}
@@ -70,6 +68,9 @@ const styles = StyleSheet.create({
     padding: 10,
     color: 'white',
   },
+  text: {
+    color: 'white',
+  }
 })
 
 export default Login
