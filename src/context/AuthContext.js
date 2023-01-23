@@ -1,10 +1,10 @@
 import React, { createContext, useState } from 'react'
 import AsyncStorage from '@react-native-async-storage/async-storage';
-// import {AsyncStorage} from 'react-native';
 
 export const AuthContext = createContext();
 
 export const login = async(email, password) => {
+
     const resp = await fetch("http://127.0.0.1:8000/users/login/", {
       method: 'POST',
         headers: {
@@ -20,8 +20,12 @@ export const login = async(email, password) => {
         console.log('data:', data)
         const username = data.username
         AsyncStorage.setItem('username', username)
+        // navigation.navigate('Home');
+        return true;
     }else{
         alert('Your login or password is incorrect')
+        return false;
+        // navigation.navigate('Login');
     }
 
 }
@@ -35,8 +39,7 @@ export const AuthProvider = ({children}) => {
         setUsername(user)
         
     };
-    const {user} = User();
-    console.log('user2:', user)
+    const user = User();
 
     return(
    

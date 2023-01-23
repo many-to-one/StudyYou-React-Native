@@ -8,12 +8,16 @@ const Login = ({ navigation }) => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const {username} = useContext(AuthContext);
-  // const user = 'Alex'
 
   const LoginApi = async () => {
     
     try {
       await login(email, password);
+      if(true){
+        navigation.navigate('Home');
+      }else{
+        navigation.navigate('Login');
+      }
     } catch (error) {
       console.error('error', error);
     }
@@ -24,10 +28,15 @@ const Login = ({ navigation }) => {
             <View>
                 <Text style={styles.text}>Hi {username} </Text>
               <TextInput 
+                placeholder="Enter email"
+                placeholderTextColor={'gray'}
                 onChangeText={(text) => setEmail(text)}
                 style={styles.input}
               />
               <TextInput 
+                placeholder="Enter password"
+                placeholderTextColor={'gray'}
+                secureTextEntry
                 onChangeText={(text) => setPassword(text)}
                 style={styles.input}
               />
