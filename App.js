@@ -9,6 +9,7 @@ const Stack = createNativeStackNavigator();
 
 function App() {
   return (
+
     <AuthProvider>
       <NavigationContainer>
       <Stack.Navigator>
@@ -43,5 +44,6 @@ function App() {
     </AuthProvider>
   );
 }
+
 
 export default App;

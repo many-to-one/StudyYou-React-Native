@@ -1,8 +1,30 @@
 import React, { useEffect, useState } from 'react'
 import { View, Text, Image, StyleSheet } from 'react-native'
-import Event from '../backend_pages/Event'
+import AuthButton from '../buttons/AuthButton'
+import { logout } from '../context/AuthContext'
 
-const Home = () => {
+const Home = ({navigation}) => {
+
+  const [logouted, setLogouted] = useState(false)
+
+  const Logout = async() => {
+    try {
+        await logout();
+        setLogouted(true)
+      } catch (error) {
+        console.error('error', error);
+      }
+
+      if (logouted === true){
+        navigation.navigate('Login')
+      }
+
+  return (
+    <div>
+      
+    </div>
+  )
+}
 
   return (
 
@@ -23,6 +45,10 @@ const Home = () => {
       <View style={styles.third}>
         <Text style={styles.text}>Third block</Text>
       </View>
+      <AuthButton 
+      title={'Logout'} 
+      onPress={() =>  Logout()}
+      />
     </View>
   )
 }

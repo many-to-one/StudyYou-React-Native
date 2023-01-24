@@ -1,7 +1,7 @@
-import React, { useContext, useEffect, useState } from 'react'
-import { View, Text, Button, StyleSheet, TextInput } from 'react-native'
+import React, { useContext, useState } from 'react'
+import { View, Text, StyleSheet, TextInput } from 'react-native'
 import AuthButton from '../buttons/AuthButton'
-import { AuthContext, login, User } from '../context/AuthContext'
+import { AuthContext, login } from '../context/AuthContext'
 
 const Login = ({ navigation }) => {
 
@@ -9,18 +9,27 @@ const Login = ({ navigation }) => {
   const [password, setPassword] = useState('')
   const {username} = useContext(AuthContext);
 
+  const clearTextInput = () => {
+    setEmail('')
+    setPassword('')
+  }
+
   const LoginApi = async () => {
     
     try {
-      await login(email, password);
-      if(true){
-        navigation.navigate('Home');
+      const resp = await login(email, password);
+      if (resp === '200'){
+        navigation.navigate('Home')
+        clearTextInput()
+        // alert('Hello..')
       }else{
-        navigation.navigate('Login');
+        alert('Wrong data')
+        navigation.navigate('Login')
       }
+      
     } catch (error) {
       console.error('error', error);
-    }
+    }     
       
   }
         return (
@@ -40,11 +49,12 @@ const Login = ({ navigation }) => {
                 onChangeText={(text) => setPassword(text)}
                 style={styles.input}
               />
-              <AuthButton 
-              title={'Login'} 
-              onPress={() => LoginApi()}
-              // navigation.navigate('Home')
-              />
+                <AuthButton 
+                title={'Login'} 
+                onPress={() =>  LoginApi()}
+                // onPress={() => LoginApi()}
+                />
+
             </View>
           </View>
         )    
