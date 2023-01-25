@@ -5,26 +5,21 @@ import { logout } from '../context/AuthContext'
 
 const Home = ({navigation}) => {
 
-  const [logouted, setLogouted] = useState(false)
+  // const [logouted, setLogouted] = useState(false)
 
-  const Logout = async() => {
-    try {
-        await logout();
-        setLogouted(true)
-      } catch (error) {
-        console.error('error', error);
-      }
+  // const Logout = async() => {
+  //   try {
+  //       await logout();
+  //       setLogouted(true)
+  //     } catch (error) {
+  //       console.error('error', error);
+  //     }
 
-      if (logouted === true){
-        navigation.navigate('Login')
-      }
+  //     if (logouted === true){
+  //       navigation.navigate('Login')
+  //     }
 
-  return (
-    <div>
-      
-    </div>
-  )
-}
+
 
   return (
 
@@ -47,7 +42,7 @@ const Home = ({navigation}) => {
       </View>
       <AuthButton 
       title={'Logout'} 
-      onPress={() =>  Logout()}
+      onPress={() =>  logout()}
       />
     </View>
   )

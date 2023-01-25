@@ -23,44 +23,36 @@ export const login = async(email, password) => {
         const jwt = data.jwt
         AsyncStorage.setItem('username', username)
         AsyncStorage.setItem('jwt', jwt)
+        AsyncStorage.setItem('id', data.id)
+        console.log('jwt:', jwt)
         return '200';
     }else{
         alert('Your login or password is incorrect')
         return '404';
-        // navigation.navigate('Login');
     }
 
 }
 
 
 export const logout = async() => {
-    const [jwttoken, setJwttoken] = useState('');
 
-    const Token = async() => {
-        const token = await AsyncStorage.getItem('jwt')
-        setJwttoken(token)
-    };
+    const id = await AsyncStorage.getItem('id')
 
-    const userToken = Token();
-
-    const resp = await fetch("http://127.0.0.1:8000/users/logout/", {
+    const resp = await fetch(`http://127.0.0.1:8000/users/logout/${id}/`, {
         method: 'POST',
         headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
         },
-        body:JSON.stringify({
-            jwt: jwttoken,
-        })
         
     });
     const data = await resp.json();
     if (resp.status === 205){
-        console.log('jwttoken:', jwttoken)
         console.log('dataL:', data)
     }
-
+    console.log('dataL:', data)
     await AsyncStorage.removeItem('username');
-
+    await AsyncStorage.removeItem('jwt');
+    navigation.navigate('Login');
 }
 
 
