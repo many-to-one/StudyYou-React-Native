@@ -1,25 +1,12 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { View, Text, Image, StyleSheet } from 'react-native'
 import AuthButton from '../buttons/AuthButton'
-import { logout } from '../context/AuthContext'
+import { AuthContext } from '../context/AuthContext'
+import Menu from './Menu'
 
 const Home = ({navigation}) => {
 
-  // const [logouted, setLogouted] = useState(false)
-
-  // const Logout = async() => {
-  //   try {
-  //       await logout();
-  //       setLogouted(true)
-  //     } catch (error) {
-  //       console.error('error', error);
-  //     }
-
-  //     if (logouted === true){
-  //       navigation.navigate('Login')
-  //     }
-
-
+  const {logout} = useContext(AuthContext);
 
   return (
 
@@ -44,6 +31,17 @@ const Home = ({navigation}) => {
       title={'Logout'} 
       onPress={() =>  logout()}
       />
+      <View style={styles.menuStyle}>
+        <View style={styles.lineStyle}></View>
+        <Menu />
+        <View
+          style={[
+            styles.lineStyle,
+            {
+              marginVertical: 10,
+            },
+          ]}></View>
+      </View>
     </View>
   )
 }
@@ -87,7 +85,12 @@ const styles = StyleSheet.create({
     fontSize: 25,
     fontWeight: 'bold',
     color: '#fff',
-  }
+  },
+  lineStyle: {
+    marginBottom: 10,
+    borderWidth: 0.5,
+    borderColor: "grey",
+  },
 })
 
 export default Home

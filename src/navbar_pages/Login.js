@@ -7,7 +7,7 @@ const Login = ({ navigation }) => {
 
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-  const {username} = useContext(AuthContext);
+  const {userData, login} = useContext(AuthContext);
 
   const clearTextInput = () => {
     setEmail('')
@@ -35,7 +35,7 @@ const Login = ({ navigation }) => {
         return (
           <View style={styles.container}>
             <View>
-                <Text style={styles.text}>Hi {username} </Text>
+                <Text style={styles.text}>Hi {userData.username} </Text>
               <TextInput 
                 placeholder="Enter email"
                 placeholderTextColor={'gray'}
