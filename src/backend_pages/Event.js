@@ -1,11 +1,37 @@
-import React from 'react'
-import { View, Text, Image, StyleSheet } from 'react-native'
+import React, { useContext } from 'react'
+import { View, Text, StyleSheet } from 'react-native'
+import Icon from "react-native-vector-icons/MaterialIcons";
+import { AuthContext } from '../context/AuthContext';
 
-const Event = (ev) => {
+const Event = ({ev}) => {
+  console.log('event:', ev.event)
+  const {proxy} = useContext(AuthContext);
+
+  const deleteEvent = async() => {
+    await fetch(`${proxy}/backend/events/${ev.id}/${ev.user}/delete/`, {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+    });
+
+    // navigation.navigate('AllEvents');
+    window.location.reload();
+}
+
   return (
     <View style={styles.container}>
-      <View style={styles.first}>
-        <Text>{ev.hours}</Text>
+      <View style={styles.event}>
+        <Text style={styles.event_date}>{ev.date.slice(0, 10)}</Text>
+        <Text style={styles.event_text}>{ev.event}</Text>
+      </View>  
+      <View>
+        <Icon 
+          name='delete' 
+          onPress={() => deleteEvent()}
+          // onPress={() => navigation.navigate('Delete', {id: ev.id, user: ev.user})} 
+          style={styles.delete}  
+        />
       </View>
     </View>
   )
@@ -13,44 +39,37 @@ const Event = (ev) => {
 
 const styles = StyleSheet.create({
 
-    container:{
+    container: {
       flex: 1,
-      flexDirection: 'column',
-      justifyContent: 'center',
+      flexDirection: 'row',
+      justifyContent: 'space-between',
       alignItems: 'center',
-      gap: '1rem',
-      padding: 20,
-  
-    },
-    first:{
-      backgroundColor: '#9fd3c7',
-      width: 250,
+      backgroundColor: '#282c34',
+      width: 300,
       height:50,
-      justifyContent: 'center',
-      alignItems: 'center',
+      borderRadius: 10,
       margin: 5,
     },
-    second:{
-      backgroundColor: '#385170',
-      width: 250,
-      height:50,
+    event:{
       justifyContent: 'center',
-      alignItems: 'center',
-      margin: 5,
+      borderColor: 'white',
     },
-    third:{
-      backgroundColor: '#142d4c',
-      width: 250,
-      height:50,
-      justifyContent: 'center',
-      alignItems: 'center',
-      margin: 5,
-    },
-    text: {
-      fontSize: 25,
+    event_date: {
+      fontSize: 15,
       fontWeight: 'bold',
       color: '#fff',
-    }
+      marginLeft: 10,
+    },
+    event_text: {
+      fontSize: 15,
+      fontWeight: 'bold',
+      color: '#fff',
+      marginLeft: 10,
+    },
+    delete: {
+      color: '#F0007F',
+      fontSize: 30,
+    },
   })
 
 export default Event

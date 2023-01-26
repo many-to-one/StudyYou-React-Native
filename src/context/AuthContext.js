@@ -1,16 +1,18 @@
+import {AsyncStorage} from 'react-native';
 import React, { createContext, useState } from 'react'
-import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export const AuthContext = createContext();
 
 export const AuthProvider = ({children}) => {
 
-    const [userData, setUserData] = useState({})
+    const [userData, setUserData] = useState({});
+    const [token, setToken] = useState('')
+    const proxy = "http://127.0.0.1:8000"
 
     const register = async (username ,email, password) => {
 
-        const response = await fetch("http://127.0.0.1:8000/users/register/", {
-            method: 'POST',
+        const response = await fetch(`${proxy}/users/register/`, {
+            method: 'GET',
             headers: {
                 'Content-Type': 'application/json'
             },
@@ -32,7 +34,7 @@ export const AuthProvider = ({children}) => {
 
     const login = async(email, password) => {
 
-        const resp = await fetch("http://127.0.0.1:8000/users/login/", {
+        const resp = await fetch(`${proxy}/users/login/`, {
           method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -46,11 +48,7 @@ export const AuthProvider = ({children}) => {
         if (resp.status === 200){
             console.log('data:', data)
             setUserData(data)
-            // const jwt = data.jwt
-            // AsyncStorage.setItem('username', username)
-            // AsyncStorage.setItem('jwt', jwt)
-            // AsyncStorage.setItem('id', data.id)
-            // console.log('jwt:', jwt)
+            setToken(JSON.stringify(data.jwt))
             return '200';
         }else{
             alert('Your login or password is incorrect')
@@ -59,12 +57,28 @@ export const AuthProvider = ({children}) => {
 
     };
 
+    const setingToken = async (token) => {
+        try {
+          await AsyncStorage.setItem("token", JSON.stringify(token));
+        } catch (error) {
+          console.log(error);
+        }
+      };
+
+    const Token = async() => {
+        try {
+            const token = JSON.parse(await AsyncStorage.getItem("token"))
+            console.log('localToken:', token)
+            return token;
+          } catch (error) {
+           console.log(error); 
+          }
+    }
+
 
     const logout = async() => {
 
-        // const id = await AsyncStorage.getItem('id')
-
-        const resp = await fetch(`http://127.0.0.1:8000/users/logout/${userData.id}/`, {
+        const resp = await fetch(`${proxy}/users/logout/${userData.id}/`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -72,8 +86,6 @@ export const AuthProvider = ({children}) => {
 
         });
         const data = await resp.json();
-        // if (resp.status === 205){
-        // }
         navigation.navigate('Login');
         return '205';
     };
@@ -85,6 +97,9 @@ export const AuthProvider = ({children}) => {
             login,
             logout,
             userData,
+            proxy,
+            token,
+            Token
         }}>
             {children}
         </AuthContext.Provider>

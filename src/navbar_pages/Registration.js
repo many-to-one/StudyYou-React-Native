@@ -74,15 +74,16 @@ const styles = StyleSheet.create({
     position: 'absolute',
     top: 25,
     marginLeft: -300,
-    color: '#F0007F',
+    color: 'white',
+    fontSize: 50,
   },
   container: {
     flex: 1,
     backgroundColor: 'black',
     flexDirection: 'column',
     justifyContent: 'center',
-    alignItems: 'white',
-    gap: 25,
+    alignItems: 'center',
+    // gap/=: 25,
   },
   text: {
     color: 'black'

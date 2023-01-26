@@ -1,74 +1,33 @@
 import React, { useContext, useEffect, useState } from 'react'
-import { View, Text, Image, StyleSheet, Alert } from 'react-native'
-import AuthButton from '../buttons/AuthButton'
+import { View, StyleSheet, } from 'react-native'
+import AllEvents from '../backend_pages/AllEvents'
 import { AuthContext } from '../context/AuthContext'
 import Login from './Login'
-import Menu from './Menu'
 
 const Home = ({navigation}) => {
 
-  const {logout, userData } = useContext(AuthContext);
-
-  let token = userData.jwt
+  const { Token } = useContext(AuthContext);
+  console.log('tokenHome:', Token)
 
   const openAlert=()=>{
     alert('Please login');
     navigation.navigate('Login')
   }
 
-  if(token){
+  if(Token){
 
     return (
-
-      // <View>
-      //     <Image source={
-      //       require('../../assets/main.png')
-      //       }
-      //       />
-      // </View>
   
-        <View style={styles.container}>
-  
-        <View style={styles.first}>
-          <Text style={styles.text}>First block</Text>
-        </View>
-  
-        <View style={styles.second}>
-          <Text style={styles.text}>Second block</Text>
-        </View>
-  
-        <View style={styles.third}>
-          <Text style={styles.text}>Third block</Text>
-        </View>
-  
-        <AuthButton 
-        title={'Logout'} 
-        onPress={() =>  logout()}
-        />
-  
-        <View style={styles.menuStyle}>
-  
-          <View style={styles.lineStyle}></View>
-  
-          <View
-            style={[
-              styles.lineStyle,
-              {
-                marginVertical: 10,
-              },
-            ]}>    
-          </View>
-  
-        </View>
-  
+      <View style={styles.container}>
+        <AllEvents />
       </View>
   
     )
 
   } else {
-    useEffect(() => {
-      openAlert()
-    })
+    // useEffect(() => {
+    //   openAlert()
+    // }, [])
     return(
       <Login />
     )
@@ -78,11 +37,12 @@ const Home = ({navigation}) => {
 
 const styles = StyleSheet.create({
 
-  container:{
+  container: {
     flex: 1,
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
+    backgroundColor: 'black',
     gap: '1rem',
     padding: 20,
 

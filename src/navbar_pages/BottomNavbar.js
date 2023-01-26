@@ -7,6 +7,7 @@ import Icon from "react-native-vector-icons/MaterialIcons";
 import { StyleSheet } from 'react-native';
 import { AuthContext } from '../context/AuthContext';
 import Registration from './Registration';
+import AllEvents from '../backend_pages/AllEvents';
 
 const Tab = createBottomTabNavigator();
 
@@ -58,6 +59,19 @@ function BottomNavigator() {
         }}
       >
         <Tab.Screen 
+        name="Home"
+        component={Home} 
+        options={{
+          title: 'Home',
+          headerTitleStyle: {
+            color: 'white',
+          },
+          headerStyle: {
+            backgroundColor: 'black',
+          }
+        }}
+        />
+        <Tab.Screen 
         name="Login" 
         component={Login} 
         options={{
@@ -88,19 +102,6 @@ function BottomNavigator() {
         }}
         />
         <Tab.Screen 
-        name="Home"
-        component={Home} 
-        options={{
-          title: 'Home',
-          headerTitleStyle: {
-            color: 'white',
-          },
-          headerStyle: {
-            backgroundColor: 'black',
-          }
-        }}
-        />
-        <Tab.Screen 
         name="Logout" 
         component={Logout} 
         options={{
@@ -110,6 +111,21 @@ function BottomNavigator() {
           headerStyle: {
             backgroundColor: 'black',
           }
+        }}
+        />
+        <Tab.Screen 
+        name="AllEvents" 
+        component={AllEvents} 
+        options={{
+          title: 'AllEvents',
+          headerTitleStyle: {
+            color: 'white',
+          },
+          headerStyle: {
+            backgroundColor: 'black',
+          },
+          tabBarVisible: false, // hide the button
+          tabBarButton: (props) => null, // hide the button
         }}
         />
       </Tab.Navigator>
