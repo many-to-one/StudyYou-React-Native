@@ -1,9 +1,10 @@
 import React, { useContext, useState } from 'react'
 import { View, StyleSheet, TextInput } from 'react-native'
+import Icon from "react-native-vector-icons/MaterialIcons";
 import AuthButton from '../buttons/AuthButton'
 import { AuthContext } from '../context/AuthContext';
 
-const Registration = () => {
+const Registration = ({ navigation }) => {
 
   const { register } = useContext(AuthContext);
   const [username, setUsername] = useState('');
@@ -34,6 +35,11 @@ const Registration = () => {
 
   return (
     <View style={styles.container}>
+    <Icon 
+      name='arrow-back-ios' 
+      onPress={() => navigation.navigate('Login')} 
+      style={styles.back}  
+      ></Icon>
       <View>
         <TextInput 
           placeholder='username'
@@ -64,12 +70,18 @@ const Registration = () => {
 }
 
 const styles = StyleSheet.create({
+  back: {
+    position: 'absolute',
+    top: 25,
+    marginLeft: -300,
+    color: '#F0007F',
+  },
   container: {
     flex: 1,
     backgroundColor: 'black',
     flexDirection: 'column',
     justifyContent: 'center',
-    alignItems: 'center',
+    alignItems: 'white',
     gap: 25,
   },
   text: {

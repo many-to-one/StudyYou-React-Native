@@ -24,7 +24,7 @@ function BottomNavigator() {
       case 'Login':
         iconName = 'login';
         break;
-      case 'Registration':
+      case 'Signup':
         iconName = 'app-registration';
         break;  
       case 'Logout':
@@ -67,7 +67,9 @@ function BottomNavigator() {
           },
           headerStyle: {
             backgroundColor: 'black',
-          }
+          },
+          tabBarVisible: false, // hide the button
+          tabBarButton: (props) => null, // hide the button
         }}
         />
         <Tab.Screen 
@@ -80,7 +82,9 @@ function BottomNavigator() {
           },
           headerStyle: {
             backgroundColor: 'black',
-          }
+          },
+          tabBarVisible: false, // hide the button
+          tabBarButton: (props) => null, // hide the button
         }}
         />
         <Tab.Screen 

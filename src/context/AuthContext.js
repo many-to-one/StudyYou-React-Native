@@ -72,13 +72,10 @@ export const AuthProvider = ({children}) => {
 
         });
         const data = await resp.json();
-        if (resp.status === 205){
-            console.log('dataL:', data)
-        }
-        console.log('dataL:', data)
-        // await AsyncStorage.removeItem('username');
-        // await AsyncStorage.removeItem('jwt');
+        // if (resp.status === 205){
+        // }
         navigation.navigate('Login');
+        return '205';
     };
 
     return(
