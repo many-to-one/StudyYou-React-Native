@@ -1,7 +1,9 @@
 import React, { useContext, useState } from 'react'
-import { View, Text, StyleSheet, TextInput } from 'react-native'
+import { View, Text, StyleSheet, TextInput, Button } from 'react-native'
 import AuthButton from '../buttons/AuthButton'
-import { AuthContext, login } from '../context/AuthContext'
+import RegisterButton from '../buttons/RegisterButton'
+import { AuthContext } from '../context/AuthContext'
+
 
 const Login = ({ navigation }) => {
 
@@ -21,7 +23,6 @@ const Login = ({ navigation }) => {
       if (resp === '200'){
         navigation.navigate('Home')
         clearTextInput()
-        // alert('Hello..')
       }else{
         alert('Wrong data')
         navigation.navigate('Login')
@@ -32,9 +33,14 @@ const Login = ({ navigation }) => {
     }     
       
   }
+
+  const Register = () => {
+    navigation.navigate('Registration')
+  }
+
         return (
           <View style={styles.container}>
-            <View>
+            <View style={styles.login}>
                 <Text style={styles.text}>Hi {userData.username} </Text>
               <TextInput 
                 placeholder="Enter email"
@@ -52,9 +58,17 @@ const Login = ({ navigation }) => {
                 <AuthButton 
                 title={'Login'} 
                 onPress={() =>  LoginApi()}
-                // onPress={() => LoginApi()}
                 />
 
+            </View>
+            <View style={styles.register}>
+              <Text style={styles.text}>
+                Don't have an account?
+              </Text>
+              <RegisterButton 
+                title={'Register'} 
+                onPress={() =>  Register()}
+                />
             </View>
           </View>
         )    
@@ -69,6 +83,13 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
+    gap: 25,
+  },
+  login: {
+    gap: 25,
+  },
+  register: {
+    gap: 15,
   },
   button: {
     alignItems: 'center',

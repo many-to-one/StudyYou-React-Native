@@ -1,7 +1,7 @@
 import React from 'react';
 import { Text, View, StyleSheet, TouchableOpacity } from 'react-native';
 
-export default function AuthButton({onPress, title}) {
+export default function RegisterButton({onPress, title}) {
   return (
     <TouchableOpacity style={styles.button} onPress={onPress}>
       <Text style={styles.text}>{title}</Text>
@@ -13,13 +13,11 @@ const styles = StyleSheet.create({
   button: {
     alignItems: 'center',
     justifyContent: 'center',
-    paddingVertical: 12,
+    paddingVertical: 6,
     paddingHorizontal: 20,
-    width: 250,
-    marginLeft: 13,
     borderRadius: 4,
     elevation: 3,
-    backgroundColor: '#F0007F'
+    backgroundColor: '#00B9F0'
   },
   text: {
     fontSize: 16,

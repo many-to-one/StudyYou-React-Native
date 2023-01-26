@@ -2,12 +2,17 @@ import * as React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Home from './Home';
 import Login from './Login';
-import Icon from "react-native-vector-icons/AntDesign";
+import Logout from './Logout';
+import Icon from "react-native-vector-icons/MaterialIcons";
 import { StyleSheet } from 'react-native';
+import { AuthContext } from '../context/AuthContext';
+import Registration from './Registration';
 
 const Tab = createBottomTabNavigator();
 
 function BottomNavigator() {
+
+  const {userData}  = React.useContext(AuthContext);  
 
   const screenOptions = (route, color) => {
     let iconName;
@@ -16,11 +21,14 @@ function BottomNavigator() {
       case 'Home':
         iconName = 'home';
         break;
-      case 'Browse':
-        iconName = 'appstore-o';
+      case 'Login':
+        iconName = 'login';
         break;
-      case 'Library':
-        iconName = 'folder1';
+      case 'Registration':
+        iconName = 'app-registration';
+        break;  
+      case 'Logout':
+        iconName = 'logout';
         break;
       default:
         break;
@@ -42,17 +50,6 @@ function BottomNavigator() {
             elevation: 0,
             ...styles.container,
           },
-          // tabBarOptions: {
-          //   'tabBarActiveTintColor': '#F0007F',
-          //   'tabBarInactiveTintColor': 'gray',
-          // },
-          // tabBarStyle: [
-          //     {
-          //       "display": "flex"
-          //     },
-          //     null
-          // ]
-
         })}
         tabBarOptions={{
           activeTintColor: 'white',
@@ -64,7 +61,7 @@ function BottomNavigator() {
         name="Login" 
         component={Login} 
         options={{
-          title: 'Login Form',
+          title: 'Login',
           headerTitleStyle: {
             color: 'white',
           },
@@ -74,10 +71,35 @@ function BottomNavigator() {
         }}
         />
         <Tab.Screen 
-        name="Home" 
+        name="Registration" 
+        component={Registration} 
+        options={{
+          title: 'Registration',
+          headerTitleStyle: {
+            color: 'white',
+          },
+          headerStyle: {
+            backgroundColor: 'black',
+          }
+        }}
+        />
+        <Tab.Screen 
+        name="Home"
         component={Home} 
         options={{
-          title: 'Hi, user',
+          title: 'Home',
+          headerTitleStyle: {
+            color: 'white',
+          },
+          headerStyle: {
+            backgroundColor: 'black',
+          }
+        }}
+        />
+        <Tab.Screen 
+        name="Logout" 
+        component={Logout} 
+        options={{
           headerTitleStyle: {
             color: 'white',
           },
@@ -94,9 +116,10 @@ function BottomNavigator() {
 const styles = StyleSheet.create({
   container: {
     position: 'absolute',
-    width: 350,
+    justifyContent: 'center',
+    alignContent: 'center',
     bottom: 25,
-    marginLeft: 12,
+    elevation: 10,
     backgroundColor: '#4d4d4d',
     borderRadius: 15,
   }

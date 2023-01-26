@@ -1,49 +1,79 @@
 import React, { useContext, useEffect, useState } from 'react'
-import { View, Text, Image, StyleSheet } from 'react-native'
+import { View, Text, Image, StyleSheet, Alert } from 'react-native'
 import AuthButton from '../buttons/AuthButton'
 import { AuthContext } from '../context/AuthContext'
+import Login from './Login'
 import Menu from './Menu'
 
 const Home = ({navigation}) => {
 
-  const {logout} = useContext(AuthContext);
+  const {logout, userData } = useContext(AuthContext);
 
-  return (
+  let token = userData.jwt
 
-    // <View>
-    //     <Image source={
-    //       require('../../assets/main.png')
-    //       }
-    //       />
-    // </View>
+  const openAlert=()=>{
+    alert('Please login');
+    navigation.navigate('Login')
+  }
 
-    <View style={styles.container}>
-      <View style={styles.first}>
-        <Text style={styles.text}>First block</Text>
+  if(token){
+
+    return (
+
+      // <View>
+      //     <Image source={
+      //       require('../../assets/main.png')
+      //       }
+      //       />
+      // </View>
+  
+        <View style={styles.container}>
+  
+        <View style={styles.first}>
+          <Text style={styles.text}>First block</Text>
+        </View>
+  
+        <View style={styles.second}>
+          <Text style={styles.text}>Second block</Text>
+        </View>
+  
+        <View style={styles.third}>
+          <Text style={styles.text}>Third block</Text>
+        </View>
+  
+        <AuthButton 
+        title={'Logout'} 
+        onPress={() =>  logout()}
+        />
+  
+        <View style={styles.menuStyle}>
+  
+          <View style={styles.lineStyle}></View>
+  
+          <View
+            style={[
+              styles.lineStyle,
+              {
+                marginVertical: 10,
+              },
+            ]}>    
+          </View>
+  
+        </View>
+  
       </View>
-      <View style={styles.second}>
-        <Text style={styles.text}>Second block</Text>
-      </View>
-      <View style={styles.third}>
-        <Text style={styles.text}>Third block</Text>
-      </View>
-      <AuthButton 
-      title={'Logout'} 
-      onPress={() =>  logout()}
-      />
-      <View style={styles.menuStyle}>
-        <View style={styles.lineStyle}></View>
-        <Menu />
-        <View
-          style={[
-            styles.lineStyle,
-            {
-              marginVertical: 10,
-            },
-          ]}></View>
-      </View>
-    </View>
-  )
+  
+    )
+
+  } else {
+    useEffect(() => {
+      openAlert()
+    })
+    return(
+      <Login />
+    )
+  }
+
 }
 
 const styles = StyleSheet.create({

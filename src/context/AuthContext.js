@@ -7,6 +7,29 @@ export const AuthProvider = ({children}) => {
 
     const [userData, setUserData] = useState({})
 
+    const register = async (username ,email, password) => {
+
+        const response = await fetch("http://127.0.0.1:8000/users/register/", {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body:JSON.stringify({
+                username: username,
+                email: email,
+                password: password,
+            })
+          });
+    
+          const data = await response.json()
+          console.log(data)
+          if(response.status === 201) {
+            return '201';
+          }else{
+            alert('The data you provided is incorrect, please try again')
+          }
+    };
+
     const login = async(email, password) => {
 
         const resp = await fetch("http://127.0.0.1:8000/users/login/", {
@@ -61,6 +84,7 @@ export const AuthProvider = ({children}) => {
     return(
    
         <AuthContext.Provider value={{
+            register,
             login,
             logout,
             userData,
