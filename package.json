@@ -16,6 +16,7 @@
     "@react-navigation/native": "^6.1.2",
     "@react-navigation/native-stack": "^6.9.8",
     "expo": "~47.0.12",
+    "expo-jwt": "^1.4.1",
     "expo-status-bar": "~1.4.2",
     "jwt-decode": "^3.1.2",
     "react": "18.1.0",

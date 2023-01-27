@@ -1,12 +1,14 @@
-import {AsyncStorage} from 'react-native';
+// import {AsyncStorage} from 'react-native';
 import React, { createContext, useState } from 'react'
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export const AuthContext = createContext();
 
 export const AuthProvider = ({children}) => {
 
     const [userData, setUserData] = useState({});
-    const [token, setToken] = useState('')
+    const [token, setToken] = useState('');
+    const [allUserInfo, setAllUserInfo] = useState([]);
     const proxy = "http://127.0.0.1:8000"
 
     const register = async (username ,email, password) => {
@@ -46,9 +48,11 @@ export const AuthProvider = ({children}) => {
         });
         const data = await resp.json()
         if (resp.status === 200){
-            console.log('data:', data)
+            console.log('data:', data.jwt)
+            const setasynctoken = await AsyncStorage.setItem("asyncUserData", JSON.stringify(data));
             setUserData(data)
-            setToken(JSON.stringify(data.jwt))
+            setToken(data.jwt)
+            console.log('token:', token)
             return '200';
         }else{
             alert('Your login or password is incorrect')
@@ -57,23 +61,6 @@ export const AuthProvider = ({children}) => {
 
     };
 
-    const setingToken = async (token) => {
-        try {
-          await AsyncStorage.setItem("token", JSON.stringify(token));
-        } catch (error) {
-          console.log(error);
-        }
-      };
-
-    const Token = async() => {
-        try {
-            const token = JSON.parse(await AsyncStorage.getItem("token"))
-            console.log('localToken:', token)
-            return token;
-          } catch (error) {
-           console.log(error); 
-          }
-    }
 
 
     const logout = async() => {
@@ -90,6 +77,12 @@ export const AuthProvider = ({children}) => {
         return '205';
     };
 
+
+    const getToken = async() => {
+      setAllUserInfo(JSON.parse(await AsyncStorage.getItem("asyncUserData")))
+    }
+
+
     return(
    
         <AuthContext.Provider value={{
@@ -99,7 +92,7 @@ export const AuthProvider = ({children}) => {
             userData,
             proxy,
             token,
-            Token
+            allUserInfo,
         }}>
             {children}
         </AuthContext.Provider>

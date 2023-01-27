@@ -1,28 +1,29 @@
 import React, { useContext, useEffect } from 'react'
 import { AuthContext } from '../context/AuthContext';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Logout = async({ navigation }) => {
-  const { logout } = useContext(AuthContext);
-    // try {
-    //     await logout();
-    //     if(data.resp === 500){
-    //       alert('You need to loging up before logout')
-    //       navigation.navigate('Login')
-    //     }
-    //   } catch (error) {
-    //     console.error('error', error);
-    //     alert('You need to loging up before logout')
-    //     navigation.navigate('Login')
-    //   }
+  const { allUserInfo, proxy } = useContext(AuthContext);
+    // const resp = await logout();
 
-    const resp = await logout();
-      // if(resp === '205'){
-      //   alert('You are lorged out')
-      //   navigation.navigate('Login')
-      // } else {
-      //   alert('You need to loging up before logout')
-      //   navigation.navigate('Login')
-      // }  
+    useEffect(() => {
+      logout()
+    }, [])
+
+    const logout = async() => {
+
+      const resp = await fetch(`${proxy}/users/logout/${allUserInfo.id}/`, {
+          method: 'POST',
+          headers: {
+              'Content-Type': 'application/json',
+          },
+
+      });
+      const data = await resp.json();
+      navigation.navigate('Login');
+      return '205';
+  };
+
 
 }
 

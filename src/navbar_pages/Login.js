@@ -21,8 +21,8 @@ const Login = ({ navigation }) => {
     try {
       const resp = await login(email, password);
       if (resp === '200'){
-        navigation.navigate('Home')
         clearTextInput()
+        navigation.navigate('Home')
       }else{
         alert('Wrong data')
         navigation.navigate('Login')

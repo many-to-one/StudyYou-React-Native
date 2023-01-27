@@ -97,8 +97,8 @@ function BottomNavigator() {
           headerStyle: {
             backgroundColor: 'black',
           },
-          tabBarVisible: false, // hide the button
-          tabBarButton: (props) => null, // hide the button
+          // tabBarVisible: false, // hide the button
+          // tabBarButton: (props) => null, // hide the button
         }}
         />
         <Tab.Screen 

@@ -3,18 +3,45 @@ import { View, StyleSheet, } from 'react-native'
 import AllEvents from '../backend_pages/AllEvents'
 import { AuthContext } from '../context/AuthContext'
 import Login from './Login'
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Home = ({navigation}) => {
 
-  const { Token } = useContext(AuthContext);
-  console.log('tokenHome:', Token)
+  const [ asyncUserData, setAsyncUserData ] = useState('');
+  const [token, setToken] = useState('');
+  const {proxy} = useContext(AuthContext);
 
-  const openAlert=()=>{
-    alert('Please login');
-    navigation.navigate('Login')
+  useEffect(() => {
+    profile()
+  }, [])
+  
+  const profile = async() => {
+
+    let datas = JSON.parse(await AsyncStorage.getItem("asyncUserData"))
+
+    const resp = await fetch(`${proxy}/users/user/${datas.id}`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    });
+    const data = await resp.json()
+    if(resp === 200){
+      console.log(data.token)
+      setToken(data.token)
+    }
+
   }
 
-  if(Token){
+  const getToken = async() => {
+    setAsyncUserData(JSON.parse(await AsyncStorage.getItem("asyncUserData")))
+  }
+    console.log(
+      'id:', asyncUserData.id,
+      'token:', token
+    )
+
+  if(token !== null){
 
     return (
   
@@ -25,9 +52,6 @@ const Home = ({navigation}) => {
     )
 
   } else {
-    // useEffect(() => {
-    //   openAlert()
-    // }, [])
     return(
       <Login />
     )

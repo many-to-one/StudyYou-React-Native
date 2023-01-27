@@ -15,8 +15,8 @@ const Event = ({ev}) => {
         },
     });
 
-    // navigation.navigate('AllEvents');
-    window.location.reload();
+    navigation.navigate('AllEvents');
+    // window.location.reload();
 }
 
   return (
