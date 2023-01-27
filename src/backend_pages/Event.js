@@ -15,8 +15,9 @@ const Event = ({ev}) => {
         },
     });
 
-    navigation.navigate('AllEvents');
+    navigation.navigate('Home');
     // window.location.reload();
+    window.location.reload(false);
 }
 
   return (

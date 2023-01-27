@@ -4,18 +4,18 @@ import { AuthContext } from '../context/AuthContext'
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Event from './Event'
 
-const AllEvents = () => {
+const AllEvents = ({datas}) => {
     const { userData, proxy } = useContext(AuthContext);
     const [ events, setEvents] = useState([]);
-    const [ asyncUserData, setAsyncUserData ] = useState('');
 
     useEffect(() => {
-      getToken()
+      allEvents()
     }, [])
 
-    const allEvents = async(info) => {
-
-        const response = await fetch(`${proxy}/backend/events/${info.id}/`)
+    const allEvents = async() => {
+      let datas = JSON.parse(await AsyncStorage.getItem("asyncUserData"))
+      console.log('datas:', datas)
+        const response = await fetch(`${proxy}/backend/events/${datas.id}/`)
         const resp = await response.json();
         setEvents(resp)
         console.log(
@@ -23,12 +23,6 @@ const AllEvents = () => {
             'events:', events,
             'proxy:', proxy
             )
-    }
-
-    const getToken = async() => {
-      let info = JSON.parse(await AsyncStorage.getItem("asyncUserData"))
-      console.log('info:', info)
-      await allEvents(info)
     }
 
   return (

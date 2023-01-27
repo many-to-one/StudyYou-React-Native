@@ -1,53 +1,51 @@
 import React, { useContext, useEffect, useState } from 'react'
-import { View, StyleSheet, } from 'react-native'
+import { StyleSheet, SafeAreaView, ScrollView } from 'react-native'
 import AllEvents from '../backend_pages/AllEvents'
 import { AuthContext } from '../context/AuthContext'
-import Login from './Login'
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import Login from './Login'
 
 const Home = ({navigation}) => {
 
-  const [ asyncUserData, setAsyncUserData ] = useState('');
-  const [token, setToken] = useState('');
-  const {proxy} = useContext(AuthContext);
+  const { proxy } = useContext(AuthContext);
+  const [profileToken, setProfileToken] = useState('')
+  let datas;
 
   useEffect(() => {
     profile()
   }, [])
-  
+
   const profile = async() => {
 
     let datas = JSON.parse(await AsyncStorage.getItem("asyncUserData"))
-
-    const resp = await fetch(`${proxy}/users/user/${datas.id}`, {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json'
+    console.log('datas:', datas)
+    if(datas === null){
+      navigation.navigate('Login')
+    }else{
+      const resp = await fetch(`${proxy}/users/user/${datas.id}/`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      });
+      const data = await resp.json()
+      if(data){
+        console.log('data:', data)
+        setProfileToken(data.token)
       }
-    });
-    const data = await resp.json()
-    if(resp === 200){
-      console.log(data.token)
-      setToken(data.token)
     }
 
   }
 
-  const getToken = async() => {
-    setAsyncUserData(JSON.parse(await AsyncStorage.getItem("asyncUserData")))
-  }
-    console.log(
-      'id:', asyncUserData.id,
-      'token:', token
-    )
-
-  if(token !== null){
+  if(profileToken){
 
     return (
   
-      <View style={styles.container}>
-        <AllEvents />
-      </View>
+      <SafeAreaView  style={styles.container}>
+         <ScrollView>
+            <AllEvents />
+          </ScrollView>
+      </SafeAreaView >
   
     )
 

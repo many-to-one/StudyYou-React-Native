@@ -2,8 +2,8 @@ import React, { useContext, useEffect } from 'react'
 import { AuthContext } from '../context/AuthContext';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-const Logout = async({ navigation }) => {
-  const { allUserInfo, proxy } = useContext(AuthContext);
+const Logout = ({ navigation }) => {
+  const { userData, proxy } = useContext(AuthContext);
     // const resp = await logout();
 
     useEffect(() => {
@@ -12,7 +12,9 @@ const Logout = async({ navigation }) => {
 
     const logout = async() => {
 
-      const resp = await fetch(`${proxy}/users/logout/${allUserInfo.id}/`, {
+      let datas = JSON.parse(await AsyncStorage.getItem("asyncUserData"))
+
+      const resp = await fetch(`${proxy}/users/logout/${datas.id}/`, {
           method: 'POST',
           headers: {
               'Content-Type': 'application/json',
@@ -20,6 +22,8 @@ const Logout = async({ navigation }) => {
 
       });
       const data = await resp.json();
+      await AsyncStorage.removeItem("asyncUserData")
+      window.location.reload()
       navigation.navigate('Login');
       return '205';
   };

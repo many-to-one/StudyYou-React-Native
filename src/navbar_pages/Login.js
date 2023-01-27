@@ -1,15 +1,19 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { View, Text, StyleSheet, TextInput, Button } from 'react-native'
+import AllEvents from '../backend_pages/AllEvents'
 import AuthButton from '../buttons/AuthButton'
 import RegisterButton from '../buttons/RegisterButton'
 import { AuthContext } from '../context/AuthContext'
+import Home from './Home'
 
 
 const Login = ({ navigation }) => {
 
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-  const {userData, login} = useContext(AuthContext);
+  const {userData, login,token, profileToken, logged} = useContext(AuthContext);
+
+  // console.log('profileToken:', profileToken)
 
   const clearTextInput = () => {
     setEmail('')
@@ -18,19 +22,19 @@ const Login = ({ navigation }) => {
 
   const LoginApi = async () => {
     
-    try {
+    // try {
       const resp = await login(email, password);
       if (resp === '200'){
         clearTextInput()
         navigation.navigate('Home')
+        window.location.reload()
       }else{
-        alert('Wrong data')
         navigation.navigate('Login')
       }
       
-    } catch (error) {
-      console.error('error', error);
-    }     
+    // } catch (error) {
+    //   console.error('error', error);
+    // }     
       
   }
 
@@ -38,10 +42,17 @@ const Login = ({ navigation }) => {
     navigation.navigate('Registration')
   }
 
-        return (
+    if(logged === true){
+      return(
+        <View>
+          <Home />
+        </View>
+      )
+    }else{
+      return(
           <View style={styles.container}>
             <View style={styles.login}>
-                <Text style={styles.text}>Hi {userData.username} </Text>
+              <Text style={styles.text}>Hi {userData.username} </Text>
               <TextInput 
                 placeholder="Enter email"
                 placeholderTextColor={'gray'}
@@ -58,20 +69,22 @@ const Login = ({ navigation }) => {
                 <AuthButton 
                 title={'Login'} 
                 onPress={() =>  LoginApi()}
-                />
-
+              />
+    
             </View>
-            <View style={styles.register}>
-              <Text style={styles.text}>
-                Don't have an account?
-              </Text>
-              <RegisterButton 
-                title={'Register'} 
-                onPress={() =>  Register()}
+              <View style={styles.register}>
+                <Text style={styles.text}>
+                  Don't have an account?
+                </Text>
+                <RegisterButton 
+                  title={'Registration'} 
+                  onPress={() =>  Register()}
                 />
             </View>
-          </View>
-        )    
+          </View> 
+    
+        )
+    }
 
   }
   

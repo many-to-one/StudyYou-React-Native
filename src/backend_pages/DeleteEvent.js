@@ -18,7 +18,7 @@ const DeleteEvent = ({ route, navigation }) => {
             },
         });
     
-        navigation.navigate('Home');
+        // navigation.navigate('AllEvents');
     }
 
   return (

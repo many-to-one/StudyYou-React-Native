@@ -8,7 +8,8 @@ export const AuthProvider = ({children}) => {
 
     const [userData, setUserData] = useState({});
     const [token, setToken] = useState('');
-    const [allUserInfo, setAllUserInfo] = useState([]);
+    const [profileToken, setProfileToken] = useState('')
+    const [logged, setLogged] = useState(false)
     const proxy = "http://127.0.0.1:8000"
 
     const register = async (username ,email, password) => {
@@ -52,7 +53,6 @@ export const AuthProvider = ({children}) => {
             const setasynctoken = await AsyncStorage.setItem("asyncUserData", JSON.stringify(data));
             setUserData(data)
             setToken(data.jwt)
-            console.log('token:', token)
             return '200';
         }else{
             alert('Your login or password is incorrect')
@@ -61,6 +61,23 @@ export const AuthProvider = ({children}) => {
 
     };
 
+
+    const profile = async() => {
+
+        let datas = JSON.parse(await AsyncStorage.getItem("asyncUserData"))
+            const resp = await fetch(`${proxy}/users/user/${datas.id}/`, {
+                method: 'GET',
+                headers: {
+                  'Content-Type': 'application/json'
+                }
+              });
+              const data = await resp.json()
+              if(resp === 200){
+                console.log(data)
+                setProfileToken(data.token)
+                setLogged(true)
+              }
+        }
 
 
     const logout = async() => {
@@ -78,11 +95,6 @@ export const AuthProvider = ({children}) => {
     };
 
 
-    const getToken = async() => {
-      setAllUserInfo(JSON.parse(await AsyncStorage.getItem("asyncUserData")))
-    }
-
-
     return(
    
         <AuthContext.Provider value={{
@@ -92,7 +104,9 @@ export const AuthProvider = ({children}) => {
             userData,
             proxy,
             token,
-            allUserInfo,
+            profile,
+            profileToken,
+            logged,
         }}>
             {children}
         </AuthContext.Provider>
