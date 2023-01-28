@@ -8,6 +8,7 @@ import { StyleSheet } from 'react-native';
 import { AuthContext } from '../context/AuthContext';
 import Registration from './Registration';
 import AllEvents from '../backend_pages/AllEvents';
+import AddEvent from '../backend_pages/AddEvent';
 
 const Tab = createBottomTabNavigator();
 
@@ -118,6 +119,21 @@ function BottomNavigator() {
         component={AllEvents} 
         options={{
           title: 'AllEvents',
+          headerTitleStyle: {
+            color: 'white',
+          },
+          headerStyle: {
+            backgroundColor: 'black',
+          },
+          tabBarVisible: false, // hide the button
+          tabBarButton: (props) => null, // hide the button
+        }}
+        />
+        <Tab.Screen 
+        name="AddEvent" 
+        component={AddEvent} 
+        options={{
+          title: 'AddEvent',
           headerTitleStyle: {
             color: 'white',
           },

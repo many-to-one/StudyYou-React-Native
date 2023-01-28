@@ -4,6 +4,7 @@ import AllEvents from '../backend_pages/AllEvents'
 import { AuthContext } from '../context/AuthContext'
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Login from './Login'
+import AddEventButton from '../buttons/AddEventButton';
 
 const Home = ({navigation}) => {
 
@@ -15,8 +16,11 @@ const Home = ({navigation}) => {
     profile()
   }, [])
 
-  const profile = async() => {
 
+
+  // ##### GET TOKEN FROM LOGGED USER BY ID FROM STORAGE ##### //
+
+  const profile = async() => {
     let datas = JSON.parse(await AsyncStorage.getItem("asyncUserData"))
     console.log('datas:', datas)
     if(datas === null){
@@ -35,6 +39,20 @@ const Home = ({navigation}) => {
       }
     }
 
+    // ################# END OF THE FUNCTION ################# //
+
+
+
+    // ################### ADDING NEW EVENT ################## //
+
+    // const newEvent = async() => {
+
+    // }
+
+    // ################# END OF THE FUNCTION ################# //
+
+
+
   }
 
   if(profileToken){
@@ -43,8 +61,13 @@ const Home = ({navigation}) => {
   
       <SafeAreaView  style={styles.container}>
          <ScrollView>
-            <AllEvents />
+            <AllEvents datas={datas}/>
           </ScrollView>
+          <AddEventButton 
+            onPress={() => {
+              navigation.navigate('AddEvent');
+            }}
+          />
       </SafeAreaView >
   
     )
@@ -68,30 +91,6 @@ const styles = StyleSheet.create({
     gap: '1rem',
     padding: 20,
 
-  },
-  first:{
-    backgroundColor: '#9fd3c7',
-    width: 250,
-    height:50,
-    justifyContent: 'center',
-    alignItems: 'center',
-    margin: 5,
-  },
-  second:{
-    backgroundColor: '#385170',
-    width: 250,
-    height:50,
-    justifyContent: 'center',
-    alignItems: 'center',
-    margin: 5,
-  },
-  third:{
-    backgroundColor: '#142d4c',
-    width: 250,
-    height:50,
-    justifyContent: 'center',
-    alignItems: 'center',
-    margin: 5,
   },
   text: {
     fontSize: 25,

@@ -3,6 +3,7 @@ import { StyleSheet, View } from 'react-native'
 import { AuthContext } from '../context/AuthContext'
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Event from './Event'
+import AddEventButton from '../buttons/AddEventButton';
 
 const AllEvents = ({datas}) => {
     const { userData, proxy } = useContext(AuthContext);
@@ -32,6 +33,7 @@ const AllEvents = ({datas}) => {
             <Event key={index} ev={ev}/>
         ))}
       </View>
+      {/* <AddEventButton onPress={navigation.navigate('AddEvent', {datas: datas})} /> */}
     </View>
   )
 }
