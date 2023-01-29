@@ -1,5 +1,5 @@
 import React, { useContext, useEffect } from 'react'
-import { View } from 'react-native'
+import { Keyboard, View } from 'react-native'
 import { AuthContext } from '../context/AuthContext';
 
 const DeleteEvent = ({ route, navigation }) => {
@@ -19,6 +19,7 @@ const DeleteEvent = ({ route, navigation }) => {
         });
     
         // navigation.navigate('AllEvents');
+        Keyboard.dismiss()
     }
 
   return (

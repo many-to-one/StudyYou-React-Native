@@ -11,6 +11,7 @@ export const AuthProvider = ({children}) => {
     const [profileToken, setProfileToken] = useState('')
     const [logged, setLogged] = useState(false)
     const proxy = "http://127.0.0.1:8000"
+    // const proxy = "http://10.0.2.2:8000"
 
     const register = async (username ,email, password) => {
 

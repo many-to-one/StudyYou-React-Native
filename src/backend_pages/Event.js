@@ -1,11 +1,13 @@
+import { useNavigation } from '@react-navigation/native';
 import React, { useContext } from 'react'
-import { View, Text, StyleSheet } from 'react-native'
+import { View, Text, StyleSheet, Keyboard, TouchableOpacity } from 'react-native'
 import Icon from "react-native-vector-icons/MaterialIcons";
 import { AuthContext } from '../context/AuthContext';
 
 const Event = ({ev}) => {
   console.log('event:', ev.event)
   const {proxy} = useContext(AuthContext);
+  const navigation = useNavigation();
 
   const deleteEvent = async() => {
     await fetch(`${proxy}/backend/events/${ev.id}/${ev.user}/delete/`, {
@@ -14,13 +16,17 @@ const Event = ({ev}) => {
             'Content-Type': 'application/json'
         },
     });
-
     navigation.navigate('Home');
-    // window.location.reload();
-    window.location.reload(false);
-}
+    window.location.reload();
+  }
 
   return (
+    <TouchableOpacity onPress={() => navigation.navigate(
+      'UpdateEvent',{
+        ev:ev
+      }
+      )}
+    >
     <View style={styles.container}>
       <View style={styles.event}>
         <Text style={styles.event_date}>{ev.date.slice(0, 10)}</Text>
@@ -29,12 +35,12 @@ const Event = ({ev}) => {
       <View>
         <Icon 
           name='delete' 
-          onPress={() => deleteEvent()}
-          // onPress={() => navigation.navigate('Delete', {id: ev.id, user: ev.user})} 
+          onPress={() => deleteEvent()} 
           style={styles.delete}  
         />
       </View>
     </View>
+    </TouchableOpacity>
   )
 }
 

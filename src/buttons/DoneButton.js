@@ -16,6 +16,6 @@ const styles = StyleSheet.create({
         color: '#F0007F',
         position: 'absolute',
         marginTop: 230,
-        marginLeft: 75,
+        marginLeft: 130,
     }
 })

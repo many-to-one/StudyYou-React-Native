@@ -5,7 +5,7 @@ import Icon from "react-native-vector-icons/Ionicons";
 export default function BackButton({onPress}) {
   return (
     <TouchableOpacity style={styles.button} onPress={onPress}>
-      <Icon name='arrow-back' style={styles.button}/>
+      <Icon style={styles.button} name='arrow-back'/>
     </TouchableOpacity>
   );
 }
@@ -15,7 +15,7 @@ const styles = StyleSheet.create({
         fontSize: 30,
         color: '#F0007F',
         position: 'absolute',
-        bottom: 50,
+        bottom: 235,
         marginLeft: 55,
     }
 })

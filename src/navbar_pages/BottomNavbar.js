@@ -9,6 +9,7 @@ import { AuthContext } from '../context/AuthContext';
 import Registration from './Registration';
 import AllEvents from '../backend_pages/AllEvents';
 import AddEvent from '../backend_pages/AddEvent';
+import UpdateEvent from '../backend_pages/UpdateEvent';
 
 const Tab = createBottomTabNavigator();
 
@@ -134,6 +135,21 @@ function BottomNavigator() {
         component={AddEvent} 
         options={{
           title: 'AddEvent',
+          headerTitleStyle: {
+            color: 'white',
+          },
+          headerStyle: {
+            backgroundColor: 'black',
+          },
+          tabBarVisible: false, // hide the button
+          tabBarButton: (props) => null, // hide the button
+        }}
+        />
+        <Tab.Screen 
+        name="UpdateEvent" 
+        component={UpdateEvent} 
+        options={{
+          title: 'UpdateEvent',
           headerTitleStyle: {
             color: 'white',
           },

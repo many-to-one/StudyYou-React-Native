@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react'
-import { StyleSheet, View } from 'react-native'
+import { StyleSheet, TouchableOpacity, View } from 'react-native'
 import { AuthContext } from '../context/AuthContext'
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Event from './Event'
@@ -22,18 +22,18 @@ const AllEvents = ({datas}) => {
         console.log(
             'id:', userData.id,
             'events:', events,
-            'proxy:', proxy
+            'proxy:', proxy,
+            'userData:', userData,
             )
     }
 
   return (
     <View style={styles.container}>
-      <View>
+      <View >
         {events.map((ev, index) => (
             <Event key={index} ev={ev}/>
         ))}
       </View>
-      {/* <AddEventButton onPress={navigation.navigate('AddEvent', {datas: datas})} /> */}
     </View>
   )
 }

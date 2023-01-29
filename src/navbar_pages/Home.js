@@ -8,7 +8,7 @@ import AddEventButton from '../buttons/AddEventButton';
 
 const Home = ({navigation}) => {
 
-  const { proxy } = useContext(AuthContext);
+  const { proxy, token } = useContext(AuthContext);
   const [profileToken, setProfileToken] = useState('')
   let datas;
 
@@ -21,6 +21,7 @@ const Home = ({navigation}) => {
   // ##### GET TOKEN FROM LOGGED USER BY ID FROM STORAGE ##### //
 
   const profile = async() => {
+    console.log('token:', token)
     let datas = JSON.parse(await AsyncStorage.getItem("asyncUserData"))
     console.log('datas:', datas)
     if(datas === null){
@@ -40,18 +41,6 @@ const Home = ({navigation}) => {
     }
 
     // ################# END OF THE FUNCTION ################# //
-
-
-
-    // ################### ADDING NEW EVENT ################## //
-
-    // const newEvent = async() => {
-
-    // }
-
-    // ################# END OF THE FUNCTION ################# //
-
-
 
   }
 

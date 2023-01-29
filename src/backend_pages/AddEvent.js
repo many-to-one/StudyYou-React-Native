@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { StyleSheet, View, Text, TextInput, ScrollView } from 'react-native';
 import { AuthContext } from '../context/AuthContext'
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -8,11 +8,13 @@ const AddEvent = ({ navigation }) => {
   
     const {proxy} = useContext(AuthContext);
     const [event, setEvent] = useState('');
-    const [hours, setHours] = useState(null);
-    const [minutes, setMinutes] = useState(null);
-    const [visits, setVisits] = useState(null);
-    const [publications, setPublications] = useState(null);
-    const [films, setFilms] = useState(null);
+    const [hours, setHours] = useState(0);
+    const [minutes, setMinutes] = useState(0);
+    const [visits, setVisits] = useState(0);
+    const [publications, setPublications] = useState(0);
+    const [films, setFilms] = useState(0);
+    const [event_id, setEvent_id] = useState();
+    const [user_id, setUser_id] = useState();
 
     const addEvent = async() => {
       let datas = JSON.parse(await AsyncStorage.getItem("asyncUserData"))
@@ -33,12 +35,15 @@ const AddEvent = ({ navigation }) => {
         });
         const data = await resp.json()
         if(resp.status === 200){
+          setEvent_id(data.data.id)
+          setUser_id(datas.id)
           window.location.reload()
           navigation.navigate('Home')
         }else{
           alert('Something went wrong...')
         }
       }
+
 
   return (
     <View style={styles.container}>
@@ -48,6 +53,7 @@ const AddEvent = ({ navigation }) => {
           placeholder="Event..."
           placeholderTextColor={'gray'}
           onChangeText={(text) => setEvent(text)}
+          defaultValue={event}
         />
       </View>
 
@@ -61,6 +67,7 @@ const AddEvent = ({ navigation }) => {
           <TextInput 
             onChangeText={(text) => setHours(text)}
             style={styles.input}
+            defaultValue={hours}
           />
         </View>
       </View>
@@ -73,6 +80,7 @@ const AddEvent = ({ navigation }) => {
         </View>
         <View>
           <TextInput 
+            defaultValue={minutes}
             onChangeText={(text) => setMinutes(text)}
             style={styles.input}
           />
@@ -87,6 +95,7 @@ const AddEvent = ({ navigation }) => {
         </View>
         <View>
           <TextInput 
+            defaultValue={visits}
             onChangeText={(text) => setVisits(text)}
             style={styles.input}
           />
@@ -101,6 +110,7 @@ const AddEvent = ({ navigation }) => {
         </View>
         <View>
           <TextInput 
+            defaultValue={publications}
             onChangeText={(text) => setPublications(text)}
             style={styles.input}
           />
@@ -115,6 +125,7 @@ const AddEvent = ({ navigation }) => {
         </View>
         <View >
           <TextInput 
+            defaultValue={films}
             onChangeText={(text) => setFilms(text)}
             style={styles.input}
           />
