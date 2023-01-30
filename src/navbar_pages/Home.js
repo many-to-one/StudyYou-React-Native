@@ -1,10 +1,11 @@
 import React, { useContext, useEffect, useState } from 'react'
-import { StyleSheet, SafeAreaView, ScrollView } from 'react-native'
+import { StyleSheet, SafeAreaView, ScrollView, View } from 'react-native'
 import AllEvents from '../backend_pages/AllEvents'
 import { AuthContext } from '../context/AuthContext'
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import Login from './Login'
+import Login from './Login';
 import AddEventButton from '../buttons/AddEventButton';
+import AnimatedMenu from '../menubar/AnimatedMenu';
 
 const Home = ({navigation}) => {
 
@@ -48,16 +49,21 @@ const Home = ({navigation}) => {
 
     return (
   
-      <SafeAreaView  style={styles.container}>
+      <View style={styles.main_container}>
+        <View style={styles.container_1}>
          <ScrollView>
             <AllEvents datas={datas}/>
-          </ScrollView>
-          <AddEventButton 
-            onPress={() => {
-              navigation.navigate('AddEvent');
-            }}
-          />
-      </SafeAreaView >
+         </ScrollView>
+        </View >
+        <View style={styles.container_2}>
+          <AnimatedMenu />
+        </View>
+        <AddEventButton 
+          onPress={() => {
+            navigation.navigate('AddEvent');
+          }}
+        />
+      </View>
   
     )
 
@@ -71,7 +77,7 @@ const Home = ({navigation}) => {
 
 const styles = StyleSheet.create({
 
-  container: {
+  main_container:{
     flex: 1,
     flexDirection: 'column',
     justifyContent: 'center',
@@ -79,8 +85,25 @@ const styles = StyleSheet.create({
     backgroundColor: 'black',
     gap: '1rem',
     padding: 20,
-
   },
+  container_1: {
+    flex: 1,
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'black',
+    gap: '1rem',
+    padding: 20,
+  },
+  container_2: {
+    flex: 1,
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+    // backgroundColor: 'black',
+    gap: '1rem',
+    padding: 20,
+  },  
   text: {
     fontSize: 25,
     fontWeight: 'bold',

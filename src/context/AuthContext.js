@@ -16,7 +16,7 @@ export const AuthProvider = ({children}) => {
     const register = async (username ,email, password) => {
 
         const response = await fetch(`${proxy}/users/register/`, {
-            method: 'GET',
+            method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
