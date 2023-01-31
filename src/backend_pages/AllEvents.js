@@ -1,11 +1,14 @@
 import React, { useContext, useEffect, useState } from 'react'
-import { StyleSheet, TouchableOpacity, View } from 'react-native'
+import { StyleSheet, TouchableOpacity, View, Animated, Image, Dimensions } from 'react-native'
 import { AuthContext } from '../context/AuthContext'
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Event from './Event'
 import AddEventButton from '../buttons/AddEventButton';
+import { LinearGradient } from 'expo-linear-gradient';
 
 const AllEvents = ({datas}) => {
+  const { width, height } = Dimensions.get('window');
+  const BACKDROP_HEIGHT = height * 0.65;
     const { userData, proxy } = useContext(AuthContext);
     const [ events, setEvents] = useState([]);
 
@@ -29,6 +32,17 @@ const AllEvents = ({datas}) => {
 
   return (
     <View style={styles.container}>
+      <Animated.Image 
+        source={require(`../../assets/events.png`)}
+        style={[
+          StyleSheet.absoluteFillObject,
+          {
+            width,
+            height,
+          }
+        ]}
+        blurRadius={10}
+      />
       <View >
         {events.map((ev, index) => (
             <Event key={index} ev={ev}/>
@@ -45,7 +59,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         gap: '1rem',
         padding: 20,
-    
+        backgroundColor: 'black'
       },
 })
 

@@ -32,31 +32,36 @@ const NewMenu = () => {
         key: '111',
         id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28ba',
         title: 'Profile',
-        img: 'profile.png'
+        img: 'profile.png',
+        page: 'Profile',
       },
       {
         key: '112',
         id: '3ac68afc-c605-48d3-a4f8-fbd91aa97f63',
         title: 'Result',
-        img: 'timer.png'
+        img: 'timer.png',
+        page: 'Timer',
       },
       {
         key: '113',
         id: '58694a0f-3da1-471f-bd96-145571e29d72',
         title: 'History',
-        img: 'events.png'
+        img: 'events.png',
+        page: 'AllEvents'
       },
       {
         key: '114',
         id: '58694a0f-3da1-471f-bd96-145571e29d73',
         title: 'Counter',
-        img: 'result.png'
+        img: 'result.png',
+        page: 'Result',
       },
       {
         key: '115',
         id: '58694a0f-3da1-471f-bd96-145571e29d74',
         title: 'Calendar',
-        img: 'history.png'
+        img: 'history.png',
+        page: 'History',
       },
     ];
 
@@ -134,7 +139,7 @@ const NewMenu = () => {
               extrapolate: 'clamp',
             })
             return(
-              <TouchableOpacity onPress={() => handleSubmit({item})}>
+              <TouchableOpacity onPress={() => navigation.navigate(item.page)}>
                 <Animated.View style={{
                   justifyContent: 'center',
                   alignItems: 'center',
