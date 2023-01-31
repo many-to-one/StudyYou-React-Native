@@ -1,5 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
-import React from 'react';
+import React, { useRef } from 'react';
 import {
   StyleSheet,
   Text,
@@ -9,42 +9,47 @@ import {
   Animated,
   FlatList,
   TouchableOpacity,
+  Platform
 } from 'react-native';
-import AllEvents from '../backend_pages/AllEvents';
-import Logout from '../navbar_pages/Logout'
-import Login from '../navbar_pages/Login';
 import { useNavigation } from '@react-navigation/native';
 
 const Menu = () => {
 
+  const { width, height } = Dimensions.get('window');
   const navigation = useNavigation();
-
-  // const DATA = [
-  //   <Login />,
-  //   <Logout />,
-  //   <AllEvents />,
-  // ]
+  const ITEM_SIZE = Platform.OS === 'ios' ? width * 0.72 : width * 0.74;
+  const WIDTH = width * 0.72
+  const HEIGHT = height
+  const SPACING = 10;
+  const EMPTY_ITEM_SIZE = (width - ITEM_SIZE) / 2;
+  const BACKDROP_HEIGHT = height * 0.65;
+  const scrollX = useRef(new Animated.Value(0)).current;
 
   const DATA = [
     {
-      id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28ba',
+      id: '1',
       title: 'Profile',
+      img: 'profile.png'
     },
     {
-      id: '3ac68afc-c605-48d3-a4f8-fbd91aa97f63',
+      id: '2',
       title: 'Result',
+      img: 'profile.png'
     },
     {
-      id: '58694a0f-3da1-471f-bd96-145571e29d72',
+      id: '3',
       title: 'History',
+      img: 'profile.png'
     },
     {
-      id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28ba',
+      id: '4',
       title: 'Counter',
+      img: 'profile.png'
     },
     {
-      id: '3ac68afc-c605-48d3-a4f8-fbd91aa97f63',
+      id: '5',
       title: 'Calendar',
+      img: 'profile.png'
     },
   ];
 
@@ -63,25 +68,56 @@ const Menu = () => {
   }
 
   return(
-    <View style={styles.container}>
-      <FlatList 
+    <View style={{
+      alignItems: 'center',
+      justifyContent: 'center',
+      backgroundColor: 'black',
+      height: height,
+      width: width,
+    }}>
+      <Animated.FlatList 
         data={DATA}
-        keyExtractor={(item) => item.key}
+        keyExtractor={(item) => item.key} // key
         pagingEnabled
         showsHorizontalScrollIndicator={false}
         horizontal
+        contentContainerStyle={{ alignItems: 'center' }}
+        snapToInterval={ITEM_SIZE}
+        decelerationRate={0}
+        bounces={false}
+        snapToAlignment='start'
+        onScroll={Animated.event(
+          [{ nativeEvent: { contentOffset: {x:scrollX} } }],
+          {useNativeDriver: false}
+        )}
+        scrollEventThrottle={16}
         renderItem={({item, index}) => {
+          const inputRange = [
+            (index - 2) * ITEM_SIZE,
+            (index - 1) * ITEM_SIZE,
+            index * ITEM_SIZE,
+          ];
+          const translateY = scrollX.interpolate({
+            inputRange,
+            outputRange: [100, 50, 100],
+            extrapolate: 'clamp',
+          })
           return(
             <TouchableOpacity onPress={() => handleSubmit({item})}>
-              <View style={styles.item}>
+              <Animated.View style={{
+                justifyContent: 'center',
+                alignItems: 'center',
+                marginHorizontal: SPACING,
+                padding: SPACING * 2,
+                width: ITEM_SIZE,
+                height: ITEM_SIZE,
+                transform: [{translateY}],
+              }}>
                 <Image
-                  source={require('../../assets/profile.png')}
+                  source={require(`../../assets/${item.img}`)}
                   style={styles.img}
                 />
-                {/* <Text style={styles.text}>
-                  {item.title}
-                </Text> */}
-              </View>
+              </Animated.View>
             </TouchableOpacity>
           )
         }}
@@ -94,10 +130,8 @@ const Menu = () => {
 
 const styles = StyleSheet.create({
   container:{
-    position: 'relative',
-    bottom: 100,
-    width: 300,
-    borderWidth: 'none',
+    position: 'absolute',
+    // height: {height},
   },
   text:{
     color: 'green'
@@ -106,9 +140,11 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     padding: 75,
-    marginLeft: 50,
+    marginLeft: 200,
+    marginRight: 200,
     width: 200,
     height: 200,
+    // transform: translateY,
     // borderWidth: 2,
     // borderRadius: 500,
     // borderColor: 'blue',

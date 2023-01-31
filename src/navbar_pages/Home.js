@@ -5,7 +5,6 @@ import { AuthContext } from '../context/AuthContext'
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Login from './Login';
 import AddEventButton from '../buttons/AddEventButton';
-import AnimatedMenu from '../menubar/AnimatedMenu';
 
 const Home = ({navigation}) => {
 
@@ -55,9 +54,6 @@ const Home = ({navigation}) => {
             <AllEvents datas={datas}/>
          </ScrollView>
         </View >
-        <View style={styles.container_2}>
-          <AnimatedMenu />
-        </View>
         <AddEventButton 
           onPress={() => {
             navigation.navigate('AddEvent');
@@ -83,7 +79,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: 'black',
-    gap: '1rem',
+    gap: '5rem',
     padding: 20,
   },
   container_1: {
@@ -94,6 +90,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'black',
     gap: '1rem',
     padding: 20,
+    height: '10rem',
   },
   container_2: {
     flex: 1,

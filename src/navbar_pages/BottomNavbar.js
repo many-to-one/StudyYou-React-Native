@@ -10,6 +10,8 @@ import Registration from './Registration';
 import AllEvents from '../backend_pages/AllEvents';
 import AddEvent from '../backend_pages/AddEvent';
 import UpdateEvent from '../backend_pages/UpdateEvent';
+import AnimatedMenu from '../menubar/AnimatedMenu'
+import NewMenu from '../menubar/NewMenu';
 
 const Tab = createBottomTabNavigator();
 
@@ -32,6 +34,9 @@ function BottomNavigator() {
         break;  
       case 'Logout':
         iconName = 'logout';
+        break;
+      case 'Menu':
+        iconName = 'menu-open';
         break;
       default:
         break;
@@ -89,6 +94,19 @@ function BottomNavigator() {
         }}
         />
         <Tab.Screen 
+        name="Menu" 
+        component={NewMenu} 
+        options={{
+          title: 'Menu',
+          headerTitleStyle: {
+            color: 'white',
+          },
+          headerStyle: {
+            backgroundColor: 'black',
+          },
+        }}
+        />
+        <Tab.Screen 
         name="Registration" 
         component={Registration} 
         options={{
@@ -99,8 +117,8 @@ function BottomNavigator() {
           headerStyle: {
             backgroundColor: 'black',
           },
-          // tabBarVisible: false, // hide the button
-          // tabBarButton: (props) => null, // hide the button
+          tabBarVisible: false, // hide the button
+          tabBarButton: (props) => null, // hide the button
         }}
         />
         <Tab.Screen 
