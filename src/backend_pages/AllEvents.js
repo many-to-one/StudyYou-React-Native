@@ -32,17 +32,6 @@ const AllEvents = ({datas}) => {
 
   return (
     <View style={styles.container}>
-      <Animated.Image 
-        source={require(`../../assets/events.png`)}
-        style={[
-          StyleSheet.absoluteFillObject,
-          {
-            width,
-            height,
-          }
-        ]}
-        blurRadius={10}
-      />
       <View >
         {events.map((ev, index) => (
             <Event key={index} ev={ev}/>
@@ -59,7 +48,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         gap: '1rem',
         padding: 20,
-        backgroundColor: 'black'
+        // backgroundColor: 'black'
       },
 })
 

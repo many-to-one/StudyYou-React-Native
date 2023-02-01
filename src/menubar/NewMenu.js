@@ -11,7 +11,6 @@ import {
   TouchableOpacity,
   Platform
 } from 'react-native';
-import Svg, {Rect} from 'react-native-svg'
 import { LinearGradient } from 'expo-linear-gradient';
 import { useNavigation } from '@react-navigation/native';
 
@@ -45,9 +44,9 @@ const NewMenu = () => {
       {
         key: '113',
         id: '58694a0f-3da1-471f-bd96-145571e29d72',
-        title: 'History',
+        title: 'Home',
         img: 'events.png',
-        page: 'AllEvents'
+        page: 'Home'
       },
       {
         key: '114',
@@ -59,9 +58,16 @@ const NewMenu = () => {
       {
         key: '115',
         id: '58694a0f-3da1-471f-bd96-145571e29d74',
-        title: 'Calendar',
+        title: 'MonthsResults',
         img: 'history.png',
-        page: 'History',
+        page: 'MonthsResults',
+      },
+      {
+        key: '116',
+        id: '58694a0f-3da1-471f-bd96-145571e29d74',
+        title: 'End',
+        img: 'end.png',
+        page: 'End',
       },
     ];
 

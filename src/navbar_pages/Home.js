@@ -1,13 +1,16 @@
 import React, { useContext, useEffect, useState } from 'react'
-import { StyleSheet, SafeAreaView, ScrollView, View } from 'react-native'
+import { StyleSheet, SafeAreaView, ScrollView, View, Animated, Image, Dimensions } from 'react-native'
 import AllEvents from '../backend_pages/AllEvents'
 import { AuthContext } from '../context/AuthContext'
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Login from './Login';
 import AddEventButton from '../buttons/AddEventButton';
+import { LinearGradient } from 'expo-linear-gradient';
 
 const Home = ({navigation}) => {
 
+  const { width, height } = Dimensions.get('window');
+  const BACKDROP_HEIGHT = height * 0.65;
   const { proxy, token } = useContext(AuthContext);
   const [profileToken, setProfileToken] = useState('')
   let datas;
@@ -50,6 +53,22 @@ const Home = ({navigation}) => {
   
       <View style={styles.main_container}>
         <View style={styles.container_1}>
+          {/* <Animated.Image 
+            source={require("../../assets/eventspage.png")}
+            style={[
+              StyleSheet.absoluteFillObject,
+            ]}
+            blurRadius={5}
+          /> */}
+          {/* <LinearGradient
+            colors={['rgba(0, 0, 0, 0)', '#E9E8E8']}
+            style={{
+            height: BACKDROP_HEIGHT,
+            width,
+            position: 'absolute',
+            bottom: 20,
+            }}
+          /> */}
          <ScrollView>
             <AllEvents datas={datas}/>
          </ScrollView>

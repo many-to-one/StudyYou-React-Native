@@ -10,8 +10,9 @@ import Registration from './Registration';
 import AllEvents from '../backend_pages/AllEvents';
 import AddEvent from '../backend_pages/AddEvent';
 import UpdateEvent from '../backend_pages/UpdateEvent';
-import AnimatedMenu from '../menubar/AnimatedMenu'
 import NewMenu from '../menubar/NewMenu';
+import Result from '../backend_pages/Result';
+import MonthsResults from '../backend_pages/MonthsResults';
 
 const Tab = createBottomTabNavigator();
 
@@ -168,6 +169,36 @@ function BottomNavigator() {
         component={UpdateEvent} 
         options={{
           title: 'UpdateEvent',
+          headerTitleStyle: {
+            color: 'white',
+          },
+          headerStyle: {
+            backgroundColor: 'black',
+          },
+          tabBarVisible: false, // hide the button
+          tabBarButton: (props) => null, // hide the button
+        }}
+        />
+        <Tab.Screen 
+        name="Result" 
+        component={Result} 
+        options={{
+          title: 'Result',
+          headerTitleStyle: {
+            color: 'white',
+          },
+          headerStyle: {
+            backgroundColor: 'black',
+          },
+          tabBarVisible: false, // hide the button
+          tabBarButton: (props) => null, // hide the button
+        }}
+        />
+        <Tab.Screen 
+        name="MonthsResults" 
+        component={MonthsResults} 
+        options={{
+          title: 'MonthsResults',
           headerTitleStyle: {
             color: 'white',
           },
