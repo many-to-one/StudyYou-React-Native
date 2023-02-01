@@ -1,7 +1,7 @@
 import { useNavigation } from '@react-navigation/native';
 import React, { useContext } from 'react'
 import { View, Text, StyleSheet, Keyboard, TouchableOpacity } from 'react-native'
-import Icon from "react-native-vector-icons/MaterialIcons";
+import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import { AuthContext } from '../context/AuthContext';
 
 const Event = ({ev}) => {
@@ -34,7 +34,7 @@ const Event = ({ev}) => {
       </View>  
       <View>
         <Icon 
-          name='delete' 
+          name='delete-forever' 
           onPress={() => deleteEvent()} 
           style={styles.delete}  
         />
@@ -51,7 +51,8 @@ const styles = StyleSheet.create({
       flexDirection: 'row',
       justifyContent: 'space-between',
       alignItems: 'center',
-      backgroundColor: '#282c34',
+      borderWidth: 2,
+      borderColor: '#EFA9FD', 
       width: 300,
       height:50,
       borderRadius: 10,
@@ -64,17 +65,17 @@ const styles = StyleSheet.create({
     event_date: {
       fontSize: 15,
       fontWeight: 'bold',
-      color: '#fff',
+      color: '#FAFAE6',
       marginLeft: 10,
     },
     event_text: {
       fontSize: 15,
       fontWeight: 'bold',
-      color: '#fff',
+      color: '#FAFAE6',
       marginLeft: 10,
     },
     delete: {
-      color: '#F0007F',
+      color: '#F9F9B5',
       fontSize: 30,
     },
   })

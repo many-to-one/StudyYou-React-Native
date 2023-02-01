@@ -1,12 +1,14 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { AuthContext } from '../context/AuthContext'
 import AsyncStorage from '@react-native-async-storage/async-storage'
-import { View } from 'react-native';
+import { FlatList, ScrollView, StyleSheet, View, Animated, Image, Dimensions } from 'react-native';
 import BackButton from '../buttons/BackButton';
 import MonthsResultsItem from './MonthsResultsItem';
+import { LinearGradient } from 'expo-linear-gradient';
 
 const MonthsResults = ({navigation}) => {
     
+    const { width, height } = Dimensions.get('window');
     const {proxy} = useContext(AuthContext);
     const [ result, setResults ] = useState([]);
 
@@ -23,13 +25,42 @@ const MonthsResults = ({navigation}) => {
     };
 
     return (
-         <View>
+         <View style={styles.container}>
+            <Animated.Image 
+                source={require("../../assets/history.png")}
+                style={[
+                  StyleSheet.absoluteFillObject,
+                ]}
+                blurRadius={5}
+            />
+            <LinearGradient
+                colors={['rgba(0, 0, 0, 0)', '#4B0F30']}
+                style={{
+                height,
+                width,
+                position: 'absolute',
+                bottom: -50,
+                }}
+            />
+            <ScrollView>
             {result.map((res, index) => (
                 <MonthsResultsItem key={index} res={res}/>
             ))}
+            </ScrollView>
          </View>
       )
+
     }
+
+    const styles = StyleSheet.create({
+        container:{
+            flex:1,
+
+            backgroundColor: 'black',
+            justifyContent: 'center',
+            alignItems: 'center',
+        }
+    })
     
 
 export default MonthsResults

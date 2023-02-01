@@ -1,6 +1,7 @@
 import React from 'react';
 import { StyleSheet, TouchableOpacity } from 'react-native';
 import Icon from "react-native-vector-icons/MaterialIcons";
+import { Text } from 'react-native-web';
 
 export default function SaveButton({onPress}) {
   return (
@@ -13,9 +14,9 @@ export default function SaveButton({onPress}) {
 const styles = StyleSheet.create({
     button: {
         fontSize: 50,
-        color: '#F0007F',
+        color: '#C4BF1E',
         position: 'absolute',
-        marginTop: 230,
+        marginTop: 220,
         marginLeft: 130,
     }
 })

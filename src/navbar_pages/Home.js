@@ -53,22 +53,22 @@ const Home = ({navigation}) => {
   
       <View style={styles.main_container}>
         <View style={styles.container_1}>
-          {/* <Animated.Image 
-            source={require("../../assets/eventspage.png")}
-            style={[
-              StyleSheet.absoluteFillObject,
-            ]}
-            blurRadius={5}
-          /> */}
-          {/* <LinearGradient
-            colors={['rgba(0, 0, 0, 0)', '#E9E8E8']}
+        <Animated.Image 
+          source={require("../../assets/events.png")}
+          style={[
+            StyleSheet.absoluteFillObject,
+          ]}
+          blurRadius={5}
+        />
+        <LinearGradient
+            colors={['rgba(0, 0, 0, 0)', '#3F0053']}
             style={{
-            height: BACKDROP_HEIGHT,
+            height,
             width,
             position: 'absolute',
-            bottom: 20,
+            bottom: -50,
             }}
-          /> */}
+          />
          <ScrollView>
             <AllEvents datas={datas}/>
          </ScrollView>

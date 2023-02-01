@@ -1,13 +1,51 @@
-import React from 'react'
-import { StyleSheet, Text, View, ScrollView } from 'react-native';
-import BackButton from '../buttons/BackButton';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import React, { useContext } from 'react'
+import { StyleSheet, Text, View, Dimensions } from 'react-native';
+import Icon from "react-native-vector-icons/MaterialCommunityIcons";
+import { AuthContext } from '../context/AuthContext';
+import { useNavigation } from '@react-navigation/native';
 
 const MonthsResultsItem = ({res}) => {
+  const { width, height } = Dimensions.get('window');
+  const {proxy} = useContext(AuthContext);
+  const navigation = useNavigation();
+
+  const deleteMonthResult = async() => {
+    let datas = JSON.parse(await AsyncStorage.getItem("asyncUserData"))
+      const resp = await fetch(`${proxy}/backend/month/delete/${res.id}/${datas.id}/`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    });
+    const data = await resp.json()
+    if(data){
+      window.location.reload()
+      navigation.navigate('Result')
+    }
+  }
+
   return (
     <View style={styles.container}>
-        <Text style={styles.text}>{res.date}</Text>
-        <ScrollView>
-          
+
+        <View >
+
+          <View style={styles.title}>
+            <View style={styles.date_history}>
+              <Text style={styles.text}>{res.date}</Text>
+              <Icon 
+                name='history'
+                onPress={() => deleteMonthResult()}
+                style={styles.delete}
+              />
+            </View>  
+              <Icon 
+                name='delete-alert-outline'
+                onPress={() => deleteMonthResult()}
+                style={styles.delete}
+              />
+          </View>
+      
           <View style={styles.row}>
             <View style={styles.left_row}>
               <Text style={styles.text}>
@@ -72,9 +110,7 @@ const MonthsResultsItem = ({res}) => {
               </Text>
             </View>
           </View>
-    
-          <BackButton style={styles.backbtn} onPress={() => navigation.navigate('Home')}/>
-        </ScrollView>
+        </View>
         </View>
 
   )
@@ -83,7 +119,6 @@ const MonthsResultsItem = ({res}) => {
 const styles = StyleSheet.create({
     container: {
       flex: 1,
-      backgroundColor: 'black',
       flexDirection: 'column',
       justifyContent: 'center',
       alignItems: 'center',
@@ -97,41 +132,35 @@ const styles = StyleSheet.create({
     text: {
       justifyContent: 'center',
       alignItems: 'center',
-      color: 'white',
+      color: '#FAFAE6',
       fontSize: 20,
     },
     text_res: {
       justifyContent: 'center',
       alignItems: 'center',
-      color: 'white',
+      color: '#FAFAE6',
       fontSize: 20,
       padding: 20,
     }, 
     left_row: {
-      backgroundColor: '#282c34',
       width: 250,
       height:50,
       borderRadius: 10,
+      borderWidth: 2,
+      borderColor: '#23CFD4',
       margin: 5,
       alignItems: 'flex-start',
       justifyContent: 'center',
       paddingLeft: 10,
-    },
-    right_row: {
-      backgroundColor: '#282c34',
-      width: 50,
-      height:50,
-      borderRadius: 10,
-      margin: 5,
-      alignItems: 'flex-start',
-      justifyContent: 'center',
-      paddingLeft: 10,
+      opacity: 1,
     },
     input: {
-      backgroundColor: '#282c34',
       width: 50,
       height:50,
       borderRadius: 10,
+      borderWidth: 2,
+      borderColor: '#23CFD4',
+      opacity: 10,
       margin: 5,
       alignItems: 'center',
       justifyContent: 'center',
@@ -141,7 +170,25 @@ const styles = StyleSheet.create({
     },
     backbtn: {
       marginLeft: 100,
-    }
+    },
+    delete: {
+      color: '#23CFD4',
+      fontSize: 30,
+      marginRight: 10,
+    },
+    date_history: {
+      flex: 1,
+      flexDirection: 'row',
+      gap: 10,
+      justifyContent: 'center',
+    },
+    title: {
+      flex: 1,
+      flexDirection: 'row',
+      gap: 10,
+      justifyContent: 'space-between',
+      // marginLeft: -25,
+    },
 });
 
 export default MonthsResultsItem

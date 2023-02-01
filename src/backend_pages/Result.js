@@ -1,12 +1,14 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { StyleSheet, Text, View, ScrollView } from 'react-native';
+import { StyleSheet, Text, View, ScrollView, Animated, Image, Dimensions } from 'react-native';
 import BackButton from '../buttons/BackButton';
 import { AuthContext } from '../context/AuthContext';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import SaveButton from '../buttons/SaveButton';
+import { LinearGradient } from 'expo-linear-gradient';
 
 const Result = ({navigation}) => {
 
+    const { width, height } = Dimensions.get('window');
     const {proxy} = useContext(AuthContext);
     const [ result, setResult ] = useState([]);
 
@@ -27,14 +29,31 @@ const Result = ({navigation}) => {
     const saveMonthResult = async() => {
         let datas = JSON.parse(await AsyncStorage.getItem("asyncUserData"))
         const resp = await fetch(`${proxy}/backend/month/create/${datas.id}/`)
-        if (resp.response === 200){
+        if (resp){
             navigation.navigate('MonthsResults')
+            window.location.reload()
         }
 
     }
 
     return (
         <View style={styles.container}>
+          <Animated.Image 
+          source={require("../../assets/result.png")}
+          style={[
+            StyleSheet.absoluteFillObject,
+          ]}
+          blurRadius={5}
+        />
+        <LinearGradient
+            colors={['rgba(0, 0, 0, 0)', '#3F0053']}
+            style={{
+            height,
+            width,
+            position: 'absolute',
+            bottom: -50,
+            }}
+          />
         <Text style={styles.text}>{result.date}</Text>
         <ScrollView>
           
@@ -127,41 +146,35 @@ const Result = ({navigation}) => {
       text: {
         justifyContent: 'center',
         alignItems: 'center',
-        color: 'white',
+        color: '#FAFAE6',
         fontSize: 20,
       },
       text_res: {
         justifyContent: 'center',
         alignItems: 'center',
-        color: 'white',
+        color: '#FAFAE6',
         fontSize: 20,
         padding: 20,
       }, 
       left_row: {
-        backgroundColor: '#282c34',
+        // backgroundColor: '#282c34',
         width: 250,
         height:50,
         borderRadius: 10,
-        margin: 5,
-        alignItems: 'flex-start',
-        justifyContent: 'center',
-        paddingLeft: 10,
-      },
-      right_row: {
-        backgroundColor: '#282c34',
-        width: 50,
-        height:50,
-        borderRadius: 10,
+        borderWidth: 2,
+        borderColor: '#C4BF1E',
         margin: 5,
         alignItems: 'flex-start',
         justifyContent: 'center',
         paddingLeft: 10,
       },
       input: {
-        backgroundColor: '#282c34',
         width: 50,
         height:50,
         borderRadius: 10,
+        borderRadius: 10,
+        borderWidth: 2,
+        borderColor: '#C4BF1E',
         margin: 5,
         alignItems: 'center',
         justifyContent: 'center',
@@ -171,7 +184,7 @@ const Result = ({navigation}) => {
       },
       backbtn: {
         marginLeft: 100,
-      }
+      },
     });
     
 
