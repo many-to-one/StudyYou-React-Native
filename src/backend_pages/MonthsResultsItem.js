@@ -22,7 +22,6 @@ const MonthsResultsItem = ({res}) => {
     const data = await resp.json()
     if(data){
       window.location.reload()
-      navigation.navigate('Result')
     }
   }
 

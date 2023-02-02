@@ -11,6 +11,7 @@ const Result = ({navigation}) => {
     const { width, height } = Dimensions.get('window');
     const {proxy} = useContext(AuthContext);
     const [ result, setResult ] = useState([]);
+    const month = null;
 
     useEffect(() => {
         getResult()
@@ -26,18 +27,26 @@ const Result = ({navigation}) => {
     }
     console.log('result', result)
 
+    const deleteAll = async(datas) => {
+      const resp = await fetch(`${proxy}/backend/event/delete-all/${datas.id}/`, {
+        method: 'DELETE',
+        'Content-Type': 'application/json',
+      });
+      const data = await resp.json()
+      if (data){
+        window.location.reload()
+      }
+    };
+
     const saveMonthResult = async() => {
         let datas = JSON.parse(await AsyncStorage.getItem("asyncUserData"))
         const resp = await fetch(`${proxy}/backend/month/create/${datas.id}/`)
-        if (resp){
-          window.location.reload()
-          navigation.navigate(
-            'AllEvents', {
-              // fill: null
-            })
+        const data = await resp.json()
+        if (data){
+          const month = data.date.slice(0, 5)
+          deleteAll(datas)
         }
-
-    }
+    };
 
     return (
         <View style={styles.container}>
@@ -57,7 +66,7 @@ const Result = ({navigation}) => {
             bottom: -50,
             }}
           />
-        <Text style={styles.text}>{result.date}</Text>
+        <Text style={styles.text}>Result</Text>
         <ScrollView>
           
           <View style={styles.row}>
