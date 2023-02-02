@@ -9,6 +9,7 @@ const MonthsResultsItem = ({res}) => {
   const { width, height } = Dimensions.get('window');
   const {proxy} = useContext(AuthContext);
   const navigation = useNavigation();
+  let datas;
 
   const deleteMonthResult = async() => {
     let datas = JSON.parse(await AsyncStorage.getItem("asyncUserData"))
@@ -23,6 +24,11 @@ const MonthsResultsItem = ({res}) => {
       window.location.reload()
       navigation.navigate('Result')
     }
+  }
+
+  const getHistory = async() => {
+    const resp = await fetch(`${proxy}/events_history/${datas.id}/`)
+    const data = await resp.json()
   }
 
   return (

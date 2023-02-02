@@ -13,6 +13,7 @@ import UpdateEvent from '../backend_pages/UpdateEvent';
 import NewMenu from '../menubar/NewMenu';
 import Result from '../backend_pages/Result';
 import MonthsResults from '../backend_pages/MonthsResults';
+import Profile from '../backend_pages/Profile';
 
 const Tab = createBottomTabNavigator();
 

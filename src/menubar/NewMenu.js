@@ -13,6 +13,7 @@ import {
 } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { useNavigation } from '@react-navigation/native';
+import Animation from './Animation';
 
 const NewMenu = () => {
 
@@ -117,6 +118,7 @@ const NewMenu = () => {
             }}
           />
         </View>
+        <Animation />
         <Animated.FlatList 
           data={DATA}
           keyExtractor={(item) => item.key} // key

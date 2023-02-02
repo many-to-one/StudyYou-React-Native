@@ -30,8 +30,11 @@ const Result = ({navigation}) => {
         let datas = JSON.parse(await AsyncStorage.getItem("asyncUserData"))
         const resp = await fetch(`${proxy}/backend/month/create/${datas.id}/`)
         if (resp){
-            navigation.navigate('MonthsResults')
-            window.location.reload()
+          window.location.reload()
+          navigation.navigate(
+            'AllEvents', {
+              // fill: null
+            })
         }
 
     }
