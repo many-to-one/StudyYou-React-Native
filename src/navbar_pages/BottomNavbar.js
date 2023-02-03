@@ -14,6 +14,7 @@ import NewMenu from '../menubar/NewMenu';
 import Result from '../backend_pages/Result';
 import MonthsResults from '../backend_pages/MonthsResults';
 import Profile from '../backend_pages/Profile';
+import MonthsResultsItem from '../backend_pages/MonthsResultsItem';
 
 const Tab = createBottomTabNavigator();
 
@@ -68,6 +69,19 @@ function BottomNavigator() {
         }}
       >
         <Tab.Screen 
+        name="Menu" 
+        component={NewMenu} 
+        options={{
+          title: 'Menu',
+          headerTitleStyle: {
+            color: 'white',
+          },
+          headerStyle: {
+            backgroundColor: 'black',
+          },
+        }}
+        />
+        <Tab.Screen 
         name="Home"
         component={Home} 
         options={{
@@ -93,19 +107,6 @@ function BottomNavigator() {
           },
           tabBarVisible: false, // hide the button
           tabBarButton: (props) => null, // hide the button
-        }}
-        />
-        <Tab.Screen 
-        name="Menu" 
-        component={NewMenu} 
-        options={{
-          title: 'Menu',
-          headerTitleStyle: {
-            color: 'white',
-          },
-          headerStyle: {
-            backgroundColor: 'black',
-          },
         }}
         />
         <Tab.Screen 
@@ -200,6 +201,21 @@ function BottomNavigator() {
         component={MonthsResults} 
         options={{
           title: 'MonthsResults',
+          headerTitleStyle: {
+            color: 'white',
+          },
+          headerStyle: {
+            backgroundColor: 'black',
+          },
+          tabBarVisible: false, // hide the button
+          tabBarButton: (props) => null, // hide the button
+        }}
+        />
+        <Tab.Screen 
+        name="MonthsResultsItem" 
+        component={MonthsResultsItem} 
+        options={{
+          title: 'MonthsResultsItem',
           headerTitleStyle: {
             color: 'white',
           },

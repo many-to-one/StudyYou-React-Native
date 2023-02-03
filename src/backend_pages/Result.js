@@ -5,17 +5,18 @@ import { AuthContext } from '../context/AuthContext';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import SaveButton from '../buttons/SaveButton';
 import { LinearGradient } from 'expo-linear-gradient';
+import { useIsFocused } from '@react-navigation/native';
 
 const Result = ({navigation}) => {
 
     const { width, height } = Dimensions.get('window');
     const {proxy} = useContext(AuthContext);
     const [ result, setResult ] = useState([]);
-    const month = null;
+    const isFocused = useIsFocused();
 
     useEffect(() => {
         getResult()
-    }, [])
+    }, [isFocused])
 
     const getResult = async() => {
         let datas = JSON.parse(await AsyncStorage.getItem("asyncUserData"))
@@ -34,7 +35,8 @@ const Result = ({navigation}) => {
       });
       const data = await resp.json()
       if (data){
-        window.location.reload()
+        // window.location.reload()
+        navigation.navigate('MonthsResults')
       }
     };
 
@@ -43,7 +45,6 @@ const Result = ({navigation}) => {
         const resp = await fetch(`${proxy}/backend/month/create/${datas.id}/`)
         const data = await resp.json()
         if (data){
-          const month = data.date.slice(0, 5)
           deleteAll(datas)
         }
     };

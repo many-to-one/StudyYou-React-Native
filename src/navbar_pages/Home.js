@@ -6,6 +6,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import Login from './Login';
 import AddEventButton from '../buttons/AddEventButton';
 import { LinearGradient } from 'expo-linear-gradient';
+import { useIsFocused } from '@react-navigation/native';
 
 const Home = ({navigation}) => {
 
@@ -13,11 +14,12 @@ const Home = ({navigation}) => {
   const BACKDROP_HEIGHT = height * 0.65;
   const { proxy, token } = useContext(AuthContext);
   const [profileToken, setProfileToken] = useState('')
+  const isFocused = useIsFocused();
   let datas;
 
   useEffect(() => {
     profile()
-  }, [])
+  }, [isFocused])
 
 
 
@@ -53,31 +55,13 @@ const Home = ({navigation}) => {
   
       <View style={styles.main_container}>
         <View style={styles.container_1}>
-        <Animated.Image 
-          source={require("../../assets/events.png")}
-          style={[
-            StyleSheet.absoluteFillObject,
-          ]}
-          blurRadius={5}
-        />
-        <LinearGradient
-            colors={['rgba(0, 0, 0, 0)', '#3F0053']}
-            style={{
-            height,
-            width,
-            position: 'absolute',
-            bottom: -50,
-            }}
-          />
-         <ScrollView>
             <AllEvents datas={datas}/>
-         </ScrollView>
         </View >
-        <AddEventButton 
+        {/* <AddEventButton 
           onPress={() => {
             navigation.navigate('AddEvent');
           }}
-        />
+        /> */}
       </View>
   
     )

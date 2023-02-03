@@ -18,8 +18,7 @@ const DeleteEvent = ({ route, navigation }) => {
             },
         });
     
-        // navigation.navigate('AllEvents');
-        Keyboard.dismiss()
+        navigation.navigate('AllEvents');
     }
 
   return (

@@ -16,8 +16,8 @@ const Event = ({ev}) => {
             'Content-Type': 'application/json'
         },
     });
-    navigation.navigate('Home');
-    window.location.reload();
+    navigation.navigate('AllEvents');
+    // window.location.reload();
   }
 
   return (

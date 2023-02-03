@@ -3,18 +3,17 @@ import { StyleSheet, View, Text, TextInput, ScrollView } from 'react-native';
 import { AuthContext } from '../context/AuthContext'
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import DoneButton from '../buttons/DoneButton'
+import { useIsFocused } from '@react-navigation/native';
 
 const AddEvent = ({ navigation }) => {   
-  
-    const {proxy} = useContext(AuthContext);
-    const [event, setEvent] = useState('');
-    const [hours, setHours] = useState(0);
-    const [minutes, setMinutes] = useState(0);
-    const [visits, setVisits] = useState(0);
-    const [publications, setPublications] = useState(0);
-    const [films, setFilms] = useState(0);
-    const [event_id, setEvent_id] = useState();
-    const [user_id, setUser_id] = useState();
+  const {proxy} = useContext(AuthContext);
+  const isFocused = useIsFocused();
+  const [event, setEvent] = useState('');
+  const [hours, setHours] = useState(0);
+  const [minutes, setMinutes] = useState(0);
+  const [visits, setVisits] = useState(0);
+  const [publications, setPublications] = useState(0);
+  const [films, setFilms] = useState(0);
 
     const addEvent = async() => {
       let datas = JSON.parse(await AsyncStorage.getItem("asyncUserData"))
@@ -35,10 +34,13 @@ const AddEvent = ({ navigation }) => {
         });
         const data = await resp.json()
         if(resp.status === 200){
-          setEvent_id(data.data.id)
-          setUser_id(datas.id)
-          window.location.reload()
           navigation.navigate('Home')
+          setEvent('')
+          setHours(0)
+          setMinutes(0)
+          setVisits(0)
+          setPublications(0)
+          setFilms(0)
         }else{
           alert('Something went wrong...')
         }

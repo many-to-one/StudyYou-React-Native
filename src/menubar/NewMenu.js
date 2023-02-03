@@ -109,7 +109,8 @@ const NewMenu = () => {
             )
           })}
           <LinearGradient
-            colors={['rgba(0, 0, 0, 0)', '#E9E8E8']}
+            // colors={['rgba(128,0,128)', '#E9E8E8']}
+            colors={['rgba(0, 0, 0, 0)', '#4B0F30']}
             style={{
             height: BACKDROP_HEIGHT,
             width,
@@ -118,7 +119,6 @@ const NewMenu = () => {
             }}
           />
         </View>
-        <Animation />
         <Animated.FlatList 
           data={DATA}
           keyExtractor={(item) => item.key} // key
@@ -143,11 +143,12 @@ const NewMenu = () => {
             ];
             const translateY = scrollX.interpolate({
               inputRange,
-              outputRange: [0, -40, 0],
+              outputRange: [20, -60, 20],
               extrapolate: 'clamp',
             })
             return(
               <TouchableOpacity onPress={() => navigation.navigate(item.page)}>
+              <Animation item={item}/>
                 <Animated.View style={{
                   justifyContent: 'center',
                   alignItems: 'center',
@@ -158,6 +159,7 @@ const NewMenu = () => {
                   width: 250,
                   height: 350,
                   borderRadius: 20,
+                  bottom: 250,
                   transform: [{translateY}],
                   // shadowColor: '#000',
                   // shadowOpacity: 1,

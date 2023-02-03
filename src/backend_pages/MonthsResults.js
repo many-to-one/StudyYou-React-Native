@@ -1,20 +1,22 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useCallback, useContext, useEffect, useState } from 'react'
 import { AuthContext } from '../context/AuthContext'
 import AsyncStorage from '@react-native-async-storage/async-storage'
-import { FlatList, ScrollView, StyleSheet, View, Animated, Image, Dimensions } from 'react-native';
+import { FlatList, ScrollView, StyleSheet, View, Animated, Image, Dimensions, RefreshControl } from 'react-native';
 import BackButton from '../buttons/BackButton';
 import MonthsResultsItem from './MonthsResultsItem';
 import { LinearGradient } from 'expo-linear-gradient';
+import { useFocusEffect, useIsFocused } from '@react-navigation/native';
 
 const MonthsResults = ({navigation}) => {
     
     const { width, height } = Dimensions.get('window');
     const {proxy} = useContext(AuthContext);
     const [ result, setResults ] = useState([]);
+    const isFocused = useIsFocused();
 
     useEffect(() => {
-        getMonthsResults()
-    }, [])
+        getMonthsResults();
+    }, [isFocused])
 
     const getMonthsResults = async() => {
         let datas = JSON.parse(await AsyncStorage.getItem("asyncUserData"))

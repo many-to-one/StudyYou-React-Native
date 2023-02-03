@@ -1,6 +1,6 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import React, { useContext } from 'react'
-import { StyleSheet, Text, View, Dimensions } from 'react-native';
+import React, { useContext, useState } from 'react'
+import { StyleSheet, Text, View, Dimensions, FlatList } from 'react-native';
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import { AuthContext } from '../context/AuthContext';
 import { useNavigation } from '@react-navigation/native';
@@ -20,9 +20,10 @@ const MonthsResultsItem = ({res}) => {
       }
     });
     const data = await resp.json()
-    if(data){
-      window.location.reload()
-    }
+    navigation.navigate('Menu')
+    // if(data){
+    //   window.location.reload()
+    // }
   }
 
   const getHistory = async() => {
