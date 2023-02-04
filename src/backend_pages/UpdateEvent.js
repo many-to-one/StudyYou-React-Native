@@ -6,6 +6,7 @@ import DoneButton from '../buttons/DoneButton'
 import BackButton from '../buttons/BackButton';
 import Icon from "react-native-vector-icons/MaterialIcons";
 import { LinearGradient } from 'expo-linear-gradient';
+import { useIsFocused } from '@react-navigation/native';
 
 const UpdateEvent = ({route, navigation}) => {
 
@@ -18,10 +19,11 @@ const UpdateEvent = ({route, navigation}) => {
     const [visits, setVisits] = useState(0);
     const [publications, setPublications] = useState(0);
     const [films, setFilms] = useState(0);
+    const isFocused = useIsFocused();
 
     useEffect(() => {
       getEvent()
-    });
+    }, [isFocused]);
 
     const getEvent = async() => {
         console.log('ev:',ev)
@@ -32,6 +34,7 @@ const UpdateEvent = ({route, navigation}) => {
           },
       });
       const data = await resp.json()
+      console.log('to_updateData:', data)
     }
 
     const updateEvent = async() => {
@@ -53,7 +56,8 @@ const UpdateEvent = ({route, navigation}) => {
           });
           const data = await resp.json()
           if(resp.status === 200){
-            navigation.navigate('Home')
+            // navigation.navigate('Home')
+            window.location.reload()
           }else{
             alert('Something went wrong...')
           }
@@ -61,7 +65,7 @@ const UpdateEvent = ({route, navigation}) => {
 
         const back = () => {
             navigation.navigate('Home')
-            window.location.reload()
+            // window.location.reload()
         }
 
   return (

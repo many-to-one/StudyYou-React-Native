@@ -4,7 +4,7 @@ import Home from './Home';
 import Login from './Login';
 import Logout from './Logout';
 import Icon from "react-native-vector-icons/MaterialIcons";
-import { StyleSheet } from 'react-native';
+import { Button, StyleSheet } from 'react-native';
 import { AuthContext } from '../context/AuthContext';
 import Registration from './Registration';
 import AllEvents from '../backend_pages/AllEvents';
@@ -15,6 +15,7 @@ import Result from '../backend_pages/Result';
 import MonthsResults from '../backend_pages/MonthsResults';
 import Profile from '../backend_pages/Profile';
 import MonthsResultsItem from '../backend_pages/MonthsResultsItem';
+import HeaderBackButton from '../buttons/HeaderBackButton';
 
 const Tab = createBottomTabNavigator();
 
@@ -69,12 +70,13 @@ function BottomNavigator() {
         }}
       >
         <Tab.Screen 
-        name="Menu" 
-        component={NewMenu} 
+        name="Home"
+        component={Home} 
         options={{
-          title: 'Menu',
+          title: 'Home',
           headerTitleStyle: {
             color: 'white',
+            marginLeft: '8rem',
           },
           headerStyle: {
             backgroundColor: 'black',
@@ -82,16 +84,18 @@ function BottomNavigator() {
         }}
         />
         <Tab.Screen 
-        name="Home"
-        component={Home} 
+        name="Menu" 
+        component={NewMenu} 
         options={{
-          title: 'Home',
+          title: 'Menu',
           headerTitleStyle: {
             color: 'white',
+            marginLeft: '8rem',
           },
           headerStyle: {
             backgroundColor: 'black',
-          }
+            justifyContent: 'center'
+          },
         }}
         />
         <Tab.Screen 
@@ -101,6 +105,7 @@ function BottomNavigator() {
           title: 'Login',
           headerTitleStyle: {
             color: 'white',
+            marginLeft: '8rem',
           },
           headerStyle: {
             backgroundColor: 'black',
@@ -116,10 +121,14 @@ function BottomNavigator() {
           title: 'Registration',
           headerTitleStyle: {
             color: 'white',
+            marginLeft: '8rem',
           },
           headerStyle: {
             backgroundColor: 'black',
           },
+          headerLeft: () => (
+            <BackButton onPress={() => navigation.navigate('Login')} />
+          ),
           tabBarVisible: false, // hide the button
           tabBarButton: (props) => null, // hide the button
         }}
@@ -130,10 +139,27 @@ function BottomNavigator() {
         options={{
           headerTitleStyle: {
             color: 'white',
+            marginLeft: '8rem',
           },
           headerStyle: {
             backgroundColor: 'black',
           }
+        }}
+        />
+        <Tab.Screen 
+        name="Profile" 
+        component={Profile} 
+        options={{
+          title: 'Profile',
+          headerTitleStyle: {
+            color: 'white',
+            marginLeft: '8rem',
+          },
+          headerStyle: {
+            backgroundColor: 'black',
+          },
+          tabBarVisible: false, // hide the button
+          tabBarButton: (props) => null, // hide the button
         }}
         />
         <Tab.Screen 
@@ -143,6 +169,7 @@ function BottomNavigator() {
           title: 'AllEvents',
           headerTitleStyle: {
             color: 'white',
+            marginLeft: '8rem',
           },
           headerStyle: {
             backgroundColor: 'black',
@@ -158,10 +185,14 @@ function BottomNavigator() {
           title: 'AddEvent',
           headerTitleStyle: {
             color: 'white',
+            marginLeft: '8rem'
           },
           headerStyle: {
             backgroundColor: 'black',
           },
+          headerLeft: () => (
+            <HeaderBackButton onPress={() => navigation.navigate('AllEvents')} />
+          ),
           tabBarVisible: false, // hide the button
           tabBarButton: (props) => null, // hide the button
         }}
@@ -173,10 +204,14 @@ function BottomNavigator() {
           title: 'UpdateEvent',
           headerTitleStyle: {
             color: 'white',
+            marginLeft: '8rem',
           },
           headerStyle: {
             backgroundColor: 'black',
           },
+          headerLeft: () => (
+            <HeaderBackButton onPress={() => navigation.navigate('AllEvents')} />
+          ),
           tabBarVisible: false, // hide the button
           tabBarButton: (props) => null, // hide the button
         }}
@@ -188,10 +223,14 @@ function BottomNavigator() {
           title: 'Result',
           headerTitleStyle: {
             color: 'white',
+            marginLeft: '8rem',
           },
           headerStyle: {
             backgroundColor: 'black',
           },
+          headerLeft: () => (
+            <HeaderBackButton onPress={() => navigation.navigate('Menu')} />
+          ),
           tabBarVisible: false, // hide the button
           tabBarButton: (props) => null, // hide the button
         }}
@@ -203,10 +242,14 @@ function BottomNavigator() {
           title: 'MonthsResults',
           headerTitleStyle: {
             color: 'white',
+            marginLeft: '8rem',
           },
           headerStyle: {
             backgroundColor: 'black',
           },
+          headerLeft: () => (
+            <HeaderBackButton onPress={() => navigation.navigate('Menu')} />
+          ),
           tabBarVisible: false, // hide the button
           tabBarButton: (props) => null, // hide the button
         }}

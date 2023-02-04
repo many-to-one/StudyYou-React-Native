@@ -1,11 +1,14 @@
 import React, { useContext, useEffect, useState } from 'react'
-import { StyleSheet, View, Text, TextInput, ScrollView } from 'react-native';
+import { StyleSheet, View, Text, TextInput, ScrollView, Animated, Dimensions } from 'react-native';
 import { AuthContext } from '../context/AuthContext'
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import DoneButton from '../buttons/DoneButton'
 import { useIsFocused } from '@react-navigation/native';
+import { LinearGradient } from 'expo-linear-gradient';
 
 const AddEvent = ({ navigation }) => {   
+
+  const { width, height } = Dimensions.get('window');
   const {proxy} = useContext(AuthContext);
   const isFocused = useIsFocused();
   const [event, setEvent] = useState('');
@@ -35,12 +38,7 @@ const AddEvent = ({ navigation }) => {
         const data = await resp.json()
         if(resp.status === 200){
           navigation.navigate('Home')
-          setEvent('')
-          setHours(0)
-          setMinutes(0)
-          setVisits(0)
-          setPublications(0)
-          setFilms(0)
+          window.location.reload()
         }else{
           alert('Something went wrong...')
         }
@@ -49,6 +47,22 @@ const AddEvent = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
+      <Animated.Image 
+          source={require("../../assets/events.png")}
+          style={[
+            StyleSheet.absoluteFillObject,
+          ]}
+          blurRadius={5}
+        />
+        <LinearGradient
+            colors={['rgba(0, 0, 0, 0)', '#3F0053']}
+            style={{
+            height,
+            width,
+            position: 'absolute',
+            bottom: -50,
+            }}
+          />
     <ScrollView>
       <View style={styles.row}>
         <TextInput style={styles.event} 
@@ -159,30 +173,21 @@ const styles = StyleSheet.create({
     fontSize: 20,
   },
   event:{
-    borderColor: 'black',
-    backgroundColor: '#282c34',
     width: 320,
     height: 50,
     borderRadius: 10,
+    borderWidth: 2,
+    borderColor: '#EFA9FD',
     margin: 5,
     padding: 10,
     color: 'white',
     fontSize: 20,
   },  
   left_row: {
-    backgroundColor: '#282c34',
     width: 250,
     height:50,
-    borderRadius: 10,
-    margin: 5,
-    alignItems: 'flex-start',
-    justifyContent: 'center',
-    paddingLeft: 10,
-  },
-  right_row: {
-    backgroundColor: '#282c34',
-    width: 50,
-    height:50,
+    borderWidth: 2,
+    borderColor: '#EFA9FD',
     borderRadius: 10,
     margin: 5,
     alignItems: 'flex-start',
@@ -190,9 +195,10 @@ const styles = StyleSheet.create({
     paddingLeft: 10,
   },
   input: {
-    backgroundColor: '#282c34',
     width: 50,
     height:50,
+    borderWidth: 2,
+    borderColor: '#EFA9FD',
     borderRadius: 10,
     margin: 5,
     alignItems: 'center',
@@ -201,6 +207,13 @@ const styles = StyleSheet.create({
     color: 'white',
     fontSize: 25,
   },
+  back_button: {
+      fontSize: 50,
+      color: '#EFA9FD',
+      position: 'absolute',
+      marginTop: 470,
+      marginLeft: 30,
+  }
 });
 
 export default AddEvent
