@@ -1,39 +1,39 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import React, { useContext, useEffect, useState } from 'react'
-import { Text } from 'react-native';
+import { Button, Text } from 'react-native';
 import { View } from 'react-native-web';
 import { AuthContext } from '../context/AuthContext'
+import AuthButton from '../buttons/AuthButton';
 
-const Profile = () => {
-    const {proxy} = useContext(AuthContext);
-    const [profile, setProfile] = useState([]);
+const Profile = ({navigation}) => {
+    const {profile} = useContext(AuthContext);
+    const [profileData, setProfileData] = useState([]);
 
     useEffect(() => {
         getProfile()
     }, [])
 
     const getProfile = async() => {
-        const datas = JSON.parse(await AsyncStorage.getItem('asyncUserData'))
-        const resp = await fetch(`${proxy}/users/user/${datas.id}`, {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        })
-        const data = await resp.json()
-        setProfile(data.data)
+
+        const resp = await profile()
+        const data = resp
+        setProfileData(data.data)
         console.log('profile:', data)
     }
 
   return (
     <View>
-        <Text>{profile.username}</Text>
-        <Text>{profile.email}</Text>
-        {profile.is_superuser ? 
+        <Text>{profileData.username}</Text>
+        <Text>{profileData.email}</Text>
+        {profileData.is_superuser ? 
         
         <Text>Admin</Text> :
         <Text>Not Atmin</Text>
     }
+        <AuthButton 
+            title={'Change password'}
+            onPress={() => navigation.navigate('RequestResetMail')}
+        />
       
     </View>
   )

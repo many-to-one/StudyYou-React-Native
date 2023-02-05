@@ -16,6 +16,7 @@ import MonthsResults from '../backend_pages/MonthsResults';
 import Profile from '../backend_pages/Profile';
 import MonthsResultsItem from '../backend_pages/MonthsResultsItem';
 import HeaderBackButton from '../buttons/HeaderBackButton';
+import RequestResetMail from '../backend_pages/RequestResetMail';
 
 const Tab = createBottomTabNavigator();
 
@@ -151,6 +152,22 @@ function BottomNavigator() {
         component={Profile} 
         options={{
           title: 'Profile',
+          headerTitleStyle: {
+            color: 'white',
+            marginLeft: '8rem',
+          },
+          headerStyle: {
+            backgroundColor: 'black',
+          },
+          tabBarVisible: false, // hide the button
+          tabBarButton: (props) => null, // hide the button
+        }}
+        />
+        <Tab.Screen 
+        name="RequestResetMail" 
+        component={RequestResetMail} 
+        options={{
+          title: 'RequestResetMail',
           headerTitleStyle: {
             color: 'white',
             marginLeft: '8rem',

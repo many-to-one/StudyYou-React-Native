@@ -11,7 +11,7 @@ export const AuthProvider = ({children}) => {
     const [profileToken, setProfileToken] = useState('')
     const [logged, setLogged] = useState(false)
     const proxy = "http://127.0.0.1:8000"
-    // const proxy = "http://10.0.2.2:8000"
+
 
     const register = async (username ,email, password) => {
 
@@ -78,7 +78,18 @@ export const AuthProvider = ({children}) => {
                 setProfileToken(data.token)
                 setLogged(true)
               }
+              return data
         }
+
+    const passwordResetService = async(token, uidb64) => {
+        const resp =  await fetch(`/users/password-reset/${uidb64}/${token}/`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+        });
+        return await response.json()
+    }
 
 
     const logout = async() => {
