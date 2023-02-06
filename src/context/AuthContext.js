@@ -81,20 +81,24 @@ export const AuthProvider = ({children}) => {
               return data
         }
 
-    const passwordResetService = async(token, uidb64) => {
-        const resp =  await fetch(`/users/password-reset/${uidb64}/${token}/`, {
+    const passwordResetService = async(uidb64, token) => {
+        const resp =  await fetch(`${proxy}/users/password-reset/${uidb64}/${token}/`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json'
             },
         });
-        return await response.json()
+        const data = await resp.json()
+        console.log('passwordResetService:', data)
+        await logout()
+        return data
     }
 
 
     const logout = async() => {
 
-        const resp = await fetch(`${proxy}/users/logout/${userData.id}/`, {
+        let datas = JSON.parse(await AsyncStorage.getItem("asyncUserData"))
+        const resp = await fetch(`${proxy}/users/logout/${datas.id}/`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -102,6 +106,7 @@ export const AuthProvider = ({children}) => {
 
         });
         const data = await resp.json();
+        await AsyncStorage.removeItem("asyncUserData")
         navigation.navigate('Login');
         return '205';
     };
@@ -119,6 +124,7 @@ export const AuthProvider = ({children}) => {
             profile,
             profileToken,
             logged,
+            passwordResetService
         }}>
             {children}
         </AuthContext.Provider>

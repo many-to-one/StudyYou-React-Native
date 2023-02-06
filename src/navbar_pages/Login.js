@@ -72,8 +72,18 @@ const Login = () => {
                 title={'Login'} 
                 onPress={() =>  LoginApi()}
               />
-    
             </View>
+
+              <View style={styles.register}>
+                <Text style={styles.text}>
+                  Forgot your password?
+                </Text>
+                <RegisterButton 
+                  title={'Click here'} 
+                  onPress={() =>  navigation.navigate('RequestResetMail')}
+                />
+              </View>
+
               <View style={styles.register}>
                 <Text style={styles.text}>
                   Don't have an account?
@@ -82,7 +92,8 @@ const Login = () => {
                   title={'Registration'} 
                   onPress={() =>  navigation.navigate('Registration')}
                 />
-            </View>
+              </View>
+
           </View> 
     
         )

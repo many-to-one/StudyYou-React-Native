@@ -42,32 +42,28 @@ const RequestResetMail = ({navigation}) => {
     const passwordReset = async() => {
 
         try {
-            const resp = await passwordResetService(uidb64, token);
-            if (resp.status === 200){
-                console.log('passwordReset:', resp)
-                alert('Please check your email')
-            }
-             
+            const resp = await passwordResetService(uidb64, token);        
           } catch (error) {
             console.error('error', error);
           }
       
     }
 
-  return (
-    <View>
-        {success ? 
-        
+    return(
+      <View>
+      {success ? 
+
         <AuthButton 
             title={'Confirm'}
-            onPress={passwordReset()}
+            onPress={() => passwordReset()}
         />
-         :
+       :
 
         <Text>Loading...</Text>
-    }
+      }
     </View>
-  )
+
+    )
 }
 
 export default RequestResetMail
