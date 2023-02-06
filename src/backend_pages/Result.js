@@ -44,8 +44,9 @@ const Result = ({navigation}) => {
         let datas = JSON.parse(await AsyncStorage.getItem("asyncUserData"))
         const resp = await fetch(`${proxy}/backend/month/create/${datas.id}/`)
         const data = await resp.json()
-        if (data){
+        if (data.status === 200){
           deleteAll(datas)
+          navigation.navigate('Menu')
         }
     };
 

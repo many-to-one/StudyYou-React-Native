@@ -17,6 +17,7 @@ import Profile from '../backend_pages/Profile';
 import MonthsResultsItem from '../backend_pages/MonthsResultsItem';
 import HeaderBackButton from '../buttons/HeaderBackButton';
 import RequestResetMail from '../backend_pages/RequestResetMail';
+import BackButton from '../buttons/BackButton';
 
 const Tab = createBottomTabNavigator();
 

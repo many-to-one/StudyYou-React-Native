@@ -45,7 +45,7 @@ const Home = ({navigation}) => {
       }
     }
 
-    // ################# END OF THE FUNCTION ################# //
+  // ################# END OF THE FUNCTION ################# //
 
   }
 
@@ -73,6 +73,7 @@ const Home = ({navigation}) => {
   }
 
 }
+
 
 const styles = StyleSheet.create({
 

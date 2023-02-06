@@ -14,7 +14,7 @@ const UpdateEvent = ({route, navigation}) => {
     const {ev} = route.params;
     const {proxy} = useContext(AuthContext);
     const [event, setEvent] = useState('');
-    const [hours, setHours] = useState(0);
+    const [hours, setHours] = useState('');
     const [minutes, setMinutes] = useState(0);
     const [visits, setVisits] = useState(0);
     const [publications, setPublications] = useState(0);
@@ -46,16 +46,17 @@ const UpdateEvent = ({route, navigation}) => {
               'Content-Type': 'application/json'
             },
             body:JSON.stringify({
-              event:ev.event,
-              hours:ev.hours,
-              minutes:ev.minutes,
-              visits:ev.visits,
-              publications:ev.publications,
-              films:ev.films,
+              event:event,
+              hours:hours,
+              minutes:minutes,
+              visits:visits,
+              publications:publications,
+              films:films,
             })
           });
           const data = await resp.json()
-          if(resp.status === 200){
+          console.log('dataUpd:', data)
+          if(data){
             // navigation.navigate('Home')
             window.location.reload()
           }else{

@@ -5,10 +5,12 @@ import AuthButton from '../buttons/AuthButton'
 import RegisterButton from '../buttons/RegisterButton'
 import { AuthContext } from '../context/AuthContext'
 import Home from './Home'
+import { useNavigation } from '@react-navigation/native'
 
 
-const Login = ({ navigation }) => {
+const Login = () => {
 
+  const navigation = useNavigation() 
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const {userData, login,token, profileToken, logged} = useContext(AuthContext);
@@ -78,7 +80,7 @@ const Login = ({ navigation }) => {
                 </Text>
                 <RegisterButton 
                   title={'Registration'} 
-                  onPress={() =>  Register()}
+                  onPress={() =>  navigation.navigate('Registration')}
                 />
             </View>
           </View> 
