@@ -14,7 +14,7 @@ const UpdateEvent = ({route, navigation}) => {
     const {ev} = route.params;
     const {proxy} = useContext(AuthContext);
     const [event, setEvent] = useState('');
-    const [hours, setHours] = useState('');
+    const [hours, setHours] = useState(0);
     const [minutes, setMinutes] = useState(0);
     const [visits, setVisits] = useState(0);
     const [publications, setPublications] = useState(0);
@@ -34,7 +34,14 @@ const UpdateEvent = ({route, navigation}) => {
           },
       });
       const data = await resp.json()
-      console.log('to_updateData:', data)
+      if(data){
+        setEvent(data.event)
+        setHours(data.hours)
+        setMinutes(data.minutes)
+        setVisits(data.visits)
+        setPublications(data.publications)
+        setFilms(data.films)
+      }
     }
 
     const updateEvent = async() => {
@@ -55,10 +62,8 @@ const UpdateEvent = ({route, navigation}) => {
             })
           });
           const data = await resp.json()
-          console.log('dataUpd:', data)
           if(data){
-            // navigation.navigate('Home')
-            window.location.reload()
+            navigation.navigate('Home')
           }else{
             alert('Something went wrong...')
           }
@@ -105,7 +110,7 @@ const UpdateEvent = ({route, navigation}) => {
         </View>
         <View>
           <TextInput 
-            onChangeText={(text) => setHours(text)}
+            onChangeText={text => setHours(text)}
             style={styles.input}
             defaultValue={ev.hours}
           />
@@ -173,11 +178,6 @@ const UpdateEvent = ({route, navigation}) => {
       </View>
 
       <DoneButton onPress={() => updateEvent()}/>
-      <Icon 
-      name='arrow-back' 
-      onPress={() => back()} 
-      style={styles.back_button}  
-      />
     </ScrollView>
     </View>
   )

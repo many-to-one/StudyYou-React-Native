@@ -38,7 +38,7 @@ const AddEvent = ({ navigation }) => {
         const data = await resp.json()
         if(resp.status === 200){
           navigation.navigate('Home')
-          window.location.reload()
+          // window.location.reload()
         }else{
           alert('Something went wrong...')
         }
