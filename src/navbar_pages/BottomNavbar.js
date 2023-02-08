@@ -72,20 +72,6 @@ function BottomNavigator() {
         }}
       >
         <Tab.Screen 
-        name="Home"
-        component={Home} 
-        options={{
-          title: 'Home',
-          headerTitleStyle: {
-            color: 'white',
-            marginLeft: '8rem',
-          },
-          headerStyle: {
-            backgroundColor: 'black',
-          },
-        }}
-        />
-        <Tab.Screen 
         name="Menu" 
         component={NewMenu} 
         options={{
@@ -97,6 +83,20 @@ function BottomNavigator() {
           headerStyle: {
             backgroundColor: 'black',
             justifyContent: 'center'
+          },
+        }}
+        />
+        <Tab.Screen 
+        name="Home"
+        component={Home} 
+        options={{
+          title: 'Home',
+          headerTitleStyle: {
+            color: 'white',
+            marginLeft: '8rem',
+          },
+          headerStyle: {
+            backgroundColor: 'black',
           },
         }}
         />

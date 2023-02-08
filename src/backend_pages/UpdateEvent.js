@@ -13,6 +13,7 @@ const UpdateEvent = ({route, navigation}) => {
     const { width, height } = Dimensions.get('window');
     const {ev} = route.params;
     const {proxy} = useContext(AuthContext);
+    const [events, setEvents] = useState({name: {}});
     const [event, setEvent] = useState('');
     const [hours, setHours] = useState(0);
     const [minutes, setMinutes] = useState(0);
@@ -26,7 +27,6 @@ const UpdateEvent = ({route, navigation}) => {
     }, [isFocused]);
 
     const getEvent = async() => {
-        console.log('ev:',ev)
       const resp = await fetch(`${proxy}/backend/events/${ev.id}/${ev.user}/`, {
           method: 'GET',
           headers: {
@@ -35,12 +35,7 @@ const UpdateEvent = ({route, navigation}) => {
       });
       const data = await resp.json()
       if(data){
-        setEvent(data.event)
-        setHours(data.hours)
-        setMinutes(data.minutes)
-        setVisits(data.visits)
-        setPublications(data.publications)
-        setFilms(data.films)
+        setEvents(data)
       }
     }
 
@@ -52,17 +47,11 @@ const UpdateEvent = ({route, navigation}) => {
             headers: {
               'Content-Type': 'application/json'
             },
-            body:JSON.stringify({
-              event:event,
-              hours:hours,
-              minutes:minutes,
-              visits:visits,
-              publications:publications,
-              films:films,
-            })
+            body:JSON.stringify(events),
           });
           const data = await resp.json()
           if(data){
+            setEvents(data)
             navigation.navigate('Home')
           }else{
             alert('Something went wrong...')
@@ -71,7 +60,6 @@ const UpdateEvent = ({route, navigation}) => {
 
         const back = () => {
             navigation.navigate('Home')
-            // window.location.reload()
         }
 
   return (
@@ -93,12 +81,13 @@ const UpdateEvent = ({route, navigation}) => {
             }}
           />
     <ScrollView>
+      <BackButton onPress={() => back()}/>
       <View style={styles.row}>
         <TextInput style={styles.event} 
           placeholder="Event..."
           placeholderTextColor={'gray'}
-          onChangeText={(text) => setEvent(text)}
-          defaultValue={ev.event}
+          defaultValue={events.event}
+          onChangeText={(e) => {setEvents({...events, 'event': e})}}
         />
       </View>
 
@@ -110,9 +99,9 @@ const UpdateEvent = ({route, navigation}) => {
         </View>
         <View>
           <TextInput 
-            onChangeText={text => setHours(text)}
+            defaultValue={events.hours}
+            onChangeText={(e) => {setEvents({...events, 'hours': e})}}
             style={styles.input}
-            defaultValue={ev.hours}
           />
         </View>
       </View>
@@ -125,8 +114,8 @@ const UpdateEvent = ({route, navigation}) => {
         </View>
         <View>
           <TextInput 
-            defaultValue={ev.minutes}
-            onChangeText={(text) => setMinutes(text)}
+            defaultValue={events.minutes}
+            onChangeText={(e) => {setEvents({...events, 'minutes': e})}}
             style={styles.input}
           />
         </View>
@@ -140,8 +129,8 @@ const UpdateEvent = ({route, navigation}) => {
         </View>
         <View>
           <TextInput 
-            defaultValue={ev.visits}
-            onChangeText={(text) => setVisits(text)}
+            defaultValue={events.visits}
+            onChangeText={(e) => {setEvents({...events, 'visits': e})}}
             style={styles.input}
           />
         </View>
@@ -155,8 +144,8 @@ const UpdateEvent = ({route, navigation}) => {
         </View>
         <View>
           <TextInput 
-            defaultValue={ev.publications}
-            onChangeText={(text) => setPublications(text)}
+            defaultValue={events.publications}
+            onChangeText={(e) => {setEvents({...events, 'publications': e})}}
             style={styles.input}
           />
         </View>
@@ -170,8 +159,8 @@ const UpdateEvent = ({route, navigation}) => {
         </View>
         <View >
           <TextInput 
-            defaultValue={ev.films}
-            onChangeText={(text) => setFilms(text)}
+            defaultValue={events.films}
+            onChangeText={(e) => {setEvents({...events, 'films': e})}}
             style={styles.input}
           />
         </View>
