@@ -43,7 +43,8 @@ const UpdateEvent = ({route, navigation}) => {
       const data = await resp.json()
       if(data){
         setEvents(data)
-        console.log('data received:', data)
+        // setEvents({...events, 'hours': ev.hours})
+        console.log('ev.id:', ev.id)
         // onRefresh()
       }
     }
@@ -94,7 +95,7 @@ const UpdateEvent = ({route, navigation}) => {
         <TextInput style={styles.event} 
           placeholder="Event..."
           placeholderTextColor={'gray'}
-          defaultValue={events.event}
+          value={events.event}
           onChangeText={(e) => {setEvents({...events, 'event': e})}}
         />
       </View>
@@ -107,9 +108,8 @@ const UpdateEvent = ({route, navigation}) => {
         </View>
         <View>
           <TextInput 
-            defaultValue={events.hours}
+            value={events.hours}
             onChangeText={(e) => {setEvents({...events, 'hours': e})}}
-            // onChangeText={(text) => setHours(text)}
             style={styles.input}
           />
         </View>
@@ -123,7 +123,7 @@ const UpdateEvent = ({route, navigation}) => {
         </View>
         <View>
           <TextInput 
-            defaultValue={events.minutes}
+            value={events.minutes}
             onChangeText={(e) => {setEvents({...events, 'minutes': e})}}
             style={styles.input}
           />
@@ -138,7 +138,7 @@ const UpdateEvent = ({route, navigation}) => {
         </View>
         <View>
           <TextInput 
-            defaultValue={events.visits}
+            value={events.visits}
             onChangeText={(e) => {setEvents({...events, 'visits': e})}}
             style={styles.input}
           />
@@ -153,7 +153,7 @@ const UpdateEvent = ({route, navigation}) => {
         </View>
         <View>
           <TextInput 
-            defaultValue={events.publications}
+            value={events.publications}
             onChangeText={(e) => {setEvents({...events, 'publications': e})}}
             style={styles.input}
           />
@@ -168,7 +168,7 @@ const UpdateEvent = ({route, navigation}) => {
         </View>
         <View >
           <TextInput 
-            defaultValue={events.films}
+            value={events.films}
             onChangeText={(e) => {setEvents({...events, 'films': e})}}
             style={styles.input}
           />

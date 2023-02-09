@@ -5,6 +5,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import DoneButton from '../buttons/DoneButton'
 import { useIsFocused } from '@react-navigation/native';
 import { LinearGradient } from 'expo-linear-gradient';
+import BackButton from '../buttons/BackButton';
 
 const AddEvent = ({ navigation }) => {   
 
@@ -12,18 +13,10 @@ const AddEvent = ({ navigation }) => {
   const {proxy} = useContext(AuthContext);
   const isFocused = useIsFocused();
   const [events, setEvents] = useState({name:{}})
-  // const [events, setEvents] = useState({
-  //   'event': '',
-  //   'hours': 0,
-  //   'minutes': 0,
-  //   'visits': 0,
-  //   'publications': 0,
-  //   'films': 0,
-  //   });
 
     useEffect(() => {
       setData()
-    },[])
+    },[isFocused])
 
     const setData = async() => {
       setEvents({
@@ -48,24 +41,11 @@ const AddEvent = ({ navigation }) => {
         });
         const data = await resp.json()
         if(resp.status === 200){
-          clearTextInput()
           navigation.navigate('Home')
         }else{
           alert('Something went wrong...')
         }
       }
-
-      const clearTextInput = () => {
-        setEvents({
-          'event': '',
-          'hours': 0,
-          'minutes': 0,
-          'visits': 0,
-          'publications': 0,
-          'films': 0,
-        })
-      }
-
 
   return (
     <View style={styles.container}>
@@ -86,11 +66,12 @@ const AddEvent = ({ navigation }) => {
             }}
           />
     <ScrollView>
+    <BackButton onPress={() => navigation.navigate('Home')}/>
       <View style={styles.row}>
         <TextInput style={styles.event} 
           placeholder="Event..."
           placeholderTextColor={'gray'}
-          defaultValue={events.event}
+          value={events.event}
           onChangeText={(e) => {setEvents({...events, 'event': e})}}
         />
       </View>
@@ -103,7 +84,7 @@ const AddEvent = ({ navigation }) => {
         </View>
         <View>
           <TextInput 
-            defaultValue={events.hours}
+            value={events.hours}
             onChangeText={(e) => {setEvents({...events, 'hours': e})}}
             style={styles.input}
           />
@@ -118,7 +99,7 @@ const AddEvent = ({ navigation }) => {
         </View>
         <View>
           <TextInput 
-            defaultValue={events.minutes}
+            value={events.minutes}
             onChangeText={(e) => {setEvents({...events, 'minutes': e})}}
             style={styles.input}
           />
@@ -133,7 +114,7 @@ const AddEvent = ({ navigation }) => {
         </View>
         <View>
           <TextInput 
-            defaultValue={events.visits}
+            value={events.visits}
             onChangeText={(e) => {setEvents({...events, 'visits': e})}}
             style={styles.input}
           />
@@ -148,7 +129,7 @@ const AddEvent = ({ navigation }) => {
         </View>
         <View>
           <TextInput 
-            defaultValue={events.publications}
+            value={events.publications}
             onChangeText={(e) => {setEvents({...events, 'publications': e})}}
             style={styles.input}
           />
@@ -163,7 +144,7 @@ const AddEvent = ({ navigation }) => {
         </View>
         <View >
           <TextInput 
-            defaultValue={events.films}
+            value={events.films}
             onChangeText={(e) => {setEvents({...events, 'films': e})}}
             style={styles.input}
           />

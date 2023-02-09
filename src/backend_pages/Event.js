@@ -19,19 +19,19 @@ const Event = ({ev}) => {
     console.log('refreshed Event')
   }, []);
 
-  // const getEvent = async() => {
-  //   const resp = await fetch(`${proxy}/backend/events/${ev.id}/${ev.user}/`, {
-  //       method: 'GET',
-  //       headers: {
-  //           'Content-Type': 'application/json'
-  //       },
-  //   });
-  //   const data = await resp.json()
-  //   if(data){
-  //     console.log('data received:', data.hours)
-  //     onRefresh()
-  //   }
-  // }
+  const getEvent = async() => {
+    const resp = await fetch(`${proxy}/backend/events/${ev.id}/${ev.user}/`, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+    });
+    const data = await resp.json()
+    if(data){
+      console.log('data received:', data.hours)
+      onRefresh()
+    }
+  }
 
   const deleteEvent = async() => {
     await fetch(`${proxy}/backend/events/${ev.id}/${ev.user}/delete/`, {
@@ -40,17 +40,13 @@ const Event = ({ev}) => {
             'Content-Type': 'application/json'
         },
     });
-    window.location.reload();
-  }
-
-  const goToUpdate = async() => {
     onRefresh()
-    navigation.navigate('UpdateEvent', {ev:ev})
+    navigation.navigate('Home')
+    // window.location.reload();
   }
 
   return (
-    <TouchableOpacity onPress={() => goToUpdate()}
-    >
+    <TouchableOpacity onPress={() => navigation.navigate('UpdateEvent', {ev:ev})}>
     <View style={styles.container}>
       <View style={styles.event}>
         <Text style={styles.event_date}>{ev.date.slice(0, 10)}</Text>
