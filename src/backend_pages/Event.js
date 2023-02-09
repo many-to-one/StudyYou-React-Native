@@ -1,13 +1,37 @@
-import { useNavigation } from '@react-navigation/native';
-import React, { useContext } from 'react'
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
+import { useIsFocused, useNavigation } from '@react-navigation/native';
+import React, { useContext, useEffect, useState } from 'react'
+import { View, Text, StyleSheet, TouchableOpacity, Button } from 'react-native'
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import { AuthContext } from '../context/AuthContext';
 
 const Event = ({ev}) => {
-  console.log('event:', ev.event)
   const {proxy} = useContext(AuthContext);
   const navigation = useNavigation();
+  const isFocused = useIsFocused();
+
+  // useEffect(() => {
+  //   getEvent()
+  // }, [isFocused]);
+
+  const onRefresh = React.useCallback(() => {
+    setTimeout(() => {
+    }, 100);
+    console.log('refreshed Event')
+  }, []);
+
+  // const getEvent = async() => {
+  //   const resp = await fetch(`${proxy}/backend/events/${ev.id}/${ev.user}/`, {
+  //       method: 'GET',
+  //       headers: {
+  //           'Content-Type': 'application/json'
+  //       },
+  //   });
+  //   const data = await resp.json()
+  //   if(data){
+  //     console.log('data received:', data.hours)
+  //     onRefresh()
+  //   }
+  // }
 
   const deleteEvent = async() => {
     await fetch(`${proxy}/backend/events/${ev.id}/${ev.user}/delete/`, {
@@ -19,12 +43,13 @@ const Event = ({ev}) => {
     window.location.reload();
   }
 
+  const goToUpdate = async() => {
+    onRefresh()
+    navigation.navigate('UpdateEvent', {ev:ev})
+  }
+
   return (
-    <TouchableOpacity onPress={() => navigation.navigate(
-      'UpdateEvent',{
-        ev:ev
-      }
-      )}
+    <TouchableOpacity onPress={() => goToUpdate()}
     >
     <View style={styles.container}>
       <View style={styles.event}>
@@ -40,6 +65,26 @@ const Event = ({ev}) => {
       </View>
     </View>
     </TouchableOpacity>
+
+    //  <View style={styles.container}>
+    //  <Button onPress={() => navigation.navigate(
+    //     'UpdateEvent',{
+    //       ev:ev
+    //     }
+    //     )}
+    //   />
+    //   <View style={styles.event}>
+    //     <Text style={styles.event_date}>{ev.date.slice(0, 10)}</Text>
+    //     <Text style={styles.event_text}>{ev.event}</Text>
+    //   </View>  
+    //   <View>
+    //     <Icon 
+    //       name='delete-forever' 
+    //       onPress={() => deleteEvent()} 
+    //       style={styles.delete}  
+    //     />
+    //   </View>
+    // </View>
   )
 }
 

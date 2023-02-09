@@ -11,14 +11,15 @@ const AddEvent = ({ navigation }) => {
   const { width, height } = Dimensions.get('window');
   const {proxy} = useContext(AuthContext);
   const isFocused = useIsFocused();
-  const [events, setEvents] = useState({
-    'event': '',
-    'hours': 0,
-    'minutes': 0,
-    'visits': 0,
-    'publications': 0,
-    'films': 0,
-    });
+  const [events, setEvents] = useState({name:{}})
+  // const [events, setEvents] = useState({
+  //   'event': '',
+  //   'hours': 0,
+  //   'minutes': 0,
+  //   'visits': 0,
+  //   'publications': 0,
+  //   'films': 0,
+  //   });
 
     useEffect(() => {
       setData()
@@ -46,11 +47,9 @@ const AddEvent = ({ navigation }) => {
           body:JSON.stringify(events),
         });
         const data = await resp.json()
-        console.log('sendedData:', data)
         if(resp.status === 200){
-          navigation.navigate('Home')
           clearTextInput()
-          // window.location.reload()
+          navigation.navigate('Home')
         }else{
           alert('Something went wrong...')
         }

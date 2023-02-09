@@ -6,7 +6,7 @@ import DoneButton from '../buttons/DoneButton'
 import BackButton from '../buttons/BackButton';
 import Icon from "react-native-vector-icons/MaterialIcons";
 import { LinearGradient } from 'expo-linear-gradient';
-import { useIsFocused } from '@react-navigation/native';
+import { useFocusEffect, useIsFocused } from '@react-navigation/native';
 
 const UpdateEvent = ({route, navigation}) => {
 
@@ -26,6 +26,13 @@ const UpdateEvent = ({route, navigation}) => {
       getEvent()
     }, [isFocused]);
 
+
+    const onRefresh = React.useCallback(() => {
+      setTimeout(() => {
+      }, 100);
+      console.log('events:', events)
+    }, []);
+
     const getEvent = async() => {
       const resp = await fetch(`${proxy}/backend/events/${ev.id}/${ev.user}/`, {
           method: 'GET',
@@ -36,12 +43,12 @@ const UpdateEvent = ({route, navigation}) => {
       const data = await resp.json()
       if(data){
         setEvents(data)
+        console.log('data received:', data)
+        // onRefresh()
       }
     }
 
     const updateEvent = async() => {
-        let datas = JSON.parse(await AsyncStorage.getItem("asyncUserData"))
-        console.log('datas:', datas)
           const resp = await fetch(`${proxy}/backend/events/${ev.id}/${ev.user}/update/`, {
             method: 'PUT',
             headers: {
@@ -51,7 +58,7 @@ const UpdateEvent = ({route, navigation}) => {
           });
           const data = await resp.json()
           if(data){
-            setEvents(data)
+            onRefresh()
             navigation.navigate('Home')
           }else{
             alert('Something went wrong...')
@@ -59,6 +66,7 @@ const UpdateEvent = ({route, navigation}) => {
         }
 
         const back = () => {
+            onRefresh()
             navigation.navigate('Home')
         }
 
@@ -101,6 +109,7 @@ const UpdateEvent = ({route, navigation}) => {
           <TextInput 
             defaultValue={events.hours}
             onChangeText={(e) => {setEvents({...events, 'hours': e})}}
+            // onChangeText={(text) => setHours(text)}
             style={styles.input}
           />
         </View>

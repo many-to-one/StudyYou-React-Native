@@ -82,7 +82,6 @@ function BottomNavigator() {
           },
           headerStyle: {
             backgroundColor: 'black',
-            justifyContent: 'center'
           },
         }}
         />

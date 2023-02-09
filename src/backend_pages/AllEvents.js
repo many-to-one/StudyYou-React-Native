@@ -19,28 +19,22 @@ const AllEvents = ({datas}) => {
       allEvents()
     }, [isFocused])
 
-    const [refreshing, setRefreshing] = React.useState(false);
-
     const onRefresh = React.useCallback(() => {
-      setRefreshing(true);
       setTimeout(() => {
-        setRefreshing(false);
+        allEvents();
       }, 100);
+      console.log('refreshed AllEvents')
     }, []);
 
     const allEvents = async() => {
       let datas = JSON.parse(await AsyncStorage.getItem("asyncUserData"))
-      console.log('datas:', datas)
         const response = await fetch(`${proxy}/backend/events/${datas.id}/`)
-        const resp = await response.json();
-        setEvents(resp)
-        console.log(
-            'id:', userData.id,
-            'events:', events,
-            'proxy:', proxy,
-            'userData:', userData,
-            'resp', resp,
-            )
+        const data = await response.json();
+        setEvents(data)
+        if (data){
+          console.log('allEvents', data)
+        // onRefresh()
+        }
     }
 
   return (
@@ -62,11 +56,8 @@ const AllEvents = ({datas}) => {
           bottom: -50,
           }}
         />
-         <ScrollView
+         <View
           contentContainerStyle={styles.scrollView}
-          refreshControl={
-          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
-          }
          >
 
 
@@ -76,7 +67,7 @@ const AllEvents = ({datas}) => {
         ))}
       </View>
 
-      </ScrollView>
+      </View>
       <AddEventButton 
           onPress={() => {
             navigation.navigate('AddEvent');

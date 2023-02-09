@@ -19,6 +19,7 @@ const Home = ({navigation}) => {
 
   useEffect(() => {
     profile()
+    console.log('home is focused')
   }, [isFocused])
 
 
@@ -26,9 +27,7 @@ const Home = ({navigation}) => {
   // ##### GET TOKEN FROM LOGGED USER BY ID FROM STORAGE ##### //
 
   const profile = async() => {
-    console.log('token:', token)
     let datas = JSON.parse(await AsyncStorage.getItem("asyncUserData"))
-    console.log('datas:', datas)
     if(datas === null){
       navigation.navigate('Login')
     }else{
@@ -40,7 +39,6 @@ const Home = ({navigation}) => {
       });
       const data = await resp.json()
       if(data){
-        console.log('data:', data)
         setProfileToken(data.token)
       }
     }
@@ -55,13 +53,8 @@ const Home = ({navigation}) => {
   
       <View style={styles.main_container}>
         <View style={styles.container_1}>
-            <AllEvents datas={datas}/>
-        </View >
-        {/* <AddEventButton 
-          onPress={() => {
-            navigation.navigate('AddEvent');
-          }}
-        /> */}
+          <AllEvents datas={datas} />
+        </View>
       </View>
   
     )
