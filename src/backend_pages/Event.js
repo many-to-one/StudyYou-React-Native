@@ -7,31 +7,13 @@ import { AuthContext } from '../context/AuthContext';
 const Event = ({ev}) => {
   const {proxy} = useContext(AuthContext);
   const navigation = useNavigation();
-  const isFocused = useIsFocused();
-
-  // useEffect(() => {
-  //   getEvent()
-  // }, [isFocused]);
+  const [live, setLive] = useState(true)
 
   const onRefresh = React.useCallback(() => {
     setTimeout(() => {
     }, 100);
     console.log('refreshed Event')
   }, []);
-
-  const getEvent = async() => {
-    const resp = await fetch(`${proxy}/backend/events/${ev.id}/${ev.user}/`, {
-        method: 'GET',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-    });
-    const data = await resp.json()
-    if(data){
-      console.log('data received:', data.hours)
-      onRefresh()
-    }
-  }
 
   const deleteEvent = async() => {
     await fetch(`${proxy}/backend/events/${ev.id}/${ev.user}/delete/`, {
@@ -40,48 +22,40 @@ const Event = ({ev}) => {
             'Content-Type': 'application/json'
         },
     });
-    onRefresh()
+    // onRefresh()
+    setLive(false)
     navigation.navigate('Home')
-    // window.location.reload();
   }
 
-  return (
-    <TouchableOpacity onPress={() => navigation.navigate('UpdateEvent', {ev:ev})}>
-    <View style={styles.container}>
-      <View style={styles.event}>
-        <Text style={styles.event_date}>{ev.date.slice(0, 10)}</Text>
-        <Text style={styles.event_text}>{ev.event}</Text>
-      </View>  
-      <View>
-        <Icon 
-          name='delete-forever' 
-          onPress={() => deleteEvent()} 
-          style={styles.delete}  
-        />
-      </View>
-    </View>
-    </TouchableOpacity>
+  
+    if(live === true){
 
-    //  <View style={styles.container}>
-    //  <Button onPress={() => navigation.navigate(
-    //     'UpdateEvent',{
-    //       ev:ev
-    //     }
-    //     )}
-    //   />
-    //   <View style={styles.event}>
-    //     <Text style={styles.event_date}>{ev.date.slice(0, 10)}</Text>
-    //     <Text style={styles.event_text}>{ev.event}</Text>
-    //   </View>  
-    //   <View>
-    //     <Icon 
-    //       name='delete-forever' 
-    //       onPress={() => deleteEvent()} 
-    //       style={styles.delete}  
-    //     />
-    //   </View>
-    // </View>
-  )
+      return(
+        <TouchableOpacity onPress={() => navigation.navigate('UpdateEvent', {ev:ev})}>
+          <View style={styles.container}>
+            <View style={styles.event}>
+              <Text style={styles.event_date}>{ev.date.slice(0, 10)}</Text>
+              <Text style={styles.event_text}>{ev.event}</Text>
+            </View>  
+            <View>
+              <Icon 
+                name='delete-forever' 
+                onPress={() => deleteEvent()} 
+                style={styles.delete}  
+              />
+            </View>
+          </View>
+        </TouchableOpacity>
+      )
+
+    }else{
+
+      return(
+        <View></View>
+      )
+
+    }
+  
 }
 
 const styles = StyleSheet.create({

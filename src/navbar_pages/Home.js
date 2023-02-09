@@ -53,7 +53,7 @@ const Home = ({navigation}) => {
   
       <View style={styles.main_container}>
         <View style={styles.container_1}>
-          <AllEvents datas={datas} />
+          <AllEvents/>
         </View>
       </View>
   
