@@ -18,6 +18,7 @@ import MonthsResultsItem from '../backend_pages/MonthsResultsItem';
 import HeaderBackButton from '../buttons/HeaderBackButton';
 import RequestResetMail from '../backend_pages/RequestResetMail';
 import BackButton from '../buttons/BackButton';
+import Timer from '../backend_pages/Timer';
 
 const Tab = createBottomTabNavigator();
 
@@ -168,6 +169,22 @@ function BottomNavigator() {
         component={RequestResetMail} 
         options={{
           title: 'RequestResetMail',
+          headerTitleStyle: {
+            color: 'white',
+            marginLeft: '8rem',
+          },
+          headerStyle: {
+            backgroundColor: 'black',
+          },
+          tabBarVisible: false, // hide the button
+          tabBarButton: (props) => null, // hide the button
+        }}
+        />
+        <Tab.Screen 
+        name="Timer" 
+        component={Timer} 
+        options={{
+          title: 'Timer',
           headerTitleStyle: {
             color: 'white',
             marginLeft: '8rem',
