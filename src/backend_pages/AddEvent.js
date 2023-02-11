@@ -6,17 +6,23 @@ import DoneButton from '../buttons/DoneButton'
 import { useIsFocused } from '@react-navigation/native';
 import { LinearGradient } from 'expo-linear-gradient';
 import BackButton from '../buttons/BackButton';
+import { SelectList } from 'react-native-dropdown-select-list';
+import Icon from "react-native-vector-icons/Ionicons";
 
 const AddEvent = ({ navigation }) => {   
 
   const { width, height } = Dimensions.get('window');
-  const {proxy} = useContext(AuthContext);
+  const {proxy, language} = useContext(AuthContext);
   const isFocused = useIsFocused();
   const [events, setEvents] = useState({name:{}})
+  const [selected, setSelected] = useState('')
 
     useEffect(() => {
       setData()
+      console.log('language:', language)
     },[isFocused])
+
+    const Data = ['1', '2'] 
 
     const setData = async() => {
       setEvents({
@@ -66,6 +72,22 @@ const AddEvent = ({ navigation }) => {
             }}
           />
     <ScrollView>
+    <SelectList 
+        onSelect={() => alert(selected)}
+        setSelected={setSelected} 
+        // fontFamily='lato'
+        data={Data} 
+        boxStyles={styles.event}
+        inputStyles={styles.text}
+        dropdownStyles={styles.event}
+        dropdownItemStyles={{color: 'white'}}
+        dropdownTextStyles={{color: 'white'}}
+        // arrowicon={<FontAwesome name="chevron-down" size={12} color={'black'} />} 
+        searchicon={<Icon name="search" size={20} color={'white'} />} 
+        search={true} 
+        // boxStyles={{borderRadius:5}} //override default styles
+        // defaultOption={{ key:'1', value:'Jammu & Kashmir' }}
+      />
     <BackButton onPress={() => navigation.navigate('Home')}/>
       <View style={styles.row}>
         <TextInput style={styles.event} 
@@ -79,7 +101,8 @@ const AddEvent = ({ navigation }) => {
       <View style={styles.row}>
         <View style={styles.left_row}>
           <Text style={styles.text}>
-            Hours:
+            {/* Hours: */}
+            {language.PL.Hours}
           </Text>
         </View>
         <View>
@@ -177,7 +200,7 @@ const styles = StyleSheet.create({
   },
   event:{
     width: 320,
-    height: 50,
+    // height: 50,
     borderRadius: 10,
     borderWidth: 2,
     borderColor: '#EFA9FD',
@@ -185,6 +208,7 @@ const styles = StyleSheet.create({
     padding: 10,
     color: 'white',
     fontSize: 20,
+    zIndex: 999,
   },  
   left_row: {
     width: 250,

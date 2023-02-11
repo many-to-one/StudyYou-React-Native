@@ -35,7 +35,7 @@ const Event = ({ev}) => {
           <View style={styles.container}>
             <View style={styles.event}>
               <Text style={styles.event_date}>{ev.date.slice(0, 10)}</Text>
-              <Text style={styles.event_text}>{ev.event}</Text>
+              <Text style={styles.event_text}>{ev.event.slice(0,25)} ...</Text>
             </View>  
             <View>
               <Icon 

@@ -12,6 +12,30 @@ export const AuthProvider = ({children}) => {
     const [logged, setLogged] = useState(false)
     const proxy = "http://127.0.0.1:8000"
 
+    const language = {
+        PL: {
+            Hours: 'Godziny',
+            Minutes: 'Minuty',
+            Visits: 'Odwiedziny',
+            Piblications: 'Publikacje',
+            Films: 'Filmy',
+        },
+        RU: {
+          Hours: 'Часы',
+          Minutes: 'Минуты',
+          Visits: 'Повторы',
+          Piblications: 'Публикации',
+          Films: 'Фильмы',
+        },
+        UA: {
+          Hours: 'Години',
+          Minutes: 'Хвилини',
+          Visits: 'Повтори',
+          Piblications: 'Публiкацiї',
+          Films: 'Фiльми',
+        },
+    }
+
 
     const register = async (username ,email, password) => {
 
@@ -111,6 +135,7 @@ export const AuthProvider = ({children}) => {
         return '205';
     };
 
+    
 
     return(
    
@@ -124,7 +149,8 @@ export const AuthProvider = ({children}) => {
             profile,
             profileToken,
             logged,
-            passwordResetService
+            passwordResetService,
+            language
         }}>
             {children}
         </AuthContext.Provider>

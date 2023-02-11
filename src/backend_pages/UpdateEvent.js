@@ -201,7 +201,7 @@ const styles = StyleSheet.create({
     },
     event:{
       width: 320,
-      height: 50,
+      // height: 50,
       borderRadius: 10,
       borderWidth: 2,
       borderColor: '#EFA9FD',

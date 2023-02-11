@@ -19,7 +19,6 @@ const Home = ({navigation}) => {
 
   useEffect(() => {
     profile()
-    console.log('home is focused')
   }, [isFocused])
 
 

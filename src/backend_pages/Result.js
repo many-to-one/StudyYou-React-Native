@@ -68,9 +68,8 @@ const Result = ({navigation}) => {
             bottom: -50,
             }}
           />
-        <Text style={styles.text}>Result</Text>
         <ScrollView>
-          
+        <BackButton style={styles.backbtn} onPress={() => navigation.navigate('Menu')}/>
           <View style={styles.row}>
             <View style={styles.left_row}>
               <Text style={styles.text}>
@@ -136,7 +135,6 @@ const Result = ({navigation}) => {
             </View>
           </View>
     
-          <BackButton style={styles.backbtn} onPress={() => navigation.navigate('Home')}/>
           <SaveButton onPress={() => saveMonthResult()}/>
         </ScrollView>
         </View>
