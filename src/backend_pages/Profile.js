@@ -10,13 +10,18 @@ import { LinearGradient } from 'expo-linear-gradient';
 import BackButton from '../buttons/BackButton';
 import { SelectList } from 'react-native-dropdown-select-list';
 import Icon from "react-native-vector-icons/Ionicons";
+import { ChageLanguage } from '../context/ChageLanguage';
 
 const Profile = ({navigation}) => {
     const { width, height } = Dimensions.get('window');
-    const {profile} = useContext(AuthContext);
+    const {profile, setLanguage} = useContext(AuthContext);
     const [profileData, setProfileData] = useState([]);
     const [selected, setSelected] = useState('')
-    const Data = ['1', '2'] 
+    const Data = [
+      {key: 'PL', value: 'PL'},
+      {key: 'RU', value: 'RU'},
+      {key: 'UA', value: 'UA'},
+    ] 
 
     useEffect(() => {
         getProfile()
@@ -27,8 +32,16 @@ const Profile = ({navigation}) => {
         const resp = await profile()
         const data = resp
         setProfileData(data.data)
-        console.log('profile:', data)
     }
+
+    const language = async(selected) => {
+      await AsyncStorage.setItem('language', selected)
+      changeL()
+    }
+
+    const changeL = async() => {
+      await setLanguage()
+  }
 
   return (
 
@@ -51,7 +64,7 @@ const Profile = ({navigation}) => {
           />
     <ScrollView>
     <SelectList 
-        onSelect={() => alert(selected)}
+        onSelect={() => language(selected)}
         setSelected={setSelected} 
         // fontFamily='lato'
         data={Data} 
@@ -60,10 +73,10 @@ const Profile = ({navigation}) => {
         dropdownStyles={styles.event}
         dropdownItemStyles={{color: 'white'}}
         dropdownTextStyles={{color: 'white'}}
-        // arrowicon={<FontAwesome name="chevron-down" size={12} color={'black'} />} 
+        arrowicon={<Icon name="chevron-down" size={20} color={'white'} />} 
         searchicon={<Icon name="search" size={20} color={'white'} />} 
         search={true} 
-        // boxStyles={{borderRadius:5}} //override default styles
+        // defaultOption={{key: 'RU', value: language.RU}}
         // defaultOption={{ key:'1', value:'Jammu & Kashmir' }}
       />
     <BackButton onPress={() => navigation.navigate('Home')}/>

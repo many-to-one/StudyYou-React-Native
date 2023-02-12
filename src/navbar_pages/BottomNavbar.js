@@ -19,19 +19,31 @@ import HeaderBackButton from '../buttons/HeaderBackButton';
 import RequestResetMail from '../backend_pages/RequestResetMail';
 import BackButton from '../buttons/BackButton';
 import Timer from '../backend_pages/Timer';
+import ChageLanguage from '../context/ChageLanguage';
 
 const Tab = createBottomTabNavigator();
 
 function BottomNavigator() {
 
-  const {userData}  = React.useContext(AuthContext);  
+  const {
+    Menu_,
+    Profile_,
+    Timer_,
+    Result_,
+    History_,
+    Events_,
+    AddEvent_,
+    UpdateEvent_,
+    AllEvents_,
+    Logout_,
+  }  = React.useContext(AuthContext);  
 
   const screenOptions = (route, color) => {
     let iconName;
   
     switch (route.name) {
       case 'Home':
-        iconName = 'home';
+        iconName = 'event-note';
         break;
       case 'Login':
         iconName = 'login';
@@ -73,10 +85,10 @@ function BottomNavigator() {
         }}
       >
         <Tab.Screen 
-        name="Menu" 
+        name='Menu'
         component={NewMenu} 
         options={{
-          title: 'Menu',
+          title: `${Menu_}`,
           headerTitleStyle: {
             color: 'white',
             marginLeft: '8rem',
@@ -90,7 +102,7 @@ function BottomNavigator() {
         name="Home"
         component={Home} 
         options={{
-          title: 'Home',
+          title: `${Events_}`,
           headerTitleStyle: {
             color: 'white',
             marginLeft: '8rem',
@@ -136,9 +148,10 @@ function BottomNavigator() {
         }}
         />
         <Tab.Screen 
-        name="Logout" 
+        name='Logout'
         component={Logout} 
         options={{
+          title: `${Logout_}`,
           headerTitleStyle: {
             color: 'white',
             marginLeft: '8rem',
@@ -149,10 +162,10 @@ function BottomNavigator() {
         }}
         />
         <Tab.Screen 
-        name="Profile" 
+        name='Profile'
         component={Profile} 
         options={{
-          title: 'Profile',
+          title: `${Profile_}`,
           headerTitleStyle: {
             color: 'white',
             marginLeft: '8rem',
@@ -184,7 +197,7 @@ function BottomNavigator() {
         name="Timer" 
         component={Timer} 
         options={{
-          title: 'Timer',
+          title: `${Timer_}`,
           headerTitleStyle: {
             color: 'white',
             marginLeft: '8rem',
@@ -200,7 +213,7 @@ function BottomNavigator() {
         name="AllEvents" 
         component={AllEvents} 
         options={{
-          title: 'AllEvents',
+          title: `${AllEvents_}`,
           headerTitleStyle: {
             color: 'white',
             marginLeft: '8rem',
@@ -216,7 +229,7 @@ function BottomNavigator() {
         name="AddEvent" 
         component={AddEvent} 
         options={{
-          title: 'AddEvent',
+          title: `${AddEvent_}`,
           headerTitleStyle: {
             color: 'white',
             marginLeft: '8rem'
@@ -235,7 +248,7 @@ function BottomNavigator() {
         name="UpdateEvent" 
         component={UpdateEvent} 
         options={{
-          title: 'UpdateEvent',
+          title: `${UpdateEvent_}`,
           headerTitleStyle: {
             color: 'white',
             marginLeft: '8rem',
@@ -254,7 +267,7 @@ function BottomNavigator() {
         name="Result" 
         component={Result} 
         options={{
-          title: 'Result',
+          title: `${Result_}`,
           headerTitleStyle: {
             color: 'white',
             marginLeft: '8rem',
@@ -273,7 +286,7 @@ function BottomNavigator() {
         name="MonthsResults" 
         component={MonthsResults} 
         options={{
-          title: 'MonthsResults',
+          title: `${History_}`,
           headerTitleStyle: {
             color: 'white',
             marginLeft: '8rem',
@@ -293,6 +306,21 @@ function BottomNavigator() {
         component={MonthsResultsItem} 
         options={{
           title: 'MonthsResultsItem',
+          headerTitleStyle: {
+            color: 'white',
+          },
+          headerStyle: {
+            backgroundColor: 'black',
+          },
+          tabBarVisible: false, // hide the button
+          tabBarButton: (props) => null, // hide the button
+        }}
+        />
+        <Tab.Screen 
+        name="ChageLanguage" 
+        component={ChageLanguage} 
+        options={{
+          title: 'ChageLanguage',
           headerTitleStyle: {
             color: 'white',
           },

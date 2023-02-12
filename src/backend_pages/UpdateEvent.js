@@ -12,7 +12,7 @@ const UpdateEvent = ({route, navigation}) => {
 
     const { width, height } = Dimensions.get('window');
     const {ev} = route.params;
-    const {proxy} = useContext(AuthContext);
+    const {proxy, setLanguauge, Hours, Minutes, Publications, Visits, Films} = useContext(AuthContext);
     const [events, setEvents] = useState({name: {}});
     const [event, setEvent] = useState('');
     const [hours, setHours] = useState(0);
@@ -103,7 +103,7 @@ const UpdateEvent = ({route, navigation}) => {
       <View style={styles.row}>
         <View style={styles.left_row}>
           <Text style={styles.text}>
-            Hours:
+            {Hours}:
           </Text>
         </View>
         <View>
@@ -118,7 +118,7 @@ const UpdateEvent = ({route, navigation}) => {
       <View style={styles.row}>
         <View style={styles.left_row}>
           <Text style={styles.text}>
-            Minutes:
+            {Minutes}:
           </Text>
         </View>
         <View>
@@ -133,7 +133,7 @@ const UpdateEvent = ({route, navigation}) => {
       <View style={styles.row}>
         <View style={styles.left_row}>
           <Text style={styles.text}>
-            Visits:
+            {Visits}:
           </Text>
         </View>
         <View>
@@ -148,7 +148,7 @@ const UpdateEvent = ({route, navigation}) => {
       <View style={styles.row}>
         <View style={styles.left_row}>
           <Text style={styles.text}>
-            Publications:
+            {Publications}:
           </Text>
         </View>
         <View>
@@ -163,7 +163,7 @@ const UpdateEvent = ({route, navigation}) => {
       <View style={styles.row}>
         <View style={styles.left_row}>
           <Text style={styles.text}>
-            Films:
+            {Films}:
           </Text>
         </View>
         <View >

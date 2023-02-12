@@ -1,5 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
-import React, { useRef } from 'react';
+import React, { useContext, useEffect, useRef, useState } from 'react';
 import {
   StyleSheet,
   Text,
@@ -14,6 +14,9 @@ import {
 import { LinearGradient } from 'expo-linear-gradient';
 import { useNavigation } from '@react-navigation/native';
 import Animation from './Animation';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import Login from '../navbar_pages/Login';
+import { AuthContext } from '../context/AuthContext';
 
 const NewMenu = () => {
 
@@ -26,6 +29,35 @@ const NewMenu = () => {
     const EMPTY_ITEM_SIZE = (width - ITEM_SIZE) / 2;
     const BACKDROP_HEIGHT = height * 0.65;
     const scrollX = useRef(new Animated.Value(0)).current;
+    const [profileToken, setProfileToken] = useState('')
+    const {proxy, setLanguage} = useContext(AuthContext);
+
+    useEffect(() => {
+      profile()
+    }, [])
+  
+  
+  
+    // ##### GET TOKEN FROM LOGGED USER BY ID FROM STORAGE ##### //
+  
+    const profile = async() => {
+      let datas = JSON.parse(await AsyncStorage.getItem("asyncUserData"))
+      if(datas === null){
+        navigation.navigate('Login')
+      }else{
+        const resp = await fetch(`${proxy}/users/user/${datas.id}/`, {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        });
+        const data = await resp.json()
+        if(data){
+          setProfileToken(data.token)
+          await setLanguage()
+        }
+      }
+    }
   
     const DATA = [
       {
@@ -73,114 +105,124 @@ const NewMenu = () => {
     ];
 
 
-    return(
-      <View style={{
-        position: 'relative',
-        backgroundColor: 'black',
-        height: height,
-        width: width,
-      }}>
-        <View 
-          style={[
-              StyleSheet.absoluteFillObject
-            ]}
-        >
-          {DATA.map((item, index) => {
-            const inputRange = [
-              (index - 1) * width,
-              index * width,
-              (index + 1) * width
-            ]
-            const opacity = scrollX.interpolate({
-              inputRange,
-              outputRange: [0, 1, 0]
-            })
-            return(
-              <Animated.Image 
-            source={require(`../../assets/${item.img}`)}
+    if(profileToken){
+
+      return(
+        <View style={{
+          position: 'relative',
+          backgroundColor: 'black',
+          height: height,
+          width: width,
+        }}>
+          <View 
             style={[
-              StyleSheet.absoluteFillObject,
-              {
-                opacity
-              }
-            ]}
-            blurRadius={10}
-          />
-            )
-          })}
-          <LinearGradient
-            // colors={['rgba(128,0,128)', '#E9E8E8']}
-            colors={['rgba(0, 0, 0, 0)', '#4B0F30']}
-            style={{
-            height: BACKDROP_HEIGHT,
-            width,
-            position: 'absolute',
-            bottom: 20,
+                StyleSheet.absoluteFillObject
+              ]}
+          >
+            {DATA.map((item, index) => {
+              const inputRange = [
+                (index - 1) * width,
+                index * width,
+                (index + 1) * width
+              ]
+              const opacity = scrollX.interpolate({
+                inputRange,
+                outputRange: [0, 1, 0]
+              })
+              return(
+                <Animated.Image 
+              source={require(`../../assets/${item.img}`)}
+              style={[
+                StyleSheet.absoluteFillObject,
+                {
+                  opacity
+                }
+              ]}
+              blurRadius={10}
+            />
+              )
+            })}
+            <LinearGradient
+              // colors={['rgba(128,0,128)', '#E9E8E8']}
+              colors={['rgba(0, 0, 0, 0)', '#4B0F30']}
+              style={{
+              height: BACKDROP_HEIGHT,
+              width,
+              position: 'absolute',
+              bottom: 20,
+              }}
+            />
+          </View>
+          <Animated.FlatList 
+            data={DATA}
+            keyExtractor={(item) => item.key} // key
+            pagingEnabled
+            showsHorizontalScrollIndicator={false}
+            horizontal
+            contentContainerStyle={{ alignItems: 'center' }}
+            snapToInterval={ITEM_SIZE}
+            decelerationRate={0}
+            bounces={false}
+            snapToAlignment='start'
+            onScroll={Animated.event(
+              [{ nativeEvent: { contentOffset: {x:scrollX} } }],
+              {useNativeDriver: false}
+            )}
+            scrollEventThrottle={16}
+            renderItem={({item, index}) => {
+              const inputRange = [
+                (index - 1) * ITEM_SIZE,  
+                index * ITEM_SIZE,
+                (index + 1) * ITEM_SIZE,
+              ];
+              const translateY = scrollX.interpolate({
+                inputRange,
+                outputRange: [40, -60, 40],
+                extrapolate: 'clamp',
+              })
+              return(
+                <TouchableOpacity onPress={() => navigation.navigate(item.page)}>
+                <Animation item={item}/>
+                  <Animated.View style={{
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    marginLeft: EMPTY_ITEM_SIZE,
+                    marginHorizontal: SPACING,
+                    padding: SPACING * 2,
+                    gap: 2,
+                    width: 250,
+                    height: 350,
+                    borderRadius: 20,
+                    bottom: 300,
+                    transform: [{translateY}],
+                    // shadowColor: '#000',
+                    // shadowOpacity: 1,
+                    // shadowOffset: {
+                    //   width: 0,
+                    //   height: 0,
+                    // },
+                    // shadowRadius: 20,
+                  }}>
+                    <Image
+                      source={require(`../../assets/${item.img}`)}
+                      style={styles.img}
+                    />
+                  </Animated.View>
+                </TouchableOpacity>
+              )
             }}
           />
+    
         </View>
-        <Animated.FlatList 
-          data={DATA}
-          keyExtractor={(item) => item.key} // key
-          pagingEnabled
-          showsHorizontalScrollIndicator={false}
-          horizontal
-          contentContainerStyle={{ alignItems: 'center' }}
-          snapToInterval={ITEM_SIZE}
-          decelerationRate={0}
-          bounces={false}
-          snapToAlignment='start'
-          onScroll={Animated.event(
-            [{ nativeEvent: { contentOffset: {x:scrollX} } }],
-            {useNativeDriver: false}
-          )}
-          scrollEventThrottle={16}
-          renderItem={({item, index}) => {
-            const inputRange = [
-              (index - 1) * ITEM_SIZE,  
-              index * ITEM_SIZE,
-              (index + 1) * ITEM_SIZE,
-            ];
-            const translateY = scrollX.interpolate({
-              inputRange,
-              outputRange: [20, -60, 20],
-              extrapolate: 'clamp',
-            })
-            return(
-              <TouchableOpacity onPress={() => navigation.navigate(item.page)}>
-              <Animation item={item}/>
-                <Animated.View style={{
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                  marginLeft: EMPTY_ITEM_SIZE,
-                  marginHorizontal: SPACING,
-                  padding: SPACING * 2,
-                  gap: 2,
-                  width: 250,
-                  height: 350,
-                  borderRadius: 20,
-                  bottom: 250,
-                  transform: [{translateY}],
-                  // shadowColor: '#000',
-                  // shadowOpacity: 1,
-                  // shadowOffset: {
-                  //   width: 0,
-                  //   height: 0,
-                  // },
-                  // shadowRadius: 20,
-                }}>
-                  <Image
-                    source={require(`../../assets/${item.img}`)}
-                    style={styles.img}
-                  />
-                </Animated.View>
-              </TouchableOpacity>
-            )
-          }}
-        />
-  
-      </View>
-    )
+      )
+
+    }else{
+
+      return(
+        <Login />
+      )
+
+    }
       
   }
   

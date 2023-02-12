@@ -4,8 +4,11 @@ import AllEvents from '../backend_pages/AllEvents'
 import AuthButton from '../buttons/AuthButton'
 import RegisterButton from '../buttons/RegisterButton'
 import { AuthContext } from '../context/AuthContext'
-import Home from './Home'
+import Menu from './Menu'
 import { useNavigation } from '@react-navigation/native'
+import { SelectList } from 'react-native-dropdown-select-list'
+import Icon from "react-native-vector-icons/Ionicons";
+import AsyncStorage from '@react-native-async-storage/async-storage'
 
 
 const Login = () => {
@@ -13,13 +16,22 @@ const Login = () => {
   const navigation = useNavigation() 
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-  const {userData, login,token, profileToken, logged} = useContext(AuthContext);
+  const {userData, login, setLanguage, profileToken, logged} = useContext(AuthContext);
+  const [selected, setSelected] = useState('')
 
-  // console.log('profileToken:', profileToken)
+  const Data = [
+    {key: 'PL', value: 'PL'},
+    {key: 'RU', value: 'RU'},
+    {key: 'UA', value: 'UA'},
+  ]
 
   const clearTextInput = () => {
     setEmail('')
     setPassword('')
+  }
+
+  const language = async(selected) => {
+    await AsyncStorage.setItem('language', selected)
   }
 
   const LoginApi = async () => {
@@ -47,7 +59,7 @@ const Login = () => {
     if(logged === true){
       return(
         <View>
-          <Home />
+          <Menu />
         </View>
       )
     }else{
@@ -67,6 +79,22 @@ const Login = () => {
                 secureTextEntry
                 onChangeText={(text) => setPassword(text)}
                 style={styles.input}
+              />
+              <SelectList 
+                onSelect={() => language(selected)}
+                setSelected={setSelected} 
+                // fontFamily='lato'
+                data={Data} 
+                boxStyles={styles.event}
+                inputStyles={styles.textL}
+                dropdownStyles={styles.event}
+                dropdownItemStyles={{color: 'white'}}
+                dropdownTextStyles={{color: 'white'}}
+                arrowicon={<Icon name="chevron-down" size={20} color={'white'} />} 
+                searchicon={<Icon name="search" size={20} color={'white'} />} 
+                search={true} 
+                // defaultOption={{key: 'RU', value: language.RU}}
+                // defaultOption={{ key:'1', value:'Jammu & Kashmir' }}
               />
                 <AuthButton 
                 title={'Login'} 
@@ -136,7 +164,23 @@ const styles = StyleSheet.create({
   },
   text: {
     color: 'white',
-  }
+  },
+  textL: {
+    color: 'white',
+    fontSize: 20,
+  },
+  event:{
+    width: 250,
+    // height: 50,
+    borderRadius: 10,
+    borderWidth: 2,
+    borderColor: '#EFA9FD',
+    margin: 5,
+    padding: 10,
+    color: 'white',
+    fontSize: 20,
+    zIndex: 999,
+  },  
 })
 
 export default Login
