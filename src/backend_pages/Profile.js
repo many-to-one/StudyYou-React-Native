@@ -11,10 +11,12 @@ import BackButton from '../buttons/BackButton';
 import { SelectList } from 'react-native-dropdown-select-list';
 import Icon from "react-native-vector-icons/Ionicons";
 import { ChageLanguage } from '../context/ChageLanguage';
+import ChangePasswordBtn from '../buttons/ChangePassowrdBtn';
+import Calendar from './Calendar';
 
 const Profile = ({navigation}) => {
     const { width, height } = Dimensions.get('window');
-    const {profile, setLanguage} = useContext(AuthContext);
+    const {profile, setLanguage, Changepassword_} = useContext(AuthContext);
     const [profileData, setProfileData] = useState([]);
     const [selected, setSelected] = useState('')
     const Data = [
@@ -43,6 +45,10 @@ const Profile = ({navigation}) => {
       await setLanguage()
   }
 
+  const plsHolder = () => {
+    return <Icon name='md-language' size={20} color={'white'} />
+  }
+
   return (
 
     <View style={styles.container}>
@@ -63,36 +69,53 @@ const Profile = ({navigation}) => {
             }}
           />
     <ScrollView>
-    <SelectList 
-        onSelect={() => language(selected)}
-        setSelected={setSelected} 
-        // fontFamily='lato'
-        data={Data} 
-        boxStyles={styles.event}
-        inputStyles={styles.text}
-        dropdownStyles={styles.event}
-        dropdownItemStyles={{color: 'white'}}
-        dropdownTextStyles={{color: 'white'}}
-        arrowicon={<Icon name="chevron-down" size={20} color={'white'} />} 
-        searchicon={<Icon name="search" size={20} color={'white'} />} 
-        search={true} 
-        // defaultOption={{key: 'RU', value: language.RU}}
-        // defaultOption={{ key:'1', value:'Jammu & Kashmir' }}
-      />
+    
     <BackButton onPress={() => navigation.navigate('Home')}/>
 
     <View>
-        <Text style={styles.text}>{profileData.username}</Text>
-        <Text style={styles.text}>{profileData.email}</Text>
+      <SelectList 
+          onSelect={() => language(selected)}
+          setSelected={setSelected}
+          placeholder={plsHolder()}
+          // fontFamily='lato'
+          data={Data} 
+          boxStyles={styles.event}
+          inputStyles={styles.text}
+          dropdownStyles={styles.event}
+          dropdownItemStyles={{color: 'white'}}
+          dropdownTextStyles={{color: 'white'}}
+          arrowicon={<Icon name="chevron-down" size={20} color={'white'} />} 
+          searchicon={<Icon name="search" size={20} color={'white'} />} 
+          search={true} 
+          // defaultOption={{key: 'RU', value: language.RU}}
+          // defaultOption={{ key:'1', value:'Jammu & Kashmir' }}
+        />
+        <View style={styles.event}>
+          <Text style={styles.text}>
+            {profileData.username}
+          </Text>
+        </View>
+        <View style={styles.event}>
+          <Text style={styles.text}>
+            {profileData.email}
+          </Text>
+        </View>
         {profileData.is_superuser ? 
-        
-        <Text style={styles.text}>Admin</Text> :
-        <Text style={styles.text}>Not Atmin</Text>
+
+        <View style={styles.event}>
+          <Text style={styles.text}>
+            {profileData.email}
+          </Text>
+        </View>
+         :
+         <View />
     }
-        <AuthButton 
-            title={'Change password'}
+        <ChangePasswordBtn 
+            title={Changepassword_}
             onPress={() => navigation.navigate('RequestResetMail')}
         />
+
+        <Calendar />
       
     </View> 
     </ScrollView>

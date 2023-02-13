@@ -18,6 +18,7 @@ const Login = () => {
   const [password, setPassword] = useState('')
   const {userData, login, setLanguage, profileToken, logged} = useContext(AuthContext);
   const [selected, setSelected] = useState('')
+  const [lng, setLng] = useState(false)
 
   const Data = [
     {key: 'PL', value: 'PL'},
@@ -26,8 +27,21 @@ const Login = () => {
   ]
 
   const clearTextInput = () => {
-    setEmail('')
+    setEmail('') 
     setPassword('')
+  }
+
+  useEffect(() => {
+    isLanguage()
+  })
+
+  const isLanguage = async() => {
+    const get = await AsyncStorage.getItem('language')
+    if(get !== null){
+      setLng(true)
+    }else{
+      setLng(false)
+    }
   }
 
   const language = async(selected) => {
@@ -62,7 +76,7 @@ const Login = () => {
           <Menu />
         </View>
       )
-    }else{
+    }else if(lng === false){
       return(
           <View style={styles.container}>
             <View style={styles.login}>
@@ -83,7 +97,6 @@ const Login = () => {
               <SelectList 
                 onSelect={() => language(selected)}
                 setSelected={setSelected} 
-                // fontFamily='lato'
                 data={Data} 
                 boxStyles={styles.event}
                 inputStyles={styles.textL}
@@ -93,8 +106,6 @@ const Login = () => {
                 arrowicon={<Icon name="chevron-down" size={20} color={'white'} />} 
                 searchicon={<Icon name="search" size={20} color={'white'} />} 
                 search={true} 
-                // defaultOption={{key: 'RU', value: language.RU}}
-                // defaultOption={{ key:'1', value:'Jammu & Kashmir' }}
               />
                 <AuthButton 
                 title={'Login'} 
@@ -125,6 +136,55 @@ const Login = () => {
           </View> 
     
         )
+    }else if(lng === true){
+
+      return(
+        <View style={styles.container}>
+          <View style={styles.login}>
+            <Text style={styles.text}>Hi {userData.username} </Text>
+            <TextInput 
+              placeholder="Enter email"
+              placeholderTextColor={'gray'}
+              onChangeText={(text) => setEmail(text)}
+              style={styles.input}
+            />
+            <TextInput 
+              placeholder="Enter password"
+              placeholderTextColor={'gray'}
+              secureTextEntry
+              onChangeText={(text) => setPassword(text)}
+              style={styles.input}
+            />
+              <AuthButton 
+              title={'Login'} 
+              onPress={() =>  LoginApi()}
+            />
+          </View>
+
+            <View style={styles.register}>
+              <Text style={styles.text}>
+                Forgot your password?
+              </Text>
+              <RegisterButton 
+                title={'Click here'} 
+                onPress={() =>  navigation.navigate('RequestResetMail')}
+              />
+            </View>
+
+            <View style={styles.register}>
+              <Text style={styles.text}>
+                Don't have an account?
+              </Text>
+              <RegisterButton 
+                title={'Registration'} 
+                onPress={() =>  navigation.navigate('Registration')}
+              />
+            </View>
+
+        </View> 
+  
+      )
+
     }
 
   }

@@ -10,7 +10,7 @@ import BackButton from '../buttons/BackButton';
 const AddEvent = ({ navigation }) => {   
 
   const { width, height } = Dimensions.get('window');
-  const {proxy, Hours, Minutes, Publications, Visits, Films, setLanguage} = useContext(AuthContext);
+  const {proxy, Hours, Minutes, Publications, Visits, Films} = useContext(AuthContext);
   const isFocused = useIsFocused();
   const [events, setEvents] = useState({name:{}})
 

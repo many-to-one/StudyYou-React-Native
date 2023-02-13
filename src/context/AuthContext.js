@@ -25,31 +25,8 @@ export const AuthProvider = ({children}) => {
     const [UpdateEvent_, setUpdateEvent] = useState('')
     const [AllEvents_, setAllEvents] = useState('')
     const [Logout_, setLogout] = useState('')
+    const [Changepassword_, setChangepassword] = useState('')
     const proxy = "http://127.0.0.1:8000"
-
-    // const language = {
-    //     PL: {
-    //         Hours: 'Godziny',
-    //         Minutes: 'Minuty',
-    //         Visits: 'Odwiedziny',
-    //         Piblications: 'Publikacje',
-    //         Films: 'Filmy',
-    //     },
-    //     RU: {
-    //       Hours: 'Часы',
-    //       Minutes: 'Минуты',
-    //       Visits: 'Повторы',
-    //       Piblications: 'Публикации',
-    //       Films: 'Фильмы',
-    //     },
-    //     UA: {
-    //       Hours: 'Години',
-    //       Minutes: 'Хвилини',
-    //       Visits: 'Повтори',
-    //       Piblications: 'Публiкацiї',
-    //       Films: 'Фiльми',
-    //     },
-    // };
 
 
     const setLanguage = async() => {
@@ -70,6 +47,7 @@ export const AuthProvider = ({children}) => {
             setUpdateEvent('Edytuj wydarzenie')
             setAllEvents('Wszystkie wydarzenia')
             setLogout('Wyłoguj')
+            setChangepassword('Zmienić hasło')
         }else if(lng === 'RU'){
             setHours('Часы')
             setMinutes('Минуты')
@@ -86,6 +64,7 @@ export const AuthProvider = ({children}) => {
             setUpdateEvent('Редактировать событие')
             setAllEvents('Все события')
             setLogout('Выйти')
+            setChangepassword('Изменить пароль')
         }else if(lng === 'UA'){
             setHours('Години')
             setMinutes('Хвилини')
@@ -102,6 +81,7 @@ export const AuthProvider = ({children}) => {
             setUpdateEvent('Редагувати подiю')
             setAllEvents('Усi подiї')
             setLogout('Вийти')
+            setChangepassword('Змiнити гасло')
         }
       };
 
@@ -236,6 +216,7 @@ export const AuthProvider = ({children}) => {
             UpdateEvent_,
             AllEvents_,
             Logout_,
+            Changepassword_,
         }}>
             {children}
         </AuthContext.Provider>
