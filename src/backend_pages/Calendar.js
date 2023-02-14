@@ -1,76 +1,69 @@
-import React, { Component, useState } from 'react';
-import {
-  StyleSheet,
-  Text,
-  View
-} from 'react-native';
-import CalendarPicker from 'react-native-calendar-picker';
-import Icon from "react-native-vector-icons/Entypo";
-import moment from 'moment';
+import { Calendar } from 'react-native-calendars';
+import { Animated, Button, Dimensions, ScrollView, StyleSheet, Text, View } from 'react-native';
 
-const Calendar = () => {
-    const [day_, setDay] = useState('')
+import React, { useContext, useMemo, useState } from 'react'
+import { AuthContext } from '../context/AuthContext';
 
+const Calendar_ = (props) => {
 
-    const onDateChange =(date) => {
-        let customDatesStyles = []
-        console.log('date:', date._i)
-        setDay(date)
-        // customDatesStyles(date)
+  const [selected, setSelected] = useState(null);
+  const {marked} = useContext(AuthContext);
 
-    }
+  // const marked = {
+  //   '2023-02-20':{
+  //     selected: true,
+  //     selectedColor: '#222222',
+  //     selectedTextColor: 'yellow',
+  //   }
+  // }
 
-    const customDatesStyles = () => {
-        let customDatesStyles = []
-        customDatesStyles.push({
-            date: day_,
-            // Random colors
-            style: {backgroundColor: 'red'},
-            textStyle: {color: 'black'}, // sets the font color
-            containerStyle: [], // extra styling for day container
-          });
-    }
+  // const marked = useMemo(() => ({
+  //   [selected]: {
+  //     selected: true,
+  //     selectedColor: '#222222',
+  //     selectedTextColor: 'yellow',
+  //   }
+  // }), [selected]);
+  
+  const getMarked = (day) => {
+    marked(day)
+    // setSelected(day)
+    console.log('marked:', marked)
+    // return marked
+  }
 
   return (
-    <View style={styles.event}>
-      <CalendarPicker 
-        startFromMonday={true}
-        // selectedDayColor={'#F9F9B5'}
-        onDateChange={onDateChange}
-        textStyle={{
-            color: 'white',
-            fontSize: 17
+    <Calendar 
+        onDayPress={(day) => getMarked(day.dateString)}
+        firstDay = { 1 } 
+        style={styles.event}
+        theme={{
+          calendarBackground: 'transparent',
+          dayTextColor: 'white',
+          textDisabledColor: '#444',
+          monthTextColor: 'white'
         }}
-        width={310}
-        previousTitle={
-            <Icon name='chevron-small-left' size={20} color={'white'}/>
-        }
-        nextTitle={
-            <Icon name='chevron-small-right' size={20} color={'white'}/>
-        }
-        customDatesStyles={customDatesStyles}
-      />
-    </View>
+        markedDates={marked}
+  />
   )
+
+  
 }
 
 const styles = StyleSheet.create({
-    text: {
-        color: 'white',
-        fontSize: 20,
-      },
-      event:{
-        width: 320,
-        // height: 50,
-        borderRadius: 10,
-        borderWidth: 2,
-        borderColor: '#EFA9FD',
-        margin: 5,
-        padding: 10,
-        color: 'white',
-        fontSize: 20,
-        zIndex: 999,
-      },  
+  event:{
+    width: 320,
+    // height: 50,
+    borderRadius: 10,
+    borderWidth: 2,
+    borderColor: '#EFA9FD',
+    margin: 5,
+    padding: 10,
+    color: 'white',
+    fontSize: 20,
+    zIndex: 999,
+    backgroundColor: 'transparent'
+  }
 })
 
-export default Calendar
+export default Calendar_

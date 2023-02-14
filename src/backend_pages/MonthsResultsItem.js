@@ -7,7 +7,7 @@ import { useNavigation } from '@react-navigation/native';
 
 const MonthsResultsItem = ({res}) => {
   const { width, height } = Dimensions.get('window');
-  const {proxy} = useContext(AuthContext);
+  const {proxy, Hours, Minutes, Publications, Visits, Films,} = useContext(AuthContext);
   const navigation = useNavigation();
   let datas;
 
@@ -55,7 +55,7 @@ const MonthsResultsItem = ({res}) => {
           <View style={styles.row}>
             <View style={styles.left_row}>
               <Text style={styles.text}>
-                Hours:
+                {Hours}:
               </Text>
             </View>
             <View style={styles.input}>
@@ -68,7 +68,7 @@ const MonthsResultsItem = ({res}) => {
           <View style={styles.row}>
             <View style={styles.left_row}>
               <Text style={styles.text}>
-                Minutes:
+                {Minutes}:
               </Text>
             </View>
             <View style={styles.input}>
@@ -81,7 +81,7 @@ const MonthsResultsItem = ({res}) => {
           <View style={styles.row}>
             <View style={styles.left_row}>
               <Text style={styles.text}>
-                Publications:
+                {Publications}:
               </Text>
             </View>
             <View style={styles.input}>
@@ -94,7 +94,7 @@ const MonthsResultsItem = ({res}) => {
           <View style={styles.row}>
             <View style={styles.left_row}>
               <Text style={styles.text}>
-                Visits:
+                {Visits}:
               </Text>
             </View>
             <View style={styles.input}>
@@ -107,7 +107,7 @@ const MonthsResultsItem = ({res}) => {
           <View style={styles.row}>
             <View style={styles.left_row}>
               <Text style={styles.text}>
-                Films:
+                {Films}:
               </Text>
             </View>
             <View style={styles.input}>

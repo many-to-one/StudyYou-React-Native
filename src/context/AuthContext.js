@@ -186,6 +186,16 @@ export const AuthProvider = ({children}) => {
     };
 
     
+    const marked = (day) => {
+        let data = {}
+        data[day] = {
+            selected: true,
+            selectedColor: '#222222',
+            selectedTextColor: 'yellow',
+          }
+        return data
+    }
+
 
     return(
    
@@ -217,6 +227,7 @@ export const AuthProvider = ({children}) => {
             AllEvents_,
             Logout_,
             Changepassword_,
+            marked,
         }}>
             {children}
         </AuthContext.Provider>

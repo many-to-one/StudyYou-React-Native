@@ -8,15 +8,15 @@ import DoneButton from '../buttons/DoneButton'
 import { useIsFocused } from '@react-navigation/native';
 import { LinearGradient } from 'expo-linear-gradient';
 import BackButton from '../buttons/BackButton';
+import ChangePasswordBtn from '../buttons/ChangePasswordBtn';
 import { SelectList } from 'react-native-dropdown-select-list';
 import Icon from "react-native-vector-icons/Ionicons";
 import { ChageLanguage } from '../context/ChageLanguage';
-import ChangePasswordBtn from '../buttons/ChangePassowrdBtn';
 import Calendar from './Calendar';
 
 const Profile = ({navigation}) => {
     const { width, height } = Dimensions.get('window');
-    const {profile, setLanguage, Changepassword_} = useContext(AuthContext);
+    const {profile, setLanguage, marked, Changepassword_} = useContext(AuthContext);
     const [profileData, setProfileData] = useState([]);
     const [selected, setSelected] = useState('')
     const Data = [
@@ -114,8 +114,13 @@ const Profile = ({navigation}) => {
             title={Changepassword_}
             onPress={() => navigation.navigate('RequestResetMail')}
         />
+          <Calendar 
+            markedDates={marked}
+          />
 
-        <Calendar />
+        <View style={styles.event}>
+          
+        </View>
       
     </View> 
     </ScrollView>
@@ -154,6 +159,7 @@ const styles = StyleSheet.create({
       color: 'white',
       fontSize: 20,
       zIndex: 999,
+      backgroundColor: 'transparent'
     },  
     left_row: {
       width: 250,
@@ -185,7 +191,7 @@ const styles = StyleSheet.create({
         position: 'absolute',
         marginTop: 470,
         marginLeft: 30,
-    }
+    },
   });
 
 export default Profile
