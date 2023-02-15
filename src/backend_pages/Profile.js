@@ -114,9 +114,7 @@ const Profile = ({navigation}) => {
             title={Changepassword_}
             onPress={() => navigation.navigate('RequestResetMail')}
         />
-          <Calendar 
-            markedDates={marked}
-          />
+          <Calendar />
 
         <View style={styles.event}>
           

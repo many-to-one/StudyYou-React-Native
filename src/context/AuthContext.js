@@ -26,6 +26,8 @@ export const AuthProvider = ({children}) => {
     const [AllEvents_, setAllEvents] = useState('')
     const [Logout_, setLogout] = useState('')
     const [Changepassword_, setChangepassword] = useState('')
+    const [dayNames, setDaynames] = useState([])
+    const [monthNames, setMonthnames] = useState([])
     const proxy = "http://127.0.0.1:8000"
 
 
@@ -48,6 +50,8 @@ export const AuthProvider = ({children}) => {
             setAllEvents('Wszystkie wydarzenia')
             setLogout('Wyłoguj')
             setChangepassword('Zmienić hasło')
+            setDaynames(['Pon', 'Wt', 'Śr', 'Czw', 'Pt', 'Sob', 'Niedz'])
+            setMonthnames(['styczeń', 'luty', 'marzec', 'kwiecień', 'maj', 'czerwiec', 'lipiec', 'sierpień', 'wrzesień', 'październik', 'listopad', 'grudzień  '])
         }else if(lng === 'RU'){
             setHours('Часы')
             setMinutes('Минуты')
@@ -185,17 +189,6 @@ export const AuthProvider = ({children}) => {
         return '205';
     };
 
-    
-    const marked = (day) => {
-        let data = {}
-        data[day] = {
-            selected: true,
-            selectedColor: '#222222',
-            selectedTextColor: 'yellow',
-          }
-        return data
-    }
-
 
     return(
    
@@ -227,7 +220,8 @@ export const AuthProvider = ({children}) => {
             AllEvents_,
             Logout_,
             Changepassword_,
-            marked,
+            dayNames,
+            monthNames,
         }}>
             {children}
         </AuthContext.Provider>

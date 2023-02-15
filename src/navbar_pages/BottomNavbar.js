@@ -20,6 +20,7 @@ import RequestResetMail from '../backend_pages/RequestResetMail';
 import BackButton from '../buttons/BackButton';
 import Timer from '../backend_pages/Timer';
 import ChageLanguage from '../context/ChageLanguage';
+import CreateCalendarEvent from '../backend_pages/CreateCalendarEvent';
 
 const Tab = createBottomTabNavigator();
 
@@ -321,6 +322,21 @@ function BottomNavigator() {
         component={ChageLanguage} 
         options={{
           title: 'ChageLanguage',
+          headerTitleStyle: {
+            color: 'white',
+          },
+          headerStyle: {
+            backgroundColor: 'black',
+          },
+          tabBarVisible: false, // hide the button
+          tabBarButton: (props) => null, // hide the button
+        }}
+        />
+        <Tab.Screen 
+        name="CreateCalendarEvent" 
+        component={CreateCalendarEvent} 
+        options={{
+          title: 'CreateCalendarEvent',
           headerTitleStyle: {
             color: 'white',
           },
