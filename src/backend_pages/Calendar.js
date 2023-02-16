@@ -19,32 +19,14 @@ const Calendar_ = (props) => {
 
   useEffect(() => {
     getMarked()
-    console.log('test:', test)
   }, [isFocused])
 
   LocaleConfig.locales['pl'] = {
     dayNames: dayNames,
     monthNames: monthNames
   } 
-  
-  let test = {
-    '2023-02-05' : {
-      selected: true,
-      selectedColor: '#222222',
-      selectedTextColor: 'yellow',
-    }
-  }
 
-  const nextDays = {
-    '2023-02-01': {selected: true, selectedColor: '#222222', selectedTextColor: 'yellow',},
-    '2023-02-05': {selected: true, selectedColor: '#222222', selectedTextColor: 'yellow',},
-    '2023-02-08': {selected: true, selectedColor: '#222222', selectedTextColor: 'yellow',},
-    '2023-02-07': {selected: true, selectedColor: '#222222', selectedTextColor: 'yellow',},
-    '2023-02-18': {selected: true, selectedColor: '#222222', selectedTextColor: 'yellow',},
-    '2023-02-17': {selected: true, selectedColor: '#222222', selectedTextColor: 'yellow',},
-    '2023-02-28': {selected: true, selectedColor: '#222222', selectedTextColor: 'yellow',},
-    '2023-02-29': {selected: true, selectedColor: '#222222', selectedTextColor: 'yellow',},
-};
+let test = {}
 
 
   const getMarked = async() => {
@@ -59,7 +41,7 @@ const Calendar_ = (props) => {
       console.log('days:', days)
 
       days.map((day) => {
-        marked[day] = {
+        marked[day.toString()] = {
           selected: true,
           selectedColor: '#222222',
           selectedTextColor: 'yellow',
@@ -80,7 +62,7 @@ const Calendar_ = (props) => {
       //   setDs(marked)
       // })
 
-      console.log('marked:', marked[0])
+      console.log('marked:', marked)
     }
   }
 
@@ -90,7 +72,7 @@ const Calendar_ = (props) => {
   }
 
 
-  if(marked === null){
+  if(marked !== null){
     return (
       <Calendar 
           onDayPress={(day) =>  setDate(day.dateString)}
@@ -102,7 +84,7 @@ const Calendar_ = (props) => {
             textDisabledColor: '#444',
             monthTextColor: 'white'
           }}
-          markedDates={nextDays}
+          markedDates={marked}
     />
     )
   }else{
@@ -118,9 +100,7 @@ const Calendar_ = (props) => {
             textDisabledColor: '#444',
             monthTextColor: 'white'
           }}
-          markedDates={{
-          [date]: { selected: true, marked: true, selectedColor: 'blue' },
-        }}
+          markedDates={marked}
     />
     )
   }
