@@ -4,6 +4,7 @@ import { Animated, Button, Dimensions, ScrollView, StyleSheet, Text, View } from
 import React, { useContext, useEffect, useMemo, useState } from 'react'
 import { AuthContext } from '../context/AuthContext';
 import { useIsFocused, useNavigation } from '@react-navigation/native';
+import moment from 'moment';
 
 const Calendar_ = (props) => {
 
@@ -14,12 +15,11 @@ const Calendar_ = (props) => {
   const isFocused = useIsFocused();
   let days = [];
   const marked = {}
-
-
+  const date = ['2023-02-17']
 
   useEffect(() => {
     getMarked()
-    console.log('ds:', ds)
+    console.log('test:', test)
   }, [isFocused])
 
   LocaleConfig.locales['pl'] = {
@@ -28,12 +28,23 @@ const Calendar_ = (props) => {
   } 
   
   let test = {
-    '2023-02-05': {
+    '2023-02-05' : {
       selected: true,
       selectedColor: '#222222',
       selectedTextColor: 'yellow',
     }
   }
+
+  const nextDays = {
+    '2023-02-01': {selected: true, selectedColor: '#222222', selectedTextColor: 'yellow',},
+    '2023-02-05': {selected: true, selectedColor: '#222222', selectedTextColor: 'yellow',},
+    '2023-02-08': {selected: true, selectedColor: '#222222', selectedTextColor: 'yellow',},
+    '2023-02-07': {selected: true, selectedColor: '#222222', selectedTextColor: 'yellow',},
+    '2023-02-18': {selected: true, selectedColor: '#222222', selectedTextColor: 'yellow',},
+    '2023-02-17': {selected: true, selectedColor: '#222222', selectedTextColor: 'yellow',},
+    '2023-02-28': {selected: true, selectedColor: '#222222', selectedTextColor: 'yellow',},
+    '2023-02-29': {selected: true, selectedColor: '#222222', selectedTextColor: 'yellow',},
+};
 
 
   const getMarked = async() => {
@@ -41,13 +52,14 @@ const Calendar_ = (props) => {
     if(resp.status === 200){
       const data = await resp.json()
       const ar = data.data
+
       ar.map((date) => {
         days.push(date.date)
       })
       console.log('days:', days)
 
       days.map((day) => {
-        marked[`'${day}'`] = {
+        marked[day] = {
           selected: true,
           selectedColor: '#222222',
           selectedTextColor: 'yellow',
@@ -67,7 +79,8 @@ const Calendar_ = (props) => {
       //   }
       //   setDs(marked)
       // })
-      console.log('selected:', marked)
+
+      console.log('marked:', marked[0])
     }
   }
 
@@ -77,7 +90,7 @@ const Calendar_ = (props) => {
   }
 
 
-  if(selected !== null){
+  if(marked === null){
     return (
       <Calendar 
           onDayPress={(day) =>  setDate(day.dateString)}
@@ -89,12 +102,13 @@ const Calendar_ = (props) => {
             textDisabledColor: '#444',
             monthTextColor: 'white'
           }}
-          markedDates={selected}
+          markedDates={nextDays}
     />
     )
   }else{
     return (
       <Calendar 
+          initialDate="2022-12-01"
           onDayPress={(day) =>  setDate(day.dateString)}
           firstDay = { 1 } 
           style={styles.event}
@@ -104,7 +118,9 @@ const Calendar_ = (props) => {
             textDisabledColor: '#444',
             monthTextColor: 'white'
           }}
-          markedDates={test}
+          markedDates={{
+          [date]: { selected: true, marked: true, selectedColor: 'blue' },
+        }}
     />
     )
   }

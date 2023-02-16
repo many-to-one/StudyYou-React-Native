@@ -21,6 +21,7 @@ import BackButton from '../buttons/BackButton';
 import Timer from '../backend_pages/Timer';
 import ChageLanguage from '../context/ChageLanguage';
 import CreateCalendarEvent from '../backend_pages/CreateCalendarEvent';
+import DatePickerCalendar from '../backend_pages/DatePickerCalendar';
 
 const Tab = createBottomTabNavigator();
 
@@ -337,6 +338,21 @@ function BottomNavigator() {
         component={CreateCalendarEvent} 
         options={{
           title: 'CreateCalendarEvent',
+          headerTitleStyle: {
+            color: 'white',
+          },
+          headerStyle: {
+            backgroundColor: 'black',
+          },
+          tabBarVisible: false, // hide the button
+          tabBarButton: (props) => null, // hide the button
+        }}
+        />
+        <Tab.Screen 
+        name="DatePickerCalendar" 
+        component={DatePickerCalendar} 
+        options={{
+          title: 'DatePickerCalendar',
           headerTitleStyle: {
             color: 'white',
           },
