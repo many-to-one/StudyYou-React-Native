@@ -116,7 +116,7 @@ const Profile = ({navigation}) => {
             onPress={() => navigation.navigate('RequestResetMail')}
         />
         {/* <Calendar /> */}
-          <DatePickerCalendar />
+          <DatePickerCalendar/>
           {/* <Button 
             onPress={() => navigation.navigate('DatePickerCalendar')}
           /> */}
