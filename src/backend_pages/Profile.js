@@ -14,6 +14,7 @@ import Icon from "react-native-vector-icons/Ionicons";
 import { ChageLanguage } from '../context/ChageLanguage';
 import Calendar from './Calendar';
 import DatePickerCalendar from './DatePickerCalendar';
+import CalendarII from './CalendarII';
 
 const Profile = ({navigation}) => {
     const { width, height } = Dimensions.get('window');
@@ -115,7 +116,7 @@ const Profile = ({navigation}) => {
             title={Changepassword_}
             onPress={() => navigation.navigate('RequestResetMail')}
         />
-        {/* <Calendar /> */}
+        {/* <CalendarII /> */}
           <DatePickerCalendar/>
           {/* <Button 
             onPress={() => navigation.navigate('DatePickerCalendar')}
@@ -153,7 +154,7 @@ const styles = StyleSheet.create({
     },
     event:{
       width: 320,
-      // height: 50,
+      // height: 250,
       borderRadius: 10,
       borderWidth: 2,
       borderColor: '#EFA9FD',

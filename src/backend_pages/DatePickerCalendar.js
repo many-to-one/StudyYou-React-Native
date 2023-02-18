@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react'
 import Datetime from 'react-datetime';
 import "react-datetime/css/react-datetime.css";
 import { FlatList, ScrollView, StyleSheet, Text, View } from 'react-native';
+import CalendarMonth from './CalendarMonth';
 
 const DatePickerCalendar = () => {
 
@@ -13,7 +14,8 @@ const DatePickerCalendar = () => {
   const calendar = [];
   const today = moment();
   const startDay = today.clone().startOf('year').startOf('month');
-  const endDay = today.clone().endOf('year').endOf('month');
+  // const endDay = today.clone().endOf('year').endOf('month');
+  const endDay = today.clone().set('year', 2024)
   
   let date = startDay.clone().subtract(1, 'day');
   
@@ -26,12 +28,20 @@ const DatePickerCalendar = () => {
 
   let year_ = []
   let Mon = []
-  let Tue = []
-  let Wed = []
-  let Thu = []
-  let Fri = []
-  let Sat = []
-  let Sun = []
+  const LastMon = []
+  const Jan = []
+  const Feb = []
+  const Mar = []
+  const Apr = []
+  const May = []
+  const Jun = []
+  const Jul = []
+  const Aug = []
+  const Sep = []
+  const Oct = []
+  const Nov = []
+  const Dec = []
+
   for (let w=0; w < 53; w++){
     for (let d = 0; d <= 6; d++) {
       year_.push(calendar[w].days[d]._d)
@@ -39,103 +49,137 @@ const DatePickerCalendar = () => {
             break;
           }else if(calendar[w].days[d]._d.toString().slice(0, 3) === 'Mon'){
             Mon.push(calendar[w].days[d]._d)
-          }else if(calendar[w].days[d]._d.toString().slice(0, 3) === 'Tue'){
-            Tue.push(calendar[w].days[d]._d)
-          }else if(calendar[w].days[d]._d.toString().slice(0, 3) === 'Wed'){
-            Wed.push(calendar[w].days[d]._d)
-          }else if(calendar[w].days[d]._d.toString().slice(0, 3) === 'Thu'){
-            Thu.push(calendar[w].days[d]._d)
-          }else if(calendar[w].days[d]._d.toString().slice(0, 3) === 'Fri'){
-            Fri.push(calendar[w].days[d]._d)
-          }else if(calendar[w].days[d]._d.toString().slice(0, 3) === 'Sat'){
-            Sat.push(calendar[w].days[d]._d)
-          }else if(calendar[w].days[d]._d.toString().slice(0, 3) === 'Sun'){
-            Sun.push(calendar[w].days[d]._d)
-          }
     }
   }
+}
 
   for(let i=0; i<6; i++){
     year_.unshift('')
   }
 
   console.log('year', year_)
-  console.log('Mon:', Mon)
-  const Feb = []
+
+  // Cztoby uwieliczic kalendar > czem na god
+  // nużno dla każdogo goda (12?) wyczeslic
+  // poslednije Mon
 
     for (let i = 0; i < Mon.length; i++) {
-      if(Mon[i].toString().slice(4, 7) == moment().format('MMM').toString()){
-        // console.log(Mon[i].toString().slice(0, 7));
-        Feb.push(Mon[i].toString().slice(8, 10))
+      if(Mon[i].toString().slice(4, 7) === 'Jan'){
+        Jan.push(Mon[i])
+      }else if(Mon[i].toString().slice(4, 7) === 'Feb'){
+        Feb.push(Mon[i])
+      }else if(Mon[i].toString().slice(4, 7) === 'Mar'){
+        Mar.push(Mon[i])
+      }else if(Mon[i].toString().slice(4, 7) === 'Apr'){
+        Apr.push(Mon[i])
+      }else if(Mon[i].toString().slice(4, 7) === 'May'){
+        May.push(Mon[i])
+      }else if(Mon[i].toString().slice(4, 7) === 'Jun'){
+        Jun.push(Mon[i])
+      }else if(Mon[i].toString().slice(4, 7) === 'Jul'){
+        Jul.push(Mon[i])
+      }else if(Mon[i].toString().slice(4, 7) === 'Aug'){
+        Aug.push(Mon[i])
+      }else if(Mon[i].toString().slice(4, 7) === 'Sep'){
+        Sep.push(Mon[i])
+      }else if(Mon[i].toString().slice(4, 7) === 'Oct'){
+        Oct.push(Mon[i])
+      }else if(Mon[i].toString().slice(4, 7) === 'Nov'){
+        Nov.push(Mon[i])
+      }else if(Mon[i].toString().slice(4, 7) === 'Dec'){
+        Dec.push(Mon[i])
       }
   }
-  console.log('Feb:', Feb)
+  LastMon.push(Jan.slice(-1))
+  LastMon.push(Feb.slice(-1))
+  LastMon.push(Mar.slice(-1))
+  LastMon.push(Apr.slice(-1))
+  LastMon.push(May.slice(-1))
+  LastMon.push(Jun.slice(-1))
+  LastMon.push(Jul.slice(-1))
+  LastMon.push(Aug.slice(-1))
+  LastMon.push(Sep.slice(-1))
+  LastMon.push(Oct.slice(-1))
+  LastMon.push(Nov.slice(-1))
+  LastMon.push(Dec.slice(-1))
 
-  for(let i=0; i<year_.length; i++){
-    console.log(year_[i].toString().slice(4,7))
+
+// ############## END-END-END-END-END-END-END ##############  //
+
+
+const step = [0]
+const step2 = []
+
+for(let i=0; i<year_.length; i++){
+  if(year_[i].toString().slice(8, 10) === '01'){
+    step2.push(i)
   }
-
-
-  
-
-// useEffect(() => {
-//   year.forEach((e) => console.log('e:', e.toString().slice(3, 7)))
-// })
-
-// ############## END-END-END-END-END-END-END ##############  //
-
-
-
-
-
-
-// ############## CURRENT YEAR - MONTH - DAYS ##############  //
-
-
-const year = moment().format('YYYY');
-const month = moment().format('MM'); 
-const monthName = moment().format('MMMM').toString();
-const daysOfMonth = []
-const daysOfWeekSun = [0, 1, 2, 3, 4, 5, 6]
-const daysOfWeekMon = [1, 2, 3, 4, 5, 6, 7]
-
-const days = moment(`${year}-${month}`, "YYYY-MM").daysInMonth()
-for (let i=1; i<=days; i++){
-daysOfMonth.push(i)
+  for(let m=0; m<LastMon.length; m++){
+    if(year_[i].toString() === LastMon[m].toString()){
+      step.push(i)
+    }
+  }
 }
+step2.shift()
 
-console.log('daysOfMonth:', daysOfMonth)
-const next = moment().add(1, 'month').calendar()
-const previouse = moment().subtract(1, 'month').calendar();
+console.log('LastMon', LastMon)
+console.log('step', step)
+console.log('step2', step2)
 
-console.log('next', next)
-
-for(let i = 1; i<=daysOfMonth.length; i++){
-  console.log(':', moment().day(i).toString()) //moment().weekday(i).toString().slice(0, 3), 
-}
-
-console.log(moment("2023-02", "YYYY-MM").daysInMonth())
-console.log('first day of month', moment().startOf('quarter').toString())
-
-  
-// ############## END-END-END-END-END-END-END ##############  //
-
-// moment().startOf('week')
-  return (
-
+  return(
     <View style={styles.container}>
       <View style={styles.list}>
-        {year_.map((e) => (
-          <View style={styles.date}>
-            <Text style={styles.text}>{e.toString().slice(8, 10)}</Text>
-          </View>
-        ))}
-      </View>    
+        {year_.slice(step[1], step2[1]).map((e) => {
+          if(e.toString().slice(4, 7) === `${moment().add(0, 'M').startOf('month').format('MMM')}`){
+            return  <View style={styles.date}>
+                      <Text style={styles.text}>{e.toString().slice(8, 10)}</Text>
+                    </View>
+                    }else{
+                      return <View style={styles.date}>
+                              <Text style={styles.text2}></Text>
+                            </View>
+                    }
+          })}
+      </View>
     </View>
+  )
 
 
+    
 
     // <View style={styles.container}>
+    //   <View style={styles.list}>
+    //     {year_.map((e) => {
+    //       if(e.toString().slice(4, 7) === 'Jan'){
+    //         return  <View style={styles.date}>
+    //                   <Text style={styles.text}>{e.toString().slice(8, 10)}</Text>
+    //                 </View>
+    //             }
+    //     })}
+    // </View>
+    // </View>
+
+    //  <View style={styles.container}>
+    //    <View style={styles.list}>
+    //  <View>
+    //      {year_.map((e) => {
+    //        if(e.toString().slice(4, 7) === 'Feb'){
+    //           <CalendarMonth e={e} />
+    //        }
+    //        else{
+    //          return <View style={styles.date}>
+    //          <Text style={styles.text2}></Text>
+    //        </View>
+    //        }
+      
+    //      })}
+    //  </View>    
+    //  </View>
+
+
+
+
+  // <View style={styles.container}>
     //   <View style={styles.columns_cont}>
     //     {year_.map((e) => {
     //       if (e.toString().slice(4, 7) === moment().format('MMM') && e.toString().slice(0, 3) === 'Mon') {
@@ -172,7 +216,6 @@ console.log('first day of month', moment().startOf('quarter').toString())
 
     //   </View>  
 
-  )
 }
 
 const styles = StyleSheet.create({
@@ -187,6 +230,7 @@ const styles = StyleSheet.create({
     margin: 5,
     padding: 20,
     width: 320,
+    height: 250,
   },
   daysOfWeek: {
     flexDirection: 'row',
@@ -212,6 +256,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     flexWrap: 'wrap',
     width: 300,
+    height: 250,
     // gap: 8,
     marginTop: 5,
   },
@@ -223,6 +268,10 @@ const styles = StyleSheet.create({
   },
   text: {
     color: 'white',
+    fontSize: 15,
+  },
+  text2: {
+    color: 'gray',
     fontSize: 15,
   },
 })

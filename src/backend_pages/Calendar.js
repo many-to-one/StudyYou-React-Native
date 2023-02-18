@@ -13,8 +13,11 @@ const Calendar_ = (props) => {
   const [selected, setSelected] = useState('')
   const [ds, setDs] = useState('')
   const isFocused = useIsFocused();
+  const nextDay = moment().add(1, 'days').format("YYYY-MM-DD");
   let days = [];
-  const marked = {}
+  const marked = {
+    // [nextDay]: {selected: true, selectedColor: '#222222', selectedTextColor: 'yellow',}
+  }
   const date = ['2023-02-17']
 
   useEffect(() => {
@@ -68,43 +71,26 @@ let test = {}
 
 
   const setDate = (day) => {
-    navigation.navigate('CreateCalendarEvent', {day: day})
+    // navigation.navigate('CreateCalendarEvent', {day: day})
+    console.log(day)
   }
 
 
-  if(marked !== null){
-    return (
-      <Calendar 
-          onDayPress={(day) =>  setDate(day.dateString)}
-          firstDay = { 1 } 
-          style={styles.event}
-          theme={{
-            calendarBackground: 'transparent',
-            dayTextColor: 'white',
-            textDisabledColor: '#444',
-            monthTextColor: 'white'
-          }}
-          markedDates={marked}
-    />
-    )
-  }else{
-    return (
-      <Calendar 
-          initialDate="2022-12-01"
-          onDayPress={(day) =>  setDate(day.dateString)}
-          firstDay = { 1 } 
-          style={styles.event}
-          theme={{
-            calendarBackground: 'transparent',
-            dayTextColor: 'white',
-            textDisabledColor: '#444',
-            monthTextColor: 'white'
-          }}
-          markedDates={marked}
-    />
-    )
-  }
-
+  return (
+    <Calendar 
+        onDayPress={(day) =>  setDate(day.dateString)}
+        // onDayPress={(day) =>  marked.push(day.dateString)}
+        firstDay = { 1 } 
+        style={styles.event}
+        theme={{
+          calendarBackground: 'transparent',
+          dayTextColor: 'white',
+          textDisabledColor: '#444',
+          monthTextColor: 'white'
+        }}
+        markedDates={marked}
+  />
+  )
   
 }
 
