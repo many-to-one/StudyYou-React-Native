@@ -72,12 +72,13 @@ function BottomNavigator() {
         screenOptions={({route}) => ({
           tabBarIcon: ({color}) => screenOptions(route, color),
           tabBarStyle: {
+            backgroundColor:'black',
             borderTopColor: '#404040',
-            backgroundColor: '#4d4d4d',
-            elevation: 0,
-            display: 'flex',
-            elevation: 0,
-            ...styles.container,
+            // backgroundColor: '#4d4d4d',
+            // elevation: 0,
+            // display: 'flex',
+            // elevation: 0,
+            // ...styles.container,
           },
         })}
         tabBarOptions={{

@@ -28,9 +28,11 @@ const NewMenu = () => {
     const SPACING = 10;
     const EMPTY_ITEM_SIZE = (width - ITEM_SIZE) / 2;
     const BACKDROP_HEIGHT = height * 0.65;
+    const SPACER_ITEM_SIZE = (width - ITEM_SIZE) / 2;
     const scrollX = useRef(new Animated.Value(0)).current;
     const [profileToken, setProfileToken] = useState('')
     const {proxy, setLanguage} = useContext(AuthContext);
+  
 
     useEffect(() => {
       profile()
@@ -60,11 +62,13 @@ const NewMenu = () => {
     }
   
     const DATA = [
+      {key: 'spacer'},
       {
         key: '111',
         id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28ba',
         title: 'Profile',
         img: 'profile.png',
+        // img: 'main.png',
         page: 'Profile',
       },
       {
@@ -72,6 +76,7 @@ const NewMenu = () => {
         id: '3ac68afc-c605-48d3-a4f8-fbd91aa97f63',
         title: 'Result',
         img: 'timer.png',
+        // img: 'main.png',
         page: 'Timer',
       },
       {
@@ -79,6 +84,7 @@ const NewMenu = () => {
         id: '58694a0f-3da1-471f-bd96-145571e29d72',
         title: 'Home',
         img: 'events.png',
+        // img: 'main.png',
         page: 'Home'
       },
       {
@@ -86,6 +92,7 @@ const NewMenu = () => {
         id: '58694a0f-3da1-471f-bd96-145571e29d73',
         title: 'Counter',
         img: 'result.png',
+        // img: 'main.png',
         page: 'Result',
       },
       {
@@ -93,16 +100,21 @@ const NewMenu = () => {
         id: '58694a0f-3da1-471f-bd96-145571e29d74',
         title: 'MonthsResults',
         img: 'history.png',
+        // img: 'main.png',
         page: 'MonthsResults',
       },
-      {
-        key: '116',
-        id: '58694a0f-3da1-471f-bd96-145571e29d74',
-        title: 'End',
-        img: 'end.png',
-        page: 'End',
-      },
+      {key: 'spacer'},
+      // {
+      //   key: '116',
+      //   id: '58694a0f-3da1-471f-bd96-145571e29d74',
+      //   title: 'End',
+      //   img: 'end.png',
+      //   page: 'End',
+      // },
     ];
+
+    const PAG = [...DATA,]
+    console.log('PAG', PAG)
 
 
     if(profileToken){
@@ -110,7 +122,7 @@ const NewMenu = () => {
       return(
         <View style={{
           position: 'relative',
-          backgroundColor: 'black',
+          // backgroundColor: 'black',
           height: height,
           width: width,
         }}>
@@ -119,30 +131,37 @@ const NewMenu = () => {
                 StyleSheet.absoluteFillObject
               ]}
           >
-            {DATA.map((item, index) => {
+            {PAG.map((item, index) => {
+              if(!item.img){
+                return <View style={{width: SPACER_ITEM_SIZE - 20, height: 350}}/>
+              }
               const inputRange = [
-                (index - 1) * width,
-                index * width,
-                (index + 1) * width
+                // (index - 1) * width,
+                // index * width,
+                // (index + 1) * width
+                (index - 2) * ITEM_SIZE,
+                (index - 1) * ITEM_SIZE,
+                index * ITEM_SIZE,
               ]
               const opacity = scrollX.interpolate({
                 inputRange,
                 outputRange: [0, 1, 0]
               })
-              return(
-                <Animated.Image 
-              source={require(`../../assets/${item.img}`)}
-              style={[
-                StyleSheet.absoluteFillObject,
-                {
-                  opacity
-                }
-              ]}
-              blurRadius={10}
-            />
-              )
+                return(
+                  <Animated.Image 
+                // source={require(`../../assets/${item.img}`)}
+                source={require("../../assets/6.jpg")}
+                style={[
+                  StyleSheet.absoluteFillObject,
+                  {
+                    opacity
+                  }
+                ]}
+                blurRadius={10}
+              />
+                )
             })}
-            <LinearGradient
+            {/* <LinearGradient
               // colors={['rgba(128,0,128)', '#E9E8E8']}
               colors={['rgba(0, 0, 0, 0)', '#4B0F30']}
               style={{
@@ -151,17 +170,18 @@ const NewMenu = () => {
               position: 'absolute',
               bottom: 20,
               }}
-            />
+            /> */}
           </View>
           <Animated.FlatList 
-            data={DATA}
+            data={PAG}
             keyExtractor={(item) => item.key} // key
             pagingEnabled
+            decelerationRate={Platform.OS === 'ios' ? 0 : 0.98}
+            renderToHardwareTextureAndroid
             showsHorizontalScrollIndicator={false}
             horizontal
             contentContainerStyle={{ alignItems: 'center' }}
             snapToInterval={ITEM_SIZE}
-            decelerationRate={0}
             bounces={false}
             snapToAlignment='start'
             onScroll={Animated.event(
@@ -170,30 +190,41 @@ const NewMenu = () => {
             )}
             scrollEventThrottle={16}
             renderItem={({item, index}) => {
+              if(!item.img){
+                return <View style={{width: SPACER_ITEM_SIZE, height: 350}}></View>
+              }
               const inputRange = [
-                (index - 1) * ITEM_SIZE,  
+                // (index - 1) * width,  
+                // index * width,
+                // (index + 1) * width,
+                (index - 2) * ITEM_SIZE,
+                (index - 1) * ITEM_SIZE,
                 index * ITEM_SIZE,
-                (index + 1) * ITEM_SIZE,
               ];
               const translateY = scrollX.interpolate({
                 inputRange,
-                outputRange: [40, -60, 40],
+                outputRange: [100, 50, 100],
+                // outputRange: [40, -60, 40],
                 extrapolate: 'clamp',
               })
               return(
+                <View style={{width: ITEM_SIZE}}>
                 <TouchableOpacity onPress={() => navigation.navigate(item.page)}>
                 <Animation item={item}/>
                   <Animated.View style={{
                     justifyContent: 'center',
                     alignItems: 'center',
-                    marginLeft: EMPTY_ITEM_SIZE,
-                    marginHorizontal: SPACING,
-                    padding: SPACING * 2,
-                    gap: 2,
-                    width: 250,
-                    height: 350,
+                    // marginLeft: -10,
+                    // marginLeft: EMPTY_ITEM_SIZE,
+                    // marginHorizontal: SPACING,
+                    // padding: SPACING * 4,
+                    // gap: 2,
+                    // width: 250,
+                    // height: 350,
+                    width: ITEM_SIZE + 90,
                     borderRadius: 20,
-                    bottom: 300,
+                    bottom: 350,
+                    // backgroundColor: 'white',
                     transform: [{translateY}],
                     // shadowColor: '#000',
                     // shadowOpacity: 1,
@@ -204,11 +235,13 @@ const NewMenu = () => {
                     // shadowRadius: 20,
                   }}>
                     <Image
-                      source={require(`../../assets/${item.img}`)}
+                      // source={require(`../../assets/${item.img}`)}
+                      source={require("../../assets/main.png")}
                       style={styles.img}
                     />
                   </Animated.View>
                 </TouchableOpacity>
+                </View>
               )
             }}
           />
