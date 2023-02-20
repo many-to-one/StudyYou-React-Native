@@ -136,9 +136,6 @@ const NewMenu = () => {
                 return <View style={{width: SPACER_ITEM_SIZE - 20, height: 350}}/>
               }
               const inputRange = [
-                // (index - 1) * width,
-                // index * width,
-                // (index + 1) * width
                 (index - 2) * ITEM_SIZE,
                 (index - 1) * ITEM_SIZE,
                 index * ITEM_SIZE,
@@ -149,8 +146,8 @@ const NewMenu = () => {
               })
                 return(
                   <Animated.Image 
-                // source={require(`../../assets/${item.img}`)}
-                source={require("../../assets/6.jpg")}
+                source={require(`../../assets/${item.img}`)}
+                // source={require("../../assets/6.jpg")}
                 style={[
                   StyleSheet.absoluteFillObject,
                   {
@@ -194,9 +191,6 @@ const NewMenu = () => {
                 return <View style={{width: SPACER_ITEM_SIZE, height: 350}}></View>
               }
               const inputRange = [
-                // (index - 1) * width,  
-                // index * width,
-                // (index + 1) * width,
                 (index - 2) * ITEM_SIZE,
                 (index - 1) * ITEM_SIZE,
                 index * ITEM_SIZE,
@@ -204,7 +198,6 @@ const NewMenu = () => {
               const translateY = scrollX.interpolate({
                 inputRange,
                 outputRange: [100, 50, 100],
-                // outputRange: [40, -60, 40],
                 extrapolate: 'clamp',
               })
               return(
@@ -217,14 +210,14 @@ const NewMenu = () => {
                     // marginLeft: -10,
                     // marginLeft: EMPTY_ITEM_SIZE,
                     // marginHorizontal: SPACING,
-                    // padding: SPACING * 4,
+                    padding: SPACING * 4,
                     // gap: 2,
                     // width: 250,
-                    // height: 350,
+                    height: 620,
                     width: ITEM_SIZE + 90,
                     borderRadius: 20,
                     bottom: 350,
-                    // backgroundColor: 'white',
+                    // backgroundColor: 'red',
                     transform: [{translateY}],
                     // shadowColor: '#000',
                     // shadowOpacity: 1,
@@ -236,7 +229,7 @@ const NewMenu = () => {
                   }}>
                     <Image
                       // source={require(`../../assets/${item.img}`)}
-                      source={require("../../assets/main.png")}
+                      source={require("../../assets/pro_i.png")}
                       style={styles.img}
                     />
                   </Animated.View>
@@ -280,7 +273,7 @@ const NewMenu = () => {
     img:{
       width:250,
       height:350,
-      resizeMode: 'cover',
+      // resizeMode: 'cover',
       borderRadius: 20,
     },
   })
