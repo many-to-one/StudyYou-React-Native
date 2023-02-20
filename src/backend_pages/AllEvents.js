@@ -41,14 +41,15 @@ const AllEvents = ({datas}) => {
     <View style={styles.container}>
 
       <Animated.Image 
-        source={require("../../assets/events.png")}
+        source={require("../../assets/events_i.png")}
         style={[
           StyleSheet.absoluteFillObject,
         ]}
         blurRadius={5}
         />
         <LinearGradient
-          colors={['rgba(0, 0, 0, 0)', '#3F0053']}
+          // colors={['rgba(0, 0, 0, 0)', '#3F0053']}
+          colors={['rgba(0, 0, 0, 0)', '#000000']}
           style={{
           height,
           width,

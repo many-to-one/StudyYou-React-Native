@@ -66,41 +66,41 @@ const NewMenu = () => {
       {
         key: '111',
         id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28ba',
-        title: 'Profile',
-        img: 'profile.png',
-        // img: 'main.png',
+        title: 'PROFILE',
+        bg: 'profile_m.png',
+        img: 'profile_i.png',
         page: 'Profile',
       },
       {
         key: '112',
         id: '3ac68afc-c605-48d3-a4f8-fbd91aa97f63',
-        title: 'Result',
-        img: 'timer.png',
-        // img: 'main.png',
+        title: 'TIMER',
+        bg: 'timer.png',
+        img: 'timer_i.png',
         page: 'Timer',
       },
       {
         key: '113',
         id: '58694a0f-3da1-471f-bd96-145571e29d72',
-        title: 'Home',
-        img: 'events.png',
-        // img: 'main.png',
+        title: 'EVENTS',
+        bg: 'events.png',
+        img: 'events_i.png',
         page: 'Home'
       },
       {
         key: '114',
         id: '58694a0f-3da1-471f-bd96-145571e29d73',
-        title: 'Counter',
-        img: 'result.png',
-        // img: 'main.png',
+        title: 'RESULT',
+        bg: 'result.png',
+        img: 'result_i.png',
         page: 'Result',
       },
       {
         key: '115',
         id: '58694a0f-3da1-471f-bd96-145571e29d74',
-        title: 'MonthsResults',
-        img: 'history.png',
-        // img: 'main.png',
+        title: 'HISTORY',
+        bg: 'history.png',
+        img: 'history_i.png',
         page: 'MonthsResults',
       },
       {key: 'spacer'},
@@ -122,7 +122,7 @@ const NewMenu = () => {
       return(
         <View style={{
           position: 'relative',
-          // backgroundColor: 'black',
+          backgroundColor: 'black',
           height: height,
           width: width,
         }}>
@@ -131,7 +131,7 @@ const NewMenu = () => {
                 StyleSheet.absoluteFillObject
               ]}
           >
-            {PAG.map((item, index) => {
+            {DATA.map((item, index) => {
               if(!item.img){
                 return <View style={{width: SPACER_ITEM_SIZE - 20, height: 350}}/>
               }
@@ -147,30 +147,30 @@ const NewMenu = () => {
                 return(
                   <Animated.Image 
                 source={require(`../../assets/${item.img}`)}
-                // source={require("../../assets/6.jpg")}
+                // source={require("../../assets/bgbg.png")}
                 style={[
                   StyleSheet.absoluteFillObject,
                   {
                     opacity
                   }
                 ]}
-                blurRadius={10}
+                blurRadius={6}
               />
                 )
             })}
-            {/* <LinearGradient
-              // colors={['rgba(128,0,128)', '#E9E8E8']}
-              colors={['rgba(0, 0, 0, 0)', '#4B0F30']}
+            <LinearGradient
+              colors={['rgba(128,0,128)', '#E9E8E8']}
+              // colors={['rgba(0, 0, 0, 0)', '#4B0F30']}
               style={{
               height: BACKDROP_HEIGHT,
               width,
               position: 'absolute',
               bottom: 20,
               }}
-            /> */}
+            />
           </View>
           <Animated.FlatList 
-            data={PAG}
+            data={DATA}
             keyExtractor={(item) => item.key} // key
             pagingEnabled
             decelerationRate={Platform.OS === 'ios' ? 0 : 0.98}
@@ -202,39 +202,49 @@ const NewMenu = () => {
               })
               return(
                 <View style={{width: ITEM_SIZE}}>
+                  <View >
+                  <Text style={{
+                    color: '#78F5FA',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    marginBottom: 50,
+                    fontSize: 30,
+                    marginLeft: ITEM_SIZE / 2,
+                    marginHorizontal: SPACING,
+                    // padding: SPACING * 4,
+                  }}>{item.title}
+                  </Text>
+                  </View>
                 <TouchableOpacity onPress={() => navigation.navigate(item.page)}>
-                <Animation item={item}/>
+                {/* <Animation item={item}/> */}
                   <Animated.View style={{
                     justifyContent: 'center',
                     alignItems: 'center',
-                    // marginLeft: -10,
-                    // marginLeft: EMPTY_ITEM_SIZE,
-                    // marginHorizontal: SPACING,
-                    padding: SPACING * 4,
-                    // gap: 2,
-                    // width: 250,
-                    height: 620,
-                    width: ITEM_SIZE + 90,
+                    marginLeft: EMPTY_ITEM_SIZE + 7,
+                    marginHorizontal: SPACING,
+                    padding: SPACING,
+                    width: ITEM_SIZE - 15,
+                    height: height/2,
                     borderRadius: 20,
-                    bottom: 350,
+                    bottom: 100,
+                    // gap: 1,
                     // backgroundColor: 'red',
                     transform: [{translateY}],
-                    // shadowColor: '#000',
-                    // shadowOpacity: 1,
-                    // shadowOffset: {
-                    //   width: 0,
-                    //   height: 0,
-                    // },
-                    // shadowRadius: 20,
+                    shadowColor: 'white',
+                    shadowOpacity: 1,
+                    shadowOffset: {
+                      width: 0,
+                      height: 0,
+                    },
+                    shadowRadius: 4,
                   }}>
                     <Image
-                      // source={require(`../../assets/${item.img}`)}
-                      source={require("../../assets/pro_i.png")}
+                      source={require(`../../assets/${item.img}`)}
                       style={styles.img}
                     />
                   </Animated.View>
                 </TouchableOpacity>
-                </View>
+               </View>
               )
             }}
           />
@@ -251,7 +261,9 @@ const NewMenu = () => {
     }
       
   }
-  
+
+  const { width, height } = Dimensions.get('window');
+  const ITEM_SIZE = Platform.OS === 'ios' ? width * 0.72 : width * 0.74;
   const styles = StyleSheet.create({
     container:{
       position: 'relative',
@@ -259,8 +271,16 @@ const NewMenu = () => {
       width: 300,
       borderWidth: 'none',
     },
+    title: {
+      borderBottomColor: '#78F5FA',
+      gap: 10,
+      borderBottomWidth: 10,
+      // marginLeft: 20,
+      // marginHorizontal: 20
+      // marginLeft: ITEM_SIZE / 2.2,
+    },
     text:{
-      color: 'green'
+      color: '#78F5FA'
     },
     item:{
       justifyContent: 'center',
@@ -271,9 +291,9 @@ const NewMenu = () => {
       height: 200,
     },
     img:{
-      width:250,
-      height:350,
-      // resizeMode: 'cover',
+      width: ITEM_SIZE - 15,
+      height:height/2,
+      resizeMode: 'cover',
       borderRadius: 20,
     },
   })

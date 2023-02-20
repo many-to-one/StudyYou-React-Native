@@ -42,10 +42,10 @@ const DatePickerCalendar = () => {
   const Nov = []
   const Dec = []
 
-  for (let w=0; w < 53; w++){
+  for (let w=0; w < 54; w++){
     for (let d = 0; d <= 6; d++) {
       year_.push(calendar[w].days[d]._d)
-          if(w === 52){
+          if(w === 53){
             break;
           }else if(calendar[w].days[d]._d.toString().slice(0, 3) === 'Mon'){
             Mon.push(calendar[w].days[d]._d)
@@ -125,6 +125,13 @@ step2.shift()
 console.log('LastMon', LastMon)
 console.log('step', step)
 console.log('step2', step2)
+
+const startOfMonth = moment().startOf('month').format('DDD');
+const endOfMonth   = moment().endOf('month').format('DDD');
+console.log(moment().startOf('month')._d.toString(), moment().endOf('month')._d.toString())
+// console.log(Array.from({length: moment().daysInMonth()}, (x, i) => moment().startOf('month').add(i, 'days')))
+
+
 
   return(
     <View style={styles.container}>
@@ -226,7 +233,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     borderRadius: 10,
     borderWidth: 2,
-    borderColor: '#EFA9FD',
+    borderColor: '#78F5FA',
     margin: 5,
     padding: 20,
     width: 320,

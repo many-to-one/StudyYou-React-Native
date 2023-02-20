@@ -29,14 +29,14 @@ const MonthsResults = ({navigation}) => {
     return (
          <View style={styles.container}>
             <Animated.Image 
-                source={require("../../assets/history.png")}
+                source={require("../../assets/history_i.png")}
                 style={[
                   StyleSheet.absoluteFillObject,
                 ]}
                 blurRadius={5}
             />
             <LinearGradient
-                colors={['rgba(0, 0, 0, 0)', '#4B0F30']}
+                colors={['rgba(0, 0, 0, 0)', '#393939']}
                 style={{
                 height,
                 width,

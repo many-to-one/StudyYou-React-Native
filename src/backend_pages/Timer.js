@@ -1,8 +1,10 @@
+import { LinearGradient } from 'expo-linear-gradient';
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, View, StatusBar, TouchableOpacity, Dimensions } from 'react-native';
+import { StyleSheet, Text, View, StatusBar, TouchableOpacity, Dimensions, Animated } from 'react-native';
 import Icon from "react-native-vector-icons/FontAwesome5";
 
 const screen = Dimensions.get('window');
+const { width, height } = Dimensions.get('window');
 
 const getRemaining = (time) => {
     const hr = Math.floor(time / 60 / 60)
@@ -46,6 +48,22 @@ export default function Timer() {
 
   return (
     <View style={styles.container}>
+      <Animated.Image 
+                source={require("../../assets/timer_i.png")}
+                style={[
+                  StyleSheet.absoluteFillObject,
+                ]}
+                blurRadius={5}
+            />
+            <LinearGradient
+                colors={['rgba(0, 0, 0, 0)', '#000000']}
+                style={{
+                height,
+                width,
+                position: 'absolute',
+                bottom: -50,
+                }}
+            />
       <StatusBar barStyle="light-content" />
         <Text style={styles.timerText}>{`${hr}:${min}:${sec}`}</Text>
       <View style={styles.buttons_cont}>
@@ -94,7 +112,7 @@ const styles = StyleSheet.create({
         color: 'white'
     },
     timerText: {
-        color: '#fff',
+        color: 'white',
         fontSize: 60,
         marginBottom: 20
     },

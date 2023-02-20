@@ -55,14 +55,14 @@ const Profile = ({navigation}) => {
 
     <View style={styles.container}>
       <Animated.Image 
-          source={require("../../assets/events.png")}
+          source={require("../../assets/profile_i.png")}
           style={[
             StyleSheet.absoluteFillObject,
           ]}
           blurRadius={5}
         />
         <LinearGradient
-            colors={['rgba(0, 0, 0, 0)', '#3F0053']}
+            colors={['rgba(0, 0, 0, 0)', '#393939']}
             style={{
             height,
             width,
@@ -116,11 +116,8 @@ const Profile = ({navigation}) => {
             title={Changepassword_}
             onPress={() => navigation.navigate('RequestResetMail')}
         />
-        {/* <CalendarII /> */}
-          <DatePickerCalendar/>
-          {/* <Button 
-            onPress={() => navigation.navigate('DatePickerCalendar')}
-          /> */}
+        <Calendar />
+          {/* <DatePickerCalendar/> */}
 
         <View style={styles.event}>
           
@@ -157,7 +154,8 @@ const styles = StyleSheet.create({
       // height: 250,
       borderRadius: 10,
       borderWidth: 2,
-      borderColor: '#EFA9FD',
+      // borderColor: '#EFA9FD',
+      borderColor: '#78D7D9',
       margin: 5,
       padding: 10,
       color: 'white',
