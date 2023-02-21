@@ -113,8 +113,8 @@ const NewMenu = () => {
       // },
     ];
 
-    const PAG = [...DATA,]
-    console.log('PAG', PAG)
+    // const PAG = [...DATA,]
+    // console.log('PAG', PAG)
 
 
     if(profileToken){
