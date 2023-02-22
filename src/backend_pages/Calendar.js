@@ -72,6 +72,7 @@ let test = {}
 
   const setDate = (day) => {
     navigation.navigate('CreateCalendarEvent', {day: day})
+    // navigation.navigate('CalendarII')
     console.log(day)
   }
 

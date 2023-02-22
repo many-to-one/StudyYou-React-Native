@@ -21,7 +21,7 @@ import BackButton from '../buttons/BackButton';
 import Timer from '../backend_pages/Timer';
 import ChageLanguage from '../context/ChageLanguage';
 import CreateCalendarEvent from '../backend_pages/CreateCalendarEvent';
-import DatePickerCalendar from '../backend_pages/DatePickerCalendar';
+import Microphones from '../backend_pages/DatePickerCalendar';
 
 const Tab = createBottomTabNavigator();
 
@@ -297,9 +297,9 @@ function BottomNavigator() {
           headerStyle: {
             backgroundColor: 'black',
           },
-          headerLeft: () => (
-            <HeaderBackButton onPress={() => navigation.navigate('Menu')} />
-          ),
+          // headerLeft: () => (
+          //   <HeaderBackButton onPress={() => navigation.navigate('NewMenu')} />
+          // ),
           tabBarVisible: false, // hide the button
           tabBarButton: (props) => null, // hide the button
         }}
@@ -350,10 +350,10 @@ function BottomNavigator() {
         }}
         />
         <Tab.Screen 
-        name="DatePickerCalendar" 
-        component={DatePickerCalendar} 
+        name="Microphones" 
+        component={Microphones} 
         options={{
-          title: 'DatePickerCalendar',
+          title: 'Microphones',
           headerTitleStyle: {
             color: 'white',
           },

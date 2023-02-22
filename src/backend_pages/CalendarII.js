@@ -1,57 +1,34 @@
-import { Calendar, LocaleConfig } from 'react-native-calendars';
-import { Animated, Button, Dimensions, ScrollView, StyleSheet, Text, View } from 'react-native';
-
-import React, { useContext, useEffect, useMemo, useState } from 'react'
+import AsyncStorage from '@react-native-async-storage/async-storage'
+import React, { useContext, useEffect, useState } from 'react'
+import { Button, StyleSheet, Text, View } from 'react-native'
 import { AuthContext } from '../context/AuthContext';
-import { useIsFocused, useNavigation } from '@react-navigation/native';
-import moment from 'moment';
+import { MultipleSelectList  } from 'react-native-dropdown-select-list';
+import Icon from "react-native-vector-icons/Ionicons";
+import { useIsFocused } from '@react-navigation/native';
 
-const CalendarII = () => {
-    const marked = {}
-    const [date, setDate] = useState([])
-    const mDay = ''
+const CalendarII = ({navigation}) => {
+  const [selected, setSelected] = React.useState([]);
+  // const {day} = route.params;
+  
+  const data = [
+      {key:'1', value:'Mobiles', disabled:true},
+      {key:'2', value:'Appliances'},
+      {key:'3', value:'Cameras'},
+      {key:'4', value:'Computers', disabled:true},
+      {key:'5', value:'Vegetables'},
+      {key:'6', value:'Diary Products'},
+      {key:'7', value:'Drinks'},
+  ]
 
-    const setMarked = (e) => {
-        console.log(e)
-        const marked = {
-            [e] : {selected: true, selectedColor: '#222222', selectedTextColor: 'yellow',}
-        }
-        console.log(marked)
-    }
-
-    
-
-    return (
-        <Calendar 
-            // onDayPress={(day) =>  setDate(day.dateString)}
-            onDayPress={(day) =>  setMarked(day.dateString)}
-            firstDay = { 1 } 
-            style={styles.event}
-            theme={{
-              calendarBackground: 'transparent',
-              dayTextColor: 'white',
-              textDisabledColor: '#444',
-              monthTextColor: 'white'
-            }}
-            markedDates={marked}
-      />
-      )
+  return(
+    <MultipleSelectList 
+        setSelected={(val) => setSelected(val)} 
+        data={data} 
+        save="value"
+        onSelect={() => alert(selected)} 
+        label="Categories"
+    />
+  )
 }
-
-const styles = StyleSheet.create({
-    event:{
-      width: 320,
-      // height: 50,
-      borderRadius: 10,
-      borderWidth: 2,
-      borderColor: '#EFA9FD',
-      margin: 5,
-      padding: 10,
-      color: 'white',
-      fontSize: 20,
-      zIndex: 999,
-      backgroundColor: 'transparent'
-    }
-  })
 
 export default CalendarII
