@@ -84,7 +84,10 @@ const CreateCalendarEvent = ({route, navigation}) => {
 
     return (
       <View style={styles.container}>
-        <Microphones  day={day}/>
+        <Text style={styles.text}>Microphones</Text>
+        <View style={styles.event}>
+          <Microphones  day={day}/>
+        </View>
       </View>
       // <View style={styles.container}>
       //   <Text style={styles.text}>Microfones</Text>
@@ -137,7 +140,7 @@ const styles = StyleSheet.create({
     color: 'white',
     fontSize: 20,
     zIndex: 999,
-    backgroundColor: "#a6a6a6"
+    backgroundColor: "transparent",
   },
   input:{
     width: 230,

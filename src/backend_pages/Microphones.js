@@ -4,7 +4,7 @@ import { AuthContext } from '../context/AuthContext';
 import { MultipleSelectList  } from 'react-native-dropdown-select-list';
 import Icon from "react-native-vector-icons/Ionicons";
 import { useIsFocused } from '@react-navigation/native';
-
+import ScheduleBtn from '../buttons/ScheduleBtn';
 
 const Microphones = ({day, navigation}) => {
 
@@ -14,6 +14,7 @@ const Microphones = ({day, navigation}) => {
     const [users, setUsers] = useState([])
     const [dateMicrophones, setDateMicrophones] = useState([])
     const USERS = {}
+    const [live, setLive] = useState(true)
     const isFocused = useIsFocused();
 
     useEffect(() => {
@@ -25,16 +26,19 @@ const Microphones = ({day, navigation}) => {
       const data = await resp.json();
       if(resp.status === 200){
         setUsers(data)
-        console.log('ok:', data)
+        getCalendarDatesByDate()
       }
-      getCalendarDatesByDate()
   }
 
   const getCalendarDatesByDate = async() => {
     const resp = await fetch(`${proxy}/backend/get_microphones/${day}/`)
     const data = await resp.json();
     if(resp.status === 200){
-      setDateMicrophones(data)
+      const uniquedata = Array.from(new Set(data.map(a => a.id)))
+        .map(id => {
+          return data.find(a => a.id === id)
+        })
+        setDateMicrophones(data)
     }
 }
 
@@ -67,42 +71,43 @@ const Microphones = ({day, navigation}) => {
           })
 
           if(resp.status === 200){
-          alert('data was sent')  
+            setSelected([])
           }
-          setSelected([])
         }
       }
     })
   }
 
   const deleteMicrophone = async(user) => {
-
+    const resp = await fetch(`${proxy}/backend/delete_microphone/${user.user}/${user.date}/`, {
+      method: 'DELETE',
+      headers: {
+          'Content-Type': 'application/json'
+      },
+    })
+    if(resp.status === 200){
+      console.log('deleted', user)
+      getCalendarDatesByDate()
+    }
   }
 
-  
 
 
-console.log('dateMicrophones:', dateMicrophones)
+console.log('dateMicrophones:', dateMicrophones[0])
 
-    if(dateMicrophones.length > 0){
+    if(dateMicrophones.length > 1){
         return ( 
         dateMicrophones.map((e) => {
             if(e.date === day){  
-                return  <View style={styles.container}>
-                            <Text style={styles.text}>{e.action}</Text>
-        
-                            <View style={styles.event}>
-                                <View style={styles.user}>
-                                <Text style={styles.user_text}>{USERS[e.user]}</Text>
-                                    <Icon 
-                                        name="close-circle-outline" 
-                                        size={20} 
-                                        color={'white'} 
-                                        onPress={() => deleteMicrophone(e)}     
-                                        />
-                                </View>
-                            </View>    
-                        </View>
+                return  <View style={styles.user}>
+                <Text style={styles.user_text}>{USERS[e.user]}</Text>
+                    <Icon 
+                        name="close-circle-outline" 
+                        size={20} 
+                        color={'white'} 
+                        onPress={() => deleteMicrophone(e)}     
+                        />
+                </View>
                                     
             }
         }) 
@@ -110,9 +115,45 @@ console.log('dateMicrophones:', dateMicrophones)
         )
     }else if(dateMicrophones.length === 0){
         return (
-            <View style={styles.container}>
-              <Text style={styles.text}>Microfones</Text>
+            <View >
               <MultipleSelectList 
+                setSelected={(val) => setSelected(val)} 
+                data={data} 
+                save="value"
+                // onSelect={(value) => alert(`${value}`)} 
+                placeholder={<Icon name='mic' size={20} color={'white'} />}
+                boxStyles={styles.event}
+                inputStyles={styles.input}
+                dropdownStyles={styles.box}
+                dropdownItemStyles={{color: 'white'}}
+                dropdownTextStyles={{color: 'white'}}
+                arrowicon={<Icon name="chevron-down" size={20} color={'white'} />} 
+                searchicon={<Icon name="search" size={20} color={'white'} />} 
+                closeicon={<Icon name="close" size={20} color={'white'} />} 
+                search={true}
+              />
+              <ScheduleBtn 
+                  style={{backgroundColor: '#F9F9B5',}}
+                  title={'Submit'}
+                  onPress={() => setMicrophones(selected)}
+              />
+            </View>
+        )
+    }else if(dateMicrophones.length === 1){
+        return ( 
+          dateMicrophones.map((e) => {
+              if(e.date === day){  
+                  return  <View>
+                    <View style={styles.user}>
+                      <Text style={styles.user_text}>{USERS[e.user]}</Text>
+                          <Icon 
+                              name="close-circle-outline" 
+                              size={20} 
+                              color={'white'} 
+                              onPress={() => deleteMicrophone(e)}     
+                              />
+                    </View>
+                    <MultipleSelectList 
                 setSelected={(val) => setSelected(val)} 
                 data={data} 
                 save="value"
@@ -128,14 +169,19 @@ console.log('dateMicrophones:', dateMicrophones)
                 closeicon={<Icon name="close" size={20} color={'white'} />} 
                 search={true}
               />
-              <Button 
-                  style={styles.button}
-                  title={'Set'}
+              <ScheduleBtn 
+                  style={{backgroundColor: '#F9F9B5',}}
+                  title={'Submit'}
                   onPress={() => setMicrophones(selected)}
               />
-            </View>
-        )
-    }
+                  </View>
+                  
+                                      
+              }
+          }) 
+  
+          )
+  }
 }
 
 const styles = StyleSheet.create({
@@ -143,7 +189,6 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: 'black',
     flexDirection: 'column',
-    // justifyContent: 'center',
     alignItems: 'center',
     gap: 25,
     paddingTop: 25,
@@ -153,11 +198,11 @@ const styles = StyleSheet.create({
     fontSize: 20,
   },
   event:{
-    width: 320,
+    width: 290,
     borderRadius: 10,
     borderWidth: 2,
-    borderColor: '#78D7D9',
-    margin: 5,
+    borderColor: '#4f4f4f',
+    margin: 2,
     padding: 10,
     color: 'white',
     fontSize: 20,
@@ -165,24 +210,23 @@ const styles = StyleSheet.create({
     backgroundColor: "transparent"
   },
   input:{
-    width: 230,
+    width: 200,
     height: 50,
     borderRadius: 10,
     borderWidth: 2,
-    borderColor: '#78D7D9',
+    borderColor: '#4f4f4f',
     margin: 5,
     padding: 10,
     color: 'white',
     fontSize: 20,
     zIndex: 999,
-    backgroundColor: "#a6a6a6"
   },
   box:{
-    width: 320,
+    width: 290,
     borderRadius: 10,
-    borderWidth: 2,
-    borderColor: '#78D7D9',
-    margin: 5,
+    borderWidth: 1,
+    borderColor: '#4f4f4f',
+    margin: 2,
     padding: 10,
     color: 'white',
     fontSize: 20,
@@ -193,7 +237,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
-    // width: 100,
+    marginBottom: 10,
     height: 50,
     borderRadius: 20,
     backgroundColor: "gray",
@@ -206,16 +250,15 @@ const styles = StyleSheet.create({
   button: {
     alignItems: 'center',
     justifyContent: 'center',
+    marginBottom: 10,
     width: 320,
     height: 50,
     borderRadius: 10,
     borderWidth: 2,
-    borderColor: '#78F5FA',
+    backgroundColor: '#78F5FA',
     margin: 5,
     padding: 10,
     backgroundColor: '#F9F9B5',
-    // color: 'white',
-    // fontSize: 20,
     zIndex: 999,
 },    
 })
