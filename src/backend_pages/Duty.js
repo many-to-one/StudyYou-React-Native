@@ -6,13 +6,13 @@ import Icon from "react-native-vector-icons/Ionicons";
 import { useIsFocused } from '@react-navigation/native';
 import ScheduleBtn from '../buttons/ScheduleBtn';
 
-const Microphones = ({day, navigation}) => {
+const Duty = ({day, navigation}) => {
 
     const {proxy} = useContext(AuthContext);
     // const {day} = route.params;
     const [selected, setSelected] = useState('')
     const [users, setUsers] = useState([])
-    const [dateMicrophones, setDateMicrophones] = useState([])
+    const [dateDuty, setDateDuty] = useState([])
     const USERS = {}
     const [live, setLive] = useState(true)
     const isFocused = useIsFocused();
@@ -31,7 +31,7 @@ const Microphones = ({day, navigation}) => {
   }
 
   const getCalendarDatesByDate = async() => {
-    const body = {'date': day, 'action': 'Microphones',}
+    const body = {'date': day, 'action': 'Duty',}
     const resp = await fetch(`${proxy}/backend/get_calendar_date/`, {
       method: 'POST',
           headers: {
@@ -41,7 +41,7 @@ const Microphones = ({day, navigation}) => {
         });
         const data = await resp.json();
         if(data){
-          setDateMicrophones(data)
+          setDateDuty(data)
           setSelected([])
         }  
   }
@@ -70,7 +70,7 @@ const Microphones = ({day, navigation}) => {
             },
             body: JSON.stringify({
               'date': `${day}`,
-              'action': 'Microphones'
+              'action': 'Duty'
             })
           })
 
@@ -93,32 +93,32 @@ const Microphones = ({day, navigation}) => {
     if(resp.status === 200){
       console.log('deleted', user)
       setSelected([])
-      setDateMicrophones([])
+      setDateMusic([])
       getCalendarDatesByDate()
     }
   }
 
-console.log('dateMicrophones:', dateMicrophones, day)
+  console.log('dateDuty:', dateDuty, day)
 
-if(dateMicrophones.length > 1){
+if(dateDuty.length >= 1){
   return ( 
-    dateMicrophones.map((e) => {
-        if(e.date === day && e.action === 'Microphones'){  
-            return  <View style={styles.user}>
-            <Text style={styles.user_text}>{USERS[e.user]}</Text>
-                <Icon 
-                    name="close-circle-outline" 
-                    size={20} 
-                    color={'white'} 
-                    onPress={() => deleteMicrophone(e)}     
-                    />
-            </View>  
-
-        }
-    }) 
+    dateDuty.map((e) => {
+      if(e.date === day && e.action === 'Duty'){  
+          return  <View style={styles.user}>
+          <Text style={styles.user_text}>{USERS[e.user]}</Text>
+              <Icon 
+                  name="close" 
+                  size={20} 
+                  color={'white'} 
+                  onPress={() => deleteMicrophone(e)}     
+                  />
+          </View>  
+                              
+      }
+  }) 
 
   )
-    }else if(dateMicrophones.length === 0){
+    }else if(dateDuty.length === 0){
         return (
             <View >
               <MultipleSelectList 
@@ -126,7 +126,7 @@ if(dateMicrophones.length > 1){
                 data={data} 
                 save="value"
                 // onSelect={(value) => alert(`${value}`)} 
-                placeholder={<Icon name='mic' size={20} color={'white'} />}
+                placeholder={<Icon name='man-sharp' size={20} color={'white'} />}
                 boxStyles={styles.event}
                 inputStyles={styles.input}
                 dropdownStyles={styles.box}
@@ -144,49 +144,8 @@ if(dateMicrophones.length > 1){
               />
             </View>
         )
-    }else if(dateMicrophones.length == 1){
-        return ( 
-          dateMicrophones.map((e) => {
-              if(e.date === day && e.action === 'Microphones'){  
-                  return  <View>
-                    <View style={styles.user}>
-                      <Text style={styles.user_text}>{USERS[e.user]}</Text>
-                          <Icon 
-                              name="close-circle-outline" 
-                              size={20} 
-                              color={'white'} 
-                              onPress={() => deleteMicrophone(e)}     
-                              />
-                    </View>
-                    <MultipleSelectList 
-                    setSelected={(val) => setSelected(val)} 
-                    data={data} 
-                    save="value"
-                    // onSelect={() => alert('selected')} 
-                    placeholder={<Icon name='mic' size={20} color={'white'} />}
-                    boxStyles={styles.event}
-                    inputStyles={styles.input}
-                    dropdownStyles={styles.box}
-                    dropdownItemStyles={{color: 'white'}}
-                    dropdownTextStyles={{color: 'white'}}
-                    arrowicon={<Icon name="chevron-down" size={20} color={'white'} />} 
-                    searchicon={<Icon name="search" size={20} color={'white'} />} 
-                    closeicon={<Icon name="close" size={20} color={'white'} />} 
-                    search={true}
-                    />
-                    <ScheduleBtn 
-                        style={{backgroundColor: '#F9F9B5',}}
-                        title={'Submit'}
-                        onPress={() => setMicrophones(selected)}
-                    />
-                  </View>
-                  
-                                      
-              }
-          }) 
-  
-          )
-  }
+    }
+
 }
 
 const styles = StyleSheet.create({
@@ -204,6 +163,9 @@ const styles = StyleSheet.create({
   },
   event:{
     width: 290,
+    borderRadius: 10,
+    borderWidth: 2,
+    borderColor: '#4f4f4f',
     margin: 2,
     padding: 10,
     color: 'white',
@@ -265,4 +227,4 @@ const styles = StyleSheet.create({
 },    
 })
 
-export default Microphones
+export default Duty

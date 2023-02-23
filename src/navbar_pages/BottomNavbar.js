@@ -21,7 +21,9 @@ import BackButton from '../buttons/BackButton';
 import Timer from '../backend_pages/Timer';
 import ChageLanguage from '../context/ChageLanguage';
 import CreateCalendarEvent from '../backend_pages/CreateCalendarEvent';
-import Microphones from '../backend_pages/DatePickerCalendar';
+import Microphones from '../backend_pages/Microphones';
+import Music from '../backend_pages/Music';
+import Duty from '../backend_pages/Duty';
 
 const Tab = createBottomTabNavigator();
 
@@ -354,6 +356,36 @@ function BottomNavigator() {
         component={Microphones} 
         options={{
           title: 'Microphones',
+          headerTitleStyle: {
+            color: 'white',
+          },
+          headerStyle: {
+            backgroundColor: 'black',
+          },
+          tabBarVisible: false, // hide the button
+          tabBarButton: (props) => null, // hide the button
+        }}
+        />
+        <Tab.Screen 
+        name="Music" 
+        component={Music} 
+        options={{
+          title: 'Music',
+          headerTitleStyle: {
+            color: 'white',
+          },
+          headerStyle: {
+            backgroundColor: 'black',
+          },
+          tabBarVisible: false, // hide the button
+          tabBarButton: (props) => null, // hide the button
+        }}
+        />
+        <Tab.Screen 
+        name="Duty" 
+        component={Duty} 
+        options={{
+          title: 'Duty',
           headerTitleStyle: {
             color: 'white',
           },
