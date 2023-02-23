@@ -1,28 +1,38 @@
 import React from 'react';
 import { Text, View, StyleSheet, TouchableOpacity } from 'react-native';
+import Icon from "react-native-vector-icons/Ionicons";
 
 export default function ChangePasswordBtn({onPress, title}) {
   return (
     <TouchableOpacity style={styles.button} onPress={onPress}>
-      <Text style={styles.text}>{title}</Text>
+      <Text style={styles.text}>
+        {title}
+      </Text>
+      <Icon 
+        name="key-sharp" 
+        size={30} 
+        color={'#78D7D9'}      
+      />
     </TouchableOpacity>
   );
 }
 
 const styles = StyleSheet.create({
     button: {
+        flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'center',
-        width: 320,
-        height: 50,
+        width: 300,
+        height: 60,
         borderRadius: 10,
-        borderWidth: 2,
-        borderColor: '#78F5FA',
-        margin: 5,
+        borderWidth: 1,
+        // borderColor: '#78F5FA',
+        borderColor: 'white',
+        marginBottom: 10,
+        marginTop: 5,
         padding: 10,
-        backgroundColor: '#F9F9B5',
-        // color: 'white',
-        // fontSize: 20,
+        gap: 25,
+        backgroundColor: 'transparent',
         zIndex: 999,
     },
     text: {
@@ -30,6 +40,6 @@ const styles = StyleSheet.create({
       lineHeight: 21,
       fontWeight: 'bold',
       letterSpacing: 0.25,
-      color: 'black',
+      color: 'white',
     },
   });

@@ -9,12 +9,10 @@ import ScheduleBtn from '../buttons/ScheduleBtn';
 const Duty = ({day, navigation}) => {
 
     const {proxy} = useContext(AuthContext);
-    // const {day} = route.params;
     const [selected, setSelected] = useState('')
     const [users, setUsers] = useState([])
     const [dateDuty, setDateDuty] = useState([])
     const USERS = {}
-    const [live, setLive] = useState(true)
     const isFocused = useIsFocused();
 
     useEffect(() => {
@@ -93,7 +91,7 @@ const Duty = ({day, navigation}) => {
     if(resp.status === 200){
       console.log('deleted', user)
       setSelected([])
-      setDateMusic([])
+      setDateDuty([])
       getCalendarDatesByDate()
     }
   }
@@ -107,7 +105,7 @@ if(dateDuty.length >= 1){
           return  <View style={styles.user}>
           <Text style={styles.user_text}>{USERS[e.user]}</Text>
               <Icon 
-                  name="close" 
+                  name="close-circle-outline" 
                   size={20} 
                   color={'white'} 
                   onPress={() => deleteMicrophone(e)}     

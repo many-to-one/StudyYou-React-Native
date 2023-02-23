@@ -15,6 +15,7 @@ import { ChageLanguage } from '../context/ChageLanguage';
 import Calendar from './Calendar';
 import DatePickerCalendar from './DatePickerCalendar';
 import CalendarII from './CalendarII';
+import Timetable from './Timetable';
 
 const Profile = ({navigation}) => {
     const { width, height } = Dimensions.get('window');
@@ -48,7 +49,8 @@ const Profile = ({navigation}) => {
   }
 
   const plsHolder = () => {
-    return <Icon name='md-language' size={20} color={'white'} />
+    return <Icon name='globe-outline' size={30} color={'white'} />
+    // return <Icon name='md-language' size={20} color={'white'} />
   }
 
   return (
@@ -72,9 +74,9 @@ const Profile = ({navigation}) => {
           />
     <ScrollView>
     
-    <BackButton onPress={() => navigation.navigate('Home')}/>
+    <BackButton onPress={() => navigation.navigate('Menu')}/>
 
-    <View>
+    <View style={styles.cont}>
       <SelectList 
           onSelect={() => language(selected)}
           setSelected={setSelected}
@@ -92,21 +94,21 @@ const Profile = ({navigation}) => {
           // defaultOption={{key: 'RU', value: language.RU}}
           // defaultOption={{ key:'1', value:'Jammu & Kashmir' }}
         />
-        <View style={styles.event}>
+        <View style={styles.inside}>
           <Text style={styles.text}>
             {profileData.username}
           </Text>
         </View>
-        <View style={styles.event}>
+        <View style={styles.inside}>
           <Text style={styles.text}>
             {profileData.email}
           </Text>
         </View>
         {profileData.is_superuser ? 
 
-        <View style={styles.event}>
+        <View style={styles.inside}>
           <Text style={styles.text}>
-            {profileData.email}
+            superuser
           </Text>
         </View>
          :
@@ -116,12 +118,15 @@ const Profile = ({navigation}) => {
             title={Changepassword_}
             onPress={() => navigation.navigate('RequestResetMail')}
         />
-        <Calendar />
-          {/* <DatePickerCalendar/> */}
 
-        <View style={styles.event}>
+        <ScrollView style={styles.timetable}>
+          <Timetable />
+        </ScrollView>
+        <Calendar />
+
+        {/* <View style={styles.event}>
           
-        </View>
+        </View> */}
       
     </View> 
     </ScrollView>
@@ -149,20 +154,42 @@ const styles = StyleSheet.create({
       color: 'white',
       fontSize: 20,
     },
+    cont: {
+      alignItems: 'center',
+    },
     event:{
-      width: 320,
-      // height: 250,
+      width: 300,
+      height: 60,
       borderRadius: 10,
       borderWidth: 2,
       // borderColor: '#EFA9FD',
-      borderColor: '#78D7D9',
-      margin: 5,
+      // borderColor: '#78D7D9',
+      borderColor: 'white',
+      marginBottom: 20,
       padding: 10,
       color: 'white',
       fontSize: 20,
       zIndex: 999,
       backgroundColor: 'transparent'
-    },  
+    }, 
+    inside: {
+      // flex: 1,
+      flexDirection: 'row',
+      justifyContent: 'center',
+      width: 300,
+      height: 60,
+      margin: 5,
+      marginBottom: 10,
+      padding: 15,
+      borderColor: 'white',
+      borderRadius: 10,
+      borderWidth: 1,
+    },
+    timetable: {
+      height: 300,
+      marginBottom: 25,
+      marginTop: 25,
+    }, 
     left_row: {
       width: 250,
       height:50,

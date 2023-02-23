@@ -8,6 +8,7 @@ import { useIsFocused } from '@react-navigation/native';
 import Microphones from '../backend_pages/Microphones';
 import Music from '../backend_pages/Music';
 import Duty from './Duty';
+import BackButton from '../buttons/BackButton';
 
 const CreateCalendarEvent = ({route, navigation}) => {
 
@@ -16,6 +17,7 @@ const CreateCalendarEvent = ({route, navigation}) => {
     return (
       <ScrollView style={styles.scroll}>
         <View style={styles.container}>
+        <BackButton onPress={() => navigation.navigate('Profile')}/>
         <Text style={styles.text}>Microphones</Text>
         <View style={styles.event}>
           <Microphones  day={day}/>

@@ -107,7 +107,7 @@ if(dateMusic.length > 1){
           return  <View style={styles.user}>
           <Text style={styles.user_text}>{USERS[e.user]}</Text>
               <Icon 
-                  name="md-headset" 
+                  name="close-circle-outline" 
                   size={20} 
                   color={'white'} 
                   onPress={() => deleteMicrophone(e)}     
@@ -152,7 +152,7 @@ if(dateMusic.length > 1){
                     <View style={styles.user}>
                       <Text style={styles.user_text}>{USERS[e.user]}</Text>
                           <Icon 
-                              name="md-headset" 
+                              name="close-circle-outline" 
                               size={20} 
                               color={'white'} 
                               onPress={() => deleteMicrophone(e)}     

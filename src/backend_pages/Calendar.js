@@ -46,24 +46,10 @@ let test = {}
       days.map((day) => {
         marked[day.toString()] = {
           selected: true,
-          selectedColor: '#222222',
-          selectedTextColor: 'yellow',
+          selectedColor: '#78D7D9',
+          selectedTextColor: 'white',
         }
       })
-
-      // days.map((day) => {
-      //   marked[`${day}`] = {
-      //     customStyles: {
-      //       container:{
-      //         backgroundColor: 'red'
-      //       },
-      //       text:{
-      //         color:'white'
-      //       }
-      //     }
-      //   }
-      //   setDs(marked)
-      // })
 
       console.log('marked:', marked)
     }
@@ -97,12 +83,12 @@ let test = {}
 
 const styles = StyleSheet.create({
   event:{
-    width: 320,
-    // height: 50,
+    width: 300,
     borderRadius: 10,
-    borderWidth: 2,
-    borderColor: '#78D7D9',
-    margin: 5,
+    borderWidth: 1,
+    // borderColor: '#78D7D9',
+    borderColor: 'white',
+    marginTop: 15,
     padding: 10,
     color: 'white',
     fontSize: 20,

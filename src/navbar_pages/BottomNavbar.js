@@ -24,6 +24,7 @@ import CreateCalendarEvent from '../backend_pages/CreateCalendarEvent';
 import Microphones from '../backend_pages/Microphones';
 import Music from '../backend_pages/Music';
 import Duty from '../backend_pages/Duty';
+import Timetable from '../backend_pages/Timetable';
 
 const Tab = createBottomTabNavigator();
 
@@ -386,6 +387,21 @@ function BottomNavigator() {
         component={Duty} 
         options={{
           title: 'Duty',
+          headerTitleStyle: {
+            color: 'white',
+          },
+          headerStyle: {
+            backgroundColor: 'black',
+          },
+          tabBarVisible: false, // hide the button
+          tabBarButton: (props) => null, // hide the button
+        }}
+        />
+        <Tab.Screen 
+        name="Timetable" 
+        component={Timetable} 
+        options={{
+          title: 'Timetable',
           headerTitleStyle: {
             color: 'white',
           },
