@@ -54,13 +54,13 @@ const AddEvent = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <Animated.Image 
-          source={require("../../assets/events.png")}
+          source={require("../../assets/events_ibg.png")}
           style={[
             StyleSheet.absoluteFillObject,
           ]}
           blurRadius={5}
         />
-        <LinearGradient
+        {/* <LinearGradient
             colors={['rgba(0, 0, 0, 0)', '#3F0053']}
             style={{
             height,
@@ -68,7 +68,7 @@ const AddEvent = ({ navigation }) => {
             position: 'absolute',
             bottom: -50,
             }}
-          />
+          /> */}
     <ScrollView>
     <BackButton onPress={() => navigation.navigate('Home')}/>
       <View style={styles.row}>
@@ -182,38 +182,59 @@ const styles = StyleSheet.create({
   event:{
     width: 320,
     // height: 50,
-    borderRadius: 10,
-    borderWidth: 2,
-    borderColor: '#EFA9FD',
-    margin: 5,
+    borderRadius: 20,
+    // borderWidth: 1,
+    // borderColor: 'white',
+    margin: 10,
     padding: 10,
     color: 'white',
     fontSize: 20,
     zIndex: 999,
+    shadowColor: 'white',
+      shadowOpacity: 1,
+      shadowOffset: {
+        width: 0,
+        height: 0,
+      },
+      shadowRadius: 4
   },  
   left_row: {
     width: 250,
     height:50,
-    borderWidth: 2,
-    borderColor: '#EFA9FD',
-    borderRadius: 10,
-    margin: 5,
+    // borderWidth: 1,
+    // borderColor: 'white',
+    borderRadius: 20,
+    margin: 10,
     alignItems: 'flex-start',
     justifyContent: 'center',
     paddingLeft: 10,
+    shadowColor: 'white',
+      shadowOpacity: 1,
+      shadowOffset: {
+        width: 0,
+        height: 0,
+      },
+      shadowRadius: 4
   },
   input: {
     width: 50,
     height:50,
-    borderWidth: 2,
-    borderColor: '#EFA9FD',
-    borderRadius: 10,
-    margin: 5,
+    // borderWidth: 1,
+    // borderColor: 'white',
+    borderRadius: 20,
+    margin: 10,
     alignItems: 'center',
     justifyContent: 'center',
     paddingLeft: 10,
     color: 'white',
     fontSize: 25,
+    shadowColor: 'white',
+      shadowOpacity: 1,
+      shadowOffset: {
+        width: 0,
+        height: 0,
+      },
+      shadowRadius: 4
   },
   back_button: {
       fontSize: 50,

@@ -103,6 +103,7 @@ if(dateDuty.length >= 1){
     dateDuty.map((e) => {
       if(e.date === day && e.action === 'Duty'){  
           return  <View style={styles.user}>
+          <Icon name='man-sharp' size={20} color={'#F9F9B5'} />
           <Text style={styles.user_text}>{USERS[e.user]}</Text>
               <Icon 
                   name="close-circle-outline" 
@@ -197,12 +198,12 @@ const styles = StyleSheet.create({
   },
   user: {
     flexDirection: 'row',
-    justifyContent: 'center',
+    justifyContent: 'space-around',
     alignItems: 'center',
     marginBottom: 10,
     height: 50,
-    borderRadius: 20,
-    backgroundColor: "gray",
+    borderRadius: 15,
+    backgroundColor: "#333333",
     gap: 10,
   },
   user_text: {

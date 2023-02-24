@@ -1,6 +1,6 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import React, { useContext, useEffect, useState } from 'react'
-import { Animated, Button, Dimensions, ScrollView, StyleSheet, Text, View } from 'react-native';
+import { Animated, Button, Dimensions, Image, ImageBackground, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 // import { View } from 'react-native-web';
 import { AuthContext } from '../context/AuthContext'
 import AuthButton from '../buttons/AuthButton';
@@ -57,13 +57,13 @@ const Profile = ({navigation}) => {
 
     <View style={styles.container}>
       <Animated.Image 
-          source={require("../../assets/profile_i.png")}
+          source={require("../../assets/profile_ibg.png")}
           style={[
             StyleSheet.absoluteFillObject,
           ]}
           blurRadius={5}
         />
-        <LinearGradient
+        {/* <LinearGradient
             colors={['rgba(0, 0, 0, 0)', '#393939']}
             style={{
             height,
@@ -71,7 +71,7 @@ const Profile = ({navigation}) => {
             position: 'absolute',
             bottom: -50,
             }}
-          />
+          /> */}
     <ScrollView>
     
     <BackButton onPress={() => navigation.navigate('Menu')}/>
@@ -85,7 +85,7 @@ const Profile = ({navigation}) => {
           data={Data} 
           boxStyles={styles.event}
           inputStyles={styles.text}
-          dropdownStyles={styles.event}
+          dropdownStyles={styles.selectlist}
           dropdownItemStyles={{color: 'white'}}
           dropdownTextStyles={{color: 'white'}}
           arrowicon={<Icon name="chevron-down" size={20} color={'white'} />} 
@@ -94,23 +94,55 @@ const Profile = ({navigation}) => {
           // defaultOption={{key: 'RU', value: language.RU}}
           // defaultOption={{ key:'1', value:'Jammu & Kashmir' }}
         />
-        <View style={styles.inside}>
-          <Text style={styles.text}>
-            {profileData.username}
-          </Text>
-        </View>
-        <View style={styles.inside}>
-          <Text style={styles.text}>
-            {profileData.email}
-          </Text>
-        </View>
+        <TouchableOpacity>
+          <Animated.View style={styles.animated}>
+            <ImageBackground
+              source={require('../../assets/card.png')}
+              style={styles.img}
+            >
+              <View style={styles.inside}>
+                <Icon name="person-circle-outline" size={20} color={'#a1efff'} />
+                <Text style={styles.text}>
+                  {profileData.username}
+                </Text>
+              </View>
+            </ImageBackground>
+          </Animated.View>
+        </TouchableOpacity>
+
+        <TouchableOpacity>
+          <Animated.View style={styles.animated}>
+            <ImageBackground
+              source={require('../../assets/card.png')}
+              style={styles.img}
+            >
+              <View style={styles.inside}>
+              <Icon name="mail-outline" size={20} color={'#a1efff'} />
+                <Text style={styles.text}>
+                  {profileData.email}
+                </Text>
+              </View>
+            </ImageBackground>
+          </Animated.View>
+        </TouchableOpacity>
+
         {profileData.is_superuser ? 
 
-        <View style={styles.inside}>
-          <Text style={styles.text}>
-            superuser
-          </Text>
-        </View>
+          <TouchableOpacity>
+          <Animated.View style={styles.animated}>
+            <ImageBackground
+              source={require('../../assets/card.png')}
+              style={styles.img}
+            >
+              <View style={styles.inside}>
+                <Icon name="md-star" size={20} color={'#a1efff'} />
+                <Text style={styles.text}>
+                  superuser
+                </Text>
+              </View>
+            </ImageBackground>
+          </Animated.View>
+        </TouchableOpacity>
          :
          <View />
     }
@@ -122,12 +154,9 @@ const Profile = ({navigation}) => {
         <ScrollView style={styles.timetable}>
           <Timetable />
         </ScrollView>
+
         <Calendar />
 
-        {/* <View style={styles.event}>
-          
-        </View> */}
-      
     </View> 
     </ScrollView>
     </View>
@@ -151,17 +180,48 @@ const styles = StyleSheet.create({
       flexDirection: 'row'
     },
     text: {
-      color: 'white',
-      fontSize: 20,
+      color: '#a1efff',
+      fontSize: 15,
     },
     cont: {
       alignItems: 'center',
+      gap: 10
+    },
+    selectlist:{
+      width: 300,
+      borderRadius: 10,
+      borderWidth: 1,
+      // borderColor: '#EFA9FD',
+      // borderColor: '#78D7D9',
+      borderColor: 'white',
+      marginBottom: 20,
+      padding: 10,
+      color: 'white',
+      fontSize: 20,
+      zIndex: 999,
+      backgroundColor: 'transparent'
+    },
+    animated: {
+      borderRadius: 15,
+      shadowColor: 'white',
+      shadowOpacity: 1,
+      shadowOffset: {
+        width: 0,
+        height: 0,
+      },
+      shadowRadius: 4
+    }, 
+    img: {
+      width: 300,
+      height: 60,
+      borderRadius: 25,
+      resizeMode: 'cover',
     },
     event:{
       width: 300,
       height: 60,
-      borderRadius: 10,
-      borderWidth: 2,
+      borderRadius: 15,
+      borderWidth: 1,
       // borderColor: '#EFA9FD',
       // borderColor: '#78D7D9',
       borderColor: 'white',
@@ -173,34 +233,21 @@ const styles = StyleSheet.create({
       backgroundColor: 'transparent'
     }, 
     inside: {
-      // flex: 1,
       flexDirection: 'row',
-      justifyContent: 'center',
+      alignItems: 'center',
+      gap: 20,
       width: 300,
       height: 60,
       margin: 5,
       marginBottom: 10,
       padding: 15,
-      borderColor: 'white',
-      borderRadius: 10,
-      borderWidth: 1,
+      borderRadius: 50,
     },
     timetable: {
       height: 300,
       marginBottom: 25,
       marginTop: 25,
     }, 
-    left_row: {
-      width: 250,
-      height:50,
-      borderWidth: 2,
-      borderColor: '#EFA9FD',
-      borderRadius: 10,
-      margin: 5,
-      alignItems: 'flex-start',
-      justifyContent: 'center',
-      paddingLeft: 10,
-    },
     input: {
       width: 50,
       height:50,

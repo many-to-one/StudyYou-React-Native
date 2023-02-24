@@ -15,7 +15,7 @@ const styles = StyleSheet.create({
         fontSize: 70,
         color: '#F9F9B5', // #F0007F
         position: 'absolute',
-        bottom: 45,
+        bottom: 5,
         marginLeft: 35,
     }
 })

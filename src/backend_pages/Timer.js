@@ -55,7 +55,7 @@ export default function Timer() {
                 ]}
                 blurRadius={5}
             />
-            <LinearGradient
+            {/* <LinearGradient
                 colors={['rgba(0, 0, 0, 0)', '#000000']}
                 style={{
                 height,
@@ -63,7 +63,7 @@ export default function Timer() {
                 position: 'absolute',
                 bottom: -50,
                 }}
-            />
+            /> */}
       <StatusBar barStyle="light-content" />
         <Text style={styles.timerText}>{`${hr}:${min}:${sec}`}</Text>
       <View style={styles.buttons_cont}>

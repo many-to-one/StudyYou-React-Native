@@ -38,29 +38,20 @@ const AllEvents = ({datas}) => {
     }
 
   return (
+
     <View style={styles.container}>
+    <ScrollView>
 
       <Animated.Image 
-        source={require("../../assets/events_i.png")}
+        source={require("../../assets/events_ibg.png")}
         style={[
           StyleSheet.absoluteFillObject,
         ]}
         blurRadius={5}
-        />
-        <LinearGradient
-          // colors={['rgba(0, 0, 0, 0)', '#3F0053']}
-          colors={['rgba(0, 0, 0, 0)', '#000000']}
-          style={{
-          height,
-          width,
-          position: 'absolute',
-          bottom: -50,
-          }}
-        />
+        />s
          <View
           contentContainerStyle={styles.scrollView}
          >
-
 
       <View > 
         {events.map((ev, index) => (
@@ -75,6 +66,7 @@ const AllEvents = ({datas}) => {
           }}
         />
 
+</ScrollView>
     </View>
   )
 }

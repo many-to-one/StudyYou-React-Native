@@ -85,15 +85,22 @@ const styles = StyleSheet.create({
   event:{
     width: 300,
     borderRadius: 10,
-    borderWidth: 1,
+    // borderWidth: 1,
     // borderColor: '#78D7D9',
-    borderColor: 'white',
+    // borderColor: 'white',
     marginTop: 15,
     padding: 10,
     color: 'white',
     fontSize: 20,
     zIndex: 999,
-    backgroundColor: 'transparent'
+    backgroundColor: 'transparent',
+    shadowColor: 'white',
+    shadowOpacity: 1,
+    shadowOffset: {
+      width: 0,
+      height: 0,
+    },
+    shadowRadius: 4
   }
 })
 

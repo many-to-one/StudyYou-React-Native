@@ -105,6 +105,7 @@ if(dateMusic.length > 1){
     dateMusic.map((e) => {
       if(e.date === day && e.action === 'Music'){  
           return  <View style={styles.user}>
+          <Icon name='md-headset' size={20} color={'#F9F9B5'} />
           <Text style={styles.user_text}>{USERS[e.user]}</Text>
               <Icon 
                   name="close-circle-outline" 
@@ -150,6 +151,7 @@ if(dateMusic.length > 1){
               if(e.date === day && e.action === 'Music'){  
                   return  <View>
                     <View style={styles.user}>
+                    <Icon name='md-headset' size={20} color={'#F9F9B5'} />
                       <Text style={styles.user_text}>{USERS[e.user]}</Text>
                           <Icon 
                               name="close-circle-outline" 
@@ -240,12 +242,12 @@ const styles = StyleSheet.create({
   },
   user: {
     flexDirection: 'row',
-    justifyContent: 'center',
+    justifyContent: 'space-around',
     alignItems: 'center',
     marginBottom: 10,
     height: 50,
-    borderRadius: 20,
-    backgroundColor: "gray",
+    borderRadius: 15,
+    backgroundColor: "#333333",
     gap: 10,
   },
   user_text: {

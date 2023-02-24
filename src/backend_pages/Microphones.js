@@ -105,11 +105,12 @@ if(dateMicrophones.length > 1){
     dateMicrophones.map((e) => {
         if(e.date === day && e.action === 'Microphones'){  
             return  <View style={styles.user}>
+            <Icon name='mic' size={20} color={'#F9F9B5'} />
             <Text style={styles.user_text}>{USERS[e.user]}</Text>
                 <Icon 
                     name="close-circle-outline" 
                     size={20} 
-                    color={'white'} 
+                    color={'#F9F9B5'} 
                     onPress={() => deleteMicrophone(e)}     
                     />
             </View>  
@@ -150,11 +151,12 @@ if(dateMicrophones.length > 1){
               if(e.date === day && e.action === 'Microphones'){  
                   return  <View>
                     <View style={styles.user}>
+                    <Icon name='mic' size={20} color={'#F9F9B5'} />
                       <Text style={styles.user_text}>{USERS[e.user]}</Text>
                           <Icon 
                               name="close-circle-outline" 
                               size={20} 
-                              color={'white'} 
+                              color={'#F9F9B5'} 
                               onPress={() => deleteMicrophone(e)}     
                               />
                     </View>
@@ -216,7 +218,7 @@ const styles = StyleSheet.create({
     height: 50,
     borderRadius: 10,
     borderWidth: 2,
-    borderColor: '#4f4f4f',
+    borderColor: '#333333',
     margin: 5,
     padding: 10,
     color: 'white',
@@ -237,12 +239,12 @@ const styles = StyleSheet.create({
   },
   user: {
     flexDirection: 'row',
-    justifyContent: 'center',
+    justifyContent: 'space-around',
     alignItems: 'center',
     marginBottom: 10,
     height: 50,
-    borderRadius: 20,
-    backgroundColor: "gray",
+    borderRadius: 15,
+    backgroundColor: "#333333",
     gap: 10,
   },
   user_text: {

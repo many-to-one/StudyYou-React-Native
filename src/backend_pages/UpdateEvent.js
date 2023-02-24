@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react'
-import { StyleSheet, View, Text, TextInput, ScrollView, Animated, Dimensions } from 'react-native';
+import { StyleSheet, View, Text, TextInput, ScrollView, Animated, Dimensions, ImageBackground } from 'react-native';
 import { AuthContext } from '../context/AuthContext'
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import DoneButton from '../buttons/DoneButton'
@@ -74,13 +74,13 @@ const UpdateEvent = ({route, navigation}) => {
   return (
     <View style={styles.container}>
       <Animated.Image 
-          source={require("../../assets/events.png")}
+          source={require("../../assets/events_ibg.png")}
           style={[
             StyleSheet.absoluteFillObject,
           ]}
           blurRadius={5}
         />
-        <LinearGradient
+        {/* <LinearGradient
             colors={['rgba(0, 0, 0, 0)', '#3F0053']}
             style={{
             height,
@@ -88,9 +88,10 @@ const UpdateEvent = ({route, navigation}) => {
             position: 'absolute',
             bottom: -50,
             }}
-          />
+          /> */}
     <ScrollView>
       <BackButton onPress={() => back()}/>
+
       <View style={styles.row}>
         <TextInput style={styles.event} 
           placeholder="Event..."
@@ -99,6 +100,7 @@ const UpdateEvent = ({route, navigation}) => {
           onChangeText={(e) => {setEvents({...events, 'event': e})}}
         />
       </View>
+      
 
       <View style={styles.row}>
         <View style={styles.left_row}>
@@ -200,39 +202,60 @@ const styles = StyleSheet.create({
       fontSize: 20,
     },
     event:{
-      width: 320,
-      // height: 50,
-      borderRadius: 10,
-      borderWidth: 2,
-      borderColor: '#EFA9FD',
-      margin: 5,
+      width: 310,
+      height: 50,
+      borderRadius: 20,
+      // borderWidth: 1,
+      // borderColor: '#a1efff',
+      margin: 10,
       padding: 10,
       color: 'white',
       fontSize: 20,
+      shadowColor: 'white',
+      shadowOpacity: 1,
+      shadowOffset: {
+        width: 0,
+        height: 0,
+      },
+      shadowRadius: 4,
     },  
     left_row: {
       width: 250,
       height:50,
-      borderWidth: 2,
-      borderColor: '#EFA9FD',
-      borderRadius: 10,
-      margin: 5,
+      // borderWidth: 1,
+      // borderColor: 'a1efff',
+      borderRadius: 20,
+      margin: 10,
       alignItems: 'flex-start',
       justifyContent: 'center',
       paddingLeft: 10,
+      shadowColor: 'white',
+      shadowOpacity: 1,
+      shadowOffset: {
+        width: 0,
+        height: 0,
+      },
+      shadowRadius: 4,
     },
     input: {
       width: 50,
       height:50,
-      borderWidth: 2,
-      borderColor: '#EFA9FD',
-      borderRadius: 10,
-      margin: 5,
+      // borderWidth: 1,
+      // borderColor: '#a1efff',
+      borderRadius: 20,
+      margin: 10,
       alignItems: 'center',
       justifyContent: 'center',
       paddingLeft: 10,
       color: 'white',
       fontSize: 25,
+      shadowColor: 'white',
+      shadowOpacity: 1,
+      shadowOffset: {
+        width: 0,
+        height: 0,
+      },
+      shadowRadius: 4,
     },
     back_button: {
         fontSize: 50,

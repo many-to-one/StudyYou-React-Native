@@ -14,7 +14,7 @@ export default function SaveButton({onPress}) {
 const styles = StyleSheet.create({
     button: {
         fontSize: 50,
-        color: '#C4BF1E',
+        color: '#a1efff',
         position: 'absolute',
         marginTop: 220,
         marginLeft: 130,

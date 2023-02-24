@@ -35,7 +35,7 @@ const MonthsResults = ({navigation}) => {
                 ]}
                 blurRadius={5}
             />
-            <LinearGradient
+            {/* <LinearGradient
                 colors={['rgba(0, 0, 0, 0)', '#393939']}
                 style={{
                 height,
@@ -43,7 +43,7 @@ const MonthsResults = ({navigation}) => {
                 position: 'absolute',
                 bottom: -50,
                 }}
-            />
+            /> */}
             <ScrollView>
             {result.map((res, index) => (
                 <MonthsResultsItem key={index} res={res}/>

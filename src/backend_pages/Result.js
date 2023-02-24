@@ -59,7 +59,7 @@ const Result = ({navigation}) => {
           ]}
           blurRadius={5}
         />
-        <LinearGradient
+        {/* <LinearGradient
             colors={['rgba(0, 0, 0, 0)', '#393939']}
             style={{
             height,
@@ -67,7 +67,7 @@ const Result = ({navigation}) => {
             position: 'absolute',
             bottom: -50,
             }}
-          />
+          /> */}
         <ScrollView>
         <BackButton style={styles.backbtn} onPress={() => navigation.navigate('Menu')}/>
           <View style={styles.row}>
@@ -173,26 +173,39 @@ const Result = ({navigation}) => {
         width: 250,
         height:50,
         borderRadius: 10,
-        borderWidth: 2,
-        borderColor: '#C4BF1E',
+        // borderWidth: 2,
+        // borderColor: '#C4BF1E',
         margin: 5,
         alignItems: 'flex-start',
         justifyContent: 'center',
         paddingLeft: 10,
+        shadowColor: '#a1efff',
+        shadowOpacity: 1,
+        shadowOffset: {
+        width: 0,
+        height: 0,
+      },
+      shadowRadius: 6
       },
       input: {
         width: 50,
         height:50,
         borderRadius: 10,
-        borderRadius: 10,
-        borderWidth: 2,
-        borderColor: '#C4BF1E',
+        // borderWidth: 1,
+        // borderColor: '#C4BF1E',
         margin: 5,
         alignItems: 'center',
         justifyContent: 'center',
         paddingLeft: 10,
         color: 'white',
         fontSize: 25,
+        shadowColor: '#a1efff',
+        shadowOpacity: 1,
+        shadowOffset: {
+        width: 0,
+        height: 0,
+      },
+      shadowRadius: 6
       },
       backbtn: {
         marginLeft: 100,

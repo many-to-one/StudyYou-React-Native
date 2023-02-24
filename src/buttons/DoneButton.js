@@ -13,7 +13,7 @@ export default function DoneButton({onPress}) {
 const styles = StyleSheet.create({
     button: {
         fontSize: 50,
-        color: '#EFA9FD',
+        color: '#a1efff',
         position: 'absolute',
         marginTop: 230,
         marginLeft: 130,
