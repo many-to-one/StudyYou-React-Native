@@ -72,9 +72,8 @@ const Profile = ({navigation}) => {
             bottom: -50,
             }}
           /> */}
-    <ScrollView>
     
-    <BackButton onPress={() => navigation.navigate('Menu')}/>
+    <ScrollView>
 
     <View style={styles.cont}>
       <SelectList 
@@ -202,7 +201,7 @@ const styles = StyleSheet.create({
       backgroundColor: 'transparent'
     },
     animated: {
-      borderRadius: 15,
+      borderRadius: 25,
       shadowColor: 'white',
       shadowOpacity: 1,
       shadowOffset: {

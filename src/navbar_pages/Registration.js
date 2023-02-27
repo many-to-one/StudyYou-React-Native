@@ -35,11 +35,6 @@ const Registration = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
-    <Icon 
-      name='arrow-back-ios' 
-      onPress={() => navigation.navigate('Login')} 
-      style={styles.back}  
-      ></Icon>
       <View>
         <TextInput 
           placeholder='username'

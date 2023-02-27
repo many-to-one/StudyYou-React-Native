@@ -6,12 +6,12 @@ import Icon from "react-native-vector-icons/Ionicons";
 import { useIsFocused } from '@react-navigation/native';
 import ScheduleBtn from '../buttons/ScheduleBtn';
 
-const Duty = ({day, navigation}) => {
+const WeekTreasures = ({day, navigation}) => {
 
     const {proxy} = useContext(AuthContext);
     const [selected, setSelected] = useState('')
     const [users, setUsers] = useState([])
-    const [dateDuty, setDateDuty] = useState([])
+    const [dateWeekTreasures, setDateWeekTreasures] = useState([])
     const USERS = {}
     const isFocused = useIsFocused();
 
@@ -29,7 +29,7 @@ const Duty = ({day, navigation}) => {
   }
 
   const getCalendarDatesByDate = async() => {
-    const body = {'date': day, 'action': 'Duty',}
+    const body = {'date': day, 'action': 'Treasures (week)',}
     const resp = await fetch(`${proxy}/backend/get_calendar_date/`, {
       method: 'POST',
           headers: {
@@ -39,7 +39,7 @@ const Duty = ({day, navigation}) => {
         });
         const data = await resp.json();
         if(data){
-          setDateDuty(data)
+          setDateWeekTreasures(data)
           setSelected([])
         }  
   }
@@ -56,7 +56,7 @@ const Duty = ({day, navigation}) => {
     )
   }
 
-  const setMicrophones = async(selected) => {
+  const setWeekTreasures = async(selected) => {
     selected.map((e) => {
       for(let k in USERS){  
         if(e === USERS[k]){
@@ -68,7 +68,7 @@ const Duty = ({day, navigation}) => {
             },
             body: JSON.stringify({
               'date': `${day}`,
-              'action': 'Duty'
+              'action': 'Treasures (week)'
             })
           })
 
@@ -81,7 +81,7 @@ const Duty = ({day, navigation}) => {
     getCalendarDatesByDate()
   }
 
-  const deleteMicrophone = async(user) => {
+  const deleteWeekTreasures = async(user) => {
     const resp = await fetch(`${proxy}/backend/delete_calendar/${user.id}/`, {
       method: 'DELETE',
       headers: {
@@ -91,25 +91,25 @@ const Duty = ({day, navigation}) => {
     if(resp.status === 200){
       console.log('deleted', user)
       setSelected([])
-      setDateDuty([])
+      setDateWeekTreasures([])      
       getCalendarDatesByDate()
     }
   }
 
-  console.log('dateDuty:', dateDuty, day)
+  console.log('dateWeekTreasures:', dateWeekTreasures, day)
 
-if(dateDuty.length >= 1){
+if(dateWeekTreasures.length === 1){
   return ( 
-    dateDuty.map((e) => {
-      if(e.date === day && e.action === 'Duty'){  
+    dateWeekTreasures.map((e) => {
+      if(e.date === day && e.action === 'Treasures (week)'){  
           return  <View style={styles.user}>
-          <Icon name='man-sharp' size={20} color={'#F9F9B5'} />
+          <Icon name='md-shield' size={20} color={'#F9F9B5'} />
           <Text style={styles.user_text}>{USERS[e.user]}</Text>
               <Icon 
                   name="close-circle-outline" 
                   size={20} 
                   color={'white'} 
-                  onPress={() => deleteMicrophone(e)}     
+                  onPress={() => deleteWeekTreasures(e)}     
                   />
           </View>  
                               
@@ -117,7 +117,8 @@ if(dateDuty.length >= 1){
   }) 
 
   )
-    }else if(dateDuty.length === 0){
+     
+}else if(dateWeekTreasures.length === 0){
         return (
             <View >
               <MultipleSelectList 
@@ -127,8 +128,8 @@ if(dateDuty.length >= 1){
                 // onSelect={(value) => alert(`${value}`)} 
                 placeholder={
                   <View style={styles.placeholder}>
-                    <Icon name='man-sharp' size={20} color={'white'} />
-                    <Text style={styles.text}>Duty</Text>
+                    <Icon name='md-shield' size={20} color={'white'} />
+                    <Text style={styles.text}>Treasures</Text>
                   </View>
                 }
                 boxStyles={styles.event}
@@ -144,12 +145,10 @@ if(dateDuty.length >= 1){
               <ScheduleBtn 
                   style={{backgroundColor: '#F9F9B5',}}
                   title={'Submit'}
-                  onPress={() => setMicrophones(selected)}
+                  onPress={() => setWeekTreasures(selected)}
               />
             </View>
-        )
-    }
-
+        )}
 }
 
 const styles = StyleSheet.create({
@@ -233,7 +232,7 @@ placeholder: {
   flexDirection: 'row',
   alignItems: 'center',
   gap: 10,
-},   
+},     
 })
 
-export default Duty
+export default WeekTreasures

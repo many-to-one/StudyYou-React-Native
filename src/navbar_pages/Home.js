@@ -7,6 +7,7 @@ import Login from './Login';
 import AddEventButton from '../buttons/AddEventButton';
 import { LinearGradient } from 'expo-linear-gradient';
 import { useIsFocused } from '@react-navigation/native';
+import BackButton from '../buttons/BackButton';
 
 const Home = ({navigation}) => {
 
@@ -50,11 +51,23 @@ const Home = ({navigation}) => {
 
     return (
   
-      <View style={styles.main_container}>
+      // <View style={styles.main_container}>
         <View style={styles.container_1}>
+          <Animated.Image 
+            source={require("../../assets/events_ibg.png")}
+            style={[
+              StyleSheet.absoluteFillObject,
+            ]}
+            blurRadius={5}
+            />
         <AllEvents/>
+        <AddEventButton 
+          onPress={() => {
+            navigation.navigate('AddEvent');
+          }}
+        />
         </View>
-      </View>
+      // </View>
   
     )
 

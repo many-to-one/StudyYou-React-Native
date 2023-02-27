@@ -4,7 +4,7 @@ import Home from './Home';
 import Login from './Login';
 import Logout from './Logout';
 import Icon from "react-native-vector-icons/MaterialIcons";
-import { Button, StyleSheet } from 'react-native';
+import { Button, Dimensions, StyleSheet } from 'react-native';
 import { AuthContext } from '../context/AuthContext';
 import Registration from './Registration';
 import AllEvents from '../backend_pages/AllEvents';
@@ -25,6 +25,9 @@ import Microphones from '../backend_pages/Microphones';
 import Music from '../backend_pages/Music';
 import Duty from '../backend_pages/Duty';
 import Timetable from '../backend_pages/Timetable';
+import Service from '../backend_pages/Service';
+import Ministries from '../backend_pages/Ministries';
+import MiddleOfTheWeek from '../backend_pages/MiddleOfTheWeek';
 
 const Tab = createBottomTabNavigator();
 
@@ -97,7 +100,7 @@ function BottomNavigator() {
           title: `${Menu_}`,
           headerTitleStyle: {
             color: 'white',
-            marginLeft: '8rem',
+            marginLeft: '6rem',
           },
           headerStyle: {
             backgroundColor: 'black',
@@ -107,16 +110,19 @@ function BottomNavigator() {
         <Tab.Screen 
         name="Home"
         component={Home} 
-        options={{
+        options={({ navigation }) => ({
           title: `${Events_}`,
           headerTitleStyle: {
             color: 'white',
-            marginLeft: '8rem',
+            marginLeft: '6rem',
           },
           headerStyle: {
             backgroundColor: 'black',
           },
-        }}
+          headerLeft: () => (
+            <BackButton onPress={() => navigation.navigate('Menu')} />
+          ),
+        })}
         />
         <Tab.Screen 
         name="Login" 
@@ -137,21 +143,21 @@ function BottomNavigator() {
         <Tab.Screen 
         name="Registration" 
         component={Registration} 
-        options={{
+        options={({ navigation }) => ({
           title: 'Registration',
           headerTitleStyle: {
             color: 'white',
-            marginLeft: '8rem',
+            marginLeft: '6rem',
           },
           headerStyle: {
             backgroundColor: 'black',
           },
+          tabBarVisible: false, // hide the button
+          tabBarButton: (props) => null, // hide the button
           headerLeft: () => (
             <BackButton onPress={() => navigation.navigate('Login')} />
           ),
-          tabBarVisible: false, // hide the button
-          tabBarButton: (props) => null, // hide the button
-        }}
+        })}
         />
         <Tab.Screen 
         name='Logout'
@@ -170,18 +176,21 @@ function BottomNavigator() {
         <Tab.Screen 
         name='Profile'
         component={Profile} 
-        options={{
+        options={({ navigation }) => ({
           title: `${Profile_}`,
           headerTitleStyle: {
             color: 'white',
-            marginLeft: '8rem',
+            marginLeft: '6rem',
           },
           headerStyle: {
             backgroundColor: 'black',
           },
           tabBarVisible: false, // hide the button
           tabBarButton: (props) => null, // hide the button
-        }}
+          headerLeft: () => (
+            <BackButton onPress={() => navigation.navigate('Menu')} />
+          ),
+        })}
         />
         <Tab.Screen 
         name="RequestResetMail" 
@@ -202,23 +211,26 @@ function BottomNavigator() {
         <Tab.Screen 
         name="Timer" 
         component={Timer} 
-        options={{
+        options={({ navigation }) => ({
           title: `${Timer_}`,
           headerTitleStyle: {
             color: 'white',
-            marginLeft: '8rem',
+            marginLeft: '6rem',
           },
           headerStyle: {
             backgroundColor: 'black',
           },
           tabBarVisible: false, // hide the button
           tabBarButton: (props) => null, // hide the button
-        }}
+          headerLeft: () => (
+            <BackButton onPress={() => navigation.navigate('Home')} />
+          ),
+        })}
         />
         <Tab.Screen 
         name="AllEvents" 
         component={AllEvents} 
-        options={{
+        options={({ navigation }) => ({
           title: `${AllEvents_}`,
           headerTitleStyle: {
             color: 'white',
@@ -229,83 +241,86 @@ function BottomNavigator() {
           },
           tabBarVisible: false, // hide the button
           tabBarButton: (props) => null, // hide the button
-        }}
+          headerLeft: () => (
+            <BackButton onPress={() => navigation.navigate('Menu')} />
+          ),
+        })}
         />
         <Tab.Screen 
         name="AddEvent" 
         component={AddEvent} 
-        options={{
+        options={({ navigation }) => ({
           title: `${AddEvent_}`,
           headerTitleStyle: {
             color: 'white',
-            marginLeft: '8rem'
+            marginLeft: '6rem',
           },
           headerStyle: {
             backgroundColor: 'black',
           },
-          headerLeft: () => (
-            <HeaderBackButton onPress={() => navigation.navigate('AllEvents')} />
-          ),
           tabBarVisible: false, // hide the button
           tabBarButton: (props) => null, // hide the button
-        }}
+          headerLeft: () => (
+            <BackButton onPress={() => navigation.navigate('Home')} />
+          ),
+        })}
         />
         <Tab.Screen 
         name="UpdateEvent" 
         component={UpdateEvent} 
-        options={{
+        options={({ navigation }) => ({
           title: `${UpdateEvent_}`,
           headerTitleStyle: {
             color: 'white',
-            marginLeft: '8rem',
+            marginLeft: '6rem',
           },
           headerStyle: {
             backgroundColor: 'black',
           },
-          headerLeft: () => (
-            <HeaderBackButton onPress={() => navigation.navigate('AllEvents')} />
-          ),
           tabBarVisible: false, // hide the button
           tabBarButton: (props) => null, // hide the button
-        }}
+          headerLeft: () => (
+            <BackButton onPress={() => navigation.navigate('Home')} />
+          ),
+        })}
         />
         <Tab.Screen 
         name="Result" 
         component={Result} 
-        options={{
+        options={({ navigation }) => ({
           title: `${Result_}`,
           headerTitleStyle: {
             color: 'white',
-            marginLeft: '8rem',
+            marginLeft: '6rem',
           },
           headerStyle: {
             backgroundColor: 'black',
           },
-          headerLeft: () => (
-            <HeaderBackButton onPress={() => navigation.navigate('Menu')} />
-          ),
           tabBarVisible: false, // hide the button
           tabBarButton: (props) => null, // hide the button
-        }}
+          headerLeft: () => (
+            <BackButton onPress={() => navigation.navigate('Menu')} />
+          ),
+        })}
         />
         <Tab.Screen 
         name="MonthsResults" 
         component={MonthsResults} 
-        options={{
+        options={({ navigation }) => ({
           title: `${History_}`,
           headerTitleStyle: {
             color: 'white',
-            marginLeft: '8rem',
+            marginLeft: '6rem',
           },
           headerStyle: {
             backgroundColor: 'black',
           },
-          // headerLeft: () => (
-          //   <HeaderBackButton onPress={() => navigation.navigate('NewMenu')} />
-          // ),
           tabBarVisible: false, // hide the button
           tabBarButton: (props) => null, // hide the button
-        }}
+          headerLeft: () => (
+            <BackButton onPress={() => navigation.navigate('Menu')} />
+          ),
+        })}
         />
         <Tab.Screen 
         name="MonthsResultsItem" 
@@ -340,17 +355,78 @@ function BottomNavigator() {
         <Tab.Screen 
         name="CreateCalendarEvent" 
         component={CreateCalendarEvent} 
-        options={{
+        options={({ navigation }) => ({
           title: 'CreateCalendarEvent',
           headerTitleStyle: {
             color: 'white',
+            marginLeft: '6rem',
           },
           headerStyle: {
             backgroundColor: 'black',
           },
           tabBarVisible: false, // hide the button
           tabBarButton: (props) => null, // hide the button
-        }}
+          headerLeft: () => (
+            <BackButton onPress={() => navigation.navigate('Profile')} />
+          ),
+        })}
+        />
+        <Tab.Screen 
+        name="Service" 
+        component={Service} 
+        options={({ navigation }) => ({
+          title: 'Service',
+          headerTitleStyle: {
+            color: 'white',
+            marginLeft: '6rem',
+          },
+          headerStyle: {
+            backgroundColor: 'black',
+          },
+          tabBarVisible: false, // hide the button
+          tabBarButton: (props) => null, // hide the button
+          headerLeft: () => (
+            <BackButton onPress={() => navigation.navigate('Profile')} />
+          ),
+        })}
+        />
+        <Tab.Screen 
+        name="Ministries" 
+        component={Ministries} 
+        options={({ navigation }) => ({
+          title: 'Ministries',
+          headerTtleStyle: {
+            color: 'white',
+            marginLeft: '6rem',
+          },
+          headerStyle: {
+            backgroundColor: 'black',
+          },
+          tabBarVisible: false, // hide the button
+          tabBarButton: (props) => null, // hide the button
+          headerLeft: () => (
+            <BackButton onPress={() => navigation.navigate('Profile')} />
+          ),
+        })}
+        />
+        <Tab.Screen 
+        name="MiddleOfTheWeek" 
+        component={MiddleOfTheWeek} 
+        options={({ navigation }) => ({
+          title: 'MiddleOfTheWeek',
+          headerTtleStyle: {
+            color: 'white',
+            marginLeft: '6rem',
+          },
+          headerStyle: {
+            backgroundColor: 'black',
+          },
+          tabBarVisible: false, // hide the button
+          tabBarButton: (props) => null, // hide the button
+          headerLeft: () => (
+            <BackButton onPress={() => navigation.navigate('Profile')} />
+          ),
+        })}
         />
         <Tab.Screen 
         name="Microphones" 

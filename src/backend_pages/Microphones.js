@@ -127,7 +127,12 @@ if(dateMicrophones.length > 1){
                 data={data} 
                 save="value"
                 // onSelect={(value) => alert(`${value}`)} 
-                placeholder={<Icon name='mic' size={20} color={'white'} />}
+                placeholder={
+                  <View style={styles.placeholder}>
+                    <Icon name='mic' size={20} color={'white'} />
+                    <Text style={styles.text}>Microphones</Text>
+                  </View>
+                }
                 boxStyles={styles.event}
                 inputStyles={styles.input}
                 dropdownStyles={styles.box}
@@ -165,7 +170,12 @@ if(dateMicrophones.length > 1){
                     data={data} 
                     save="value"
                     // onSelect={() => alert('selected')} 
-                    placeholder={<Icon name='mic' size={20} color={'white'} />}
+                    placeholder={
+                      <View style={styles.placeholder}>
+                        <Icon name='mic' size={20} color={'white'} />
+                        <Text style={styles.text}>Microphones</Text>
+                      </View>
+                    }
                     boxStyles={styles.event}
                     inputStyles={styles.input}
                     dropdownStyles={styles.box}
@@ -264,7 +274,12 @@ const styles = StyleSheet.create({
     padding: 10,
     backgroundColor: '#F9F9B5',
     zIndex: 999,
-},    
+},  
+placeholder: {
+  flexDirection: 'row',
+  alignItems: 'center',
+  gap: 10,
+},     
 })
 
 export default Microphones

@@ -9,6 +9,7 @@ import Microphones from '../backend_pages/Microphones';
 import Music from '../backend_pages/Music';
 import Duty from './Duty';
 import BackButton from '../buttons/BackButton';
+import Service from './Service';
 
 const CreateCalendarEvent = ({route, navigation}) => {
 
@@ -17,19 +18,37 @@ const CreateCalendarEvent = ({route, navigation}) => {
     return (
       <ScrollView style={styles.scroll}>
         <View style={styles.container}>
-        <BackButton onPress={() => navigation.navigate('Profile')}/>
-        <Text style={styles.text}>Microphones</Text>
+
         <View style={styles.event}>
-          <Microphones  day={day}/>
+          <Icon 
+            name="people-sharp" 
+            size={30} 
+            color={'#78D7D9'} 
+            onPress={() => navigation.navigate('Service', {day: day})}     
+          />
+          <Text style={styles.text}>Meeting's stuff</Text>
         </View>
-        <Text style={styles.text}>Music</Text>
+
         <View style={styles.event}>
-          <Music  day={day}/>
+          <Icon 
+            name="people-circle-outline" 
+            size={30} 
+            color={'#78D7D9'} 
+            onPress={() => navigation.navigate('Ministries', {day: day})}     
+          />
+          <Text style={styles.text}>Ministry leaders</Text>
         </View>
-        <Text style={styles.text}>Duty</Text>
+
         <View style={styles.event}>
-          <Duty  day={day}/>
+          <Icon 
+            name="reader" 
+            size={30} 
+            color={'#78D7D9'} 
+            onPress={() => navigation.navigate('MiddleOfTheWeek', {day: day})}     
+          />
+          <Text style={styles.text}>MiddleOfTheWeek</Text>
         </View>
+
       </View>
       </ScrollView>
     )
@@ -41,26 +60,31 @@ const styles = StyleSheet.create({
     backgroundColor: 'black',
   },
   container: {
-    flex: 1,
+    // flex: 1,
     backgroundColor: 'black',
-    flexDirection: 'column',
-    alignItems: 'center',
-    gap: 25,
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    justifyContent: 'center',
+    gap: 15,
     paddingTop: 25,
   },
   text: {
-    color: 'white',
-    fontSize: 20,
+    color: '#78D7D9',
+    fontSize: 10,
+    marginTop: 50,
   },
   event:{
-    width: 320,
-    // borderRadius: 10,
-    // borderWidth: 2,
-    // borderColor: '#78D7D9',
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: 140,
+    height: 140,
+    borderRadius: 10,
+    borderWidth: 1,
+    borderColor: '#78D7D9',
     margin: 5,
     padding: 10,
-    color: 'white',
-    fontSize: 20,
+    // color: 'white',
+    // fontSize: 20,
     zIndex: 999,
     backgroundColor: "transparent",
   },

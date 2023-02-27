@@ -41,14 +41,6 @@ const AllEvents = ({datas}) => {
 
     <View style={styles.container}>
     <ScrollView>
-
-      <Animated.Image 
-        source={require("../../assets/events_ibg.png")}
-        style={[
-          StyleSheet.absoluteFillObject,
-        ]}
-        blurRadius={5}
-        />s
          <View
           contentContainerStyle={styles.scrollView}
          >
@@ -60,11 +52,6 @@ const AllEvents = ({datas}) => {
       </View>
 
       </View>
-      <AddEventButton 
-          onPress={() => {
-            navigation.navigate('AddEvent');
-          }}
-        />
 
 </ScrollView>
     </View>
@@ -78,7 +65,7 @@ const styles = StyleSheet.create({
       alignItems: 'center',
       gap: '1rem',
       padding: 20,
-      backgroundColor: 'black'
+      // backgroundColor: 'black'
     },
 })
 

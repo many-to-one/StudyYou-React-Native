@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, View, StyleSheet, TouchableOpacity } from 'react-native';
+import { Text, View, StyleSheet, TouchableOpacity, Dimensions } from 'react-native';
 import Icon from "react-native-vector-icons/Ionicons";
 
 export default function AddEventButton({onPress}) {
@@ -10,12 +10,14 @@ export default function AddEventButton({onPress}) {
   );
 }
 
+const { width, height } = Dimensions.get('window');
+
 const styles = StyleSheet.create({
     button: {
-        fontSize: 70,
-        color: '#F9F9B5', // #F0007F
-        position: 'absolute',
-        bottom: 5,
-        marginLeft: 35,
+      fontSize: 70,
+      color: '#F9F9B5', 
+      position: 'absolute',
+      bottom: 25,
+      marginLeft: width / 7,
     }
 })

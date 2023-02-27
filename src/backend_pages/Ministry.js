@@ -1,19 +1,19 @@
 import React, { useContext, useEffect, useState } from 'react'
-import { Button, StyleSheet, Text, View } from 'react-native'
+import { Button, Dimensions, StyleSheet, Text, View } from 'react-native'
 import { AuthContext } from '../context/AuthContext';
 import { MultipleSelectList  } from 'react-native-dropdown-select-list';
 import Icon from "react-native-vector-icons/Ionicons";
 import { useIsFocused } from '@react-navigation/native';
 import ScheduleBtn from '../buttons/ScheduleBtn';
 
-const Duty = ({day, navigation}) => {
+const Ministry = ({day, navigation}) => {
 
-    const {proxy} = useContext(AuthContext);
-    const [selected, setSelected] = useState('')
-    const [users, setUsers] = useState([])
-    const [dateDuty, setDateDuty] = useState([])
-    const USERS = {}
-    const isFocused = useIsFocused();
+  const {proxy} = useContext(AuthContext);
+  const [selected, setSelected] = useState('')
+  const [users, setUsers] = useState([])
+  const [dateMinistry, setDateMinistry] = useState([])
+  const USERS = {}
+  const isFocused = useIsFocused();
 
     useEffect(() => {
       getUsers()
@@ -29,7 +29,7 @@ const Duty = ({day, navigation}) => {
   }
 
   const getCalendarDatesByDate = async() => {
-    const body = {'date': day, 'action': 'Duty',}
+    const body = {'date': day, 'action': 'Ministry leader',}
     const resp = await fetch(`${proxy}/backend/get_calendar_date/`, {
       method: 'POST',
           headers: {
@@ -39,7 +39,7 @@ const Duty = ({day, navigation}) => {
         });
         const data = await resp.json();
         if(data){
-          setDateDuty(data)
+          setDateMinistry(data)
           setSelected([])
         }  
   }
@@ -56,7 +56,7 @@ const Duty = ({day, navigation}) => {
     )
   }
 
-  const setMicrophones = async(selected) => {
+  const setMinistryUsers = async(selected) => {
     selected.map((e) => {
       for(let k in USERS){  
         if(e === USERS[k]){
@@ -68,7 +68,7 @@ const Duty = ({day, navigation}) => {
             },
             body: JSON.stringify({
               'date': `${day}`,
-              'action': 'Duty'
+              'action': 'Ministry leader'
             })
           })
 
@@ -81,7 +81,7 @@ const Duty = ({day, navigation}) => {
     getCalendarDatesByDate()
   }
 
-  const deleteMicrophone = async(user) => {
+  const deleteMinistry = async(user) => {
     const resp = await fetch(`${proxy}/backend/delete_calendar/${user.id}/`, {
       method: 'DELETE',
       headers: {
@@ -91,35 +91,37 @@ const Duty = ({day, navigation}) => {
     if(resp.status === 200){
       console.log('deleted', user)
       setSelected([])
-      setDateDuty([])
+      setDateMinistry([])
       getCalendarDatesByDate()
     }
   }
 
-  console.log('dateDuty:', dateDuty, day)
+console.log('dateMinistry:', dateMinistry, day)
+console.log('selected:', selected)
 
-if(dateDuty.length >= 1){
+if(dateMinistry.length > 1){
   return ( 
-    dateDuty.map((e) => {
-      if(e.date === day && e.action === 'Duty'){  
-          return  <View style={styles.user}>
-          <Icon name='man-sharp' size={20} color={'#F9F9B5'} />
-          <Text style={styles.user_text}>{USERS[e.user]}</Text>
-              <Icon 
-                  name="close-circle-outline" 
-                  size={20} 
-                  color={'white'} 
-                  onPress={() => deleteMicrophone(e)}     
-                  />
-          </View>  
-                              
-      }
-  }) 
+    dateMinistry.map((e) => {
+        if(e.date === day && e.action === 'Ministry leader'){  
+                    return <View style={styles.user}>
+                      <Icon name='people-circle-outline' size={20} color={'#F9F9B5'} />
+                      <Text style={styles.user_text}>{USERS[e.user]}</Text>
+                          <Icon 
+                              name="close-circle-outline" 
+                              size={20} 
+                              color={'#F9F9B5'} 
+                              onPress={() => deleteMinistry(e)}     
+                              />
+                      </View>  
+           
+
+        }
+    }) 
 
   )
-    }else if(dateDuty.length === 0){
+    }else if(dateMinistry.length === 0){
         return (
-            <View >
+            <View style={styles.container}>
               <MultipleSelectList 
                 setSelected={(val) => setSelected(val)} 
                 data={data} 
@@ -127,10 +129,10 @@ if(dateDuty.length >= 1){
                 // onSelect={(value) => alert(`${value}`)} 
                 placeholder={
                   <View style={styles.placeholder}>
-                    <Icon name='man-sharp' size={20} color={'white'} />
-                    <Text style={styles.text}>Duty</Text>
+                    <Icon name='people-circle-outline' size={20} color={'white'} />
+                    <Text style={styles.text}>Ministry lider</Text>
                   </View>
-                }
+              }
                 boxStyles={styles.event}
                 inputStyles={styles.input}
                 dropdownStyles={styles.box}
@@ -144,14 +146,62 @@ if(dateDuty.length >= 1){
               <ScheduleBtn 
                   style={{backgroundColor: '#F9F9B5',}}
                   title={'Submit'}
-                  onPress={() => setMicrophones(selected)}
+                  onPress={() => setMinistryUsers(selected)}
               />
             </View>
         )
-    }
+    }else if(dateMinistry.length == 1){
+        return ( 
+          dateMinistry.map((e) => {
+              if(e.date === day && e.action === 'Ministry leader'){  
+                  return  <View>
+                    <View style={styles.user}>
+                    <Icon name='people-circle-outline' size={20} color={'#F9F9B5'} />
+                      <Text style={styles.user_text}>{USERS[e.user]}</Text>
+                          <Icon 
+                              name="close-circle-outline" 
+                              size={20} 
+                              color={'#F9F9B5'} 
+                              onPress={() => deleteMinistry(e)}     
+                              />
+                    </View>
 
+                    <MultipleSelectList 
+                    setSelected={(val) => setSelected(val)} 
+                    data={data} 
+                    save="value"
+                    // onSelect={() => alert('selected')} 
+                    placeholder={
+                      <View style={styles.placeholder}>
+                        <Icon name='people-circle-outline' size={20} color={'white'} />
+                        <Text style={styles.text}>Ministry lider</Text>
+                      </View>
+                    }
+                    boxStyles={styles.event}
+                    inputStyles={styles.input}
+                    dropdownStyles={styles.box}
+                    dropdownItemStyles={{color: 'white'}}
+                    dropdownTextStyles={{color: 'white'}}
+                    arrowicon={<Icon name="chevron-down" size={20} color={'white'} />} 
+                    searchicon={<Icon name="search" size={20} color={'white'} />} 
+                    closeicon={<Icon name="close" size={20} color={'white'} />} 
+                    search={true}
+                    />
+                    <ScheduleBtn 
+                        style={{backgroundColor: '#F9F9B5',}}
+                        title={'Submit'}
+                        onPress={() => setMinistryUsers(selected)}
+                    />
+                  </View>          
+                                      
+              }
+          }) 
+  
+          )
+  }
 }
 
+const { width, height } = Dimensions.get('window');
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -161,15 +211,18 @@ const styles = StyleSheet.create({
     gap: 25,
     paddingTop: 25,
   },
+  scroll: {
+    backgroundColor: 'black',
+    width: width,
+    height: height,
+    padding: 20,
+  },
   text: {
     color: 'white',
     fontSize: 20,
   },
   event:{
     width: 290,
-    borderRadius: 10,
-    borderWidth: 2,
-    borderColor: '#4f4f4f',
     margin: 2,
     padding: 10,
     color: 'white',
@@ -182,7 +235,7 @@ const styles = StyleSheet.create({
     height: 50,
     borderRadius: 10,
     borderWidth: 2,
-    borderColor: '#4f4f4f',
+    borderColor: '#333333',
     margin: 5,
     padding: 10,
     color: 'white',
@@ -236,4 +289,4 @@ placeholder: {
 },   
 })
 
-export default Duty
+export default Ministry

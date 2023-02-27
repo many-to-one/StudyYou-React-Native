@@ -90,7 +90,7 @@ const UpdateEvent = ({route, navigation}) => {
             }}
           /> */}
     <ScrollView>
-      <BackButton onPress={() => back()}/>
+      {/* <BackButton onPress={() => back()}/> */}
 
       <View style={styles.row}>
         <TextInput style={styles.event} 

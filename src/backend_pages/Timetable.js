@@ -77,17 +77,6 @@ const Timetable = ({navigation}) => {
               </ImageBackground>
             </Animated.View>
           </TouchableOpacity>
-        //     return <View style={styles.event}>
-        //         <Icon 
-        //             name="md-headset" 
-        //             size={20} 
-        //             color={'#F9F9B5'}      
-        //         />
-        //     <View style={styles.in_event}>
-        //         <Text style={styles.text}>{e.date}</Text>
-        //         <Text style={styles.text}>{e.action}</Text>
-        //     </View>
-        // </View>
         
         }else if(e.action === 'Duty'){
             return  <TouchableOpacity>
@@ -109,18 +98,87 @@ const Timetable = ({navigation}) => {
             </Animated.View>
           </TouchableOpacity>
 
-        //     return <View style={styles.event}>
-        //         <Icon 
-        //             name="man-sharp" 
-        //             size={20} 
-        //             color={'#F9F9B5'}      
-        //         />
-        //     <View style={styles.in_event}>
-        //         <Text style={styles.text}>{e.date}</Text>
-        //         <Text style={styles.text}>{e.action}</Text>
-        //     </View>
-        // </View>
+        }else if(e.action === 'Ministry leader'){
+            return  <TouchableOpacity>
+            <Animated.View style={styles.animated}>
+              <ImageBackground
+                source={require('../../assets/card.png')}
+                style={styles.img}
+              >
+                <View style={styles.event}>
+                  <Icon name="people-circle-outline" size={20} color={'#F9F9B5'} />
+                  <Text style={styles.text}>
+                    {e.date}
+                  </Text>
+                  <Text style={styles.text}>
+                    {e.action}
+                  </Text>
+                </View>
+              </ImageBackground>
+            </Animated.View>
+          </TouchableOpacity> 
+
+        }else if(e.action === 'Leader (week)'){
+            return  <TouchableOpacity>
+            <Animated.View style={styles.animated}>
+              <ImageBackground
+                source={require('../../assets/card.png')}
+                style={styles.img}
+              >
+                <View style={styles.event}>
+                  <Icon name="person-outline" size={20} color={'#F9F9B5'} />
+                  <Text style={styles.text}>
+                    {e.date}
+                  </Text>
+                  <Text style={styles.text}>
+                    {e.action}
+                  </Text>
+                </View>
+              </ImageBackground>
+            </Animated.View>
+          </TouchableOpacity> 
+
+        }else if(e.action === 'Prayer 1 (week)'){
+            return  <TouchableOpacity>
+            <Animated.View style={styles.animated}>
+              <ImageBackground
+                source={require('../../assets/card.png')}
+                style={styles.img}
+              >
+                <View style={styles.event}>
+                  <Icon name="ios-layers" size={20} color={'#F9F9B5'} />
+                  <Text style={styles.text}>
+                    {e.date}
+                  </Text>
+                  <Text style={styles.text}>
+                    {e.action}
+                  </Text>
+                </View>
+              </ImageBackground>
+            </Animated.View>
+          </TouchableOpacity> 
+
+        }else if(e.action === 'Treasures (week)'){
+            return  <TouchableOpacity>
+            <Animated.View style={styles.animated}>
+              <ImageBackground
+                source={require('../../assets/card.png')}
+                style={styles.img}
+              >
+                <View style={styles.event}>
+                  <Icon name="md-shield" size={20} color={'#F9F9B5'} />
+                  <Text style={styles.text}>
+                    {e.date}
+                  </Text>
+                  <Text style={styles.text}>
+                    {e.action}
+                  </Text>
+                </View>
+              </ImageBackground>
+            </Animated.View>
+          </TouchableOpacity> 
         }
+
     })
   )
 }

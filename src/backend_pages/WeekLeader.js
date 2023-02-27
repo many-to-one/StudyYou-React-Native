@@ -6,13 +6,15 @@ import Icon from "react-native-vector-icons/Ionicons";
 import { useIsFocused } from '@react-navigation/native';
 import ScheduleBtn from '../buttons/ScheduleBtn';
 
-const Duty = ({day, navigation}) => {
+const WeekLeader = ({day, navigation}) => {
 
     const {proxy} = useContext(AuthContext);
+    // const {day} = route.params;
     const [selected, setSelected] = useState('')
     const [users, setUsers] = useState([])
-    const [dateDuty, setDateDuty] = useState([])
+    const [dateLeaderWeek, setDateLeaderWeek] = useState([])
     const USERS = {}
+    const [live, setLive] = useState(true)
     const isFocused = useIsFocused();
 
     useEffect(() => {
@@ -29,7 +31,7 @@ const Duty = ({day, navigation}) => {
   }
 
   const getCalendarDatesByDate = async() => {
-    const body = {'date': day, 'action': 'Duty',}
+    const body = {'date': day, 'action': 'Leader (week)',}
     const resp = await fetch(`${proxy}/backend/get_calendar_date/`, {
       method: 'POST',
           headers: {
@@ -39,7 +41,7 @@ const Duty = ({day, navigation}) => {
         });
         const data = await resp.json();
         if(data){
-          setDateDuty(data)
+          setDateLeaderWeek(data)
           setSelected([])
         }  
   }
@@ -56,7 +58,7 @@ const Duty = ({day, navigation}) => {
     )
   }
 
-  const setMicrophones = async(selected) => {
+  const setLeaderWeek = async(selected) => {
     selected.map((e) => {
       for(let k in USERS){  
         if(e === USERS[k]){
@@ -68,7 +70,7 @@ const Duty = ({day, navigation}) => {
             },
             body: JSON.stringify({
               'date': `${day}`,
-              'action': 'Duty'
+              'action': 'Leader (week)'
             })
           })
 
@@ -81,7 +83,7 @@ const Duty = ({day, navigation}) => {
     getCalendarDatesByDate()
   }
 
-  const deleteMicrophone = async(user) => {
+  const deleteLeaderWeek = async(user) => {
     const resp = await fetch(`${proxy}/backend/delete_calendar/${user.id}/`, {
       method: 'DELETE',
       headers: {
@@ -91,25 +93,25 @@ const Duty = ({day, navigation}) => {
     if(resp.status === 200){
       console.log('deleted', user)
       setSelected([])
-      setDateDuty([])
+      setDateLeaderWeek([])
       getCalendarDatesByDate()
     }
   }
 
-  console.log('dateDuty:', dateDuty, day)
+  console.log('dateLeaderWeek:', dateLeaderWeek, day)
 
-if(dateDuty.length >= 1){
+if(dateLeaderWeek.length === 1){
   return ( 
-    dateDuty.map((e) => {
-      if(e.date === day && e.action === 'Duty'){  
+    dateLeaderWeek.map((e) => {
+      if(e.date === day && e.action === 'Leader (week)'){  
           return  <View style={styles.user}>
-          <Icon name='man-sharp' size={20} color={'#F9F9B5'} />
+          <Icon name='person-outline' size={20} color={'#F9F9B5'} />
           <Text style={styles.user_text}>{USERS[e.user]}</Text>
               <Icon 
                   name="close-circle-outline" 
                   size={20} 
                   color={'white'} 
-                  onPress={() => deleteMicrophone(e)}     
+                  onPress={() => deleteLeaderWeek(e)}     
                   />
           </View>  
                               
@@ -117,7 +119,8 @@ if(dateDuty.length >= 1){
   }) 
 
   )
-    }else if(dateDuty.length === 0){
+     
+}else if(dateLeaderWeek.length === 0){
         return (
             <View >
               <MultipleSelectList 
@@ -127,8 +130,8 @@ if(dateDuty.length >= 1){
                 // onSelect={(value) => alert(`${value}`)} 
                 placeholder={
                   <View style={styles.placeholder}>
-                    <Icon name='man-sharp' size={20} color={'white'} />
-                    <Text style={styles.text}>Duty</Text>
+                    <Icon name='person-outline' size={20} color={'white'} />
+                    <Text style={styles.text}>Leader</Text>
                   </View>
                 }
                 boxStyles={styles.event}
@@ -144,12 +147,10 @@ if(dateDuty.length >= 1){
               <ScheduleBtn 
                   style={{backgroundColor: '#F9F9B5',}}
                   title={'Submit'}
-                  onPress={() => setMicrophones(selected)}
+                  onPress={() => setLeaderWeek(selected)}
               />
             </View>
-        )
-    }
-
+        )}
 }
 
 const styles = StyleSheet.create({
@@ -233,7 +234,7 @@ placeholder: {
   flexDirection: 'row',
   alignItems: 'center',
   gap: 10,
-},   
+},     
 })
 
-export default Duty
+export default WeekLeader

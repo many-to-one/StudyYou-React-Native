@@ -70,7 +70,6 @@ const AddEvent = ({ navigation }) => {
             }}
           /> */}
     <ScrollView>
-    <BackButton onPress={() => navigation.navigate('Home')}/>
       <View style={styles.row}>
         <TextInput style={styles.event} 
           placeholder="Event..."

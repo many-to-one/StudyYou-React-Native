@@ -69,7 +69,6 @@ const Result = ({navigation}) => {
             }}
           /> */}
         <ScrollView>
-        <BackButton style={styles.backbtn} onPress={() => navigation.navigate('Menu')}/>
           <View style={styles.row}>
             <View style={styles.left_row}>
               <Text style={styles.text}>
