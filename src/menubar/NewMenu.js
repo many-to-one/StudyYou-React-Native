@@ -13,10 +13,10 @@ import {
 } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { useNavigation } from '@react-navigation/native';
-import Animation from './Animation';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Login from '../navbar_pages/Login';
 import { AuthContext } from '../context/AuthContext';
+import { LanguageContext } from '../context/LanguageContext';
 
 const NewMenu = () => {
 
@@ -31,7 +31,8 @@ const NewMenu = () => {
     const SPACER_ITEM_SIZE = (width - ITEM_SIZE) / 2;
     const scrollX = useRef(new Animated.Value(0)).current;
     const [profileToken, setProfileToken] = useState('')
-    const {proxy, setLanguage} = useContext(AuthContext);
+    const {proxy} = useContext(AuthContext);
+    const {setLanguage} = useContext(LanguageContext);
   
 
     useEffect(() => {
@@ -104,17 +105,7 @@ const NewMenu = () => {
         page: 'MonthsResults',
       },
       {key: 'spacer'},
-      // {
-      //   key: '116',
-      //   id: '58694a0f-3da1-471f-bd96-145571e29d74',
-      //   title: 'End',
-      //   img: 'end.png',
-      //   page: 'End',
-      // },
     ];
-
-    // const PAG = [...DATA,]
-    // console.log('PAG', PAG)
 
 
     if(profileToken){

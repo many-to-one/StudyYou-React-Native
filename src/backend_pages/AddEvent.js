@@ -6,11 +6,13 @@ import DoneButton from '../buttons/DoneButton'
 import { useIsFocused } from '@react-navigation/native';
 import { LinearGradient } from 'expo-linear-gradient';
 import BackButton from '../buttons/BackButton';
+import { LanguageContext } from '../context/LanguageContext';
 
 const AddEvent = ({ navigation }) => {   
 
   const { width, height } = Dimensions.get('window');
-  const {proxy, Hours, Minutes, Publications, Visits, Films} = useContext(AuthContext);
+  const {proxy} = useContext(AuthContext);
+  const {Hours, Minutes, Publications, Visits, Films} = useContext(LanguageContext);
   const isFocused = useIsFocused();
   const [events, setEvents] = useState({name:{}})
 

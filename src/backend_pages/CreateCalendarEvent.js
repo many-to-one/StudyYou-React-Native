@@ -1,53 +1,70 @@
-import AsyncStorage from '@react-native-async-storage/async-storage'
-import React, { useContext, useEffect, useState } from 'react'
-import { Button, Dimensions, ScrollView, StyleSheet, Text, View } from 'react-native'
-import { AuthContext } from '../context/AuthContext';
-import { MultipleSelectList  } from 'react-native-dropdown-select-list';
+import React, { useContext } from 'react'
+import { Dimensions, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import Icon from "react-native-vector-icons/Ionicons";
-import { useIsFocused } from '@react-navigation/native';
-import Microphones from '../backend_pages/Microphones';
-import Music from '../backend_pages/Music';
-import Duty from './Duty';
-import BackButton from '../buttons/BackButton';
-import Service from './Service';
+import { LanguageContext } from '../context/LanguageContext';
+
 
 const CreateCalendarEvent = ({route, navigation}) => {
 
   const {day} = route.params;
+  const {
+    technicalSupport_,
+    ministryLeaders_,
+    midweekMeetings_,
+    weekendMeetings_,
+  } = useContext(LanguageContext);
 
     return (
       <ScrollView style={styles.scroll}>
         <View style={styles.container}>
 
-        <View style={styles.event}>
-          <Icon 
-            name="people-sharp" 
-            size={30} 
-            color={'#78D7D9'} 
-            onPress={() => navigation.navigate('Service', {day: day})}     
-          />
-          <Text style={styles.text}>Meeting's stuff</Text>
-        </View>
+        <TouchableOpacity>
+          <View style={styles.event}>
+            <Icon 
+              name="people-sharp" 
+              size={50} 
+              color={'#78D7D9'} 
+              onPress={() => navigation.navigate('Service', {day: day})}     
+            />
+            <Text style={styles.text}>{technicalSupport_}</Text>
+          </View>
+        </TouchableOpacity>
 
-        <View style={styles.event}>
-          <Icon 
-            name="people-circle-outline" 
-            size={30} 
-            color={'#78D7D9'} 
-            onPress={() => navigation.navigate('Ministries', {day: day})}     
-          />
-          <Text style={styles.text}>Ministry leaders</Text>
-        </View>
+        <TouchableOpacity>
+          <View style={styles.event}>
+            <Icon 
+              name="people-circle-outline" 
+              size={50} 
+              color={'#78D7D9'} 
+              onPress={() => navigation.navigate('Ministries', {day: day})}     
+            />
+            <Text style={styles.text}>{ministryLeaders_}</Text>
+          </View>
+        </TouchableOpacity>
 
-        <View style={styles.event}>
-          <Icon 
-            name="reader" 
-            size={30} 
-            color={'#78D7D9'} 
-            onPress={() => navigation.navigate('MiddleOfTheWeek', {day: day})}     
-          />
-          <Text style={styles.text}>MiddleOfTheWeek</Text>
-        </View>
+        <TouchableOpacity>
+          <View style={styles.event}>
+            <Icon 
+              name="reader" 
+              size={50} 
+              color={'#78D7D9'} 
+              onPress={() => navigation.navigate('MiddleOfTheWeek', {day: day})}     
+            />
+            <Text style={styles.text}>{midweekMeetings_}</Text>
+          </View>
+        </TouchableOpacity>
+
+        <TouchableOpacity>
+          <View style={styles.event}>
+            <Icon 
+              name="newspaper" 
+              size={50} 
+              color={'#78D7D9'} 
+              onPress={() => navigation.navigate('WeekendMeetings', {day: day})}     
+            />
+            <Text style={styles.text}>{weekendMeetings_}</Text>
+          </View>
+        </TouchableOpacity>
 
       </View>
       </ScrollView>
@@ -82,9 +99,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: '#78D7D9',
     margin: 5,
-    padding: 10,
-    // color: 'white',
-    // fontSize: 20,
+    // padding: 10,
     zIndex: 999,
     backgroundColor: "transparent",
   },

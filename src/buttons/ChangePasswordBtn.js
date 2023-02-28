@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, View, StyleSheet, TouchableOpacity } from 'react-native';
+import { Text, StyleSheet, TouchableOpacity } from 'react-native';
 import Icon from "react-native-vector-icons/Ionicons";
 
 export default function ChangePasswordBtn({onPress, title}) {
@@ -26,7 +26,6 @@ const styles = StyleSheet.create({
         height: 60,
         borderRadius: 10,
         borderWidth: 2,
-        // borderColor: '#78F5FA',
         borderColor: '#a1efff',
         marginBottom: 10,
         marginTop: 5,

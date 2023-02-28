@@ -177,15 +177,333 @@ const Timetable = ({navigation}) => {
               </ImageBackground>
             </Animated.View>
           </TouchableOpacity> 
-        }
 
+        }else if(e.action === 'Find treasures (week)'){
+            return  <TouchableOpacity>
+            <Animated.View style={styles.animated}>
+              <ImageBackground
+                source={require('../../assets/card.png')}
+                style={styles.img}
+              >
+                <View style={styles.event}>
+                  <Icon name="albums" size={20} color={'#F9F9B5'} />
+                  <Text style={styles.text}>
+                    {e.date}
+                  </Text>
+                  <Text style={styles.text}>
+                    {e.action}
+                  </Text>
+                </View>
+              </ImageBackground>
+            </Animated.View>
+          </TouchableOpacity> 
+
+        }else if(e.action === 'Bible reading (week)'){
+            return  <TouchableOpacity>
+            <Animated.View style={styles.animated}>
+              <ImageBackground
+                source={require('../../assets/card.png')}
+                style={styles.img}
+              >
+                <View style={styles.event}>
+                  <Icon name="book" size={20} color={'#F9F9B5'} />
+                  <Text style={styles.text}>
+                    {e.date}
+                  </Text>
+                  <Text style={styles.text}>
+                    {e.action}
+                  </Text>
+                </View>
+              </ImageBackground>
+            </Animated.View>
+          </TouchableOpacity> 
+
+        }else if(e.action === 'School leader (week)'){
+            return  <TouchableOpacity>
+            <Animated.View style={styles.animated}>
+              <ImageBackground
+                source={require('../../assets/card.png')}
+                style={styles.img}
+              >
+                <View style={styles.event}>
+                  <Icon name="school-sharp" size={20} color={'#F9F9B5'} />
+                  <Text style={styles.text}>
+                    {e.date}
+                  </Text>
+                  <Text style={styles.text}>
+                    {e.action}
+                  </Text>
+                </View>
+              </ImageBackground>
+            </Animated.View>
+          </TouchableOpacity> 
+
+        }else if(e.action === 'School: Initial Call'){
+            return  <TouchableOpacity>
+            <Animated.View style={styles.animated}>
+              <ImageBackground
+                source={require('../../assets/card.png')}
+                style={styles.img}
+              >
+                <View style={styles.event}>
+                  <Icon name="people-outline" size={20} color={'#F9F9B5'} />
+                  <Text style={styles.text}>
+                    {e.date}
+                  </Text>
+                  <Text style={styles.text}>
+                    {e.action}
+                  </Text>
+                </View>
+              </ImageBackground>
+            </Animated.View>
+          </TouchableOpacity> 
+
+        }else if(e.action === 'School: Return visit'){
+            return  <TouchableOpacity>
+            <Animated.View style={styles.animated}>
+              <ImageBackground
+                source={require('../../assets/card.png')}
+                style={styles.img}
+              >
+                <View style={styles.event}>
+                  <Icon name="people-outline" size={20} color={'#F9F9B5'} />
+                  <Text style={styles.text}>
+                    {e.date}
+                  </Text>
+                  <Text style={styles.text}>
+                    {e.action}
+                  </Text>
+                </View>
+              </ImageBackground>
+            </Animated.View>
+          </TouchableOpacity> 
+
+        }else if(e.action === 'School: Study'){
+            return  <TouchableOpacity>
+            <Animated.View style={styles.animated}>
+              <ImageBackground
+                source={require('../../assets/card.png')}
+                style={styles.img}
+              >
+                <View style={styles.event}>
+                  <Icon name="people-sharp" size={20} color={'#F9F9B5'} />
+                  <Text style={styles.text}>
+                    {e.date}
+                  </Text>
+                  <Text style={styles.text}>
+                    {e.action}
+                  </Text>
+                </View>
+              </ImageBackground>
+            </Animated.View>
+          </TouchableOpacity> 
+
+        }else if(e.action === 'School: Talk'){
+            return  <TouchableOpacity>
+            <Animated.View style={styles.animated}>
+              <ImageBackground
+                source={require('../../assets/card.png')}
+                style={styles.img}
+              >
+                <View style={styles.event}>
+                  <Icon name="md-man-outline" size={20} color={'#F9F9B5'} />
+                  <Text style={styles.text}>
+                    {e.date}
+                  </Text>
+                  <Text style={styles.text}>
+                    {e.action}
+                  </Text>
+                </View>
+              </ImageBackground>
+            </Animated.View>
+          </TouchableOpacity> 
+
+        }else if(e.action === 'Discussion (week)'){
+            return  <TouchableOpacity>
+            <Animated.View style={styles.animated}>
+              <ImageBackground
+                source={require('../../assets/card.png')}
+                style={styles.img}
+              >
+                <View style={styles.event}>
+                  <Icon name="md-film-outline" size={20} color={'#F9F9B5'} />
+                  <Text style={styles.text}>
+                    {e.date}
+                  </Text>
+                  <Text style={styles.text}>
+                    {e.action}
+                  </Text>
+                </View>
+              </ImageBackground>
+            </Animated.View>
+          </TouchableOpacity> 
+
+        }else if(e.action === 'Local Needs'){
+            return  <TouchableOpacity>
+            <Animated.View style={styles.animated}>
+              <ImageBackground
+                source={require('../../assets/card.png')}
+                style={styles.img}
+              >
+                <View style={styles.event}>
+                  <Icon name="md-file-tray-full" size={20} color={'#F9F9B5'} />
+                  <Text style={styles.text}>
+                    {e.date}
+                  </Text>
+                  <Text style={styles.text}>
+                    {e.action}
+                  </Text>
+                </View>
+              </ImageBackground>
+            </Animated.View>
+          </TouchableOpacity> 
+
+        }else if(e.action === 'Bible Study Leader'){
+            return  <TouchableOpacity>
+            <Animated.View style={styles.animated}>
+              <ImageBackground
+                source={require('../../assets/card.png')}
+                style={styles.img}
+              >
+                <View style={styles.event}>
+                  <Icon name="md-library" size={20} color={'#F9F9B5'} />
+                  <Text style={styles.text}>
+                    {e.date}
+                  </Text>
+                  <Text style={styles.text}>
+                    {e.action}
+                  </Text>
+                </View>
+              </ImageBackground>
+            </Animated.View>
+          </TouchableOpacity> 
+
+        }else if(e.action === 'Bible Study Lector'){
+            return  <TouchableOpacity>
+            <Animated.View style={styles.animated}>
+              <ImageBackground
+                source={require('../../assets/card.png')}
+                style={styles.img}
+              >
+                <View style={styles.event}>
+                  <Icon name="md-reader" size={20} color={'#F9F9B5'} />
+                  <Text style={styles.text}>
+                    {e.date}
+                  </Text>
+                  <Text style={styles.text}>
+                    {e.action}
+                  </Text>
+                </View>
+              </ImageBackground>
+            </Animated.View>
+          </TouchableOpacity> 
+
+        }else if(e.action === 'Prayer 2 (week)'){
+            return  <TouchableOpacity>
+            <Animated.View style={styles.animated}>
+              <ImageBackground
+                source={require('../../assets/card.png')}
+                style={styles.img}
+              >
+                <View style={styles.event}>
+                  <Icon name="ios-layers" size={20} color={'#F9F9B5'} />
+                  <Text style={styles.text}>
+                    {e.date}
+                  </Text>
+                  <Text style={styles.text}>
+                    {e.action}
+                  </Text>
+                </View>
+              </ImageBackground>
+            </Animated.View>
+        </TouchableOpacity> 
+
+        }else if(e.action === 'Weekend Leader'){
+            return  <TouchableOpacity>
+            <Animated.View style={styles.animated}>
+              <ImageBackground
+                source={require('../../assets/card.png')}
+                style={styles.img}
+              >
+                <View style={styles.event}>
+                  <Icon name="person-outline" size={20} color={'#F9F9B5'} />
+                  <Text style={styles.text}>
+                    {e.date}
+                  </Text>
+                  <Text style={styles.text}>
+                    {e.action}
+                  </Text>
+                </View>
+              </ImageBackground>
+            </Animated.View>
+          </TouchableOpacity> 
+
+        }else if(e.action === 'Weekend Speach'){
+            return  <TouchableOpacity>
+            <Animated.View style={styles.animated}>
+              <ImageBackground
+                source={require('../../assets/card.png')}
+                style={styles.img}
+              >
+                <View style={styles.event}>
+                  <Icon name="md-man-outline" size={20} color={'#F9F9B5'} />
+                  <Text style={styles.text}>
+                    {e.date}
+                  </Text>
+                  <Text style={styles.text}>
+                    {e.action}
+                  </Text>
+                </View>
+              </ImageBackground>
+            </Animated.View>
+          </TouchableOpacity> 
+
+        }else if(e.action === 'Watch Tower Leader'){
+            return  <TouchableOpacity>
+            <Animated.View style={styles.animated}>
+              <ImageBackground
+                source={require('../../assets/card.png')}
+                style={styles.img}
+              >
+                <View style={styles.event}>
+                  <Icon name="person-sharp" size={20} color={'#F9F9B5'} />
+                  <Text style={styles.text}>
+                    {e.date}
+                  </Text>
+                  <Text style={styles.text}>
+                    {e.action}
+                  </Text>
+                </View>
+              </ImageBackground>
+            </Animated.View>
+          </TouchableOpacity> 
+
+        }else if(e.action === 'Watch Tower Lector'){
+            return  <TouchableOpacity>
+            <Animated.View style={styles.animated}>
+              <ImageBackground
+                source={require('../../assets/card.png')}
+                style={styles.img}
+              >
+                <View style={styles.event}>
+                  <Icon name="md-reader" size={20} color={'#F9F9B5'} />
+                  <Text style={styles.text}>
+                    {e.date}
+                  </Text>
+                  <Text style={styles.text}>
+                    {e.action}
+                  </Text>
+                </View>
+              </ImageBackground>
+            </Animated.View>
+          </TouchableOpacity> 
+        }
     })
   )
 }
 
 const styles = StyleSheet.create({
     text: {
-        // color: '#78D7D9',
         color: 'white',
         fontSize: 15,
       },

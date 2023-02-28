@@ -4,8 +4,7 @@ import Home from './Home';
 import Login from './Login';
 import Logout from './Logout';
 import Icon from "react-native-vector-icons/MaterialIcons";
-import { Button, Dimensions, StyleSheet } from 'react-native';
-import { AuthContext } from '../context/AuthContext';
+import { StyleSheet } from 'react-native';
 import Registration from './Registration';
 import AllEvents from '../backend_pages/AllEvents';
 import AddEvent from '../backend_pages/AddEvent';
@@ -19,7 +18,6 @@ import HeaderBackButton from '../buttons/HeaderBackButton';
 import RequestResetMail from '../backend_pages/RequestResetMail';
 import BackButton from '../buttons/BackButton';
 import Timer from '../backend_pages/Timer';
-import ChageLanguage from '../context/ChageLanguage';
 import CreateCalendarEvent from '../backend_pages/CreateCalendarEvent';
 import Microphones from '../backend_pages/Microphones';
 import Music from '../backend_pages/Music';
@@ -28,6 +26,8 @@ import Timetable from '../backend_pages/Timetable';
 import Service from '../backend_pages/Service';
 import Ministries from '../backend_pages/Ministries';
 import MiddleOfTheWeek from '../backend_pages/MiddleOfTheWeek';
+import WeekendMeetings from '../backend_pages/WeekendMeetings';
+import { LanguageContext } from '../context/LanguageContext';
 
 const Tab = createBottomTabNavigator();
 
@@ -44,7 +44,7 @@ function BottomNavigator() {
     UpdateEvent_,
     AllEvents_,
     Logout_,
-  }  = React.useContext(AuthContext);  
+  }  = React.useContext(LanguageContext);  
 
   const screenOptions = (route, color) => {
     let iconName;
@@ -223,7 +223,7 @@ function BottomNavigator() {
           tabBarVisible: false, // hide the button
           tabBarButton: (props) => null, // hide the button
           headerLeft: () => (
-            <BackButton onPress={() => navigation.navigate('Home')} />
+            <BackButton onPress={() => navigation.navigate('Menu')} />
           ),
         })}
         />
@@ -327,21 +327,6 @@ function BottomNavigator() {
         component={MonthsResultsItem} 
         options={{
           title: 'MonthsResultsItem',
-          headerTitleStyle: {
-            color: 'white',
-          },
-          headerStyle: {
-            backgroundColor: 'black',
-          },
-          tabBarVisible: false, // hide the button
-          tabBarButton: (props) => null, // hide the button
-        }}
-        />
-        <Tab.Screen 
-        name="ChageLanguage" 
-        component={ChageLanguage} 
-        options={{
-          title: 'ChageLanguage',
           headerTitleStyle: {
             color: 'white',
           },
@@ -472,6 +457,25 @@ function BottomNavigator() {
           tabBarVisible: false, // hide the button
           tabBarButton: (props) => null, // hide the button
         }}
+        />
+        <Tab.Screen 
+        name="WeekendMeetings" 
+        component={WeekendMeetings} 
+        options={({ navigation }) => ({
+          title: 'WeekendMeetings',
+          headerTtleStyle: {
+            color: 'white',
+            marginLeft: '6rem',
+          },
+          headerStyle: {
+            backgroundColor: 'black',
+          },
+          tabBarVisible: false, // hide the button
+          tabBarButton: (props) => null, // hide the button
+          headerLeft: () => (
+            <BackButton onPress={() => navigation.navigate('Profile')} />
+          ),
+        })}
         />
         <Tab.Screen 
         name="Timetable" 

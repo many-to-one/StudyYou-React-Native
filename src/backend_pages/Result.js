@@ -1,16 +1,17 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { StyleSheet, Text, View, ScrollView, Animated, Image, Dimensions } from 'react-native';
-import BackButton from '../buttons/BackButton';
+import { StyleSheet, Text, View, ScrollView, Animated, Dimensions } from 'react-native';
 import { AuthContext } from '../context/AuthContext';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import SaveButton from '../buttons/SaveButton';
 import { LinearGradient } from 'expo-linear-gradient';
 import { useIsFocused } from '@react-navigation/native';
+import { LanguageContext } from '../context/LanguageContext';
 
 const Result = ({navigation}) => {
 
     const { width, height } = Dimensions.get('window');
-    const {proxy, Hours, Minutes, Publications, Visits, Films,} = useContext(AuthContext);
+    const {proxy} = useContext(AuthContext);
+    const {Hours, Minutes, Publications, Visits, Films} = useContext(LanguageContext);
     const [ result, setResult ] = useState([]);
     const isFocused = useIsFocused();
 

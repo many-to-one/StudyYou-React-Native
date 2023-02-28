@@ -16,10 +16,12 @@ import Calendar from './Calendar';
 import DatePickerCalendar from './DatePickerCalendar';
 import CalendarII from './CalendarII';
 import Timetable from './Timetable';
+import { LanguageContext } from '../context/LanguageContext';
 
 const Profile = ({navigation}) => {
     const { width, height } = Dimensions.get('window');
-    const {profile, setLanguage, marked, Changepassword_} = useContext(AuthContext);
+    const {profile} = useContext(AuthContext);
+    const {setLanguage, Changepassword_} = useContext(LanguageContext);
     const [profileData, setProfileData] = useState([]);
     const [selected, setSelected] = useState('')
     const Data = [
@@ -41,12 +43,8 @@ const Profile = ({navigation}) => {
 
     const language = async(selected) => {
       await AsyncStorage.setItem('language', selected)
-      changeL()
-    }
-
-    const changeL = async() => {
       await setLanguage()
-  }
+    }
 
   const plsHolder = () => {
     return <Icon name='globe-outline' size={30} color={'white'} />
@@ -80,7 +78,6 @@ const Profile = ({navigation}) => {
           onSelect={() => language(selected)}
           setSelected={setSelected}
           placeholder={plsHolder()}
-          // fontFamily='lato'
           data={Data} 
           boxStyles={styles.event}
           inputStyles={styles.text}
@@ -90,8 +87,6 @@ const Profile = ({navigation}) => {
           arrowicon={<Icon name="chevron-down" size={20} color={'white'} />} 
           searchicon={<Icon name="search" size={20} color={'white'} />} 
           search={true} 
-          // defaultOption={{key: 'RU', value: language.RU}}
-          // defaultOption={{ key:'1', value:'Jammu & Kashmir' }}
         />
         <TouchableOpacity>
           <Animated.View style={styles.animated}>

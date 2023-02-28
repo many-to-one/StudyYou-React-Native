@@ -7,12 +7,14 @@ import BackButton from '../buttons/BackButton';
 import Icon from "react-native-vector-icons/MaterialIcons";
 import { LinearGradient } from 'expo-linear-gradient';
 import { useFocusEffect, useIsFocused } from '@react-navigation/native';
+import { LanguageContext } from '../context/LanguageContext';
 
 const UpdateEvent = ({route, navigation}) => {
 
     const { width, height } = Dimensions.get('window');
     const {ev} = route.params;
-    const {proxy, setLanguauge, Hours, Minutes, Publications, Visits, Films} = useContext(AuthContext);
+    const {proxy,} = useContext(AuthContext);
+    const {Hours, Minutes, Publications, Visits, Films} = useContext(LanguageContext);
     const [events, setEvents] = useState({name: {}});
     const [event, setEvent] = useState('');
     const [hours, setHours] = useState(0);
