@@ -5,10 +5,12 @@ import { MultipleSelectList  } from 'react-native-dropdown-select-list';
 import Icon from "react-native-vector-icons/Ionicons";
 import { useIsFocused } from '@react-navigation/native';
 import ScheduleBtn from '../buttons/ScheduleBtn';
+import { LanguageContext } from '../context/LanguageContext';
 
 const Ministry = ({day, navigation}) => {
 
   const {proxy} = useContext(AuthContext);
+  const {ministryLeaders_} = useContext(LanguageContext);
   const [selected, setSelected] = useState('')
   const [users, setUsers] = useState([])
   const [dateMinistry, setDateMinistry] = useState([])
@@ -130,7 +132,7 @@ if(dateMinistry.length > 1){
                 placeholder={
                   <View style={styles.placeholder}>
                     <Icon name='people-circle-outline' size={20} color={'white'} />
-                    <Text style={styles.text}>Ministry lider</Text>
+                    <Text style={styles.text}>{ministryLeaders_}</Text>
                   </View>
               }
                 boxStyles={styles.event}
@@ -174,7 +176,7 @@ if(dateMinistry.length > 1){
                     placeholder={
                       <View style={styles.placeholder}>
                         <Icon name='people-circle-outline' size={20} color={'white'} />
-                        <Text style={styles.text}>Ministry lider</Text>
+                        <Text style={styles.text}>{ministryLeaders_}</Text>
                       </View>
                     }
                     boxStyles={styles.event}
@@ -188,9 +190,9 @@ if(dateMinistry.length > 1){
                     search={true}
                     />
                     <ScheduleBtn 
-                        style={{backgroundColor: '#F9F9B5',}}
-                        title={'Submit'}
-                        onPress={() => setMinistryUsers(selected)}
+                      style={{backgroundColor: '#F9F9B5',}}
+                      title={'Submit'}
+                      onPress={() => setMinistryUsers(selected)}
                     />
                   </View>          
                                       
@@ -219,7 +221,7 @@ const styles = StyleSheet.create({
   },
   text: {
     color: 'white',
-    fontSize: 20,
+    fontSize: 10,
   },
   event:{
     width: 290,

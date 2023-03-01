@@ -43,8 +43,19 @@ function BottomNavigator() {
     AddEvent_,
     UpdateEvent_,
     AllEvents_,
+    login_,
     Logout_,
-  }  = React.useContext(LanguageContext);  
+    registration_,
+    requestResetMail_,
+    createCalendarEvent_,
+    technicalSupport_,
+    ministryLeaders_,
+    midweekMeetings_,
+    microphones_,
+    music_,
+    duty_,
+    weekendMeetings_,
+  } = React.useContext(LanguageContext);  
 
   const screenOptions = (route, color) => {
     let iconName;
@@ -100,7 +111,7 @@ function BottomNavigator() {
           title: `${Menu_}`,
           headerTitleStyle: {
             color: 'white',
-            marginLeft: '6rem',
+            marginLeft: '8rem',
           },
           headerStyle: {
             backgroundColor: 'black',
@@ -128,7 +139,7 @@ function BottomNavigator() {
         name="Login" 
         component={Login} 
         options={{
-          title: 'Login',
+          title: `${login_}`,
           headerTitleStyle: {
             color: 'white',
             marginLeft: '8rem',
@@ -144,7 +155,7 @@ function BottomNavigator() {
         name="Registration" 
         component={Registration} 
         options={({ navigation }) => ({
-          title: 'Registration',
+          title: `${registration_}`,
           headerTitleStyle: {
             color: 'white',
             marginLeft: '6rem',
@@ -196,7 +207,7 @@ function BottomNavigator() {
         name="RequestResetMail" 
         component={RequestResetMail} 
         options={{
-          title: 'RequestResetMail',
+          title: `${requestResetMail_}`,
           headerTitleStyle: {
             color: 'white',
             marginLeft: '8rem',
@@ -253,7 +264,7 @@ function BottomNavigator() {
           title: `${AddEvent_}`,
           headerTitleStyle: {
             color: 'white',
-            marginLeft: '6rem',
+            marginLeft: '4rem',
           },
           headerStyle: {
             backgroundColor: 'black',
@@ -272,7 +283,7 @@ function BottomNavigator() {
           title: `${UpdateEvent_}`,
           headerTitleStyle: {
             color: 'white',
-            marginLeft: '6rem',
+            marginLeft: '2rem',
           },
           headerStyle: {
             backgroundColor: 'black',
@@ -341,10 +352,10 @@ function BottomNavigator() {
         name="CreateCalendarEvent" 
         component={CreateCalendarEvent} 
         options={({ navigation }) => ({
-          title: 'CreateCalendarEvent',
+          title: `${createCalendarEvent_}`,
           headerTitleStyle: {
             color: 'white',
-            marginLeft: '6rem',
+            marginLeft: '4rem',
           },
           headerStyle: {
             backgroundColor: 'black',
@@ -360,10 +371,10 @@ function BottomNavigator() {
         name="Service" 
         component={Service} 
         options={({ navigation }) => ({
-          title: 'Service',
+          title: `${technicalSupport_}`,
           headerTitleStyle: {
             color: 'white',
-            marginLeft: '6rem',
+            marginLeft: '2rem',
           },
           headerStyle: {
             backgroundColor: 'black',
@@ -379,7 +390,7 @@ function BottomNavigator() {
         name="Ministries" 
         component={Ministries} 
         options={({ navigation }) => ({
-          title: 'Ministries',
+          title: `${ministryLeaders_}`,
           headerTtleStyle: {
             color: 'white',
             marginLeft: '6rem',
@@ -398,7 +409,7 @@ function BottomNavigator() {
         name="MiddleOfTheWeek" 
         component={MiddleOfTheWeek} 
         options={({ navigation }) => ({
-          title: 'MiddleOfTheWeek',
+          title: `${midweekMeetings_}`,
           headerTtleStyle: {
             color: 'white',
             marginLeft: '6rem',
@@ -417,7 +428,7 @@ function BottomNavigator() {
         name="Microphones" 
         component={Microphones} 
         options={{
-          title: 'Microphones',
+          title: `${microphones_}`,
           headerTitleStyle: {
             color: 'white',
           },
@@ -432,7 +443,7 @@ function BottomNavigator() {
         name="Music" 
         component={Music} 
         options={{
-          title: 'Music',
+          title: `${music_}`,
           headerTitleStyle: {
             color: 'white',
           },
@@ -447,7 +458,7 @@ function BottomNavigator() {
         name="Duty" 
         component={Duty} 
         options={{
-          title: 'Duty',
+          title: `${duty_}`,
           headerTitleStyle: {
             color: 'white',
           },
@@ -462,7 +473,7 @@ function BottomNavigator() {
         name="WeekendMeetings" 
         component={WeekendMeetings} 
         options={({ navigation }) => ({
-          title: 'WeekendMeetings',
+          title: `${weekendMeetings_}`,
           headerTtleStyle: {
             color: 'white',
             marginLeft: '6rem',

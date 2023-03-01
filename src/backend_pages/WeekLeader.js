@@ -5,11 +5,12 @@ import { MultipleSelectList  } from 'react-native-dropdown-select-list';
 import Icon from "react-native-vector-icons/Ionicons";
 import { useIsFocused } from '@react-navigation/native';
 import ScheduleBtn from '../buttons/ScheduleBtn';
+import { LanguageContext } from '../context/LanguageContext';
 
 const WeekLeader = ({day, navigation}) => {
 
     const {proxy} = useContext(AuthContext);
-    // const {day} = route.params;
+    const {leaderAndIntroductoryRemarks_} = useContext(LanguageContext);
     const [selected, setSelected] = useState('')
     const [users, setUsers] = useState([])
     const [dateLeaderWeek, setDateLeaderWeek] = useState([])
@@ -131,7 +132,7 @@ if(dateLeaderWeek.length === 1){
                 placeholder={
                   <View style={styles.placeholder}>
                     <Icon name='person-outline' size={20} color={'white'} />
-                    <Text style={styles.text}>Leader</Text>
+                    <Text style={styles.text}>{leaderAndIntroductoryRemarks_}</Text>
                   </View>
                 }
                 boxStyles={styles.event}
@@ -164,7 +165,7 @@ const styles = StyleSheet.create({
   },
   text: {
     color: 'white',
-    fontSize: 20,
+    fontSize: 10,
   },
   event:{
     width: 290,

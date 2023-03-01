@@ -1,5 +1,6 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { Dimensions, ScrollView, StyleSheet, Text, View } from 'react-native'
+import { LanguageContext } from '../context/LanguageContext';
 import WatchTowerLeader from './WatchTowerLeader';
 import WatchTowerLector from './WatchTowerLector';
 import WeekendLeader from './WeekendLeader';
@@ -8,27 +9,34 @@ import WeekendSpeach from './WeekendSpeech';
 
 const WeekendMeetings = ({route, navigation}) => {
     const {day} = route.params;
+    const {
+      weekendLeader_,
+      weekendSpeach_,
+      watchTowerLeader_,
+      watchTowerLector_,
+    } = useContext(LanguageContext);
+
   return (
     <ScrollView style={styles.scroll}>
         <View style={styles.container}>
 
         <View style={styles.event}>
-          <Text style={styles.text}>Weekend Leader and Prayer 1:</Text>
+          <Text style={styles.text}>{weekendLeader_}:</Text>
           <WeekendLeader  day={day}/>
         </View>
 
         <View style={styles.event}>
-          <Text style={styles.text}>Weekend Speach:</Text>
+          <Text style={styles.text}>{weekendSpeach_}:</Text>
           <WeekendSpeach  day={day}/>
         </View>
 
         <View style={styles.event}>
-          <Text style={styles.text}>Watch Tower Leader:</Text>
+          <Text style={styles.text}>{watchTowerLeader_}:</Text>
           <WatchTowerLeader  day={day}/>
         </View>
 
         <View style={styles.event}>
-          <Text style={styles.text}>Watch Tower Lector:</Text>
+          <Text style={styles.text}>{watchTowerLector_}:</Text>
           <WatchTowerLector  day={day}/>
         </View>
 

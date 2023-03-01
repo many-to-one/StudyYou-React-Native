@@ -5,10 +5,12 @@ import { MultipleSelectList  } from 'react-native-dropdown-select-list';
 import Icon from "react-native-vector-icons/Ionicons";
 import { useIsFocused } from '@react-navigation/native';
 import ScheduleBtn from '../buttons/ScheduleBtn';
+import { LanguageContext } from '../context/LanguageContext';
 
 const WeekendSpeach = ({day, navigation}) => {
 
     const {proxy} = useContext(AuthContext);
+    const {weekendSpeach_} = useContext(LanguageContext);
     const [selected, setSelected] = useState('')
     const [users, setUsers] = useState([])
     const [dateWeekendSpeach, setDateWeekendSpeach] = useState([])
@@ -129,7 +131,7 @@ if(dateWeekendSpeach.length === 1){
                 placeholder={
                   <View style={styles.placeholder}>
                     <Icon name='md-man-outline' size={20} color={'white'} />
-                    <Text style={styles.text}>Weekend Speach</Text>
+                    <Text style={styles.text}>{weekendSpeach_}</Text>
                   </View>
                 }
                 boxStyles={styles.event}
@@ -143,9 +145,9 @@ if(dateWeekendSpeach.length === 1){
                 search={true}
               />
               <ScheduleBtn 
-                  style={{backgroundColor: '#F9F9B5',}}
-                  title={'Submit'}
-                  onPress={() => setWeekendSpeach(selected)}
+                style={{backgroundColor: '#F9F9B5',}}
+                title={'Submit'}
+                onPress={() => setWeekendSpeach(selected)}
               />
             </View>
         )}
@@ -162,7 +164,7 @@ const styles = StyleSheet.create({
   },
   text: {
     color: 'white',
-    fontSize: 15,
+    fontSize: 10,
   },
   event:{
     width: 290,

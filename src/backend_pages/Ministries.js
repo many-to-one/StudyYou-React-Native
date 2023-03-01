@@ -1,19 +1,21 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { Button, Dimensions, ScrollView, StyleSheet, Text, View } from 'react-native'
 import Microphones from '../backend_pages/Microphones';
 import Music from '../backend_pages/Music';
+import { LanguageContext } from '../context/LanguageContext';
 import Duty from './Duty';
 import Ministry from './Ministry';
 
 const Ministries = ({route, navigation}) => {
 
     const {day} = route.params;
-    console.log('day', day)
+    const {ministryLeaders_} = useContext(LanguageContext);
 
   return (
     <ScrollView style={styles.scroll}>
         <View style={styles.container}>
         <View style={styles.event}>
+          <Text style={styles.text}>{ministryLeaders_}</Text>
           <Ministry  day={day}/>
         </View>
       </View>

@@ -5,11 +5,12 @@ import { MultipleSelectList  } from 'react-native-dropdown-select-list';
 import Icon from "react-native-vector-icons/Ionicons";
 import { useIsFocused } from '@react-navigation/native';
 import ScheduleBtn from '../buttons/ScheduleBtn';
+import { LanguageContext } from '../context/LanguageContext';
 
 const Microphones = ({day, navigation}) => {
 
     const {proxy} = useContext(AuthContext);
-    // const {day} = route.params;
+    const {microphones_} = useContext(LanguageContext);
     const [selected, setSelected] = useState('')
     const [users, setUsers] = useState([])
     const [dateMicrophones, setDateMicrophones] = useState([])
@@ -130,7 +131,7 @@ if(dateMicrophones.length > 1){
                 placeholder={
                   <View style={styles.placeholder}>
                     <Icon name='mic' size={20} color={'white'} />
-                    <Text style={styles.text}>Microphones</Text>
+                    <Text style={styles.text}>{microphones_}</Text>
                   </View>
                 }
                 boxStyles={styles.event}
@@ -212,7 +213,7 @@ const styles = StyleSheet.create({
   },
   text: {
     color: 'white',
-    fontSize: 20,
+    fontSize: 10,
   },
   event:{
     width: 290,

@@ -5,10 +5,12 @@ import { MultipleSelectList  } from 'react-native-dropdown-select-list';
 import Icon from "react-native-vector-icons/Ionicons";
 import { useIsFocused } from '@react-navigation/native';
 import ScheduleBtn from '../buttons/ScheduleBtn';
+import { LanguageContext } from '../context/LanguageContext';
 
 const WeekReadingBible = ({day, navigation}) => {
 
     const {proxy} = useContext(AuthContext);
+    const {bibleReading_} = useContext(LanguageContext);
     const [selected, setSelected] = useState('')
     const [users, setUsers] = useState([])
     const [dateWeekReadingBible, setDateWeekReadingBible] = useState([])
@@ -129,7 +131,7 @@ if(dateWeekReadingBible.length === 1){
                 placeholder={
                   <View style={styles.placeholder}>
                     <Icon name='albums' size={20} color={'white'} />
-                    <Text style={styles.text}>Bible reading</Text>
+                    <Text style={styles.text}>{bibleReading_}</Text>
                   </View>
                 }
                 boxStyles={styles.event}
@@ -162,7 +164,7 @@ const styles = StyleSheet.create({
   },
   text: {
     color: 'white',
-    fontSize: 20,
+    fontSize: 10,
   },
   event:{
     width: 290,

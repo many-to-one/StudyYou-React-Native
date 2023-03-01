@@ -5,10 +5,12 @@ import { MultipleSelectList  } from 'react-native-dropdown-select-list';
 import Icon from "react-native-vector-icons/Ionicons";
 import { useIsFocused } from '@react-navigation/native';
 import ScheduleBtn from '../buttons/ScheduleBtn';
+import { LanguageContext } from '../context/LanguageContext';
 
 const WeekVisit1 = ({day, navigation}) => {
 
     const {proxy} = useContext(AuthContext);
+    const {initialCall_} = useContext(LanguageContext);
     const [selected, setSelected] = useState('')
     const [users, setUsers] = useState([])
     const [dateWeekVisit1, setDateWeekVisit1] = useState([])
@@ -129,7 +131,48 @@ if(dateWeekVisit1.length === 1){
                 placeholder={
                   <View style={styles.placeholder}>
                     <Icon name='people-outline' size={20} color={'white'} />
-                    <Text style={styles.text}>Initial Call</Text>
+                    <Text style={styles.text}>{initialCall_}</Text>
+                  </View>
+                }
+                boxStyles={styles.event}
+                inputStyles={styles.input}
+                dropdownStyles={styles.box}
+                dropdownItemStyles={{color: 'white'}}
+                dropdownTextStyles={{color: 'white'}}
+                arrowicon={<Icon name="chevron-down" size={20} color={'white'} />} 
+                searchicon={<Icon name="search" size={20} color={'white'} />} 
+                closeicon={<Icon name="close" size={20} color={'white'} />} 
+                search={true}
+              />
+              <ScheduleBtn 
+                  style={{backgroundColor: '#F9F9B5',}}
+                  title={'Submit'}
+                  onPress={() => setWeekVisit1(selected)}
+              />
+            </View>
+
+        )}else if(dateWeekVisit1.length > 1){
+        return (
+            <View >
+              <View style={styles.user}>
+                <Icon name='people-outline' size={20} color={'#F9F9B5'} />
+                <Text style={styles.user_text}>{USERS[e.user]}</Text>
+                <Icon 
+                  name="close-circle-outline" 
+                  size={20} 
+                  color={'white'} 
+                  onPress={() => deleteWeekVisit1(e)}     
+                />
+              </View>  
+              <MultipleSelectList 
+                setSelected={(val) => setSelected(val)} 
+                data={data} 
+                save="value"
+                // onSelect={(value) => alert(`${value}`)} 
+                placeholder={
+                  <View style={styles.placeholder}>
+                    <Icon name='people-outline' size={20} color={'white'} />
+                    <Text style={styles.text}>{initialCall_}</Text>
                   </View>
                 }
                 boxStyles={styles.event}
@@ -162,7 +205,7 @@ const styles = StyleSheet.create({
   },
   text: {
     color: 'white',
-    fontSize: 20,
+    fontSize: 10,
   },
   event:{
     width: 290,
