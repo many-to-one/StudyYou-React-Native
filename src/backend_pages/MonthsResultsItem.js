@@ -4,10 +4,12 @@ import { StyleSheet, Text, View, Dimensions, FlatList } from 'react-native';
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import { AuthContext } from '../context/AuthContext';
 import { useNavigation } from '@react-navigation/native';
+import { LanguageContext } from '../context/LanguageContext';
 
 const MonthsResultsItem = ({res}) => {
   const { width, height } = Dimensions.get('window');
-  const {proxy, Hours, Minutes, Publications, Visits, Films,} = useContext(AuthContext);
+  const {proxy} = useContext(AuthContext);
+  const {Hours, Minutes, Publications, Visits, Films} = useContext(LanguageContext);
   const navigation = useNavigation();
   let datas;
 
