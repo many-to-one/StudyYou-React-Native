@@ -32,7 +32,14 @@ const NewMenu = () => {
     const scrollX = useRef(new Animated.Value(0)).current;
     const [profileToken, setProfileToken] = useState('')
     const {proxy} = useContext(AuthContext);
-    const {setLanguage} = useContext(LanguageContext);
+    const {
+      setLanguage,
+      PROFILE_,
+      TIMER_,
+      EVENTS_,
+      RESULT_,
+      HISTORY_,
+    } = useContext(LanguageContext);
   
 
     useEffect(() => {
@@ -67,7 +74,7 @@ const NewMenu = () => {
       {
         key: '111',
         id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28ba',
-        title: 'PROFILE',
+        title: `${PROFILE_}`,
         bg: 'profile_m.png',
         img: 'profile_i.png',
         page: 'Profile',
@@ -75,7 +82,7 @@ const NewMenu = () => {
       {
         key: '112',
         id: '3ac68afc-c605-48d3-a4f8-fbd91aa97f63',
-        title: 'TIMER',
+        title: `${TIMER_}`,
         bg: 'timer.png',
         img: 'timer_i.png',
         page: 'Timer',
@@ -83,7 +90,7 @@ const NewMenu = () => {
       {
         key: '113',
         id: '58694a0f-3da1-471f-bd96-145571e29d72',
-        title: 'EVENTS',
+        title: `${EVENTS_}`,
         bg: 'events.png',
         img: 'events_i.png',
         page: 'Home'
@@ -91,7 +98,7 @@ const NewMenu = () => {
       {
         key: '114',
         id: '58694a0f-3da1-471f-bd96-145571e29d73',
-        title: 'RESULT',
+        title: `${RESULT_}`,
         bg: 'result.png',
         img: 'result_i.png',
         page: 'Result',
@@ -99,7 +106,7 @@ const NewMenu = () => {
       {
         key: '115',
         id: '58694a0f-3da1-471f-bd96-145571e29d74',
-        title: 'HISTORY',
+        title: `${HISTORY_}`,
         bg: 'history.png',
         img: 'history_i.png',
         page: 'MonthsResults',
@@ -192,22 +199,20 @@ const NewMenu = () => {
                 extrapolate: 'clamp',
               })
               return(
-                <View style={{width: ITEM_SIZE}}>
+                <View style={{width: ITEM_SIZE,}}>
+
                   <View >
-                  <Text style={{
-                    color: '#78F5FA',
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                    marginBottom: 50,
-                    fontSize: 30,
-                    marginLeft: ITEM_SIZE / 2,
-                    marginHorizontal: SPACING,
-                    // padding: SPACING * 4,
-                  }}>{item.title}
-                  </Text>
+                    <Text style={{
+                      color: '#78F5FA',
+                      width: 200,
+                      marginBottom: 50,
+                      fontSize: 20,
+                      marginHorizontal: ITEM_SIZE / 2,
+                    }}>{item.title}
+                    </Text>
                   </View>
+
                 <TouchableOpacity onPress={() => navigation.navigate(item.page)}>
-                {/* <Animation item={item}/> */}
                   <Animated.View style={{
                     justifyContent: 'center',
                     alignItems: 'center',

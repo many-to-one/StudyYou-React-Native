@@ -10,85 +10,7 @@ export const AuthProvider = ({children}) => {
     const [token, setToken] = useState('');
     const [profileToken, setProfileToken] = useState('')
     const [logged, setLogged] = useState(false)
-    const [Hours, setHours] = useState('')
-    const [Minutes, setMinutes] = useState('')
-    const [Visits, setVisits] = useState('')
-    const [Publications, setPublications] = useState('')
-    const [Films, setFilms] = useState('')
-    const [Menu_, setMenu] = useState('')
-    const [Events_, setEvents] = useState('')
-    const [Profile_, setProfile] = useState('')
-    const [Timer_, setTimer] = useState('')
-    const [Result_, setResult] = useState('')
-    const [History_, setHistory] = useState('')
-    const [AddEvent_, setAddEvent] = useState('')
-    const [UpdateEvent_, setUpdateEvent] = useState('')
-    const [AllEvents_, setAllEvents] = useState('')
-    const [Logout_, setLogout] = useState('')
-    const [Changepassword_, setChangepassword] = useState('')
-    const [dayNames, setDaynames] = useState([])
-    const [monthNames, setMonthnames] = useState([])
     const proxy = "http://127.0.0.1:8000"
-
-
-    const setLanguage = async() => {
-        let lng = await AsyncStorage.getItem('language')
-        if(lng === 'PL'){
-            setHours('Godziny')
-            setMinutes('Minuty')
-            setVisits('Odwiedziny')
-            setPublications('Publikacje')
-            setFilms('Filmy')
-            setMenu('Menu')
-            setEvents('Wydarzenia')
-            setProfile('Profil')
-            setTimer('Tajmer')
-            setResult('Wynik')
-            setHistory('Historia')
-            setAddEvent('Nowe Wydarzenia')
-            setUpdateEvent('Edytuj wydarzenie')
-            setAllEvents('Wszystkie wydarzenia')
-            setLogout('Wyłoguj')
-            setChangepassword('Zmienić hasło')
-            setDaynames(['Pon', 'Wt', 'Śr', 'Czw', 'Pt', 'Sob', 'Niedz'])
-            setMonthnames(['styczeń', 'luty', 'marzec', 'kwiecień', 'maj', 'czerwiec', 'lipiec', 'sierpień', 'wrzesień', 'październik', 'listopad', 'grudzień  '])
-        }else if(lng === 'RU'){
-            setHours('Часы')
-            setMinutes('Минуты')
-            setVisits('Повторы')
-            setPublications('Публикации')
-            setFilms('Фильмы')
-            setMenu('Меню')
-            setEvents('События')
-            setProfile('Профиль')
-            setTimer('Таймер')
-            setResult('Результат')
-            setHistory('История')
-            setAddEvent('Новое событие')
-            setUpdateEvent('Редактировать событие')
-            setAllEvents('Все события')
-            setLogout('Выйти')
-            setChangepassword('Изменить пароль')
-        }else if(lng === 'UA'){
-            setHours('Години')
-            setMinutes('Хвилини')
-            setVisits('Повтори')
-            setPublications('Публiкацiї')
-            setFilms('Фiльми')
-            setMenu('Меню')
-            setEvents('Подiї')
-            setProfile('Профiль')
-            setTimer('Таймер')
-            setResult('Результат')
-            setHistory('Iсторiя')
-            setAddEvent('Нова подiя')
-            setUpdateEvent('Редагувати подiю')
-            setAllEvents('Усi подiї')
-            setLogout('Вийти')
-            setChangepassword('Змiнити гасло')
-        }
-      };
-
 
 
     const register = async (username ,email, password) => {
@@ -203,25 +125,6 @@ export const AuthProvider = ({children}) => {
             profileToken,
             logged,
             passwordResetService,
-            setLanguage,
-            Hours,
-            Minutes,
-            Visits,
-            Publications,
-            Films,
-            Menu_,
-            Events_,
-            Profile_,
-            Timer_,
-            Result_,
-            History_,
-            AddEvent_,
-            UpdateEvent_,
-            AllEvents_,
-            Logout_,
-            Changepassword_,
-            dayNames,
-            monthNames,
         }}>
             {children}
         </AuthContext.Provider>

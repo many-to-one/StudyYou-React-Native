@@ -1,5 +1,5 @@
 import { Calendar, LocaleConfig } from 'react-native-calendars';
-import { Animated, Button, Dimensions, ScrollView, StyleSheet, Text, View } from 'react-native';
+import { StyleSheet } from 'react-native';
 
 import React, { useContext, useEffect, useMemo, useState } from 'react'
 import { AuthContext } from '../context/AuthContext';
@@ -58,7 +58,6 @@ let test = {}
 
   const setDate = (day) => {
     navigation.navigate('CreateCalendarEvent', {day: day})
-    // navigation.navigate('CalendarII')
     console.log(day)
   }
 

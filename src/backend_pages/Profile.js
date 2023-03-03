@@ -1,20 +1,11 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import React, { useContext, useEffect, useState } from 'react'
-import { Animated, Button, Dimensions, Image, ImageBackground, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-// import { View } from 'react-native-web';
+import { Animated, Dimensions, ImageBackground, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { AuthContext } from '../context/AuthContext'
-import AuthButton from '../buttons/AuthButton';
-import DoneButton from '../buttons/DoneButton'
-import { useIsFocused } from '@react-navigation/native';
-import { LinearGradient } from 'expo-linear-gradient';
-import BackButton from '../buttons/BackButton';
 import ChangePasswordBtn from '../buttons/ChangePasswordBtn';
 import { SelectList } from 'react-native-dropdown-select-list';
 import Icon from "react-native-vector-icons/Ionicons";
-import { ChageLanguage } from '../context/ChageLanguage';
 import Calendar from './Calendar';
-import DatePickerCalendar from './DatePickerCalendar';
-import CalendarII from './CalendarII';
 import Timetable from './Timetable';
 import { LanguageContext } from '../context/LanguageContext';
 
@@ -48,7 +39,6 @@ const Profile = ({navigation}) => {
 
   const plsHolder = () => {
     return <Icon name='globe-outline' size={30} color={'white'} />
-    // return <Icon name='md-language' size={20} color={'white'} />
   }
 
   return (

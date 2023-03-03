@@ -5,9 +5,35 @@ import { Animated, ImageBackground, StyleSheet, Text, TouchableOpacity, View } f
 import { AuthContext } from '../context/AuthContext';
 import Icon from "react-native-vector-icons/Ionicons";
 import BackButton from '../buttons/BackButton';
+import { LanguageContext } from '../context/LanguageContext';
 
 const Timetable = ({navigation}) => {
     const {proxy} = useContext(AuthContext);
+    const {
+      microphones_,
+      music_,
+      duty_,
+      ministryLeader_,
+      leaderAndIntroductoryRemarks_,
+      firstPrayer_,
+      treasuresFromGodsWord_,
+      spiritualGems_,
+      bibleReading_,
+      schoolLeader_,
+      initialCall_,
+      returnVisit_,
+      schoolStudy_,
+      schoolTalk_,
+      discussion_,
+      localNeeds_,
+      bibleStudyLeader_,
+      bibleStudyLector_,
+      lastPrayer_,
+      weekendLeader_,
+      weekendSpeach_,
+      watchTowerLeader_,
+      watchTowerLector_,
+    } = useContext(LanguageContext)
     const isFocused = useIsFocused();
     const [data, setData] = useState([])
 
@@ -16,13 +42,48 @@ const Timetable = ({navigation}) => {
     }, [isFocused])
 
     const getCalendarDatesByUser = async() => {
-        let datas = JSON.parse(await AsyncStorage.getItem("asyncUserData"))
-        const resp = await fetch(`${proxy}/backend/get_calendar_user/${datas.id}/`)
-        const data = await resp.json()
-        if(data){
-            setData(data)
-            console.log('data',data)
-        }
+      let datas = JSON.parse(await AsyncStorage.getItem("asyncUserData"))
+      const resp = await fetch(`${proxy}/backend/get_calendar_user/${datas.id}/`)
+      const data = await resp.json()
+      if(data){
+          setData(data)
+          console.log('data',data)
+          data.map((e) => {
+            if(e.date !== Date.now()){
+              console.log('tt', e.date)
+              deleteCalendarDate(e.id)
+            }
+          })
+      }
+  }
+
+    // data.map((e) => {
+    //   if(e.date !== Date.now()){
+    //     deleteCalendarDate(e.id)
+    //   }
+    // })
+
+    // for(let e=0; e<data.length; e++){
+    //   console.log('tt-data', e)
+    // }
+
+    const deleteCalendarDate = async(id) => {
+      const resp = await fetch(`${proxy}/backend/delete_calendar/${id}/`, {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+      })
+      const data = await resp.json()
+      if(data.status === 200){
+        console.log('deleted', id)
+        // data.map((e) => {
+        //   if(e.date < Date.now()){
+        //     console.log('tt', e.date)
+        //     // deleteCalendarDate(e.id)
+        //   }
+        // })
+      }
     }
 
   return (
@@ -40,7 +101,7 @@ const Timetable = ({navigation}) => {
                     {e.date}
                   </Text>
                   <Text style={styles.text}>
-                    {e.action}
+                    {microphones_}
                   </Text>
                 </View>
               </ImageBackground>
@@ -71,7 +132,7 @@ const Timetable = ({navigation}) => {
                     {e.date}
                   </Text>
                   <Text style={styles.text}>
-                    {e.action}
+                    {music_}
                   </Text>
                 </View>
               </ImageBackground>
@@ -91,7 +152,7 @@ const Timetable = ({navigation}) => {
                     {e.date}
                   </Text>
                   <Text style={styles.text}>
-                    {e.action}
+                    {duty_}
                   </Text>
                 </View>
               </ImageBackground>
@@ -111,7 +172,7 @@ const Timetable = ({navigation}) => {
                     {e.date}
                   </Text>
                   <Text style={styles.text}>
-                    {e.action}
+                    {ministryLeader_}
                   </Text>
                 </View>
               </ImageBackground>
@@ -131,7 +192,7 @@ const Timetable = ({navigation}) => {
                     {e.date}
                   </Text>
                   <Text style={styles.text}>
-                    {e.action}
+                    {leaderAndIntroductoryRemarks_}
                   </Text>
                 </View>
               </ImageBackground>
@@ -151,7 +212,7 @@ const Timetable = ({navigation}) => {
                     {e.date}
                   </Text>
                   <Text style={styles.text}>
-                    {e.action}
+                    {firstPrayer_}
                   </Text>
                 </View>
               </ImageBackground>
@@ -171,7 +232,7 @@ const Timetable = ({navigation}) => {
                     {e.date}
                   </Text>
                   <Text style={styles.text}>
-                    {e.action}
+                    {treasuresFromGodsWord_}
                   </Text>
                 </View>
               </ImageBackground>
@@ -191,7 +252,7 @@ const Timetable = ({navigation}) => {
                     {e.date}
                   </Text>
                   <Text style={styles.text}>
-                    {e.action}
+                    {spiritualGems_}
                   </Text>
                 </View>
               </ImageBackground>
@@ -211,7 +272,7 @@ const Timetable = ({navigation}) => {
                     {e.date}
                   </Text>
                   <Text style={styles.text}>
-                    {e.action}
+                    {bibleReading_}
                   </Text>
                 </View>
               </ImageBackground>
@@ -231,7 +292,7 @@ const Timetable = ({navigation}) => {
                     {e.date}
                   </Text>
                   <Text style={styles.text}>
-                    {e.action}
+                    {schoolLeader_}
                   </Text>
                 </View>
               </ImageBackground>
@@ -251,7 +312,7 @@ const Timetable = ({navigation}) => {
                     {e.date}
                   </Text>
                   <Text style={styles.text}>
-                    {e.action}
+                    {initialCall_}
                   </Text>
                 </View>
               </ImageBackground>
@@ -271,7 +332,7 @@ const Timetable = ({navigation}) => {
                     {e.date}
                   </Text>
                   <Text style={styles.text}>
-                    {e.action}
+                    {returnVisit_}
                   </Text>
                 </View>
               </ImageBackground>
@@ -291,7 +352,7 @@ const Timetable = ({navigation}) => {
                     {e.date}
                   </Text>
                   <Text style={styles.text}>
-                    {e.action}
+                    {schoolStudy_}
                   </Text>
                 </View>
               </ImageBackground>
@@ -311,7 +372,7 @@ const Timetable = ({navigation}) => {
                     {e.date}
                   </Text>
                   <Text style={styles.text}>
-                    {e.action}
+                    {schoolTalk_}
                   </Text>
                 </View>
               </ImageBackground>
@@ -331,7 +392,7 @@ const Timetable = ({navigation}) => {
                     {e.date}
                   </Text>
                   <Text style={styles.text}>
-                    {e.action}
+                    {discussion_}
                   </Text>
                 </View>
               </ImageBackground>
@@ -351,7 +412,7 @@ const Timetable = ({navigation}) => {
                     {e.date}
                   </Text>
                   <Text style={styles.text}>
-                    {e.action}
+                    {localNeeds_}
                   </Text>
                 </View>
               </ImageBackground>
@@ -371,7 +432,7 @@ const Timetable = ({navigation}) => {
                     {e.date}
                   </Text>
                   <Text style={styles.text}>
-                    {e.action}
+                    {bibleStudyLeader_}
                   </Text>
                 </View>
               </ImageBackground>
@@ -391,7 +452,7 @@ const Timetable = ({navigation}) => {
                     {e.date}
                   </Text>
                   <Text style={styles.text}>
-                    {e.action}
+                    {bibleStudyLector_}
                   </Text>
                 </View>
               </ImageBackground>
@@ -411,7 +472,7 @@ const Timetable = ({navigation}) => {
                     {e.date}
                   </Text>
                   <Text style={styles.text}>
-                    {e.action}
+                    {lastPrayer_}
                   </Text>
                 </View>
               </ImageBackground>
@@ -431,7 +492,7 @@ const Timetable = ({navigation}) => {
                     {e.date}
                   </Text>
                   <Text style={styles.text}>
-                    {e.action}
+                    {weekendLeader_}
                   </Text>
                 </View>
               </ImageBackground>
@@ -451,7 +512,7 @@ const Timetable = ({navigation}) => {
                     {e.date}
                   </Text>
                   <Text style={styles.text}>
-                    {e.action}
+                    {weekendSpeach_}
                   </Text>
                 </View>
               </ImageBackground>
@@ -471,7 +532,7 @@ const Timetable = ({navigation}) => {
                     {e.date}
                   </Text>
                   <Text style={styles.text}>
-                    {e.action}
+                    {watchTowerLeader_}
                   </Text>
                 </View>
               </ImageBackground>
@@ -491,7 +552,7 @@ const Timetable = ({navigation}) => {
                     {e.date}
                   </Text>
                   <Text style={styles.text}>
-                    {e.action}
+                    {watchTowerLector_}
                   </Text>
                 </View>
               </ImageBackground>
@@ -505,23 +566,17 @@ const Timetable = ({navigation}) => {
 const styles = StyleSheet.create({
     text: {
         color: 'white',
-        fontSize: 15,
+        fontSize: 13,
       },
       event:{
         flexDirection: 'row',
         alignItems: 'center',
         width: 300,
-        // borderRadius: 15,
-        // borderWidth: 1,
-        // borderColor: 'white',
-        // borderColor: '#78D7D9',
         margin: 5,
         padding: 10,
         gap: 20,
-        // color: 'white',
         fontSize: 20,
         zIndex: 999,
-        // backgroundColor: '#333333'
         backgroundColor: 'transparent'
       }, 
       in_event:{

@@ -25,6 +25,7 @@ export const LanguageProvider = ({children}) => {
     const [monthNames, setMonthnames] = useState([])
     const [technicalSupport_, setTechnicalSupport] = useState([])
     const [ministryLeaders_, setMinistryLeaders] = useState([])
+    const [ministryLeader_, setMinistryLeader] = useState([])
     const [midweekMeetings_, setMidweekMeetings] = useState([])
     const [weekendMeetings_, setWeekendMeetings] = useState([])
     const [leaderAndIntroductoryRemarks_, setLeaderAndIntroductoryRemarks] = useState([])
@@ -53,6 +54,11 @@ export const LanguageProvider = ({children}) => {
     const [microphones_, setMicrophones] = useState([])
     const [music_, setMusic] = useState([])
     const [duty_, setDuty] = useState([])
+    const [PROFILE_, setPROFILE] = useState([])
+    const [TIMER_, setTIMER] = useState([])
+    const [EVENTS_, setEVENTS] = useState([])
+    const [RESULT_, setRESULT] = useState([])
+    const [HISTORY_, setHISTORY] = useState([])
 
 
     const setLanguage = async() => {
@@ -79,6 +85,7 @@ export const LanguageProvider = ({children}) => {
             setMonthnames(['styczeń', 'luty', 'marzec', 'kwiecień', 'maj', 'czerwiec', 'lipiec', 'sierpień', 'wrzesień', 'październik', 'listopad', 'grudzień  '])
             setTechnicalSupport('Obsługa Techniczna')
             setMinistryLeaders('Zbiórki')
+            setMinistryLeader('Zbiórka')
             setMidweekMeetings('Spotkania w środku tygodnia')
             setWeekendMeetings('Spotkania na koniec tygodnia')
             setLeaderAndIntroductoryRemarks('Prowadzący i uwagi wstępne')
@@ -104,8 +111,14 @@ export const LanguageProvider = ({children}) => {
             setRequestResetMail('Zresetować hasło')
             setCreateCalendarEvent('Grafik spotkań')
             setMicrophones('Mikrofony')
-            setMusic('Obsługa nagłośnienia')
+            setMusic('Nagłośnienie')
             setDuty('Porządkowy')
+            setPROFILE('PROFIL')
+            setTIMER('TAJMER')
+            setEVENTS('WYDARZENIA')
+            setRESULT('WYNIK')
+            setHISTORY('HISTORIA')
+
 
         }else if(lng === 'RU'){
             setHours('Часы')
@@ -127,6 +140,7 @@ export const LanguageProvider = ({children}) => {
             setChangepassword('Изменить пароль')
             setTechnicalSupport('Техническая поддержка')
             setMinistryLeaders('Проповедническое служение')
+            setMinistryLeader('Встреча пр.служения')
             setMidweekMeetings('Встречи в середине недели')
             setWeekendMeetings('Встречи конца недели')
             setLeaderAndIntroductoryRemarks('Ведущий и вступление')
@@ -152,8 +166,14 @@ export const LanguageProvider = ({children}) => {
             setRequestResetMail('Сбросить пароль')
             setCreateCalendarEvent('Расписание встреч')
             setMicrophones('Mикрофоны')
-            setMusic('Музыкальное обслуживание')
+            setMusic('Музыка')
             setDuty('Дежурный')
+            setPROFILE('ПРОФИЛЬ')
+            setTIMER('ТАЙМЕР')
+            setEVENTS('СОБЫТИЯ')
+            setRESULT('РЕЗУЛЬТАТ')
+            setHISTORY('ИСТОРИЯ')
+
         }else if(lng === 'UA'){
             setHours('Години')
             setMinutes('Хвилини')
@@ -174,6 +194,7 @@ export const LanguageProvider = ({children}) => {
             setChangepassword('Змiнити гасло')
             setTechnicalSupport('Технічна підтримка')
             setMinistryLeaders('Проповідницьке служіння')
+            setMinistryLeader('Проп. служіння')
             setMidweekMeetings('Зустрічі у середині тижня')
             setWeekendMeetings('Зустрічі кінця тижня')
             setLeaderAndIntroductoryRemarks('Ведучий і вступ')
@@ -199,8 +220,14 @@ export const LanguageProvider = ({children}) => {
             setRequestResetMail('Ануляцiя паролю')
             setCreateCalendarEvent('Розклад зустрічей')
             setMicrophones('Mікрофони')
-            setMusic('Музичне обслуговування')
+            setMusic('Музика')
             setDuty('Черговий')
+            setPROFILE('ПРОФІЛЬ')
+            setTIMER('ТАЙМЕР')
+            setEVENTS('ПОДІЇ')
+            setRESULT('РЕЗУЛЬТАТ')
+            setHISTORY('ІСТОРІЯ')
+
         }
       };
 
@@ -231,6 +258,7 @@ export const LanguageProvider = ({children}) => {
             monthNames,
             technicalSupport_,
             ministryLeaders_,
+            ministryLeader_,
             midweekMeetings_,
             weekendMeetings_,
             leaderAndIntroductoryRemarks_,
@@ -256,6 +284,11 @@ export const LanguageProvider = ({children}) => {
             microphones_,
             music_,
             duty_,
+            PROFILE_,
+            TIMER_,
+            EVENTS_,
+            RESULT_,
+            HISTORY_,
         }}>
             {children}
         </LanguageContext.Provider>
