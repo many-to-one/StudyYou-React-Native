@@ -15,9 +15,7 @@ const Calendar_ = (props) => {
   const isFocused = useIsFocused();
   const nextDay = moment().add(1, 'days').format("YYYY-MM-DD");
   let days = [];
-  const marked = {
-    // [nextDay]: {selected: true, selectedColor: '#222222', selectedTextColor: 'yellow',}
-  }
+  const marked = {}
   const date = ['2023-02-17']
 
   useEffect(() => {
@@ -36,6 +34,7 @@ let test = {}
     const resp = await fetch(`${proxy}/backend/get_calendar/`)
     if(resp.status === 200){
       const data = await resp.json()
+      setDs(data.data)
       const ar = data.data
 
       ar.map((date) => {
@@ -54,6 +53,16 @@ let test = {}
       console.log('marked:', marked)
     }
   }
+
+  // if(ds){
+  //   ds.map((day) => {
+  //     marked[day.toString()] = {
+  //       selected: true,
+  //       selectedColor: '#78D7D9',
+  //       selectedTextColor: 'white',
+  //     }
+  //   })
+  // }
 
 
   const setDate = (day) => {

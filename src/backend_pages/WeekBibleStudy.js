@@ -1,11 +1,12 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { StyleSheet, Text, View } from 'react-native'
 import { AuthContext } from '../context/AuthContext';
-import { MultipleSelectList  } from 'react-native-dropdown-select-list';
+import { SelectList  } from 'react-native-dropdown-select-list';
 import Icon from "react-native-vector-icons/Ionicons";
 import { useIsFocused } from '@react-navigation/native';
 import ScheduleBtn from '../buttons/ScheduleBtn';
 import { LanguageContext } from '../context/LanguageContext';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const WeekBibleStudy = ({day, navigation}) => {
 
@@ -22,7 +23,8 @@ const WeekBibleStudy = ({day, navigation}) => {
   }, [isFocused])
 
   const getUsers = async() => {
-      const resp = await fetch(`${proxy}/users/users/`)
+    let datas = JSON.parse(await AsyncStorage.getItem("asyncUserData"))
+    const resp = await fetch(`${proxy}/users/users/${datas.congregation}/`)
       const data = await resp.json();
       if(resp.status === 200){
         setUsers(data)
@@ -59,9 +61,8 @@ const WeekBibleStudy = ({day, navigation}) => {
   }
 
   const setWeekBibleStudy = async(selected) => {
-    selected.map((e) => {
       for(let k in USERS){  
-        if(e === USERS[k]){
+        if(selected === USERS[k]){
 
           const resp = fetch(`${proxy}/backend/set_calendar/${k}/`, {
             method: 'POST',
@@ -72,14 +73,21 @@ const WeekBibleStudy = ({day, navigation}) => {
               'date': `${day}`,
               'action': 'Bible Study Leader'
             })
-          })
-
-          if(resp.status === 200){
-            setSelected([])
-          }    
+          })    
         }
       }
-    })
+    const body = {'date': day, 'action': 'Bible Study Leader',}
+    const resp = await fetch(`${proxy}/backend/get_calendar_date/`, {
+      method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body:JSON.stringify(body),
+        });
+        const data = await resp.json();
+        if(data){
+          setDateWeekBibleStudy(data)
+        }  
     getCalendarDatesByDate()
   }
 
@@ -123,7 +131,7 @@ if(dateWeekBibleStudy.length === 1){
 }else if(dateWeekBibleStudy.length === 0){
         return (
             <View >
-              <MultipleSelectList 
+              <SelectList 
                 setSelected={(val) => setSelected(val)} 
                 data={data} 
                 save="value"
@@ -187,7 +195,7 @@ const styles = StyleSheet.create({
     margin: 5,
     padding: 10,
     color: 'white',
-    fontSize: 20,
+    fontSize: 10,
     zIndex: 999,
   },
   box:{

@@ -12,8 +12,11 @@ export const AuthProvider = ({children}) => {
     const [logged, setLogged] = useState(false)
     const proxy = "http://127.0.0.1:8000"
 
+    const congr = async() => {
+        return JSON.parse(await AsyncStorage.getItem("asyncUserData"))
+    }
 
-    const register = async (username ,email, password) => {
+    const register = async (username ,email, password, congregation, language) => {
 
         const response = await fetch(`${proxy}/users/register/`, {
             method: 'POST',
@@ -24,6 +27,8 @@ export const AuthProvider = ({children}) => {
                 username: username,
                 email: email,
                 password: password,
+                congregation: congregation,
+                language: language,
             })
           });
     
@@ -36,7 +41,7 @@ export const AuthProvider = ({children}) => {
           }
     };
 
-    const login = async(email, password) => {
+    const login = async(email, password, congregation) => {
 
         const resp = await fetch(`${proxy}/users/login/`, {
           method: 'POST',
@@ -46,11 +51,13 @@ export const AuthProvider = ({children}) => {
             body:JSON.stringify({
               email: email,
               password: password,
+              congregation: congregation,
           })
         });
         const data = await resp.json()
         if (resp.status === 200){
             console.log('data:', data.jwt)
+            console.log('data:', data.congregation)
             const setasynctoken = await AsyncStorage.setItem("asyncUserData", JSON.stringify(data));
             setUserData(data)
             setToken(data.jwt)
@@ -125,6 +132,7 @@ export const AuthProvider = ({children}) => {
             profileToken,
             logged,
             passwordResetService,
+            congr,
         }}>
             {children}
         </AuthContext.Provider>

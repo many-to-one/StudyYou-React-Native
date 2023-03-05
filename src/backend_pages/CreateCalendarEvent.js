@@ -12,6 +12,7 @@ const CreateCalendarEvent = ({route, navigation}) => {
     ministryLeaders_,
     midweekMeetings_,
     weekendMeetings_,
+    ministryWith_,
   } = useContext(LanguageContext);
 
     return (
@@ -63,6 +64,18 @@ const CreateCalendarEvent = ({route, navigation}) => {
               onPress={() => navigation.navigate('WeekendMeetings', {day: day})}     
             />
             <Text style={styles.text}>{weekendMeetings_}</Text>
+          </View>
+        </TouchableOpacity>
+
+        <TouchableOpacity>
+          <View style={styles.event}>
+            <Icon 
+              name="briefcase-sharp" 
+              size={50} 
+              color={'#78D7D9'} 
+              onPress={() => navigation.navigate('MinistryWithEvent', {day: day})}     
+            />
+            <Text style={styles.text}>{ministryWith_}</Text>
           </View>
         </TouchableOpacity>
 

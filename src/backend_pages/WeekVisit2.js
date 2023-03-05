@@ -6,6 +6,7 @@ import Icon from "react-native-vector-icons/Ionicons";
 import { useIsFocused } from '@react-navigation/native';
 import ScheduleBtn from '../buttons/ScheduleBtn';
 import { LanguageContext } from '../context/LanguageContext';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const WeekVisit2 = ({day, navigation}) => {
 
@@ -22,7 +23,8 @@ const WeekVisit2 = ({day, navigation}) => {
   }, [isFocused])
 
   const getUsers = async() => {
-      const resp = await fetch(`${proxy}/users/users/`)
+    let datas = JSON.parse(await AsyncStorage.getItem("asyncUserData"))
+    const resp = await fetch(`${proxy}/users/users/${datas.congregation}/`)
       const data = await resp.json();
       if(resp.status === 200){
         setUsers(data)
@@ -72,14 +74,22 @@ const WeekVisit2 = ({day, navigation}) => {
               'date': `${day}`,
               'action': 'School: Return visit'
             })
-          })
-
-          if(resp.status === 200){
-            setSelected([])
-          }    
+          })   
         }
       }
     })
+    const body = {'date': day, 'action': 'School: Return visit',}
+    const resp = await fetch(`${proxy}/backend/get_calendar_date/`, {
+      method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body:JSON.stringify(body),
+        });
+        const data = await resp.json();
+        if(data){
+          setDateWeekVisit2(data)
+        }
     getCalendarDatesByDate()
   }
 

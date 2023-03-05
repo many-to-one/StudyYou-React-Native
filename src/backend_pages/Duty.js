@@ -5,10 +5,13 @@ import { MultipleSelectList  } from 'react-native-dropdown-select-list';
 import Icon from "react-native-vector-icons/Ionicons";
 import { useIsFocused } from '@react-navigation/native';
 import ScheduleBtn from '../buttons/ScheduleBtn';
+import { LanguageContext } from '../context/LanguageContext';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Duty = ({day, navigation}) => {
 
     const {proxy} = useContext(AuthContext);
+    const {duty_} = useContext(LanguageContext);
     const [selected, setSelected] = useState('')
     const [users, setUsers] = useState([])
     const [dateDuty, setDateDuty] = useState([])
@@ -20,7 +23,8 @@ const Duty = ({day, navigation}) => {
   }, [isFocused])
 
   const getUsers = async() => {
-      const resp = await fetch(`${proxy}/users/users/`)
+      let datas = JSON.parse(await AsyncStorage.getItem("asyncUserData"))
+      const resp = await fetch(`${proxy}/users/users/${datas.congregation}/`)
       const data = await resp.json();
       if(resp.status === 200){
         setUsers(data)
@@ -70,14 +74,23 @@ const Duty = ({day, navigation}) => {
               'date': `${day}`,
               'action': 'Duty'
             })
-          })
-
-          if(resp.status === 200){
-            setSelected([])
-          }    
+          })   
         }
       }
     })
+    const body = {'date': day, 'action': 'Duty',}
+    const resp = await fetch(`${proxy}/backend/get_calendar_date/`, {
+      method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body:JSON.stringify(body),
+        });
+        const data = await resp.json();
+        if(data){
+          setDateDuty(data)
+        }  
+    getCalendarDatesByDate()
     getCalendarDatesByDate()
   }
 
@@ -98,21 +111,20 @@ const Duty = ({day, navigation}) => {
 
   console.log('dateDuty:', dateDuty, day)
 
-if(dateDuty.length >= 1){
+if(dateDuty.length > 1){
   return ( 
     dateDuty.map((e) => {
-      if(e.date === day && e.action === 'Duty'){  
-          return  <View style={styles.user}>
-          <Icon name='man-sharp' size={20} color={'#F9F9B5'} />
-          <Text style={styles.user_text}>{USERS[e.user]}</Text>
-              <Icon 
-                  name="close-circle-outline" 
-                  size={20} 
-                  color={'white'} 
-                  onPress={() => deleteMicrophone(e)}     
-                  />
-          </View>  
-                              
+      if(e.date === day && e.action === 'Duty'){            
+        return  <View style={styles.user}>
+                  <Icon name='man-sharp' size={20} color={'#F9F9B5'} />
+                  <Text style={styles.user_text}>{USERS[e.user]}</Text>
+                    <Icon 
+                      name="close-circle-outline" 
+                      size={20} 
+                      color={'white'} 
+                      onPress={() => deleteMicrophone(e)}     
+                    />
+                </View>                           
       }
   }) 
 
@@ -128,7 +140,7 @@ if(dateDuty.length >= 1){
                 placeholder={
                   <View style={styles.placeholder}>
                     <Icon name='man-sharp' size={20} color={'white'} />
-                    <Text style={styles.text}>Duty</Text>
+                    <Text style={styles.text}>{duty_}</Text>
                   </View>
                 }
                 boxStyles={styles.event}
@@ -148,8 +160,55 @@ if(dateDuty.length >= 1){
               />
             </View>
         )
-    }
+    }else if(dateDuty.length === 1){
+      return ( 
+        dateDuty.map((e) => {
+            if(e.date === day && e.action === 'Duty'){  
+                return  <View>
+                  <View style={styles.user}>
+                  <Icon name='man-sharp' size={20} color={'#F9F9B5'} />
+                    <Text style={styles.user_text}>{USERS[e.user]}</Text>
+                        <Icon 
+                            name="close-circle-outline" 
+                            size={20} 
+                            color={'#F9F9B5'} 
+                            onPress={() => deleteMicrophone(e)}     
+                            />
+                  </View>
+                  <MultipleSelectList 
+                  setSelected={(val) => setSelected(val)} 
+                  data={data} 
+                  save="value"
+                  // onSelect={() => alert('selected')} 
+                  placeholder={
+                    <View style={styles.placeholder}>
+                      <Icon name='man-sharp' size={20} color={'white'} />
+                      <Text style={styles.text}>{duty_}</Text>
+                    </View>
+                  }
+                  boxStyles={styles.event}
+                  inputStyles={styles.input}
+                  dropdownStyles={styles.box}
+                  dropdownItemStyles={{color: 'white'}}
+                  dropdownTextStyles={{color: 'white'}}
+                  arrowicon={<Icon name="chevron-down" size={20} color={'white'} />} 
+                  searchicon={<Icon name="search" size={20} color={'white'} />} 
+                  closeicon={<Icon name="close" size={20} color={'white'} />} 
+                  search={true}
+                  />
+                  <ScheduleBtn 
+                      style={{backgroundColor: '#F9F9B5',}}
+                      title={'Submit'}
+                      onPress={() => setMicrophones(selected)}
+                  />
+                </View>
+                
+                                    
+            }
+        }) 
 
+        )
+}
 }
 
 const styles = StyleSheet.create({
@@ -163,7 +222,7 @@ const styles = StyleSheet.create({
   },
   text: {
     color: 'white',
-    fontSize: 20,
+    fontSize: 10,
   },
   event:{
     width: 290,

@@ -12,11 +12,11 @@ import {
   Platform
 } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
-import { useNavigation } from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Login from '../navbar_pages/Login';
 import { AuthContext } from '../context/AuthContext';
 import { LanguageContext } from '../context/LanguageContext';
+import { useIsFocused, useNavigation } from '@react-navigation/native';
 
 const NewMenu = () => {
 
@@ -40,11 +40,12 @@ const NewMenu = () => {
       RESULT_,
       HISTORY_,
     } = useContext(LanguageContext);
+    const isFocused = useIsFocused();
   
 
     useEffect(() => {
       profile()
-    }, [])
+    }, [isFocused])
   
   
   

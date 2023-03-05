@@ -6,6 +6,7 @@ import { AuthContext } from '../context/AuthContext';
 import Icon from "react-native-vector-icons/Ionicons";
 import BackButton from '../buttons/BackButton';
 import { LanguageContext } from '../context/LanguageContext';
+import moment from 'moment';
 
 const Timetable = ({navigation}) => {
     const {proxy} = useContext(AuthContext);
@@ -33,6 +34,8 @@ const Timetable = ({navigation}) => {
       weekendSpeach_,
       watchTowerLeader_,
       watchTowerLector_,
+      ministryWith_,
+      with_
     } = useContext(LanguageContext)
     const isFocused = useIsFocused();
     const [data, setData] = useState([])
@@ -47,25 +50,13 @@ const Timetable = ({navigation}) => {
       const data = await resp.json()
       if(data){
           setData(data)
-          console.log('data',data)
           data.map((e) => {
-            if(e.date !== Date.now()){
-              console.log('tt', e.date)
+            if(e.date < moment().format('YYYY-MM-DD')){
               deleteCalendarDate(e.id)
             }
           })
       }
   }
-
-    // data.map((e) => {
-    //   if(e.date !== Date.now()){
-    //     deleteCalendarDate(e.id)
-    //   }
-    // })
-
-    // for(let e=0; e<data.length; e++){
-    //   console.log('tt-data', e)
-    // }
 
     const deleteCalendarDate = async(id) => {
       const resp = await fetch(`${proxy}/backend/delete_calendar/${id}/`, {
@@ -77,12 +68,6 @@ const Timetable = ({navigation}) => {
       const data = await resp.json()
       if(data.status === 200){
         console.log('deleted', id)
-        // data.map((e) => {
-        //   if(e.date < Date.now()){
-        //     console.log('tt', e.date)
-        //     // deleteCalendarDate(e.id)
-        //   }
-        // })
       }
     }
 
@@ -539,7 +524,7 @@ const Timetable = ({navigation}) => {
             </Animated.View>
           </TouchableOpacity> 
 
-        }else if(e.action === 'Watch Tower Lector'){
+        }else if(e.action === 'MinistryWith'){
             return  <TouchableOpacity>
             <Animated.View style={styles.animated}>
               <ImageBackground
@@ -547,12 +532,12 @@ const Timetable = ({navigation}) => {
                 style={styles.img}
               >
                 <View style={styles.event}>
-                  <Icon name="md-reader" size={20} color={'#F9F9B5'} />
+                  <Icon name="briefcase-sharp" size={20} color={'#F9F9B5'} />
                   <Text style={styles.text}>
                     {e.date}
                   </Text>
                   <Text style={styles.text}>
-                    {watchTowerLector_}
+                    {ministryWith_} {with_} {e.person}
                   </Text>
                 </View>
               </ImageBackground>

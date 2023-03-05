@@ -54,11 +54,13 @@ export const LanguageProvider = ({children}) => {
     const [microphones_, setMicrophones] = useState([])
     const [music_, setMusic] = useState([])
     const [duty_, setDuty] = useState([])
+    const [ministryWith_, setMinistryWith] = useState([])
     const [PROFILE_, setPROFILE] = useState([])
     const [TIMER_, setTIMER] = useState([])
     const [EVENTS_, setEVENTS] = useState([])
     const [RESULT_, setRESULT] = useState([])
     const [HISTORY_, setHISTORY] = useState([])
+    const [with_, setWith] = useState([])
 
 
     const setLanguage = async() => {
@@ -113,11 +115,13 @@ export const LanguageProvider = ({children}) => {
             setMicrophones('Mikrofony')
             setMusic('Nagłośnienie')
             setDuty('Porządkowy')
+            setMinistryWith('Służba')
             setPROFILE('PROFIL')
             setTIMER('TAJMER')
             setEVENTS('WYDARZENIA')
             setRESULT('WYNIK')
             setHISTORY('HISTORIA')
+            setWith('z')
 
 
         }else if(lng === 'RU'){
@@ -168,11 +172,13 @@ export const LanguageProvider = ({children}) => {
             setMicrophones('Mикрофоны')
             setMusic('Музыка')
             setDuty('Дежурный')
+            setMinistryWith('Служение')
             setPROFILE('ПРОФИЛЬ')
             setTIMER('ТАЙМЕР')
             setEVENTS('СОБЫТИЯ')
             setRESULT('РЕЗУЛЬТАТ')
             setHISTORY('ИСТОРИЯ')
+            setWith('c')
 
         }else if(lng === 'UA'){
             setHours('Години')
@@ -222,11 +228,13 @@ export const LanguageProvider = ({children}) => {
             setMicrophones('Mікрофони')
             setMusic('Музика')
             setDuty('Черговий')
+            setMinistryWith('Служіння')
             setPROFILE('ПРОФІЛЬ')
             setTIMER('ТАЙМЕР')
             setEVENTS('ПОДІЇ')
             setRESULT('РЕЗУЛЬТАТ')
             setHISTORY('ІСТОРІЯ')
+            setWith('з')
 
         }
       };
@@ -283,12 +291,14 @@ export const LanguageProvider = ({children}) => {
             createCalendarEvent_,
             microphones_,
             music_,
+            ministryWith_,
             duty_,
             PROFILE_,
             TIMER_,
             EVENTS_,
             RESULT_,
             HISTORY_,
+            with_,
         }}>
             {children}
         </LanguageContext.Provider>

@@ -8,16 +8,15 @@ import ScheduleBtn from '../buttons/ScheduleBtn';
 import { LanguageContext } from '../context/LanguageContext';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-const Microphones = ({day, navigation}) => {
+const MinistryWith = ({day, navigation}) => {
 
-    const {proxy, congr} = useContext(AuthContext);
-    const c = congr()
-    const {microphones_} = useContext(LanguageContext);
+    const {proxy} = useContext(AuthContext);
+    const {ministryWith_} = useContext(LanguageContext);
     const [selected, setSelected] = useState('')
+    const [choose, setChoose] = useState(true)
     const [users, setUsers] = useState([])
-    const [dateMicrophones, setDateMicrophones] = useState([])
+    const [dateMinistryWith, setDateMinistryWith] = useState([])
     const USERS = {}
-    const [congregation, setCongregation] = useState(true)
     const isFocused = useIsFocused();
 
     useEffect(() => {
@@ -31,13 +30,12 @@ const Microphones = ({day, navigation}) => {
       if(resp.status === 200){
         setUsers(data)
         getCalendarDatesByDate()
-        setCongregation(datas.congregation)
       }
   }
 
-  const getCalendarDatesByDate = async() => {
+  const getCalendarDatesByDate = async(selected) => {
     let datas = JSON.parse(await AsyncStorage.getItem("asyncUserData"))
-    const body = {'date': day, 'action': 'Microphones', 'congregation': datas.congregation}
+    const body = {'date': day, 'action': 'MinistryWith',} //'person': selected
     const resp = await fetch(`${proxy}/backend/get_calendar_date/`, {
       method: 'POST',
           headers: {
@@ -47,8 +45,16 @@ const Microphones = ({day, navigation}) => {
         });
         const data = await resp.json();
         if(data){
-          setDateMicrophones(data)
-          setSelected([])
+            // data.map((e) => {
+            //     if(e.person){
+            //         console.log('data+',e)
+            //         setDateMinistryWith(e)
+            //     }
+            // })
+            setDateMinistryWith(data)
+            // setChoose(true)
+            console.log('data+',data)
+            // setSelected([])
         }  
   }
 
@@ -64,43 +70,28 @@ const Microphones = ({day, navigation}) => {
     )
   }
 
-  const setMicrophones = async(selected) => {
-    let datas = JSON.parse(await AsyncStorage.getItem("asyncUserData"))
-    selected.map((e) => {
-      for(let k in USERS){  
-        if(e === USERS[k]){
 
-          const resp = fetch(`${proxy}/backend/set_calendar/${k}/`, {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-              'date': `${day}`,
-              'action': 'Microphones',
-              'congregation': datas.congregation
-              ,
-            })
-          })   
-        }
+const setMinistryWith = async(selected) => {
+    let datas = JSON.parse(await AsyncStorage.getItem("asyncUserData"))
+    const resp = await fetch(`${proxy}/backend/set_calendar_person/${datas.id}/`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          'date': `${day}`,
+          'action': 'MinistryWith',
+          'person': `${selected}`,
+        })
+      })
+      if(resp.data){
+        setDateMinistryWith(resp.data)
+        console.log('data++',resp.data)
       }
-    })
-    const body = {'date': day, 'action': 'Microphones', 'congregation': datas.congregation}
-    const resp = await fetch(`${proxy}/backend/get_calendar_date/`, {
-      method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body:JSON.stringify(body),
-        });
-        const data = await resp.json();
-        if(data){
-          setDateMicrophones(data)
-        }
-    getCalendarDatesByDate()
+      getCalendarDatesByDate(selected)
   }
 
-  const deleteMicrophone = async(user) => {
+  const deleteMinistryWith = async(user) => {
     const resp = await fetch(`${proxy}/backend/delete_calendar/${user.id}/`, {
       method: 'DELETE',
       headers: {
@@ -110,25 +101,25 @@ const Microphones = ({day, navigation}) => {
     if(resp.status === 200){
       console.log('deleted', user)
       setSelected([])
-      setDateMicrophones([])
+      setDateMinistryWith([])
       getCalendarDatesByDate()
     }
   }
 
-console.log('dateMicrophones:', dateMicrophones, day)
+console.log('dateMinistryWith:', dateMinistryWith, day)
 
-if(dateMicrophones.length > 1){
+if(dateMinistryWith.length > 1){
   return ( 
-    dateMicrophones.map((e) => {
-        if(e.date === day && e.action === 'Microphones'){  
+    dateMinistryWith.map((e) => {
+        if(e.date === day && e.action === 'MinistryWith'){  
             return  <View style={styles.user}>
-            <Icon name='mic' size={20} color={'#F9F9B5'} />
-            <Text style={styles.user_text}>{USERS[e.user]}</Text>
+            <Icon name='briefcase-sharp' size={20} color={'#F9F9B5'} />
+            <Text style={styles.user_text}>{e.person}</Text>
                 <Icon 
                     name="close-circle-outline" 
                     size={20} 
                     color={'#F9F9B5'} 
-                    onPress={() => deleteMicrophone(e)}     
+                    onPress={() => deleteMinistryWith(e)}     
                     />
             </View>  
 
@@ -136,18 +127,17 @@ if(dateMicrophones.length > 1){
     }) 
 
   )
-    }else if(dateMicrophones.length === 0){
+    }else if(dateMinistryWith.length === 0){
         return (
             <View >
               <MultipleSelectList 
                 setSelected={(val) => setSelected(val)} 
                 data={data} 
-                save="value"
-                // onSelect={(value) => alert(`${value}`)} 
+                save="value" 
                 placeholder={
                   <View style={styles.placeholder}>
-                    <Icon name='mic' size={20} color={'white'} />
-                    <Text style={styles.text}>{microphones_}</Text>
+                    <Icon name='briefcase-sharp' size={20} color={'white'} />
+                    <Text style={styles.text}>{ministryWith_}</Text>
                   </View>
                 }
                 boxStyles={styles.event}
@@ -163,34 +153,33 @@ if(dateMicrophones.length > 1){
               <ScheduleBtn 
                   style={{backgroundColor: '#F9F9B5',}}
                   title={'Submit'}
-                  onPress={() => setMicrophones(selected)}
+                  onPress={() => setMinistryWith(selected)}
               />
             </View>
         )
-    }else if(dateMicrophones.length === 1){
+    }else if(dateMinistryWith.length === 1){
         return ( 
-          dateMicrophones.map((e) => {
-              if(e.date === day && e.action === 'Microphones'){  
+            dateMinistryWith.map((e) => {
+              if(e.date === day && e.action === 'MinistryWith'){  
                   return  <View>
                     <View style={styles.user}>
-                    <Icon name='mic' size={20} color={'#F9F9B5'} />
-                      <Text style={styles.user_text}>{USERS[e.user]}</Text>
+                    <Icon name='briefcase-sharp' size={20} color={'#F9F9B5'} />
+                      <Text style={styles.user_text}>{e.person}</Text>
                           <Icon 
                               name="close-circle-outline" 
                               size={20} 
                               color={'#F9F9B5'} 
-                              onPress={() => deleteMicrophone(e)}     
+                              onPress={() => deleteMinistryWith(e)}     
                               />
                     </View>
                     <MultipleSelectList 
                     setSelected={(val) => setSelected(val)} 
                     data={data} 
                     save="value"
-                    // onSelect={() => alert('selected')} 
                     placeholder={
                       <View style={styles.placeholder}>
-                        <Icon name='mic' size={20} color={'white'} />
-                        <Text style={styles.text}>{microphones_}</Text>
+                        <Icon name='briefcase-sharp' size={20} color={'white'} />
+                        <Text style={styles.text}>{ministryWith_}</Text>
                       </View>
                     }
                     boxStyles={styles.event}
@@ -206,7 +195,7 @@ if(dateMicrophones.length > 1){
                     <ScheduleBtn 
                         style={{backgroundColor: '#F9F9B5',}}
                         title={'Submit'}
-                        onPress={() => setMicrophones(selected)}
+                        onPress={() => setMinistryWith(selected)}
                     />
                   </View>
                   
@@ -299,4 +288,4 @@ placeholder: {
 },     
 })
 
-export default Microphones
+export default MinistryWith

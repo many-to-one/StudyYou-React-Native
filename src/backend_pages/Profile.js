@@ -101,6 +101,22 @@ const Profile = ({navigation}) => {
               style={styles.img}
             >
               <View style={styles.inside}>
+                <Icon name="person-circle-outline" size={20} color={'#a1efff'} />
+                <Text style={styles.text}>
+                  {profileData.congregation}
+                </Text>
+              </View>
+            </ImageBackground>
+          </Animated.View>
+        </TouchableOpacity>
+
+        <TouchableOpacity>
+          <Animated.View style={styles.animated}>
+            <ImageBackground
+              source={require('../../assets/card.png')}
+              style={styles.img}
+            >
+              <View style={styles.inside}>
               <Icon name="mail-outline" size={20} color={'#a1efff'} />
                 <Text style={styles.text}>
                   {profileData.email}

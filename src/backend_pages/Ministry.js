@@ -6,6 +6,7 @@ import Icon from "react-native-vector-icons/Ionicons";
 import { useIsFocused } from '@react-navigation/native';
 import ScheduleBtn from '../buttons/ScheduleBtn';
 import { LanguageContext } from '../context/LanguageContext';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Ministry = ({day, navigation}) => {
 
@@ -22,7 +23,8 @@ const Ministry = ({day, navigation}) => {
   }, [isFocused])
 
   const getUsers = async() => {
-      const resp = await fetch(`${proxy}/users/users/`)
+    let datas = JSON.parse(await AsyncStorage.getItem("asyncUserData"))
+    const resp = await fetch(`${proxy}/users/users/${datas.congregation}/`)
       const data = await resp.json();
       if(resp.status === 200){
         setUsers(data)
@@ -80,6 +82,19 @@ const Ministry = ({day, navigation}) => {
         }
       }
     })
+    const body = {'date': day, 'action': 'Ministry leader',}
+    const resp = await fetch(`${proxy}/backend/get_calendar_date/`, {
+      method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body:JSON.stringify(body),
+        });
+        const data = await resp.json();
+        if(data){
+          setDateMinistry(data)
+        }  
+    getCalendarDatesByDate()
     getCalendarDatesByDate()
   }
 
@@ -152,7 +167,7 @@ if(dateMinistry.length > 1){
               />
             </View>
         )
-    }else if(dateMinistry.length == 1){
+    }else if(dateMinistry.length === 1){
         return ( 
           dateMinistry.map((e) => {
               if(e.date === day && e.action === 'Ministry leader'){  

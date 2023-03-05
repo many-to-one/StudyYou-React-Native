@@ -28,6 +28,7 @@ import Ministries from '../backend_pages/Ministries';
 import MiddleOfTheWeek from '../backend_pages/MiddleOfTheWeek';
 import WeekendMeetings from '../backend_pages/WeekendMeetings';
 import { LanguageContext } from '../context/LanguageContext';
+import MinistryWithEvent from '../backend_pages/MinistryWithEvent';
 
 const Tab = createBottomTabNavigator();
 
@@ -55,6 +56,7 @@ function BottomNavigator() {
     music_,
     duty_,
     weekendMeetings_,
+    ministryWith_,
   } = React.useContext(LanguageContext);  
 
   const screenOptions = (route, color) => {
@@ -502,6 +504,25 @@ function BottomNavigator() {
           tabBarVisible: false, // hide the button
           tabBarButton: (props) => null, // hide the button
         }}
+        />
+        <Tab.Screen 
+        name="MinistryWithEvent" 
+        component={MinistryWithEvent} 
+        options={({ navigation }) => ({
+          title: `${ministryWith_}`,
+          headerTtleStyle: {
+            color: 'white',
+            marginLeft: '6rem',
+          },
+          headerStyle: {
+            backgroundColor: 'black',
+          },
+          tabBarVisible: false, // hide the button
+          tabBarButton: (props) => null, // hide the button
+          headerLeft: () => (
+            <BackButton onPress={() => navigation.navigate('Profile')} />
+          ),
+        })}
         />
       </Tab.Navigator>
   );

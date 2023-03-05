@@ -19,8 +19,13 @@ const Login = () => {
   const {userData, login, setLanguage, profileToken, logged} = useContext(AuthContext);
   const [selected, setSelected] = useState('')
   const [lng, setLng] = useState(false)
-
-  const Data = [
+  const [selected_c, setSelected_c] = useState('')
+  const [selected_l, setSelected_l] = useState('')
+  const [congregation, setCongregation] = useState('');
+  const Data_c = [
+    {key: 'Sława', value: 'Sława'}
+  ]
+  const Data_l = [
     {key: 'PL', value: 'PL'},
     {key: 'RU', value: 'RU'},
     {key: 'UA', value: 'UA'},
@@ -51,11 +56,11 @@ const Login = () => {
   const LoginApi = async () => {
     
     // try {
-      const resp = await login(email, password);
+      const resp = await login(email, password, congregation);
       if (resp === '200'){
         clearTextInput()
-        navigation.navigate('Home')
-        window.location.reload()
+        navigation.navigate('Menu')
+        // window.location.reload()
       }else{
         navigation.navigate('Login')
       }
@@ -64,10 +69,6 @@ const Login = () => {
     //   console.error('error', error);
     // }     
       
-  }
-
-  const Register = () => {
-    navigation.navigate('Registration')
   }
 
     if(logged === true){
@@ -80,7 +81,6 @@ const Login = () => {
       return(
           <View style={styles.container}>
             <View style={styles.login}>
-              <Text style={styles.text}>Hi {userData.username} </Text>
               <TextInput 
                 placeholder="Enter email"
                 placeholderTextColor={'gray'}
@@ -94,7 +94,7 @@ const Login = () => {
                 onChangeText={(text) => setPassword(text)}
                 style={styles.input}
               />
-              <SelectList 
+              {/* <SelectList 
                 onSelect={() => language(selected)}
                 setSelected={setSelected} 
                 data={Data} 
@@ -105,6 +105,34 @@ const Login = () => {
                 dropdownTextStyles={{color: 'white'}}
                 arrowicon={<Icon name="chevron-down" size={20} color={'white'} />} 
                 searchicon={<Icon name="search" size={20} color={'white'} />} 
+                search={true} 
+              /> */}
+              {/* <SelectList 
+                onSelect={() => setCongregation}
+                setSelected={setCongregation}
+                placeholder={<Icon name='filter-outline' size={20} color={'white'} />}
+                data={Data_c} 
+                boxStyles={styles.event}
+                inputStyles={styles.text}
+                dropdownStyles={styles.selectlist}
+                dropdownItemStyles={{color: 'white'}}
+                dropdownTextStyles={{color: 'white'}}
+                arrowicon={<Icon name="chevron-down" size={15} color={'white'} />} 
+                searchicon={<Icon name="search" size={15} color={'white'} />} 
+                search={true} 
+              /> */}
+              <SelectList 
+                onSelect={() => language(selected_l)}
+                setSelected={setSelected_l}
+                placeholder={<Icon name='earth' size={20} color={'white'} />}
+                data={Data_l} 
+                boxStyles={styles.event}
+                inputStyles={styles.text}
+                dropdownStyles={styles.selectlist}
+                dropdownItemStyles={{color: 'white'}}
+                dropdownTextStyles={{color: 'white'}}
+                arrowicon={<Icon name="chevron-down" size={15} color={'white'} />} 
+                searchicon={<Icon name="search" size={15} color={'white'} />} 
                 search={true} 
               />
                 <AuthButton 
@@ -141,7 +169,6 @@ const Login = () => {
       return(
         <View style={styles.container}>
           <View style={styles.login}>
-            <Text style={styles.text}>Hi {userData.username} </Text>
             <TextInput 
               placeholder="Enter email"
               placeholderTextColor={'gray'}
@@ -231,11 +258,11 @@ const styles = StyleSheet.create({
   },
   event:{
     width: 250,
-    // height: 50,
+    height: 40,
     borderRadius: 10,
     borderWidth: 2,
     borderColor: '#EFA9FD',
-    margin: 5,
+    margin: 12,
     padding: 10,
     color: 'white',
     fontSize: 20,

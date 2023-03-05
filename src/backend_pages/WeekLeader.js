@@ -1,11 +1,12 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { Button, StyleSheet, Text, View } from 'react-native'
 import { AuthContext } from '../context/AuthContext';
-import { MultipleSelectList  } from 'react-native-dropdown-select-list';
+import { SelectList  } from 'react-native-dropdown-select-list';
 import Icon from "react-native-vector-icons/Ionicons";
 import { useIsFocused } from '@react-navigation/native';
 import ScheduleBtn from '../buttons/ScheduleBtn';
 import { LanguageContext } from '../context/LanguageContext';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const WeekLeader = ({day, navigation}) => {
 
@@ -23,7 +24,8 @@ const WeekLeader = ({day, navigation}) => {
   }, [isFocused])
 
   const getUsers = async() => {
-      const resp = await fetch(`${proxy}/users/users/`)
+    let datas = JSON.parse(await AsyncStorage.getItem("asyncUserData"))
+    const resp = await fetch(`${proxy}/users/users/${datas.congregation}/`)
       const data = await resp.json();
       if(resp.status === 200){
         setUsers(data)
@@ -60,11 +62,9 @@ const WeekLeader = ({day, navigation}) => {
   }
 
   const setLeaderWeek = async(selected) => {
-    selected.map((e) => {
       for(let k in USERS){  
-        if(e === USERS[k]){
-
-          const resp = fetch(`${proxy}/backend/set_calendar/${k}/`, {
+        if(selected === USERS[k]){
+          fetch(`${proxy}/backend/set_calendar/${k}/`, {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json'
@@ -73,14 +73,21 @@ const WeekLeader = ({day, navigation}) => {
               'date': `${day}`,
               'action': 'Leader (week)'
             })
-          })
-
-          if(resp.status === 200){
-            setSelected([])
-          }    
+          })   
         }
       }
-    })
+    const body = {'date': day, 'action': 'Leader (week)',}
+    const resp = await fetch(`${proxy}/backend/get_calendar_date/`, {
+      method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body:JSON.stringify(body),
+        });
+        const data = await resp.json();
+        if(data){
+          setDateLeaderWeek(data)
+        }  
     getCalendarDatesByDate()
   }
 
@@ -124,7 +131,7 @@ if(dateLeaderWeek.length === 1){
 }else if(dateLeaderWeek.length === 0){
         return (
             <View >
-              <MultipleSelectList 
+              <SelectList 
                 setSelected={(val) => setSelected(val)} 
                 data={data} 
                 save="value"
@@ -188,7 +195,7 @@ const styles = StyleSheet.create({
     margin: 5,
     padding: 10,
     color: 'white',
-    fontSize: 20,
+    fontSize: 10,
     zIndex: 999,
   },
   box:{
