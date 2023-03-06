@@ -10,7 +10,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const WeekSchoolLeader = ({day, navigation}) => {
 
-    const {proxy} = useContext(AuthContext);
+    const {proxy, congr} = useContext(AuthContext);
     const {schoolLeader_} = useContext(LanguageContext);
     const [selected, setSelected] = useState('')
     const [users, setUsers] = useState([])
@@ -33,7 +33,8 @@ const WeekSchoolLeader = ({day, navigation}) => {
   }
 
   const getCalendarDatesByDate = async() => {
-    const body = {'date': day, 'action': 'School leader (week)',}
+    let datas = JSON.parse(await AsyncStorage.getItem("asyncUserData"))
+    const body = {'date': day, 'action': 'School leader (week)', 'congregation': datas.congregation}
     const resp = await fetch(`${proxy}/backend/get_calendar_date/`, {
       method: 'POST',
           headers: {
@@ -61,6 +62,7 @@ const WeekSchoolLeader = ({day, navigation}) => {
   }
 
   const setWeekSchoolLeader = async(selected) => {
+    let datas = JSON.parse(await AsyncStorage.getItem("asyncUserData"))
       for(let k in USERS){  
         if(selected === USERS[k]){
           fetch(`${proxy}/backend/set_calendar/${k}/`, {
@@ -70,12 +72,13 @@ const WeekSchoolLeader = ({day, navigation}) => {
             },
             body: JSON.stringify({
               'date': `${day}`,
-              'action': 'School leader (week)'
+              'action': 'School leader (week)',
+              'congregation': datas.congregation,
             })
           })    
         }
       }
-    const body = {'date': day, 'action': 'School leader (week)',}
+    const body = {'date': day, 'action': 'School leader (week)', 'congregation': datas.congregation,}
     const resp = await fetch(`${proxy}/backend/get_calendar_date/`, {
       method: 'POST',
           headers: {

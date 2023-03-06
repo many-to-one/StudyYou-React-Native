@@ -10,7 +10,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const WeekDiscussion = ({day, navigation}) => {
 
-    const {proxy} = useContext(AuthContext);
+    const {proxy, congr} = useContext(AuthContext);
     const {discussion_} = useContext(LanguageContext);
     const [selected, setSelected] = useState('')
     const [users, setUsers] = useState([])
@@ -33,7 +33,8 @@ const WeekDiscussion = ({day, navigation}) => {
   }
 
   const getCalendarDatesByDate = async() => {
-    const body = {'date': day, 'action': 'Discussion (week)',}
+    let datas = JSON.parse(await AsyncStorage.getItem("asyncUserData"))
+    const body = {'date': day, 'action': 'Discussion (week)', 'congregation': datas.congregation}
     const resp = await fetch(`${proxy}/backend/get_calendar_date/`, {
       method: 'POST',
           headers: {
@@ -61,6 +62,7 @@ const WeekDiscussion = ({day, navigation}) => {
   }
 
   const setWeekDiscussion = async(selected) => {
+    let datas = JSON.parse(await AsyncStorage.getItem("asyncUserData"))
       for(let k in USERS){  
         if(selected === USERS[k]){
           fetch(`${proxy}/backend/set_calendar/${k}/`, {
@@ -70,12 +72,13 @@ const WeekDiscussion = ({day, navigation}) => {
             },
             body: JSON.stringify({
               'date': `${day}`,
-              'action': 'Discussion (week)'
+              'action': 'Discussion (week)',
+              'congregation': datas.congregation,
             })
           })    
         }
       }
-    const body = {'date': day, 'action': 'Discussion (week)',}
+    const body = {'date': day, 'action': 'Discussion (week)', 'congregation': datas.congregation,}
     const resp = await fetch(`${proxy}/backend/get_calendar_date/`, {
       method: 'POST',
           headers: {

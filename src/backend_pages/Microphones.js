@@ -10,8 +10,8 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Microphones = ({day, navigation}) => {
 
-    const {proxy, congr} = useContext(AuthContext);
-    const c = congr()
+    const {proxy, congr} = useContext(AuthContext); //////////////////
+    const c = congr() /////////////////////
     const {microphones_} = useContext(LanguageContext);
     const [selected, setSelected] = useState('')
     const [users, setUsers] = useState([])
@@ -25,8 +25,8 @@ const Microphones = ({day, navigation}) => {
   }, [isFocused])
 
   const getUsers = async() => {
-    let datas = JSON.parse(await AsyncStorage.getItem("asyncUserData"))
-    const resp = await fetch(`${proxy}/users/users/${datas.congregation}/`)
+    let datas = JSON.parse(await AsyncStorage.getItem("asyncUserData"))        ///////////////////
+    const resp = await fetch(`${proxy}/users/users/${datas.congregation}/`)    ///////////////
       const data = await resp.json();
       if(resp.status === 200){
         setUsers(data)
@@ -36,8 +36,8 @@ const Microphones = ({day, navigation}) => {
   }
 
   const getCalendarDatesByDate = async() => {
-    let datas = JSON.parse(await AsyncStorage.getItem("asyncUserData"))
-    const body = {'date': day, 'action': 'Microphones', 'congregation': datas.congregation}
+    let datas = JSON.parse(await AsyncStorage.getItem("asyncUserData"))  /////////////////
+    const body = {'date': day, 'action': 'Microphones', 'congregation': datas.congregation}  ////////////////
     const resp = await fetch(`${proxy}/backend/get_calendar_date/`, {
       method: 'POST',
           headers: {
@@ -65,7 +65,7 @@ const Microphones = ({day, navigation}) => {
   }
 
   const setMicrophones = async(selected) => {
-    let datas = JSON.parse(await AsyncStorage.getItem("asyncUserData"))
+    let datas = JSON.parse(await AsyncStorage.getItem("asyncUserData"))  /////////////////////
     selected.map((e) => {
       for(let k in USERS){  
         if(e === USERS[k]){
@@ -78,14 +78,13 @@ const Microphones = ({day, navigation}) => {
             body: JSON.stringify({
               'date': `${day}`,
               'action': 'Microphones',
-              'congregation': datas.congregation
-              ,
+              'congregation': datas.congregation,  ///////////////////////
             })
           })   
         }
       }
     })
-    const body = {'date': day, 'action': 'Microphones', 'congregation': datas.congregation}
+    const body = {'date': day, 'action': 'Microphones', 'congregation': datas.congregation}   /////////////////////////
     const resp = await fetch(`${proxy}/backend/get_calendar_date/`, {
       method: 'POST',
           headers: {

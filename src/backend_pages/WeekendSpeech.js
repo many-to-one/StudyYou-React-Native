@@ -10,7 +10,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const WeekendSpeach = ({day, navigation}) => {
 
-    const {proxy} = useContext(AuthContext);
+    const {proxy, congr} = useContext(AuthContext);
     const {weekendSpeach_} = useContext(LanguageContext);
     const [selected, setSelected] = useState('')
     const [users, setUsers] = useState([])
@@ -33,7 +33,8 @@ const WeekendSpeach = ({day, navigation}) => {
   }
 
   const getCalendarDatesByDate = async() => {
-    const body = {'date': day, 'action': 'Weekend Speach',}
+    let datas = JSON.parse(await AsyncStorage.getItem("asyncUserData"))
+    const body = {'date': day, 'action': 'Weekend Speach', 'congregation': datas.congregation}
     const resp = await fetch(`${proxy}/backend/get_calendar_date/`, {
       method: 'POST',
           headers: {
@@ -61,6 +62,7 @@ const WeekendSpeach = ({day, navigation}) => {
   }
 
   const setWeekendSpeach = async(selected) => {
+    let datas = JSON.parse(await AsyncStorage.getItem("asyncUserData"))
       for(let k in USERS){  
         if(selected === USERS[k]){
 
@@ -71,12 +73,13 @@ const WeekendSpeach = ({day, navigation}) => {
             },
             body: JSON.stringify({
               'date': `${day}`,
-              'action': 'Weekend Speach'
+              'action': 'Weekend Speach',
+              'congregation': datas.congregation,
             })
           })    
         }
       }
-    const body = {'date': day, 'action': 'Weekend Speach',}
+    const body = {'date': day, 'action': 'Weekend Speach', 'congregation': datas.congregation,}
     const resp = await fetch(`${proxy}/backend/get_calendar_date/`, {
       method: 'POST',
           headers: {

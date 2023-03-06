@@ -10,7 +10,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const WeekPrayer2 = ({day, navigation}) => {
 
-    const {proxy} = useContext(AuthContext);
+    const {proxy, congr} = useContext(AuthContext);
     const {lastPrayer_} = useContext(LanguageContext);
     const [selected, setSelected] = useState('')
     const [users, setUsers] = useState([])
@@ -33,7 +33,8 @@ const WeekPrayer2 = ({day, navigation}) => {
   }
 
   const getCalendarDatesByDate = async() => {
-    const body = {'date': day, 'action': 'Prayer 2 (week)',}
+    let datas = JSON.parse(await AsyncStorage.getItem("asyncUserData"))
+    const body = {'date': day, 'action': 'Prayer 2 (week)', 'congregation': datas.congregation}
     const resp = await fetch(`${proxy}/backend/get_calendar_date/`, {
       method: 'POST',
           headers: {
@@ -61,6 +62,7 @@ const WeekPrayer2 = ({day, navigation}) => {
   }
 
   const setWeekPrayer2 = async(selected) => {
+    let datas = JSON.parse(await AsyncStorage.getItem("asyncUserData")) 
       for(let k in USERS){  
         if(selected === USERS[k]){
           fetch(`${proxy}/backend/set_calendar/${k}/`, {
@@ -70,12 +72,13 @@ const WeekPrayer2 = ({day, navigation}) => {
             },
             body: JSON.stringify({
               'date': `${day}`,
-              'action': 'Prayer 2 (week)'
+              'action': 'Prayer 2 (week)',
+              'congregation': datas.congregation,
             })
           })    
         }
       }
-    const body = {'date': day, 'action': 'Prayer 2 (week)',}
+    const body = {'date': day, 'action': 'Prayer 2 (week)', 'congregation': datas.congregation,}
     const resp = await fetch(`${proxy}/backend/get_calendar_date/`, {
       method: 'POST',
           headers: {

@@ -10,7 +10,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const WeekVisit2 = ({day, navigation}) => {
 
-    const {proxy} = useContext(AuthContext);
+    const {proxy, congr} = useContext(AuthContext);
     const {returnVisit_} = useContext(LanguageContext);
     const [selected, setSelected] = useState('')
     const [users, setUsers] = useState([])
@@ -33,7 +33,8 @@ const WeekVisit2 = ({day, navigation}) => {
   }
 
   const getCalendarDatesByDate = async() => {
-    const body = {'date': day, 'action': 'School: Return visit',}
+    let datas = JSON.parse(await AsyncStorage.getItem("asyncUserData"))
+    const body = {'date': day, 'action': 'School: Return visit', 'congregation': datas.congregation}
     const resp = await fetch(`${proxy}/backend/get_calendar_date/`, {
       method: 'POST',
           headers: {
@@ -61,6 +62,7 @@ const WeekVisit2 = ({day, navigation}) => {
   }
 
   const setWeekVisit2 = async(selected) => {
+    let datas = JSON.parse(await AsyncStorage.getItem("asyncUserData")) 
     selected.map((e) => {
       for(let k in USERS){  
         if(e === USERS[k]){
@@ -72,13 +74,14 @@ const WeekVisit2 = ({day, navigation}) => {
             },
             body: JSON.stringify({
               'date': `${day}`,
-              'action': 'School: Return visit'
+              'action': 'School: Return visit',
+              'congregation': datas.congregation,
             })
           })   
         }
       }
     })
-    const body = {'date': day, 'action': 'School: Return visit',}
+    const body = {'date': day, 'action': 'School: Return visit', 'congregation': datas.congregation,}
     const resp = await fetch(`${proxy}/backend/get_calendar_date/`, {
       method: 'POST',
           headers: {
