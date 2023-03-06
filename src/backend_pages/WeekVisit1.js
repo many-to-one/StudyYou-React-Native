@@ -113,7 +113,7 @@ const WeekVisit1 = ({day, navigation}) => {
 
   console.log('dateWeekVisit1:', dateWeekVisit1, day)
 
-if(dateWeekVisit1.length === 1){
+if(dateWeekVisit1.length > 1){
   return ( 
     dateWeekVisit1.map((e) => {
       if(e.date === day && e.action === 'School: Initial Call'){  
@@ -164,9 +164,11 @@ if(dateWeekVisit1.length === 1){
               />
             </View>
 
-        )}else if(dateWeekVisit1.length > 1){
+        )}else if(dateWeekVisit1.length === 1){
         return (
-            <View >
+            dateWeekVisit1.map((e) => {
+              if(e.date === day && e.action === 'School: Initial Call'){
+                <View >
               <View style={styles.user}>
                 <Icon name='people-outline' size={20} color={'#F9F9B5'} />
                 <Text style={styles.user_text}>{USERS[e.user]}</Text>
@@ -204,6 +206,8 @@ if(dateWeekVisit1.length === 1){
                   onPress={() => setWeekVisit1(selected)}
               />
             </View>
+              }
+            })
         )}
 }
 

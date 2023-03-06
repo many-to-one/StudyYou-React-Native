@@ -78,7 +78,7 @@ const WeekFindTreasures = ({day, navigation}) => {
           })   
         }
       }
-    const body = {'date': day, 'action': 'Find treasures (week)',}
+    const body = {'date': day, 'action': 'Find treasures (week)', 'congregation': datas.congregation,}
     const resp = await fetch(`${proxy}/backend/get_calendar_date/`, {
       method: 'POST',
           headers: {

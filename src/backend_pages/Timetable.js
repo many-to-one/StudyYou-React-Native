@@ -537,7 +537,7 @@ const Timetable = ({navigation}) => {
                     {e.date}
                   </Text>
                   <Text style={styles.text}>
-                    {ministryWith_} {with_} {e.person}
+                    {ministryWith_} {with_} {e.person} {e.time}
                   </Text>
                 </View>
               </ImageBackground>

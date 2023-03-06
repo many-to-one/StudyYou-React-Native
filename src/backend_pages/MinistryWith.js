@@ -10,7 +10,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const MinistryWith = ({day, navigation}) => {
 
-    const {proxy} = useContext(AuthContext);
+    const {proxy, congr} = useContext(AuthContext);
     const {ministryWith_} = useContext(LanguageContext);
     const [selected, setSelected] = useState('')
     const [choose, setChoose] = useState(true)
@@ -33,9 +33,9 @@ const MinistryWith = ({day, navigation}) => {
       }
   }
 
-  const getCalendarDatesByDate = async(selected) => {
+  const getCalendarDatesByDate = async() => {
     let datas = JSON.parse(await AsyncStorage.getItem("asyncUserData"))
-    const body = {'date': day, 'action': 'MinistryWith',} //'person': selected
+    const body = {'date': day, 'action': 'MinistryWith', 'congregation': datas.congregation} //'person': selected
     const resp = await fetch(`${proxy}/backend/get_calendar_date/`, {
       method: 'POST',
           headers: {
@@ -45,16 +45,9 @@ const MinistryWith = ({day, navigation}) => {
         });
         const data = await resp.json();
         if(data){
-            // data.map((e) => {
-            //     if(e.person){
-            //         console.log('data+',e)
-            //         setDateMinistryWith(e)
-            //     }
-            // })
-            setDateMinistryWith(data)
-            // setChoose(true)
-            console.log('data+',data)
-            // setSelected([])
+          setDateMinistryWith(data)
+          setSelected([])
+          console.log('data+',data)
         }  
   }
 
@@ -70,25 +63,36 @@ const MinistryWith = ({day, navigation}) => {
     )
   }
 
-
-const setMinistryWith = async(selected) => {
+  const setMinistryWith = async(selected) => {
     let datas = JSON.parse(await AsyncStorage.getItem("asyncUserData"))
-    const resp = await fetch(`${proxy}/backend/set_calendar_person/${datas.id}/`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          'date': `${day}`,
-          'action': 'MinistryWith',
-          'person': `${selected}`,
+    await selected.map((e) => {
+      const resp = fetch(`${proxy}/backend/set_calendar_person/${datas.id}/`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            'date': `${day}`,
+            'action': 'MinistryWith',
+            'person': `${e}`,
+            'congregation': datas.congregation,
+          })
         })
       })
-      if(resp.data){
-        setDateMinistryWith(resp.data)
-        console.log('data++',resp.data)
-      }
-      getCalendarDatesByDate(selected)
+        const body = {'date': day, 'action': 'MinistryWith', 'congregation': datas.congregation} //'person': selected
+        const resp = await fetch(`${proxy}/backend/get_calendar_date/`, {
+          method: 'POST',
+              headers: {
+                'Content-Type': 'application/json'
+              },
+              body:JSON.stringify(body),
+            });
+            const data = await resp.json();
+            if(data){
+              setDateMinistryWith(data)
+              console.log('data+',data)
+            }  
+        getCalendarDatesByDate()
   }
 
   const deleteMinistryWith = async(user) => {
@@ -108,7 +112,7 @@ const setMinistryWith = async(selected) => {
 
 console.log('dateMinistryWith:', dateMinistryWith, day)
 
-if(dateMinistryWith.length > 1){
+if(dateMinistryWith.length > 5){
   return ( 
     dateMinistryWith.map((e) => {
         if(e.date === day && e.action === 'MinistryWith'){  
@@ -157,7 +161,7 @@ if(dateMinistryWith.length > 1){
               />
             </View>
         )
-    }else if(dateMinistryWith.length === 1){
+    }else if(dateMinistryWith.length >= 1 && dateMinistryWith.length <= 5){
         return ( 
             dateMinistryWith.map((e) => {
               if(e.date === day && e.action === 'MinistryWith'){  

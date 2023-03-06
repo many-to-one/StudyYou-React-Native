@@ -61,6 +61,7 @@ export const LanguageProvider = ({children}) => {
     const [RESULT_, setRESULT] = useState([])
     const [HISTORY_, setHISTORY] = useState([])
     const [with_, setWith] = useState([])
+    const [time_, setTime] = useState([])
 
 
     const setLanguage = async() => {
@@ -122,6 +123,8 @@ export const LanguageProvider = ({children}) => {
             setRESULT('WYNIK')
             setHISTORY('HISTORIA')
             setWith('z')
+            setTime('Czas')
+
 
 
         }else if(lng === 'RU'){
@@ -179,6 +182,7 @@ export const LanguageProvider = ({children}) => {
             setRESULT('РЕЗУЛЬТАТ')
             setHISTORY('ИСТОРИЯ')
             setWith('c')
+            setTime('Время')
 
         }else if(lng === 'UA'){
             setHours('Години')
@@ -235,6 +239,7 @@ export const LanguageProvider = ({children}) => {
             setRESULT('РЕЗУЛЬТАТ')
             setHISTORY('ІСТОРІЯ')
             setWith('з')
+            setTime('Час')
 
         }
       };
@@ -299,6 +304,7 @@ export const LanguageProvider = ({children}) => {
             RESULT_,
             HISTORY_,
             with_,
+            time_,
         }}>
             {children}
         </LanguageContext.Provider>

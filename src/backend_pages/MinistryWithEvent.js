@@ -2,6 +2,7 @@ import React, { useContext } from 'react'
 import { Dimensions, ScrollView, StyleSheet, Text, View } from 'react-native'
 import { LanguageContext } from '../context/LanguageContext';
 import MinistryWith from './MinistryWith';
+import MinistryWith2 from './MinistryWith2';
 
 const MinistryWithEvent = ({route, navigation}) => {
     const {day} = route.params;
@@ -14,7 +15,7 @@ const MinistryWithEvent = ({route, navigation}) => {
 
         <View style={styles.event}>
           <Text style={styles.text}>{ministryWith_}:</Text>
-          <MinistryWith  day={day}/>
+          <MinistryWith2  day={day}/>
         </View>
 
       </View>
