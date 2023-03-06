@@ -10,7 +10,8 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Music = ({day, navigation}) => {
 
-    const {proxy} = useContext(AuthContext);
+    const {proxy, congr} = useContext(AuthContext);
+    const c = congr()
     const {music_} = useContext(LanguageContext);
     const [selected, setSelected] = useState('')
     const [users, setUsers] = useState([])
@@ -34,7 +35,8 @@ const Music = ({day, navigation}) => {
   }
 
   const getCalendarDatesByDate = async() => {
-    const body = {'date': day, 'action': 'Music',}
+    let datas = JSON.parse(await AsyncStorage.getItem("asyncUserData"))
+    const body = {'date': day, 'action': 'Music', 'congregation': datas.congregation}
     const resp = await fetch(`${proxy}/backend/get_calendar_date/`, {
       method: 'POST',
           headers: {
@@ -62,6 +64,7 @@ const Music = ({day, navigation}) => {
   }
 
   const setMicrophones = async(selected) => {
+    let datas = JSON.parse(await AsyncStorage.getItem("asyncUserData"))
     selected.map((e) => {
       for(let k in USERS){  
         if(e === USERS[k]){
@@ -73,13 +76,14 @@ const Music = ({day, navigation}) => {
             },
             body: JSON.stringify({
               'date': `${day}`,
-              'action': 'Music'
+              'action': 'Music',
+              'congregation': datas.congregation,
             })
           })   
         }
       }
     })
-    const body = {'date': day, 'action': 'Music',}
+    const body = {'date': day, 'action': 'Music', 'congregation': datas.congregation}
     const resp = await fetch(`${proxy}/backend/get_calendar_date/`, {
       method: 'POST',
           headers: {
@@ -206,7 +210,7 @@ if(dateMusic.length > 1){
                   
                                       
               }
-          }) 
+          })  
   
           )
   }
