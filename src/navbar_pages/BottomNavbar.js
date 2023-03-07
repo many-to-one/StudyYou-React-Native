@@ -29,6 +29,7 @@ import MiddleOfTheWeek from '../backend_pages/MiddleOfTheWeek';
 import WeekendMeetings from '../backend_pages/WeekendMeetings';
 import { LanguageContext } from '../context/LanguageContext';
 import MinistryWithEvent from '../backend_pages/MinistryWithEvent';
+import ForgotPassword from '../backend_pages/ForgotPassword';
 
 const Tab = createBottomTabNavigator();
 
@@ -208,6 +209,22 @@ function BottomNavigator() {
         <Tab.Screen 
         name="RequestResetMail" 
         component={RequestResetMail} 
+        options={{
+          title: `${requestResetMail_}`,
+          headerTitleStyle: {
+            color: 'white',
+            marginLeft: '8rem',
+          },
+          headerStyle: {
+            backgroundColor: 'black',
+          },
+          tabBarVisible: false, // hide the button
+          tabBarButton: (props) => null, // hide the button
+        }}
+        />
+        <Tab.Screen 
+        name="ForgotPassword" 
+        component={ForgotPassword} 
         options={{
           title: `${requestResetMail_}`,
           headerTitleStyle: {

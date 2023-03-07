@@ -25,12 +25,12 @@ const MinistryWithPerson = ({person, day}) => {
         <Icon name='briefcase-sharp' size={20} color={'#F9F9B5'} />
         <Text style={styles.user_text}>{person.person}</Text>
         <Text style={styles.user_text}>{person.time}</Text>
-            <Icon 
-                name="close-circle-outline" 
-                size={20} 
-                color={'#F9F9B5'} 
-                onPress={() => deleteMinistryWith(person)}     
-                />
+          <Icon 
+            name="close-circle-outline" 
+            size={20} 
+            color={'#F9F9B5'} 
+            onPress={() => deleteMinistryWith(person)}     
+          />
         </View> 
     }
 

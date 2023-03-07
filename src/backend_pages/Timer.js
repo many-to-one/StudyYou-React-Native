@@ -3,10 +3,8 @@ import React, { useState, useEffect } from 'react';
 import { StyleSheet, Text, View, StatusBar, TouchableOpacity, Dimensions, Animated } from 'react-native';
 import Icon from "react-native-vector-icons/FontAwesome5";
 
-const screen = Dimensions.get('window');
-const { width, height } = Dimensions.get('window');
-
 const getRemaining = (time) => {
+  const screen = Dimensions.get('window');
     const hr = Math.floor(time / 60 / 60)
     const min = Math.floor(time / 60)
     const sec = Math.floor(time - min * 60)
@@ -84,6 +82,8 @@ export default function Timer() {
   )
 }
 
+const { width, height } = Dimensions.get('window');
+
 const styles = StyleSheet.create({
     container: {
       flex: 1,
@@ -114,6 +114,7 @@ const styles = StyleSheet.create({
     timerText: {
         color: 'white',
         fontSize: 60,
-        marginBottom: 20
+        marginTop: height / 4,
+        // marginBottom: 20
     },
   });

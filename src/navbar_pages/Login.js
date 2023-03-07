@@ -94,33 +94,6 @@ const Login = () => {
                 onChangeText={(text) => setPassword(text)}
                 style={styles.input}
               />
-              {/* <SelectList 
-                onSelect={() => language(selected)}
-                setSelected={setSelected} 
-                data={Data} 
-                boxStyles={styles.event}
-                inputStyles={styles.textL}
-                dropdownStyles={styles.event}
-                dropdownItemStyles={{color: 'white'}}
-                dropdownTextStyles={{color: 'white'}}
-                arrowicon={<Icon name="chevron-down" size={20} color={'white'} />} 
-                searchicon={<Icon name="search" size={20} color={'white'} />} 
-                search={true} 
-              /> */}
-              {/* <SelectList 
-                onSelect={() => setCongregation}
-                setSelected={setCongregation}
-                placeholder={<Icon name='filter-outline' size={20} color={'white'} />}
-                data={Data_c} 
-                boxStyles={styles.event}
-                inputStyles={styles.text}
-                dropdownStyles={styles.selectlist}
-                dropdownItemStyles={{color: 'white'}}
-                dropdownTextStyles={{color: 'white'}}
-                arrowicon={<Icon name="chevron-down" size={15} color={'white'} />} 
-                searchicon={<Icon name="search" size={15} color={'white'} />} 
-                search={true} 
-              /> */}
               <SelectList 
                 onSelect={() => language(selected_l)}
                 setSelected={setSelected_l}
@@ -143,11 +116,11 @@ const Login = () => {
 
               <View style={styles.register}>
                 <Text style={styles.text}>
-                  Forgot your password?
+                  Forgot password?
                 </Text>
                 <RegisterButton 
-                  title={'Click here'} 
-                  onPress={() =>  navigation.navigate('RequestResetMail')}
+                  title={'Registration'} 
+                  onPress={() =>  navigation.navigate('ForgotPassword', {email: email})}
                 />
               </View>
 
@@ -192,9 +165,10 @@ const Login = () => {
               <Text style={styles.text}>
                 Forgot your password?
               </Text>
-              <RegisterButton 
+              <Button 
+                style={styles.btn}
                 title={'Click here'} 
-                onPress={() =>  navigation.navigate('RequestResetMail')}
+                onPress={() =>  navigation.navigate('ForgotPassword', {email: email})}
               />
             </View>
 
@@ -268,6 +242,11 @@ const styles = StyleSheet.create({
     fontSize: 20,
     zIndex: 999,
   },  
+  btn: {
+    width: 200,
+    height: 50,
+    backgroundColor: 'gray',
+  },
 })
 
 export default Login

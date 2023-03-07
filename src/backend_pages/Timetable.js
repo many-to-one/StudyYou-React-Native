@@ -77,7 +77,7 @@ const Timetable = ({navigation}) => {
             return  <TouchableOpacity>
             <Animated.View style={styles.animated}>
               <ImageBackground
-                source={require('../../assets/card.png')}
+                source={require('../../assets/card_p.png')}
                 style={styles.img}
               >
                 <View style={styles.event}>
@@ -92,23 +92,12 @@ const Timetable = ({navigation}) => {
               </ImageBackground>
             </Animated.View>
           </TouchableOpacity>
-        //     return <View style={styles.event}>
-        //         <Icon 
-        //             name="mic" 
-        //             size={20} 
-        //             color={'#F9F9B5'}      
-        //         />
-        //     <View style={styles.in_event}>
-        //         <Text style={styles.text}>{e.date}</Text>
-        //         <Text style={styles.text}>{e.action}</Text>
-        //     </View>
-        // </View>
         
         }else if(e.action === 'Music'){
             return  <TouchableOpacity>
             <Animated.View style={styles.animated}>
               <ImageBackground
-                source={require('../../assets/card.png')}
+                source={require('../../assets/card_p.png')}
                 style={styles.img}
               >
                 <View style={styles.event}>
@@ -128,7 +117,7 @@ const Timetable = ({navigation}) => {
             return  <TouchableOpacity>
             <Animated.View style={styles.animated}>
               <ImageBackground
-                source={require('../../assets/card.png')}
+                source={require('../../assets/card_p.png')}
                 style={styles.img}
               >
                 <View style={styles.event}>
@@ -148,7 +137,7 @@ const Timetable = ({navigation}) => {
             return  <TouchableOpacity>
             <Animated.View style={styles.animated}>
               <ImageBackground
-                source={require('../../assets/card.png')}
+                source={require('../../assets/card_p.png')}
                 style={styles.img}
               >
                 <View style={styles.event}>
@@ -168,7 +157,7 @@ const Timetable = ({navigation}) => {
             return  <TouchableOpacity>
             <Animated.View style={styles.animated}>
               <ImageBackground
-                source={require('../../assets/card.png')}
+                source={require('../../assets/card_p.png')}
                 style={styles.img}
               >
                 <View style={styles.event}>
@@ -188,7 +177,7 @@ const Timetable = ({navigation}) => {
             return  <TouchableOpacity>
             <Animated.View style={styles.animated}>
               <ImageBackground
-                source={require('../../assets/card.png')}
+                source={require('../../assets/card_p.png')}
                 style={styles.img}
               >
                 <View style={styles.event}>
@@ -208,7 +197,7 @@ const Timetable = ({navigation}) => {
             return  <TouchableOpacity>
             <Animated.View style={styles.animated}>
               <ImageBackground
-                source={require('../../assets/card.png')}
+                source={require('../../assets/card_p.png')}
                 style={styles.img}
               >
                 <View style={styles.event}>
@@ -228,7 +217,7 @@ const Timetable = ({navigation}) => {
             return  <TouchableOpacity>
             <Animated.View style={styles.animated}>
               <ImageBackground
-                source={require('../../assets/card.png')}
+                source={require('../../assets/card_p.png')}
                 style={styles.img}
               >
                 <View style={styles.event}>
@@ -248,7 +237,7 @@ const Timetable = ({navigation}) => {
             return  <TouchableOpacity>
             <Animated.View style={styles.animated}>
               <ImageBackground
-                source={require('../../assets/card.png')}
+                source={require('../../assets/card_p.png')}
                 style={styles.img}
               >
                 <View style={styles.event}>
@@ -268,7 +257,7 @@ const Timetable = ({navigation}) => {
             return  <TouchableOpacity>
             <Animated.View style={styles.animated}>
               <ImageBackground
-                source={require('../../assets/card.png')}
+                source={require('../../assets/card_p.png')}
                 style={styles.img}
               >
                 <View style={styles.event}>
@@ -288,7 +277,7 @@ const Timetable = ({navigation}) => {
             return  <TouchableOpacity>
             <Animated.View style={styles.animated}>
               <ImageBackground
-                source={require('../../assets/card.png')}
+                source={require('../../assets/card_p.png')}
                 style={styles.img}
               >
                 <View style={styles.event}>
@@ -308,7 +297,7 @@ const Timetable = ({navigation}) => {
             return  <TouchableOpacity>
             <Animated.View style={styles.animated}>
               <ImageBackground
-                source={require('../../assets/card.png')}
+                source={require('../../assets/card_p.png')}
                 style={styles.img}
               >
                 <View style={styles.event}>
@@ -328,7 +317,7 @@ const Timetable = ({navigation}) => {
             return  <TouchableOpacity>
             <Animated.View style={styles.animated}>
               <ImageBackground
-                source={require('../../assets/card.png')}
+                source={require('../../assets/card_p.png')}
                 style={styles.img}
               >
                 <View style={styles.event}>
@@ -348,7 +337,7 @@ const Timetable = ({navigation}) => {
             return  <TouchableOpacity>
             <Animated.View style={styles.animated}>
               <ImageBackground
-                source={require('../../assets/card.png')}
+                source={require('../../assets/card_p.png')}
                 style={styles.img}
               >
                 <View style={styles.event}>
@@ -368,7 +357,7 @@ const Timetable = ({navigation}) => {
             return  <TouchableOpacity>
             <Animated.View style={styles.animated}>
               <ImageBackground
-                source={require('../../assets/card.png')}
+                source={require('../../assets/card_p.png')}
                 style={styles.img}
               >
                 <View style={styles.event}>
@@ -388,7 +377,7 @@ const Timetable = ({navigation}) => {
             return  <TouchableOpacity>
             <Animated.View style={styles.animated}>
               <ImageBackground
-                source={require('../../assets/card.png')}
+                source={require('../../assets/card_p.png')}
                 style={styles.img}
               >
                 <View style={styles.event}>
@@ -408,7 +397,7 @@ const Timetable = ({navigation}) => {
             return  <TouchableOpacity>
             <Animated.View style={styles.animated}>
               <ImageBackground
-                source={require('../../assets/card.png')}
+                source={require('../../assets/card_p.png')}
                 style={styles.img}
               >
                 <View style={styles.event}>
@@ -428,7 +417,7 @@ const Timetable = ({navigation}) => {
             return  <TouchableOpacity>
             <Animated.View style={styles.animated}>
               <ImageBackground
-                source={require('../../assets/card.png')}
+                source={require('../../assets/card_p.png')}
                 style={styles.img}
               >
                 <View style={styles.event}>
@@ -448,7 +437,7 @@ const Timetable = ({navigation}) => {
             return  <TouchableOpacity>
             <Animated.View style={styles.animated}>
               <ImageBackground
-                source={require('../../assets/card.png')}
+                source={require('../../assets/card_p.png')}
                 style={styles.img}
               >
                 <View style={styles.event}>
@@ -468,7 +457,7 @@ const Timetable = ({navigation}) => {
             return  <TouchableOpacity>
             <Animated.View style={styles.animated}>
               <ImageBackground
-                source={require('../../assets/card.png')}
+                source={require('../../assets/card_p.png')}
                 style={styles.img}
               >
                 <View style={styles.event}>
@@ -488,7 +477,7 @@ const Timetable = ({navigation}) => {
             return  <TouchableOpacity>
             <Animated.View style={styles.animated}>
               <ImageBackground
-                source={require('../../assets/card.png')}
+                source={require('../../assets/card_p.png')}
                 style={styles.img}
               >
                 <View style={styles.event}>
@@ -508,7 +497,7 @@ const Timetable = ({navigation}) => {
             return  <TouchableOpacity>
             <Animated.View style={styles.animated}>
               <ImageBackground
-                source={require('../../assets/card.png')}
+                source={require('../../assets/card_p.png')}
                 style={styles.img}
               >
                 <View style={styles.event}>
@@ -528,7 +517,7 @@ const Timetable = ({navigation}) => {
             return  <TouchableOpacity>
             <Animated.View style={styles.animated}>
               <ImageBackground
-                source={require('../../assets/card.png')}
+                source={require('../../assets/card_p.png')}
                 style={styles.img}
               >
                 <View style={styles.event}>

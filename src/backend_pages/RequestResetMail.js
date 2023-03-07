@@ -4,7 +4,7 @@ import { Text, View } from 'react-native';
 import AuthButton from '../buttons/AuthButton';
 import { AuthContext } from '../context/AuthContext';
 
-const RequestResetMail = ({navigation}) => {
+const RequestResetMail = ({navigation, f_email}) => {
 
     const {proxy, passwordResetService} = useContext(AuthContext)
     const [token, setToken] = useState('')
@@ -13,7 +13,7 @@ const RequestResetMail = ({navigation}) => {
 
     useEffect(() => {
         resetMail();
-    }, [])
+    }, []) 
 
     const resetMail = async() => {
     
@@ -25,7 +25,7 @@ const RequestResetMail = ({navigation}) => {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                email
+              email
             })
         })
         const data = await resp.json()
