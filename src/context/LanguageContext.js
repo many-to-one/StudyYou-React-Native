@@ -19,8 +19,6 @@ export const LanguageProvider = ({children}) => {
     const [AddEvent_, setAddEvent] = useState('')
     const [UpdateEvent_, setUpdateEvent] = useState('')
     const [AllEvents_, setAllEvents] = useState('')
-    const [Logout_, setLogout] = useState('')
-    const [Changepassword_, setChangepassword] = useState('')
     const [dayNames, setDaynames] = useState([])
     const [monthNames, setMonthnames] = useState([])
     const [technicalSupport_, setTechnicalSupport] = useState([])
@@ -49,6 +47,12 @@ export const LanguageProvider = ({children}) => {
     const [watchTowerLector_, setWatchTowerLector] = useState([])
     const [login_, setLogin] = useState([])
     const [registration_, setRegistration] = useState([])
+    const [Logout_, setLogout] = useState('')
+    const [Changepassword_, setChangepassword] = useState('')
+    const [forgotPassword_, setForgotPassword] = useState('')
+    const [dhaccount_, setDhaccount] = useState('')
+    const [submit_, setSubmit] = useState('')
+    const [click_, setClick] = useState('')
     const [requestResetMail_, setRequestResetMail] = useState([])
     const [createCalendarEvent_, setCreateCalendarEvent] = useState([])
     const [microphones_, setMicrophones] = useState([])
@@ -62,6 +66,9 @@ export const LanguageProvider = ({children}) => {
     const [HISTORY_, setHISTORY] = useState([])
     const [with_, setWith] = useState([])
     const [time_, setTime] = useState([])
+    const [delHistory_, setDelHistory] = useState([])
+    const [yes_, setYes] = useState([])
+    const [no_, setNo] = useState([]) 
 
 
     const setLanguage = async() => {
@@ -75,7 +82,7 @@ export const LanguageProvider = ({children}) => {
             setMenu('Menu')
             setEvents('Wydarzenia')
             setProfile('Profil')
-            setTimer('Tajmer')
+            setTimer('Timer')
             setResult('Wynik')
             setHistory('Historia')
             setAddEvent('Nowe Wydarzenia')
@@ -84,8 +91,6 @@ export const LanguageProvider = ({children}) => {
             setLogin('Logowanie')
             setLogout('Wyłoguj')
             setChangepassword('Zmienić hasło')
-            setDaynames(['Pon', 'Wt', 'Śr', 'Czw', 'Pt', 'Sob', 'Niedz'])
-            setMonthnames(['styczeń', 'luty', 'marzec', 'kwiecień', 'maj', 'czerwiec', 'lipiec', 'sierpień', 'wrzesień', 'październik', 'listopad', 'grudzień  '])
             setTechnicalSupport('Obsługa Techniczna')
             setMinistryLeaders('Zbiórki')
             setMinistryLeader('Zbiórka')
@@ -118,14 +123,35 @@ export const LanguageProvider = ({children}) => {
             setDuty('Porządkowy')
             setMinistryWith('Służba')
             setPROFILE('PROFIL')
-            setTIMER('TAJMER')
+            setTIMER('TIMER')
             setEVENTS('WYDARZENIA')
             setRESULT('WYNIK')
             setHISTORY('HISTORIA')
             setWith('z')
             setTime('Czas')
-
-
+            setDaynames(['Pon', 'Wt', 'Śr', 'Czw', 'Pt', 'Sob', 'Niedz'])
+            setMonthnames([
+                'styczeń', 
+                'luty', 
+                'marzec', 
+                'kwiecień', 
+                'maj', 
+                'czerwiec', 
+                'lipiec', 
+                'sierpień', 
+                'wrzesień', 
+                'październik', 
+                'listopad', 
+                'grudzień'
+            ])
+            setDelHistory('Po usunięciu dane za ten miesiąc zostaną całkowicie stracone, usunąć?')
+            setNo('Nie')
+            setYes('Tak')
+            setForgotPassword('Nie Pamiętam hasła')
+            setDhaccount('Załóż konto')
+            setSubmit('Potwierdzić')
+            setClick('Kliknij tutaj')
+            
 
         }else if(lng === 'RU'){
             setHours('Часы')
@@ -183,6 +209,27 @@ export const LanguageProvider = ({children}) => {
             setHISTORY('ИСТОРИЯ')
             setWith('c')
             setTime('Время')
+            setDaynames(['Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб', 'Вс'])
+            setMonthnames([
+                'Январь', 
+                'Февраль', 
+                'Март', 'Апрель', 
+                'Май', 
+                'Июнь', 
+                'Июль', 
+                'Август', 
+                'Сентябрь', 
+                'Октябрь', 
+                'Ноябрь', 
+                'Декабрь'
+            ])
+            setDelHistory('Данные за текущий месяц будут полностью утрачены, удалить?')
+            setNo('Нет')
+            setYes('Да')
+            setForgotPassword('Не помню пароль')
+            setDhaccount('Ещё не зарегистрированы?')
+            setSubmit('Подтвердить')
+            setClick('Нажмите здесь')
 
         }else if(lng === 'UA'){
             setHours('Години')
@@ -201,7 +248,7 @@ export const LanguageProvider = ({children}) => {
             setAllEvents('Усi подiї')
             setLogin('Авторизація')
             setLogout('Вийти')
-            setChangepassword('Змiнити гасло')
+            setChangepassword('Змiнити пароль')
             setTechnicalSupport('Технічна підтримка')
             setMinistryLeaders('Проповідницьке служіння')
             setMinistryLeader('Проп. служіння')
@@ -240,6 +287,28 @@ export const LanguageProvider = ({children}) => {
             setHISTORY('ІСТОРІЯ')
             setWith('з')
             setTime('Час')
+            setDaynames(['Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб', 'Нд'])
+            setMonthnames([
+                'січень ', 
+                'лютий ', 
+                'березень ', 
+                'квітень ', 
+                'травень ', 
+                'червень ', 
+                'липень ', 
+                'серпень ', 
+                'вересень ', 
+                'жовтень ', 
+                'листопад ', 
+                'грудень'
+            ])
+            setDelHistory('Дані за цей місяць будуть повністю видалені, видалити?')
+            setNo('Hі')
+            setYes('Так')
+            setForgotPassword("Hе пам'ятаю пароль")
+            setDhaccount('Ще не зареєстровані?')
+            setSubmit('Підтвердити')
+            setClick('Натиснути тут')
 
         }
       };
@@ -248,6 +317,10 @@ export const LanguageProvider = ({children}) => {
    
         <LanguageContext.Provider value={{
             setLanguage,
+            forgotPassword_,
+            dhaccount_,
+            submit_,
+            click_,
             Hours,
             Minutes,
             Visits,
@@ -305,6 +378,9 @@ export const LanguageProvider = ({children}) => {
             HISTORY_,
             with_,
             time_,
+            delHistory_,
+            no_,
+            yes_,
         }}>
             {children}
         </LanguageContext.Provider>

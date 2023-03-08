@@ -32,7 +32,6 @@ const AddEvent = ({ navigation }) => {
         'publications': 0,
         'films': 0,
       })
-      // await setLanguage()
     }
 
     const addEvent = async() => {

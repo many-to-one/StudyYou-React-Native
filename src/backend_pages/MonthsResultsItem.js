@@ -1,17 +1,31 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import React, { useContext, useState } from 'react'
-import { StyleSheet, Text, View, Dimensions, FlatList } from 'react-native';
+import { StyleSheet, Text, View, Dimensions, FlatList, Button } from 'react-native';
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import { AuthContext } from '../context/AuthContext';
 import { useNavigation } from '@react-navigation/native';
 import { LanguageContext } from '../context/LanguageContext';
+import Modal from "react-native-modal";
 
 const MonthsResultsItem = ({res}) => {
-  const { width, height } = Dimensions.get('window');
   const {proxy} = useContext(AuthContext);
-  const {Hours, Minutes, Publications, Visits, Films} = useContext(LanguageContext);
-  const navigation = useNavigation();
-  let datas;
+  const {
+    Hours, 
+    Minutes, 
+    Publications, 
+    Visits, 
+    Films,
+    delHistory_,
+    no_,
+    yes_,
+  } = useContext(LanguageContext);
+  // const navigation = useNavigation();
+  const [live, setLive] = useState(true)
+  const [isModalVisible, setIsModalVisible] = useState(false)
+
+  const showModal = () => {
+    setIsModalVisible(true)
+  }
 
   const deleteMonthResult = async() => {
     let datas = JSON.parse(await AsyncStorage.getItem("asyncUserData"))
@@ -22,108 +36,127 @@ const MonthsResultsItem = ({res}) => {
       }
     });
     const data = await resp.json()
-    navigation.navigate('Menu')
-    // if(data){
-    //   window.location.reload()
-    // }
+    if(data){
+      setLive(false)
+    }
   }
 
-  const getHistory = async() => {
-    const resp = await fetch(`${proxy}/events_history/${datas.id}/`)
-    const data = await resp.json()
-  }
+  if(live === true){
+    return (
+      <View style={styles.container}>
+  
+          <View >
+  
+            <View style={styles.title}>
+              <View style={styles.date_history}>
+                <Text style={styles.text}>{res.date}</Text>
+              </View>  
+                <Icon 
+                  name='delete-alert-outline'
+                  onPress={() => showModal()}
+                  style={styles.delete}
+                />
+            </View>
+        
+            <View style={styles.row}>
 
-  return (
-    <View style={styles.container}>
+              <Modal isVisible={isModalVisible}>
+                <View style={styles.cont_modal}>
+                  <View style={styles.modal}>
+                    <Text style={styles.modalText}> 
+                      {delHistory_}
+                    </Text>
+                    <View style={styles.btn_cont_modal}>
+                      <Button 
+                        style={styles.btn_modal}
+                        title={yes_}
+                        onPress={() => deleteMonthResult()}
+                      />
+                      <Button 
+                        style={styles.btn_modal}
+                        title={no_}
+                        onPress={() => setIsModalVisible(false)}
+                      />
+                    </View>
+                  </View>  
+                </View>
+              </Modal>
 
-        <View >
-
-          <View style={styles.title}>
-            <View style={styles.date_history}>
-              <Text style={styles.text}>{res.date}</Text>
-              <Icon 
-                name='history'
-                onPress={() => deleteMonthResult()}
-                style={styles.delete}
-              />
+              <View style={styles.left_row}>
+                <Text style={styles.text}>
+                  {Hours}:
+                </Text>
+              </View>
+              <View style={styles.input}>
+                <Text style={styles.text}>
+                  {res.hours}
+                </Text>
+              </View>
+             </View>  
+  
+            <View style={styles.row}>
+              <View style={styles.left_row}>
+                <Text style={styles.text}>
+                  {Minutes}:
+                </Text>
+              </View>
+              <View style={styles.input}>
+                <Text style={styles.text}>
+                  {res.minutes}
+                </Text>
+              </View>
+            </View>   
+  
+            <View style={styles.row}>
+              <View style={styles.left_row}>
+                <Text style={styles.text}>
+                  {Publications}:
+                </Text>
+              </View>
+              <View style={styles.input}>
+                <Text style={styles.text}>
+                  {res.publications}
+                </Text>
+              </View>
             </View>  
-              <Icon 
-                name='delete-alert-outline'
-                onPress={() => deleteMonthResult()}
-                style={styles.delete}
-              />
-          </View>
-      
-          <View style={styles.row}>
-            <View style={styles.left_row}>
-              <Text style={styles.text}>
-                {Hours}:
-              </Text>
-            </View>
-            <View style={styles.input}>
-              <Text style={styles.text}>
-                {res.hours}
-              </Text>
-            </View>
-           </View>  
-
-          <View style={styles.row}>
-            <View style={styles.left_row}>
-              <Text style={styles.text}>
-                {Minutes}:
-              </Text>
-            </View>
-            <View style={styles.input}>
-              <Text style={styles.text}>
-                {res.minutes}
-              </Text>
-            </View>
-          </View>   
-
-          <View style={styles.row}>
-            <View style={styles.left_row}>
-              <Text style={styles.text}>
-                {Publications}:
-              </Text>
-            </View>
-            <View style={styles.input}>
-              <Text style={styles.text}>
-                {res.publications}
-              </Text>
-            </View>
-          </View>  
-
-          <View style={styles.row}>
-            <View style={styles.left_row}>
-              <Text style={styles.text}>
-                {Visits}:
-              </Text>
-            </View>
-            <View style={styles.input}>
-              <Text style={styles.text}>
-                {res.visits}
-              </Text>
-            </View>
-          </View>  
-
-          <View style={styles.row}>
-            <View style={styles.left_row}>
-              <Text style={styles.text}>
-                {Films}:
-              </Text>
-            </View>
-            <View style={styles.input}>
-              <Text style={styles.text}>
-                {res.films}
-              </Text>
+  
+            <View style={styles.row}>
+              <View style={styles.left_row}>
+                <Text style={styles.text}>
+                  {Visits}:
+                </Text>
+              </View>
+              <View style={styles.input}>
+                <Text style={styles.text}>
+                  {res.visits}
+                </Text>
+              </View>
+            </View>  
+  
+            <View style={styles.row}>
+              <View style={styles.left_row}>
+                <Text style={styles.text}>
+                  {Films}:
+                </Text>
+              </View>
+              <View style={styles.input}>
+                <Text style={styles.text}>
+                  {res.films}
+                </Text>
+              </View>
             </View>
           </View>
-        </View>
-        </View>
-
-  )
+          </View>
+  
+    )
+  }else{
+    return(
+      <View></View>
+    )
+  }
 }
 
+const { width, height } = Dimensions.get('window');
 const styles = StyleSheet.create({
     container: {
       flex: 1,
@@ -133,6 +166,35 @@ const styles = StyleSheet.create({
       gap: 25,
       paddingTop: 25,
     },
+    cont_modal: {
+      flex: 1,
+      alignItems: 'center',
+      justifyContent: 'center',
+      backgroundColor: 'transparent',
+  },
+    modal: {
+      flexDirection: 'column',
+      alignItems: 'center',
+      justifyContent: 'center',
+      width: width * 0.7,
+      height: height * 0.3,
+      backgroundColor: '#f7f7f7',
+      borderRadius: 10,
+      marginLeft: 20,
+  },
+  btn_cont_modal: {
+    flexDirection: 'row',
+    margin: 20,
+    gap: 10,
+  },
+  btn_modal: {
+    // width: 100,
+    // height: 50,
+  },
+  modalText: {
+    fontSize: 15,
+    margin: 30,
+  },
     row: {
       flex: 1,
       flexDirection: 'row',

@@ -9,6 +9,7 @@ import { useNavigation } from '@react-navigation/native'
 import { SelectList } from 'react-native-dropdown-select-list'
 import Icon from "react-native-vector-icons/Ionicons";
 import AsyncStorage from '@react-native-async-storage/async-storage'
+import { LanguageContext } from '../context/LanguageContext'
 
 
 const Login = () => {
@@ -17,6 +18,7 @@ const Login = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const {userData, login, setLanguage, profileToken, logged} = useContext(AuthContext);
+  const {forgotPassword_, dhaccount_, submit_, click_} = useContext(LanguageContext);
   const [selected, setSelected] = useState('')
   const [lng, setLng] = useState(false)
   const [selected_c, setSelected_c] = useState('')
@@ -116,17 +118,17 @@ const Login = () => {
 
               <View style={styles.register}>
                 <Text style={styles.text}>
-                  Forgot password?
+                  {forgotPassword_}
                 </Text>
                 <RegisterButton 
-                  title={'Registration'} 
+                  title={click_} 
                   onPress={() =>  navigation.navigate('ForgotPassword', {email: email})}
                 />
               </View>
 
               <View style={styles.register}>
                 <Text style={styles.text}>
-                  Don't have an account?
+                  {dhaccount_}
                 </Text>
                 <RegisterButton 
                   title={'Registration'} 
@@ -163,18 +165,18 @@ const Login = () => {
 
             <View style={styles.register}>
               <Text style={styles.text}>
-                Forgot your password?
+                {forgotPassword_}
               </Text>
               <Button 
                 style={styles.btn}
-                title={'Click here'} 
+                title={click_} 
                 onPress={() =>  navigation.navigate('ForgotPassword', {email: email})}
               />
             </View>
 
             <View style={styles.register}>
               <Text style={styles.text}>
-                Don't have an account?
+               {dhaccount_}
               </Text>
               <RegisterButton 
                 title={'Registration'} 

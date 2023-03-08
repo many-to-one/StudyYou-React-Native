@@ -47,7 +47,7 @@ const AllEvents = ({datas}) => {
 
       <View > 
         {events.map((ev, index) => (
-            <Event key={index} ev={ev}/>
+            <Event key={ev.id} ev={ev}/>
         ))}
       </View>
 

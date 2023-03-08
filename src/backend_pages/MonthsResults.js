@@ -46,7 +46,7 @@ const MonthsResults = ({navigation}) => {
             /> */}
             <ScrollView>
             {result.map((res, index) => (
-                <MonthsResultsItem key={index} res={res}/>
+                <MonthsResultsItem key={res.id} res={res}/>
             ))}
             </ScrollView>
          </View>
