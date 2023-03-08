@@ -5,17 +5,41 @@ import AuthButton from '../buttons/AuthButton';
 import RegisterButton from '../buttons/RegisterButton';
 import { AuthContext } from '../context/AuthContext';
 
-const ForgotPassword = ({route, navigation}) => {
+const ForgotPassword = ({navigation}) => {
 
-    const {proxy, passwordResetService} = useContext(AuthContext)
+    const {proxy} = useContext(AuthContext)
     const [email, setEmail] = useState('')
     const [text, setText] = useState('')
     const [success, setSuccess] = useState(false)
+    const [click_, setClick] = useState('')
+    const [enterEmail_, setEnterEmail] = useState('')
+    const [title, setTitle] = useState('')
 
     // useEffect(() => {
     //     resetMail();
     //     console.log('email2', email)
     // }, []) 
+
+    useEffect(() => {
+      translate()
+    }, [])
+
+    const translate = async() => {
+      const get = await AsyncStorage.getItem('language')
+        if (get === 'PL'){
+          setClick('Kliknij tutaj')
+          setEnterEmail('Wprowadź email')
+          setTitle('Witamy na stronie zmiany hasła.')
+        }else if (get === 'RU'){
+          setClick('Нажмите здесь')
+          setEnterEmail('Адрес электронной почты')
+          setTitle('Добро пожаловать на страницу смены пароля.')
+        }else if (get === 'UA'){
+          setClick('Натиснути тут')
+          setEnterEmail('Адреса електронної пошти')
+          setTitle('Ласкаво просимо на сторінку зміни пароля.')
+        }
+      }
 
     const resetMail = async() => {
       // let email = JSON.parse(await AsyncStorage.getItem("f_email"))
@@ -43,16 +67,16 @@ const ForgotPassword = ({route, navigation}) => {
     return(
       <View style={styles.container}>
         <View style={styles.email}>
-          <Text style={styles.text}>Wellcome to the password changing page.</Text>
+          <Text style={styles.text}>{title}</Text>
           <TextInput
-            placeholder="Enter email"
+            placeholder={enterEmail_}
             placeholderTextColor={'gray'}
             onChangeText={(text) => setEmail(text)}
             style={styles.input}
           />
         </View>
         <RegisterButton 
-          title={'Click here'}
+          title={click_}
           onPress={() => resetMail()}
         />
       </View>

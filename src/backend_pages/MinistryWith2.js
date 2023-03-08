@@ -169,7 +169,7 @@ return(
         <View>
           {dateMinistryWith.map((person, index) => (
             <MinistryWithPerson 
-            key={index}
+            key={person.id}
             person={person}
             day={day}
           />

@@ -17,13 +17,17 @@ const Login = () => {
   const navigation = useNavigation() 
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-  const {userData, login, setLanguage, profileToken, logged} = useContext(AuthContext);
-  const {forgotPassword_, dhaccount_, submit_, click_} = useContext(LanguageContext);
-  const [selected, setSelected] = useState('')
+  const {login, logged} = useContext(AuthContext);
   const [lng, setLng] = useState(false)
-  const [selected_c, setSelected_c] = useState('')
   const [selected_l, setSelected_l] = useState('')
   const [congregation, setCongregation] = useState('');
+  const [forgotPassword_, setForgotPassword] = useState('')
+  const [dhaccount_, setDhaccount] = useState('')
+  const [registration_, setRegistration] = useState('')
+  const [login_, setLogin] = useState('')
+  const [click_, setClick] = useState('')
+  const [enterEmail_, setEnterEmail] = useState('')
+  const [enterPassword_, setEnterPassword] = useState('')
   const Data_c = [
     {key: 'Sława', value: 'Sława'}
   ]
@@ -32,7 +36,7 @@ const Login = () => {
     {key: 'RU', value: 'RU'},
     {key: 'UA', value: 'UA'},
   ]
-
+ 
   const clearTextInput = () => {
     setEmail('') 
     setPassword('')
@@ -40,12 +44,37 @@ const Login = () => {
 
   useEffect(() => {
     isLanguage()
-  })
+  }, [])
 
   const isLanguage = async() => {
     const get = await AsyncStorage.getItem('language')
     if(get !== null){
       setLng(true)
+      if (get === 'PL'){
+        setForgotPassword('Nie Pamiętam hasła')
+        setDhaccount('Załóż konto')
+        setClick('Kliknij tutaj')
+        setRegistration('Rejestracja')
+        setLogin('Załogować się')
+        setEnterEmail('Wprowadź email')
+        setEnterPassword('Wprowadź hasło')
+      }else if (get === 'RU'){
+        setForgotPassword('Не помню пароль')
+        setDhaccount('Ещё не зарегистрированы?')
+        setClick('Нажмите здесь')
+        setRegistration('Регистрация')
+        setLogin('Войти')
+        setEnterEmail('Адрес электронной почты')
+        setEnterPassword('Пароль')
+      }else if (get === 'UA'){
+        setForgotPassword("Hе пам'ятаю пароль")
+        setDhaccount('Ще не зареєстровані?')
+        setClick('Натиснути тут')
+        setRegistration('Реєстрація')
+        setLogin('Увійти')
+        setEnterEmail('Адреса електронної пошти')
+        setEnterPassword('Пароль')
+      }
     }else{
       setLng(false)
     }
@@ -84,13 +113,13 @@ const Login = () => {
           <View style={styles.container}>
             <View style={styles.login}>
               <TextInput 
-                placeholder="Enter email"
+                placeholder={enterEmail_}
                 placeholderTextColor={'gray'}
                 onChangeText={(text) => setEmail(text)}
                 style={styles.input}
               />
               <TextInput 
-                placeholder="Enter password"
+                placeholder={enterPassword_}
                 placeholderTextColor={'gray'}
                 secureTextEntry
                 onChangeText={(text) => setPassword(text)}
@@ -111,7 +140,7 @@ const Login = () => {
                 search={true} 
               />
                 <AuthButton 
-                title={'Login'} 
+                title={login_} 
                 onPress={() =>  LoginApi()}
               />
             </View>
@@ -128,7 +157,7 @@ const Login = () => {
 
               <View style={styles.register}>
                 <Text style={styles.text}>
-                  {dhaccount_}
+                  {registration_}
                 </Text>
                 <RegisterButton 
                   title={'Registration'} 
@@ -145,20 +174,20 @@ const Login = () => {
         <View style={styles.container}>
           <View style={styles.login}>
             <TextInput 
-              placeholder="Enter email"
+              placeholder={enterEmail_}
               placeholderTextColor={'gray'}
               onChangeText={(text) => setEmail(text)}
               style={styles.input}
             />
             <TextInput 
-              placeholder="Enter password"
+              placeholder={enterPassword_}
               placeholderTextColor={'gray'}
               secureTextEntry
               onChangeText={(text) => setPassword(text)}
               style={styles.input}
             />
               <AuthButton 
-              title={'Login'} 
+              title={login_} 
               onPress={() =>  LoginApi()}
             />
           </View>
@@ -167,7 +196,7 @@ const Login = () => {
               <Text style={styles.text}>
                 {forgotPassword_}
               </Text>
-              <Button 
+              <RegisterButton 
                 style={styles.btn}
                 title={click_} 
                 onPress={() =>  navigation.navigate('ForgotPassword', {email: email})}
@@ -179,7 +208,7 @@ const Login = () => {
                {dhaccount_}
               </Text>
               <RegisterButton 
-                title={'Registration'} 
+                title={registration_} 
                 onPress={() =>  navigation.navigate('Registration')}
               />
             </View>

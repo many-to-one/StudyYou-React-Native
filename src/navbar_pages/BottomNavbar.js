@@ -58,6 +58,7 @@ function BottomNavigator() {
     duty_,
     weekendMeetings_,
     ministryWith_,
+    forgotPassword_,
   } = React.useContext(LanguageContext);  
 
   const screenOptions = (route, color) => {
@@ -225,18 +226,21 @@ function BottomNavigator() {
         <Tab.Screen 
         name="ForgotPassword" 
         component={ForgotPassword} 
-        options={{
-          title: `${requestResetMail_}`,
+        options={({ navigation }) => ({
+          title: `${forgotPassword_}`,
           headerTitleStyle: {
             color: 'white',
-            marginLeft: '8rem',
+            marginLeft: '6rem',
           },
           headerStyle: {
             backgroundColor: 'black',
           },
           tabBarVisible: false, // hide the button
           tabBarButton: (props) => null, // hide the button
-        }}
+          headerLeft: () => (
+            <BackButton onPress={() => navigation.navigate('Login')} />
+          ),
+        })}
         />
         <Tab.Screen 
         name="Timer" 
