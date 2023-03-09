@@ -25,7 +25,7 @@ Również można zapisywać czas pracy, ilość pokazanych filmów i rozpowszech
 publikacji, aplikacja na bieżąco będzie pokazywać nasz wynik, który można
 zapisać do archiwum, a później usunąć.
 
-Ta część aplikacji frontendowa, backend(StydyYou) napisany w języku Python
+Ta część aplikacji jest frontendowa, backend(StydyYou) napisany jest w języku Python
 z wykorzystaniem frameworku Django Rest Framework, można go również znaleźć 
 w moim repozytorium.
 
