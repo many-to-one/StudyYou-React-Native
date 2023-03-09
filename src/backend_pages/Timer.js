@@ -67,15 +67,15 @@ export default function Timer() {
       <View style={styles.buttons_cont}>
         <TouchableOpacity onPress={() => toggle()} style={styles.buttons}>
           <Icon name='play' size={30} color={'white'}/>
-            <Text style={styles.buttonText}>Start</Text>
+            {/* <Text style={styles.buttonText}>Start</Text> */}
         </TouchableOpacity>
         <TouchableOpacity onPress={() => pause()} style={styles.buttons}>
           <Icon name='pause' size={30} color={'white'}/>
-            <Text style={styles.buttonText}>Pause</Text>
+            {/* <Text style={styles.buttonText}>Pause</Text> */}
         </TouchableOpacity>
         <TouchableOpacity onPress={() => reset()} style={styles.buttons}>
           <Icon name='stop' size={30} color={'white'}/>
-            <Text style={[styles.buttonText, styles.buttonTextReset]}>Reset</Text>
+            {/* <Text style={[styles.buttonText, styles.buttonTextReset]}>Reset</Text> */}
         </TouchableOpacity>
       </View>
     </View>
