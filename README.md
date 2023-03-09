@@ -11,3 +11,7 @@ keeping order, lecturers, and other participants of current event.
 This is a frontend part of the app, 
 the backend was created by using 
 the python framework -  Django Rest Framework
+
+
+https://user-images.githubusercontent.com/114101893/223989323-6a058e1f-01ab-4154-89f9-803429799baf.mp4
+
