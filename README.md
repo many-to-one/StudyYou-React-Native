@@ -2,7 +2,7 @@
 
 # ENG
 In this mobile app, you can add your events,
-where you can write the time of your work, 
+where you can write the time of your work(event), 
 and get a result of your working time.
 
 You can use a Calendar and appoint from the list of users 
@@ -14,11 +14,11 @@ the backend was created by using
 the python framework -  Django Rest Framework.
 
 # PL
-To jest aplikacja mobilna która służy do organizacji wydarzeń.
-Korzystając z kalendarza można wybrać date wydarzenia. 
+Ta aplikacja mobilna służy do organizacji wydarzeń.
+Korzystając z kalendarza można wybrać datę wydarzenia. 
 Mamy tutaj do despozycji obsługę techniczną: mikrofony, nagłośnienie, 
 porządkowych, lektorów i inne działy do obsługiwania naszego wydarzenia.
-Administrator może wyznaczyć konkretnych użytkowników, które trafią do
+Administrator może wyznaczyć konkretnych użytkowników, którzy trafią do
 listy obsługi technicznej.
 
 Również można zapisywać czas pracy, ilość pokazanych filmów i rozpowszechnianych 
