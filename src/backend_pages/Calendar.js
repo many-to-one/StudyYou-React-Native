@@ -17,12 +17,21 @@ const Calendar_ = (props) => {
   const isFocused = useIsFocused();
   // const nextDay = moment().add(1, 'days').format("YYYY-MM-DD");
   let days = [];
-  const marked = {}
+  const marked = {
+    '2023-03-05': {selected: true, marked: true, selectedColor: 'blue'},
+    '2023-03-06': {selected: true, marked: true, selectedColor: 'blue'},
+    '2023-03-10': {selected: true, marked: true, selectedColor: 'blue'},
+    '2023-03-11': {selected: true, marked: true, selectedColor: 'blue'},
+  }
   // const date = ['2023-02-17']
 
   useEffect(() => {
     getMarked()
   }, [isFocused])
+
+  useEffect(() => {
+
+  }, [])
 
   LocaleConfig.locales['pl'] = {
     monthNames: monthNames,
@@ -52,13 +61,15 @@ const Calendar_ = (props) => {
       })
       console.log('days:', days)
 
-      days.map((day) => {
-        marked[day.toString()] = {
-          selected: true,
-          selectedColor: '#78D7D9',
-          selectedTextColor: 'white',
-        }
-      })
+      // days.map((day) => {
+      //   marked[day.toString()] = {
+      //     selected: true,
+      //     marked: true,
+      //     selectedColor: 'blue',
+      //     // selectedTextColor: 'white',
+      //   }.join(',')
+      // })
+
 
       console.log('marked:', marked)
     }
