@@ -11,19 +11,23 @@ keeping order, lecturers, and other participants of current event.
 
 This is a frontend part of the app, 
 the backend was created by using 
-the python framework -  Django Rest Framework
+the python framework -  Django Rest Framework.
 
 # PL
 To jest aplikacja mobilna która służy do organizacji wydarzeń.
 Korzystając z kalendarza można wybrać date wydarzenia. 
 Mamy tutaj do despozycji obsługę techniczną: mikrofony, nagłośnienie, 
 porządkowych, lektorów i inne działy do obsługiwania naszego wydarzenia.
-Administrator może naznaczyć konkretnych użytkowników, które trafia do
-listy obsługi technicznej
+Administrator może wyznaczyć konkretnych użytkowników, które trafią do
+listy obsługi technicznej.
 
 Również można zapisywać czas pracy, ilość pokazanych filmów i rozpowszechnianych 
 publikacji, aplikacja na bieżąco będzie pokazywać nasz wynik, który można
-zapisać do archiwum, a później usunąć
+zapisać do archiwum, a później usunąć.
+
+Ta część aplikacji frontendowa, backend(StydyYou) napisany w języku Python
+z wykorzystaniem frameworku Django Rest Framework, można go również znaleźć 
+w moim repozytorium.
 
 https://user-images.githubusercontent.com/114101893/223989323-6a058e1f-01ab-4154-89f9-803429799baf.mp4
 
