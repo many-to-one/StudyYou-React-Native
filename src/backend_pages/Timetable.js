@@ -33,7 +33,6 @@ const Timetable = ({navigation}) => {
       weekendLeader_,
       weekendSpeach_,
       watchTowerLeader_,
-      watchTowerLector_,
       ministryWith_,
       with_
     } = useContext(LanguageContext)

@@ -10,7 +10,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const WeekPrayer1 = ({day, navigation}) => {
 
-    const {proxy, congr} = useContext(AuthContext);
+    const {proxy, stuff} = useContext(AuthContext);
     const {firstPrayer_} = useContext(LanguageContext);
     const [selected, setSelected] = useState('')
     const [users, setUsers] = useState([])
@@ -108,9 +108,9 @@ const WeekPrayer1 = ({day, navigation}) => {
     }
   }
 
-  console.log('dateWeekPrayer1:', dateWeekPrayer1, day)
+  console.log('dateWeekPrayer1:', dateWeekPrayer1, stuff)
 
-if(dateWeekPrayer1.length === 1){
+if(dateWeekPrayer1.length === 1 && stuff === true){
   return ( 
     dateWeekPrayer1.map((e) => {
       if(e.date === day && e.action === 'Prayer 1 (week)'){  
@@ -130,7 +130,7 @@ if(dateWeekPrayer1.length === 1){
 
   )
      
-}else if(dateWeekPrayer1.length === 0){
+}else if(dateWeekPrayer1.length === 0 && stuff === true){
         return (
             <View >
               <SelectList 
@@ -160,7 +160,21 @@ if(dateWeekPrayer1.length === 1){
                   onPress={() => setWeekPrayer1(selected)}
               />
             </View>
-        )}
+        )
+}else if(dateWeekPrayer1.length === 1 && stuff === false){
+  return ( 
+    dateWeekPrayer1.map((e) => {
+      if(e.date === day && e.action === 'Prayer 1 (week)'){  
+          return  <View style={styles.user}>
+          <Icon name='ios-layers' size={20} color={'#F9F9B5'} />
+          <Text style={styles.user_text}>{USERS[e.user]}</Text>
+          </View>  
+                              
+      }
+  }) 
+
+  )     
+}
 }
 
 const styles = StyleSheet.create({

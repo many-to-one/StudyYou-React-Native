@@ -91,7 +91,6 @@ const Login = () => {
       if (resp === '200'){
         clearTextInput()
         navigation.navigate('Menu')
-        // window.location.reload()
       }else{
         navigation.navigate('Login')
       }

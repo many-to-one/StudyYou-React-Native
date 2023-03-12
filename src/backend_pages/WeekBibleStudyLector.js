@@ -10,7 +10,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const WeekBibleStudyLector = ({day, navigation}) => {
 
-    const {proxy, congr} = useContext(AuthContext);
+    const {proxy, stuff} = useContext(AuthContext);
     const {bibleStudyLector_} = useContext(LanguageContext);
     const [selected, setSelected] = useState('')
     const [users, setUsers] = useState([])
@@ -110,7 +110,7 @@ const WeekBibleStudyLector = ({day, navigation}) => {
 
   console.log('dateWeekBibleStudyLector:', dateWeekBibleStudyLector, day)
 
-if(dateWeekBibleStudyLector.length === 1){
+if(dateWeekBibleStudyLector.length === 1 && stuff === true){
   return ( 
     dateWeekBibleStudyLector.map((e) => {
       if(e.date === day && e.action === 'Bible Study Lector'){  
@@ -130,7 +130,7 @@ if(dateWeekBibleStudyLector.length === 1){
 
   )
      
-}else if(dateWeekBibleStudyLector.length === 0){
+}else if(dateWeekBibleStudyLector.length === 0 && stuff === true){
         return (
             <View >
               <SelectList 
@@ -160,7 +160,21 @@ if(dateWeekBibleStudyLector.length === 1){
                   onPress={() => setWeekBibleStudyLector(selected)}
               />
             </View>
-        )}
+        )
+  }if(dateWeekBibleStudyLector.length === 1 && stuff === false){
+    return ( 
+      dateWeekBibleStudyLector.map((e) => {
+        if(e.date === day && e.action === 'Bible Study Lector'){  
+            return  <View style={styles.user}>
+            <Icon name='md-reader' size={20} color={'#F9F9B5'} />
+            <Text style={styles.user_text}>{USERS[e.user]}</Text>
+            </View>  
+                                
+        }
+    }) 
+  
+    )    
+  }
 }
 
 const styles = StyleSheet.create({

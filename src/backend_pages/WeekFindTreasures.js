@@ -10,7 +10,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const WeekFindTreasures = ({day, navigation}) => {
 
-    const {proxy, congr} = useContext(AuthContext);
+    const {proxy, stuff} = useContext(AuthContext);
     const {spiritualGems_} = useContext(LanguageContext);
     const [selected, setSelected] = useState('')
     const [users, setUsers] = useState([])
@@ -110,7 +110,7 @@ const WeekFindTreasures = ({day, navigation}) => {
 
   console.log('dateWeekFindTreasures:', dateWeekFindTreasures, day)
 
-if(dateWeekFindTreasures.length === 1){
+if(dateWeekFindTreasures.length === 1 && stuff === true){
   return ( 
     dateWeekFindTreasures.map((e) => {
       if(e.date === day && e.action === 'Find treasures (week)'){  
@@ -130,7 +130,7 @@ if(dateWeekFindTreasures.length === 1){
 
   )
      
-}else if(dateWeekFindTreasures.length === 0){
+}else if(dateWeekFindTreasures.length === 0 && stuff === true){
         return (
             <View >
               <SelectList 
@@ -160,7 +160,21 @@ if(dateWeekFindTreasures.length === 1){
                   onPress={() => setWeekFindTreasures(selected)}
               />
             </View>
-        )}
+        )
+}if(dateWeekFindTreasures.length === 1 && stuff === false){
+  return ( 
+    dateWeekFindTreasures.map((e) => {
+      if(e.date === day && e.action === 'Find treasures (week)'){  
+          return  <View style={styles.user}>
+          <Icon name='albums' size={20} color={'#F9F9B5'} />
+          <Text style={styles.user_text}>{USERS[e.user]}</Text>
+          </View>  
+                              
+      }
+  }) 
+
+  )    
+}
 }
 
 const styles = StyleSheet.create({

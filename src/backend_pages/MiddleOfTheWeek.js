@@ -45,7 +45,7 @@ const MiddleOfTheWeek = ({route, navigation}) => {
           <WeekLeader  day={day}/>
         </View>
 
-        <View style={styles.event}>
+        <View style={styles.event}> 
           <Text style={styles.text}>{firstPrayer_}:</Text>
           <WeekPrayer1  day={day}/>
         </View>

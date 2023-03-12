@@ -10,7 +10,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const WeekTreasures = ({day, navigation}) => {
 
-    const {proxy, congr} = useContext(AuthContext);
+    const {proxy, stuff} = useContext(AuthContext);
     const {treasuresFromGodsWord_} = useContext(LanguageContext);
     const [selected, setSelected] = useState('')
     const [users, setUsers] = useState([])
@@ -110,7 +110,7 @@ const WeekTreasures = ({day, navigation}) => {
 
   console.log('dateWeekTreasures:', dateWeekTreasures, day)
 
-if(dateWeekTreasures.length === 1){
+if(dateWeekTreasures.length === 1 && stuff === true){
   return ( 
     dateWeekTreasures.map((e) => {
       if(e.date === day && e.action === 'Treasures (week)'){  
@@ -130,7 +130,7 @@ if(dateWeekTreasures.length === 1){
 
   )
      
-}else if(dateWeekTreasures.length === 0){
+}else if(dateWeekTreasures.length === 0 && stuff === true){
         return (
             <View >
               <SelectList 
@@ -160,7 +160,21 @@ if(dateWeekTreasures.length === 1){
                   onPress={() => setWeekTreasures(selected)}
               />
             </View>
-        )}
+        )}else if(dateWeekTreasures.length === 1 && stuff === false){
+          return ( 
+            dateWeekTreasures.map((e) => {
+              if(e.date === day && e.action === 'Treasures (week)'){  
+                  return  <View style={styles.user}>
+                  <Icon name='md-shield' size={20} color={'#F9F9B5'} />
+                  <Text style={styles.user_text}>{USERS[e.user]}</Text>
+                  </View>  
+                                      
+              }
+          }) 
+        
+          )     
+        }
+        
 }
 
 const styles = StyleSheet.create({

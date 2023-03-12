@@ -10,13 +10,13 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const WeekLeader = ({day, navigation}) => {
 
-    const {proxy, congr} = useContext(AuthContext);
+    const {proxy, stuff} = useContext(AuthContext);
     const {leaderAndIntroductoryRemarks_} = useContext(LanguageContext);
     const [selected, setSelected] = useState('')
     const [users, setUsers] = useState([])
     const [dateLeaderWeek, setDateLeaderWeek] = useState([])
     const USERS = {}
-    const [live, setLive] = useState(true)
+    // const [stuff, setStuff] = useState(false)
     const isFocused = useIsFocused();
 
     useEffect(() => {
@@ -28,6 +28,7 @@ const WeekLeader = ({day, navigation}) => {
     const resp = await fetch(`${proxy}/users/users/${datas.congregation}/`)
       const data = await resp.json();
       if(resp.status === 200){
+        // setStuff(await AsyncStorage.getItem("is_stuff"))
         setUsers(data)
         getCalendarDatesByDate()
       }
@@ -109,7 +110,7 @@ const WeekLeader = ({day, navigation}) => {
     }
   }
 
-  console.log('dateLeaderWeek:', dateLeaderWeek, day)
+  console.log('dateLeaderWeek:', dateLeaderWeek, day, stuff)
 
 if(dateLeaderWeek.length === 1){
   return ( 
@@ -131,7 +132,7 @@ if(dateLeaderWeek.length === 1){
 
   )
      
-}else if(dateLeaderWeek.length === 0){
+}else if(dateLeaderWeek.length === 0 && stuff === true){
         return (
             <View >
               <SelectList 

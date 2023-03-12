@@ -10,7 +10,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const WeekBibleStudy = ({day, navigation}) => {
 
-    const {proxy, congr} = useContext(AuthContext);
+    const {proxy, stuff} = useContext(AuthContext);
     const {bibleStudyLeader_} = useContext(LanguageContext);
     const [selected, setSelected] = useState('')
     const [users, setUsers] = useState([])
@@ -111,7 +111,7 @@ const WeekBibleStudy = ({day, navigation}) => {
 
   console.log('dateWeekBibleStudy:', dateWeekBibleStudy, day)
 
-if(dateWeekBibleStudy.length === 1){
+if(dateWeekBibleStudy.length === 1 && stuff === true){
   return ( 
     dateWeekBibleStudy.map((e) => {
       if(e.date === day && e.action === 'Bible Study Leader'){  
@@ -131,7 +131,7 @@ if(dateWeekBibleStudy.length === 1){
 
   )
      
-}else if(dateWeekBibleStudy.length === 0){
+}else if(dateWeekBibleStudy.length === 0 && stuff === true){
         return (
             <View >
               <SelectList 
@@ -161,7 +161,19 @@ if(dateWeekBibleStudy.length === 1){
                   onPress={() => setWeekBibleStudy(selected)}
               />
             </View>
-        )}
+        )
+  }if(dateWeekBibleStudy.length === 1 && stuff === false){
+    return ( 
+      dateWeekBibleStudy.map((e) => {
+        if(e.date === day && e.action === 'Bible Study Leader'){  
+            return  <View style={styles.user}>
+            <Icon name='md-library' size={20} color={'#F9F9B5'} />
+            <Text style={styles.user_text}>{USERS[e.user]}</Text>
+            </View>                                
+        }
+    }) 
+    )    
+  }
 }
 
 const styles = StyleSheet.create({

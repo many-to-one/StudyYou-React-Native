@@ -10,7 +10,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const WeekDiscussion = ({day, navigation}) => {
 
-    const {proxy, congr} = useContext(AuthContext);
+    const {proxy, stuff} = useContext(AuthContext);
     const {discussion_} = useContext(LanguageContext);
     const [selected, setSelected] = useState('')
     const [users, setUsers] = useState([])
@@ -110,7 +110,7 @@ const WeekDiscussion = ({day, navigation}) => {
 
   console.log('dateWeekDiscussion:', dateWeekDiscussion, day)
 
-if(dateWeekDiscussion.length === 1){
+if(dateWeekDiscussion.length === 1 && stuff === true){
   return ( 
     dateWeekDiscussion.map((e) => {
       if(e.date === day && e.action === 'Discussion (week)'){  
@@ -130,7 +130,7 @@ if(dateWeekDiscussion.length === 1){
 
   )
      
-}else if(dateWeekDiscussion.length === 0){
+}else if(dateWeekDiscussion.length === 0 && stuff === true){
         return (
             <View >
               <SelectList 
@@ -160,7 +160,21 @@ if(dateWeekDiscussion.length === 1){
                   onPress={() => setWeekDiscussion(selected)}
               />
             </View>
-        )}
+        )
+}else if(dateWeekDiscussion.length === 1 && stuff === false){
+  return ( 
+    dateWeekDiscussion.map((e) => {
+      if(e.date === day && e.action === 'Discussion (week)'){  
+          return  <View style={styles.user}>
+          <Icon name='md-film-outline' size={20} color={'#F9F9B5'} />
+          <Text style={styles.user_text}>{USERS[e.user]}</Text>
+          </View>  
+                              
+      }
+  }) 
+
+  )    
+  }
 }
 
 const styles = StyleSheet.create({

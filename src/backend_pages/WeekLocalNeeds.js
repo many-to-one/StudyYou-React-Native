@@ -10,7 +10,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const WeekLocalNeeds = ({day, navigation}) => {
 
-    const {proxy, congr} = useContext(AuthContext);
+    const {proxy, stuff} = useContext(AuthContext);
     const {localNeeds_} = useContext(LanguageContext);
     const [selected, setSelected] = useState('')
     const [users, setUsers] = useState([])
@@ -110,7 +110,7 @@ const WeekLocalNeeds = ({day, navigation}) => {
 
   console.log('dateWeekLocalNeeds:', dateWeekLocalNeeds, day)
 
-if(dateWeekLocalNeeds.length === 1){
+if(dateWeekLocalNeeds.length === 1 && stuff === true){
   return ( 
     dateWeekLocalNeeds.map((e) => {
       if(e.date === day && e.action === 'Local Needs'){  
@@ -130,7 +130,7 @@ if(dateWeekLocalNeeds.length === 1){
 
   )
      
-}else if(dateWeekLocalNeeds.length === 0){
+}else if(dateWeekLocalNeeds.length === 0 && stuff === true){
         return (
             <View >
               <SelectList 
@@ -160,7 +160,20 @@ if(dateWeekLocalNeeds.length === 1){
                   onPress={() => setWeekLocalNeeds(selected)}
               />
             </View>
-        )}
+        )
+  }if(dateWeekLocalNeeds.length === 1 && stuff === false){
+    return ( 
+      dateWeekLocalNeeds.map((e) => {
+        if(e.date === day && e.action === 'Local Needs'){  
+            return  <View style={styles.user}>
+            <Icon name='md-file-tray-full' size={20} color={'#F9F9B5'} />
+            <Text style={styles.user_text}>{USERS[e.user]}</Text>
+            </View>  
+                                
+        }
+    }) 
+    )     
+  }
 }
 
 const styles = StyleSheet.create({

@@ -10,6 +10,7 @@ export const AuthProvider = ({children}) => {
     const [token, setToken] = useState('');
     const [profileToken, setProfileToken] = useState('')
     const [logged, setLogged] = useState(false)
+    const [stuff, setStuff] = useState(false)
     const proxy = "http://127.0.0.1:8000"
 
     const congr = async() => {
@@ -81,7 +82,9 @@ export const AuthProvider = ({children}) => {
               });
               const data = await resp.json()
               if(resp === 200){
-                console.log(data)
+                console.log('profile', data.data.helper)
+                setStuff(data.data.helper)
+                // await AsyncStorage.setItem("is_stuff", JSON.stringify(data.is_stuff));
                 setProfileToken(data.token)
                 setLogged(true)
               }
@@ -133,6 +136,7 @@ export const AuthProvider = ({children}) => {
             logged,
             passwordResetService,
             congr,
+            stuff,
         }}>
             {children}
         </AuthContext.Provider>

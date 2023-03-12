@@ -30,10 +30,11 @@ const Profile = ({navigation}) => {
         const resp = await profile()
         const data = resp
         setProfileData(data.data)
+        console.log('pro', data.data)
     }
 
     const language = async(selected) => {
-      await AsyncStorage.setItem('language', selected)
+      await AsyncStorage.setItem('language', selected) 
       await setLanguage()
     }
 

@@ -12,26 +12,15 @@ const Calendar_ = (props) => {
   const navigation = useNavigation();
   const {proxy} = useContext(AuthContext);
   const {dayNames, monthNames} = useContext(LanguageContext);
-  // const [selected, setSelected] = useState('')
+  const [marked, setMarked] = useState({})
   const [ds, setDs] = useState('')
   const isFocused = useIsFocused();
   // const nextDay = moment().add(1, 'days').format("YYYY-MM-DD");
   let days = [];
-  const marked = {
-    '2023-03-05': {selected: true, marked: true, selectedColor: 'blue'},
-    '2023-03-06': {selected: true, marked: true, selectedColor: 'blue'},
-    '2023-03-10': {selected: true, marked: true, selectedColor: 'blue'},
-    '2023-03-11': {selected: true, marked: true, selectedColor: 'blue'},
-  }
-  // const date = ['2023-02-17']
 
   useEffect(() => {
     getMarked()
   }, [isFocused])
-
-  useEffect(() => {
-
-  }, [])
 
   LocaleConfig.locales['pl'] = {
     monthNames: monthNames,
@@ -57,34 +46,31 @@ const Calendar_ = (props) => {
       const ar = data.data
 
       ar.map((date) => {
-        days.push(date.date)
+        if(date.date < moment().format('YYYY-MM-DD')){
+          return "null";
+        }else{
+          days.push(date.date)
+        }
       })
       console.log('days:', days)
 
-      // days.map((day) => {
-      //   marked[day.toString()] = {
-      //     selected: true,
-      //     marked: true,
-      //     selectedColor: 'blue',
-      //     // selectedTextColor: 'white',
-      //   }.join(',')
-      // })
+      days.map((day) => {
+        marked[day.toString()] = {
+          selected: true,
+          marked: true,
+          selectedColor: 'blue',
+          // selectedTextColor: 'white',
+        }
+      })
 
 
       console.log('marked:', marked)
     }
   }
 
-  // if(ds){
-  //   ds.map((day) => {
-  //     marked[day.toString()] = {
-  //       selected: true,
-  //       selectedColor: '#78D7D9',
-  //       selectedTextColor: 'white',
-  //     }
-  //   })
-  // }
-
+  useEffect(() => {
+    getMarked()
+  }, [isFocused])
 
   const setDate = (day) => {
     navigation.navigate('CreateCalendarEvent', {day: day})
