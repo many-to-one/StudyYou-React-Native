@@ -22,7 +22,7 @@ const MonthsResults = ({navigation}) => {
         let datas = JSON.parse(await AsyncStorage.getItem("asyncUserData"))
         const resp = await fetch(`${proxy}/backend/get_months_results/${datas.id}/`)
         const data = await resp.json()
-        setResults(data)
+        setResults(data.data)
         console.log('getMonthsResults', data)
     };
 

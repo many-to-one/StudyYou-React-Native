@@ -10,7 +10,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const WatchTowerLector = ({day, navigation}) => {
 
-    const {proxy, congr} = useContext(AuthContext);
+    const {proxy, stuff} = useContext(AuthContext);
     const {watchTowerLector_} = useContext(LanguageContext);
     const [selected, setSelected] = useState('')
     const [users, setUsers] = useState([])
@@ -111,7 +111,7 @@ const WatchTowerLector = ({day, navigation}) => {
 
   console.log('dateWatchTowerLector:', dateWatchTowerLector, day)
 
-if(dateWatchTowerLector.length === 1){
+if(dateWatchTowerLector.length === 1 && stuff === true){
   return ( 
     dateWatchTowerLector.map((e) => {
       if(e.date === day && e.action === 'Watch Tower Lector'){  
@@ -131,7 +131,7 @@ if(dateWatchTowerLector.length === 1){
 
   )
      
-}else if(dateWatchTowerLector.length === 0){
+}else if(dateWatchTowerLector.length === 0 && stuff === true){
         return (
             <View >
               <SelectList 
@@ -161,7 +161,20 @@ if(dateWatchTowerLector.length === 1){
                   onPress={() => setWatchTowerLector(selected)}
               />
             </View>
-        )}
+      )
+  }else if(dateWatchTowerLector.length === 1 && stuff === false){
+    return ( 
+      dateWatchTowerLector.map((e) => {
+        if(e.date === day && e.action === 'Watch Tower Lector'){  
+            return  <View style={styles.user}>
+            <Icon name='md-reader' size={20} color={'#F9F9B5'} />
+            <Text style={styles.user_text}>{USERS[e.user]}</Text>
+            </View>  
+                                
+        }
+      }) 
+    )       
+  }
 }
 
 const styles = StyleSheet.create({

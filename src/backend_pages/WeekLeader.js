@@ -112,7 +112,7 @@ const WeekLeader = ({day, navigation}) => {
 
   console.log('dateLeaderWeek:', dateLeaderWeek, day, stuff)
 
-if(dateLeaderWeek.length === 1){
+if(dateLeaderWeek.length === 1 && stuff === true){
   return ( 
     dateLeaderWeek.map((e) => {
       if(e.date === day && e.action === 'Leader (week)'){  
@@ -162,7 +162,19 @@ if(dateLeaderWeek.length === 1){
                   onPress={() => setLeaderWeek(selected)}
               />
             </View>
-        )}
+      )}else if(dateLeaderWeek.length === 1 && stuff === false){
+        return ( 
+          dateLeaderWeek.map((e) => {
+            if(e.date === day && e.action === 'Leader (week)'){  
+              return  <View style={styles.user}>
+              <Icon name='person-outline' size={20} color={'#F9F9B5'} />
+              <Text style={styles.user_text}>{USERS[e.user]}</Text>
+              </View>  
+                                    
+            }
+          }) 
+        )     
+      }
 }
 
 const styles = StyleSheet.create({

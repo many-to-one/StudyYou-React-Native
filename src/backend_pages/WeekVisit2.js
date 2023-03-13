@@ -10,7 +10,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const WeekVisit2 = ({day, navigation}) => {
 
-    const {proxy, congr} = useContext(AuthContext);
+    const {proxy, stuff} = useContext(AuthContext);
     const {returnVisit_} = useContext(LanguageContext);
     const [selected, setSelected] = useState('')
     const [users, setUsers] = useState([])
@@ -113,98 +113,118 @@ const WeekVisit2 = ({day, navigation}) => {
 
   console.log('dateWeekVisit2:', dateWeekVisit2, day)
 
-if(dateWeekVisit2.length === 1){
-  return ( 
-    dateWeekVisit2.map((e) => {
-      if(e.date === day && e.action === 'School: Return visit'){  
-          return  <View style={styles.user}>
-          <Icon name='people-outline' size={20} color={'#F9F9B5'} />
-          <Text style={styles.user_text}>{USERS[e.user]}</Text>
-              <Icon 
-                  name="close-circle-outline" 
-                  size={20} 
-                  color={'white'} 
-                  onPress={() => deleteWeekVisit2(e)}     
-                  />
-          </View>  
-                              
-      }
-  }) 
-
-  )
-     
-}else if(dateWeekVisit2.length === 0){
-        return (
-            <View >
-              <MultipleSelectList 
-                setSelected={(val) => setSelected(val)} 
-                data={data} 
-                save="value"
-                // onSelect={(value) => alert(`${value}`)} 
-                placeholder={
-                  <View style={styles.placeholder}>
-                    <Icon name='people-outline' size={20} color={'white'} />
-                    <Text style={styles.text}>{returnVisit_}</Text>
-                  </View>
+  if(dateWeekVisit2.length > 1 && stuff === true){
+    return ( 
+      dateWeekVisit2.map((e) => {
+          if(e.date === day && e.action === 'School: Return visit'){  
+              return  <View style={styles.user}>
+              <Icon name='people-outline' size={20} color={'#F9F9B5'} />
+              <Text style={styles.user_text}>{USERS[e.user]}</Text>
+                  <Icon 
+                      name="close-circle-outline" 
+                      size={20} 
+                      color={'#F9F9B5'} 
+                      onPress={() => deleteWeekVisit2(e)}     
+                      />
+              </View>  
+  
+          }
+      }) 
+  
+    )
+      }else if(dateWeekVisit2.length === 0 && stuff === true){
+          return (
+              <View >
+                <MultipleSelectList 
+                  setSelected={(val) => setSelected(val)} 
+                  data={data} 
+                  save="value"
+                  // onSelect={(value) => alert(`${value}`)} 
+                  placeholder={
+                    <View style={styles.placeholder}>
+                      <Icon name='people-outline' size={20} color={'white'} />
+                      <Text style={styles.text}>{returnVisit_}</Text>
+                    </View>
+                  }
+                  boxStyles={styles.event}
+                  inputStyles={styles.input}
+                  dropdownStyles={styles.box}
+                  dropdownItemStyles={{color: 'white'}}
+                  dropdownTextStyles={{color: 'white'}}
+                  arrowicon={<Icon name="chevron-down" size={20} color={'white'} />} 
+                  searchicon={<Icon name="search" size={20} color={'white'} />} 
+                  closeicon={<Icon name="close" size={20} color={'white'} />} 
+                  search={true}
+                />
+                <ScheduleBtn re
+                    style={{backgroundColor: '#F9F9B5',}}
+                    title={'Submit'}
+                    onPress={() => setWeekVisit2(selected)}
+                />
+              </View>
+          )
+      }else if(dateWeekVisit2.length === 1 && stuff === true){
+          return ( 
+            dateWeekVisit2.map((e) => {
+                if(e.date === day && e.action === 'School: Return visit'){  
+                    return  <View>
+                      <View style={styles.user}>
+                      <Icon name='people-outline' size={20} color={'#F9F9B5'} />
+                        <Text style={styles.user_text}>{USERS[e.user]}</Text>
+                            <Icon 
+                                name="close-circle-outline" 
+                                size={20} 
+                                color={'#F9F9B5'} 
+                                onPress={() => deleteWeekVisit2(e)}     
+                                />
+                      </View>
+                      <MultipleSelectList 
+                      setSelected={(val) => setSelected(val)} 
+                      data={data} 
+                      save="value"
+                      // onSelect={() => alert('selected')} 
+                      placeholder={
+                        <View style={styles.placeholder}>
+                          <Icon name='people-outline' size={20} color={'white'} />
+                          <Text style={styles.text}>{returnVisit_}</Text>
+                        </View>
+                      }
+                      boxStyles={styles.event}
+                      inputStyles={styles.input}
+                      dropdownStyles={styles.box}
+                      dropdownItemStyles={{color: 'white'}}
+                      dropdownTextStyles={{color: 'white'}}
+                      arrowicon={<Icon name="chevron-down" size={20} color={'white'} />} 
+                      searchicon={<Icon name="search" size={20} color={'white'} />} 
+                      closeicon={<Icon name="close" size={20} color={'white'} />} 
+                      search={true}
+                      />
+                      <ScheduleBtn 
+                          style={{backgroundColor: '#F9F9B5',}}
+                          title={'Submit'}
+                          onPress={() => setWeekVisit2(selected)}
+                      />
+                    </View>
+                    
+                                        
                 }
-                boxStyles={styles.event}
-                inputStyles={styles.input}
-                dropdownStyles={styles.box}
-                dropdownItemStyles={{color: 'white'}}
-                dropdownTextStyles={{color: 'white'}}
-                arrowicon={<Icon name="chevron-down" size={20} color={'white'} />} 
-                searchicon={<Icon name="search" size={20} color={'white'} />} 
-                closeicon={<Icon name="close" size={20} color={'white'} />} 
-                search={true}
-              />
-              <ScheduleBtn 
-                  style={{backgroundColor: '#F9F9B5',}}
-                  title={'Submit'}
-                  onPress={() => setWeekVisit2(selected)}
-              />
-            </View>
-
-        )}else if(dateWeekVisit2.length > 1){
-        return (
-            <View >
-              <View style={styles.user}>
+            }) 
+    
+            )
+    }else if(dateWeekVisit2.length >= 1 && stuff === false){
+      return ( 
+        dateWeekVisit2.map((e) => {
+            if(e.date === day && e.action === 'School: Return visit'){  
+                return  <View style={styles.user}>
                 <Icon name='people-outline' size={20} color={'#F9F9B5'} />
                 <Text style={styles.user_text}>{USERS[e.user]}</Text>
-                <Icon 
-                  name="close-circle-outline" 
-                  size={20} 
-                  color={'white'} 
-                  onPress={() => deleteWeekVisit2(e)}     
-                />
-              </View>  
-              <MultipleSelectList 
-                setSelected={(val) => setSelected(val)} 
-                data={data} 
-                save="value"
-                // onSelect={(value) => alert(`${value}`)} 
-                placeholder={
-                  <View style={styles.placeholder}>
-                    <Icon name='people-outline' size={20} color={'white'} />
-                    <Text style={styles.text}>{returnVisit_}</Text>
-                  </View>
-                }
-                boxStyles={styles.event}
-                inputStyles={styles.input}
-                dropdownStyles={styles.box}
-                dropdownItemStyles={{color: 'white'}}
-                dropdownTextStyles={{color: 'white'}}
-                arrowicon={<Icon name="chevron-down" size={20} color={'white'} />} 
-                searchicon={<Icon name="search" size={20} color={'white'} />} 
-                closeicon={<Icon name="close" size={20} color={'white'} />} 
-                search={true}
-              />
-              <ScheduleBtn 
-                  style={{backgroundColor: '#F9F9B5',}}
-                  title={'Submit'}
-                  onPress={() => setWeekVisit2(selected)}
-              />
-            </View>
-        )}
+                </View>  
+    
+            }
+        }) 
+    
+      )
+        }
 }
 
 const styles = StyleSheet.create({

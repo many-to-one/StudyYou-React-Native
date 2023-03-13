@@ -10,7 +10,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Microphones = ({day, navigation}) => {
 
-    const {proxy, congr} = useContext(AuthContext); //////////////////
+    const {proxy, congr, stuff} = useContext(AuthContext); //////////////////
     const c = congr() /////////////////////
     const {microphones_} = useContext(LanguageContext);
     const [selected, setSelected] = useState('')
@@ -114,9 +114,9 @@ const Microphones = ({day, navigation}) => {
     }
   }
 
-console.log('dateMicrophones:', dateMicrophones, day)
+console.log('dateMicrophones:', dateMicrophones, stuff)
 
-if(dateMicrophones.length > 1){
+if(dateMicrophones.length > 1 && stuff === true){
   return ( 
     dateMicrophones.map((e) => {
         if(e.date === day && e.action === 'Microphones'){  
@@ -135,7 +135,7 @@ if(dateMicrophones.length > 1){
     }) 
 
   )
-    }else if(dateMicrophones.length === 0){
+    }else if(dateMicrophones.length === 0 && stuff === true){
         return (
             <View >
               <MultipleSelectList 
@@ -166,7 +166,7 @@ if(dateMicrophones.length > 1){
               />
             </View>
         )
-    }else if(dateMicrophones.length === 1){
+    }else if(dateMicrophones.length === 1 && stuff === true){
         return ( 
           dateMicrophones.map((e) => {
               if(e.date === day && e.action === 'Microphones'){  
@@ -214,7 +214,20 @@ if(dateMicrophones.length > 1){
           }) 
   
           )
-  }
+  }else if(dateMicrophones.length >= 1 && stuff === false){
+    return ( 
+      dateMicrophones.map((e) => {
+          if(e.date === day && e.action === 'Microphones'){  
+              return  <View style={styles.user}>
+              <Icon name='mic' size={20} color={'#F9F9B5'} />
+              <Text style={styles.user_text}>{USERS[e.user]}</Text>
+              </View>  
+  
+          }
+      }) 
+  
+    )
+      }
 }
 
 const styles = StyleSheet.create({

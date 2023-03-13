@@ -10,7 +10,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const WeekendSpeach = ({day, navigation}) => {
 
-    const {proxy, congr} = useContext(AuthContext);
+    const {proxy, stuff} = useContext(AuthContext);
     const {weekendSpeach_} = useContext(LanguageContext);
     const [selected, setSelected] = useState('')
     const [users, setUsers] = useState([])
@@ -109,9 +109,9 @@ const WeekendSpeach = ({day, navigation}) => {
     }
   }
 
-  console.log('dateWeekendSpeach:', dateWeekendSpeach, day)
+  console.log('dateWeekendSpeach:', dateWeekendSpeach, stuff)
 
-if(dateWeekendSpeach.length === 1){
+if(dateWeekendSpeach.length === 1 && stuff === true){
   return ( 
     dateWeekendSpeach.map((e) => {
       if(e.date === day && e.action === 'Weekend Speach'){  
@@ -131,7 +131,7 @@ if(dateWeekendSpeach.length === 1){
 
   )
      
-}else if(dateWeekendSpeach.length === 0){
+}else if(dateWeekendSpeach.length === 0 && stuff === true){
         return (
             <View >
               <SelectList 
@@ -161,7 +161,18 @@ if(dateWeekendSpeach.length === 1){
                 onPress={() => setWeekendSpeach(selected)}
               />
             </View>
-        )}
+  )}else if(dateWeekendSpeach.length === 1 && stuff === false){
+    return ( 
+      dateWeekendSpeach.map((e) => {
+        if(e.date === day && e.action === 'Weekend Speach'){  
+          return  <View style={styles.user}>
+          <Icon name='md-man-outline' size={20} color={'#F9F9B5'} />
+          <Text style={styles.user_text}>{USERS[e.user]}</Text>
+          </View>                            
+        }
+      }) 
+    )     
+  }
 }
 
 const styles = StyleSheet.create({

@@ -10,7 +10,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const WeekSchoolLeader = ({day, navigation}) => {
 
-    const {proxy, congr} = useContext(AuthContext);
+    const {proxy, stuff} = useContext(AuthContext);
     const {schoolLeader_} = useContext(LanguageContext);
     const [selected, setSelected] = useState('')
     const [users, setUsers] = useState([])
@@ -110,7 +110,7 @@ const WeekSchoolLeader = ({day, navigation}) => {
 
   console.log('dateWeekSchoolLeader:', dateWeekSchoolLeader, day)
 
-if(dateWeekSchoolLeader.length === 1){
+if(dateWeekSchoolLeader.length === 1 && stuff === true){
   return ( 
     dateWeekSchoolLeader.map((e) => {
       if(e.date === day && e.action === 'School leader (week)'){  
@@ -130,7 +130,7 @@ if(dateWeekSchoolLeader.length === 1){
 
   )
      
-}else if(dateWeekSchoolLeader.length === 0){
+}else if(dateWeekSchoolLeader.length === 0 && stuff === true){
         return (
             <View >
               <SelectList 
@@ -160,7 +160,18 @@ if(dateWeekSchoolLeader.length === 1){
                   onPress={() => setWeekSchoolLeader(selected)}
               />
             </View>
-        )}
+  )}else if(dateWeekSchoolLeader.length === 1 && stuff === false){
+    return ( 
+      dateWeekSchoolLeader.map((e) => {
+        if(e.date === day && e.action === 'School leader (week)'){  
+            return  <View style={styles.user}>
+            <Icon name='school-sharp' size={20} color={'#F9F9B5'} />
+            <Text style={styles.user_text}>{USERS[e.user]}</Text>
+            </View>                          
+        }
+      }) 
+    )    
+  }
 }
 
 const styles = StyleSheet.create({

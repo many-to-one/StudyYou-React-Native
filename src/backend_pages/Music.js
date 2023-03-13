@@ -10,7 +10,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Music = ({day, navigation}) => {
 
-    const {proxy, congr} = useContext(AuthContext);
+    const {proxy, congr, stuff} = useContext(AuthContext);
     const c = congr()
     const {music_} = useContext(LanguageContext);
     const [selected, setSelected] = useState('')
@@ -115,7 +115,7 @@ const Music = ({day, navigation}) => {
 
   console.log('dateMusic:', dateMusic, day)
 
-if(dateMusic.length > 1){
+if(dateMusic.length > 1 && stuff === true){
   return ( 
     dateMusic.map((e) => {
       if(e.date === day && e.action === 'Music'){  
@@ -134,7 +134,7 @@ if(dateMusic.length > 1){
   }) 
 
   )
-    }else if(dateMusic.length === 0){
+    }else if(dateMusic.length === 0 && stuff === true){
         return (
             <View >
               <MultipleSelectList 
@@ -165,7 +165,7 @@ if(dateMusic.length > 1){
               />
             </View>
         )
-    }else if(dateMusic.length == 1){
+    }else if(dateMusic.length == 1 && stuff === true){
         return ( 
             dateMusic.map((e) => {
               if(e.date === day && e.action === 'Music'){  
@@ -213,7 +213,20 @@ if(dateMusic.length > 1){
           })  
   
           )
-  }
+  }else if(dateMusic.length >= 1 && stuff === false){
+    return ( 
+      dateMusic.map((e) => {
+        if(e.date === day && e.action === 'Music'){  
+            return  <View style={styles.user}>
+            <Icon name='md-headset' size={20} color={'#F9F9B5'} />
+            <Text style={styles.user_text}>{USERS[e.user]}</Text>
+            </View>  
+                                
+        }
+    }) 
+  
+    )
+      }
 }
 
 const styles = StyleSheet.create({

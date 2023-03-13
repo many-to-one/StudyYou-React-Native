@@ -27,6 +27,7 @@ const MinistryWith2 = ({day, navigation}) => {
 
   const getUsers = async() => {
     let datas = JSON.parse(await AsyncStorage.getItem("asyncUserData"))
+    console.log('datas', datas)
     const resp = await fetch(`${proxy}/users/users/${datas.congregation}/`)
       const data = await resp.json();
       if(resp.status === 200){

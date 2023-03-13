@@ -10,7 +10,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const WatchTowerLeader = ({day, navigation}) => {
 
-    const {proxy, congr} = useContext(AuthContext);
+    const {proxy, stuff} = useContext(AuthContext);
     const {watchTowerLeader_} = useContext(LanguageContext);
     const [selected, setSelected] = useState('')
     const [users, setUsers] = useState([])
@@ -111,7 +111,7 @@ const WatchTowerLeader = ({day, navigation}) => {
 
   console.log('dateWatchTowerLeader:', dateWatchTowerLeader, day)
 
-if(dateWatchTowerLeader.length === 1){
+if(dateWatchTowerLeader.length === 1 && stuff === true){
   return ( 
     dateWatchTowerLeader.map((e) => {
       if(e.date === day && e.action === 'Watch Tower Leader'){  
@@ -131,7 +131,7 @@ if(dateWatchTowerLeader.length === 1){
 
   )
      
-}else if(dateWatchTowerLeader.length === 0){
+}else if(dateWatchTowerLeader.length === 0 && stuff === true){
         return (
             <View >
               <SelectList 
@@ -161,7 +161,19 @@ if(dateWatchTowerLeader.length === 1){
                   onPress={() => setWatchTowerLeader(selected)}
               />
             </View>
-        )}
+        )
+  }else if(dateWatchTowerLeader.length === 1 && stuff === false){
+      return ( 
+        dateWatchTowerLeader.map((e) => {
+          if(e.date === day && e.action === 'Watch Tower Leader'){  
+              return  <View style={styles.user}>
+              <Icon name='person-sharp' size={20} color={'#F9F9B5'} />
+              <Text style={styles.user_text}>{USERS[e.user]}</Text>
+              </View>                               
+          }
+        }) 
+      )     
+    }
 }
 
 const styles = StyleSheet.create({

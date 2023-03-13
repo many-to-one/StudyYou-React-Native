@@ -10,7 +10,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const WeekStudy = ({day, navigation}) => {
 
-    const {proxy, congr} = useContext(AuthContext);
+    const {proxy, stuff} = useContext(AuthContext);
     const {schoolStudy_} = useContext(LanguageContext);
     const [selected, setSelected] = useState('')
     const [users, setUsers] = useState([])
@@ -111,100 +111,120 @@ const WeekStudy = ({day, navigation}) => {
     }
   }
 
-  console.log('dateWeekStudy:', dateWeekStudy, day)
+  console.log('dateWeekStudy:', dateWeekStudy, day) //School: Study people-sharp
 
-if(dateWeekStudy.length === 1){
-  return ( 
-    dateWeekStudy.map((e) => {
-      if(e.date === day && e.action === 'School: Study'){  
-          return  <View style={styles.user}>
-          <Icon name='people-sharp' size={20} color={'#F9F9B5'} />
-          <Text style={styles.user_text}>{USERS[e.user]}</Text>
-              <Icon 
-                  name="close-circle-outline" 
-                  size={20} 
-                  color={'white'} 
-                  onPress={() => deleteWeekStudy(e)}     
-                  />
-          </View>  
-                              
-      }
-  }) 
-
-  )
-     
-}else if(dateWeekStudy.length === 0){
-        return (
-            <View >
-              <MultipleSelectList 
-                setSelected={(val) => setSelected(val)} 
-                data={data} 
-                save="value"
-                // onSelect={(value) => alert(`${value}`)} 
-                placeholder={
-                  <View style={styles.placeholder}>
-                    <Icon name='people-sharp' size={20} color={'white'} />
-                    <Text style={styles.text}>{schoolStudy_}</Text>
-                  </View>
-                }
-                boxStyles={styles.event}
-                inputStyles={styles.input}
-                dropdownStyles={styles.box}
-                dropdownItemStyles={{color: 'white'}}
-                dropdownTextStyles={{color: 'white'}}
-                arrowicon={<Icon name="chevron-down" size={20} color={'white'} />} 
-                searchicon={<Icon name="search" size={20} color={'white'} />} 
-                closeicon={<Icon name="close" size={20} color={'white'} />} 
-                search={true}
-              />
-              <ScheduleBtn 
-                  style={{backgroundColor: '#F9F9B5',}}
-                  title={'Submit'}
-                  onPress={() => setWeekStudy(selected)}
-              />
-            </View>
-
-        )}else if(dateWeekStudy.length > 1){
-        return (
-            <View >
-              <View style={styles.user}>
-                 <Icon name='people-sharp' size={20} color={'#F9F9B5'} />
-                 <Text style={styles.user_text}>{USERS[e.user]}</Text>
-                 <Icon 
-                    name="close-circle-outline" 
-                    size={20} 
-                    color={'white'} 
-                    onPress={() => deleteWeekStudy(e)}     
-                  />
+  if(dateWeekStudy.length > 1 && stuff === true){
+    return ( 
+      dateWeekStudy.map((e) => {
+          if(e.date === day && e.action === 'School: Study'){  
+              return  <View style={styles.user}>
+              <Icon name='people-sharp' size={20} color={'#F9F9B5'} />
+              <Text style={styles.user_text}>{USERS[e.user]}</Text>
+                  <Icon 
+                      name="close-circle-outline" 
+                      size={20} 
+                      color={'#F9F9B5'} 
+                      onPress={() => deleteWeekStudy(e)}     
+                      />
               </View>  
-              <MultipleSelectList 
-                setSelected={(val) => setSelected(val)} 
-                data={data} 
-                save="value"
-                // onSelect={(value) => alert(`${value}`)} 
-                placeholder={
-                  <View style={styles.placeholder}>
-                    <Icon name='people-sharp' size={20} color={'white'} />
-                    <Text style={styles.text}>{schoolStudy_}</Text>
-                  </View>
+  
+          }
+      }) 
+  
+    )
+      }else if(dateWeekStudy.length === 0 && stuff === true){
+          return (
+              <View >
+                <MultipleSelectList 
+                  setSelected={(val) => setSelected(val)} 
+                  data={data} 
+                  save="value"
+                  // onSelect={(value) => alert(`${value}`)} 
+                  placeholder={
+                    <View style={styles.placeholder}>
+                      <Icon name='people-sharp' size={20} color={'white'} />
+                      <Text style={styles.text}>{schoolStudy_}</Text>
+                    </View>
+                  }
+                  boxStyles={styles.event}
+                  inputStyles={styles.input}
+                  dropdownStyles={styles.box}
+                  dropdownItemStyles={{color: 'white'}}
+                  dropdownTextStyles={{color: 'white'}}
+                  arrowicon={<Icon name="chevron-down" size={20} color={'white'} />} 
+                  searchicon={<Icon name="search" size={20} color={'white'} />} 
+                  closeicon={<Icon name="close" size={20} color={'white'} />} 
+                  search={true}
+                />
+                <ScheduleBtn re
+                    style={{backgroundColor: '#F9F9B5',}}
+                    title={'Submit'}
+                    onPress={() => setWeekStudy(selected)}
+                />
+              </View>
+          )
+      }else if(dateWeekStudy.length === 1 && stuff === true){
+          return ( 
+            dateWeekStudy.map((e) => {
+                if(e.date === day && e.action === 'School: Study'){  
+                    return  <View>
+                      <View style={styles.user}>
+                      <Icon name='people-sharp' size={20} color={'#F9F9B5'} />
+                        <Text style={styles.user_text}>{USERS[e.user]}</Text>
+                            <Icon 
+                                name="close-circle-outline" 
+                                size={20} 
+                                color={'#F9F9B5'} 
+                                onPress={() => deleteWeekStudy(e)}     
+                                />
+                      </View>
+                      <MultipleSelectList 
+                      setSelected={(val) => setSelected(val)} 
+                      data={data} 
+                      save="value"
+                      // onSelect={() => alert('selected')} 
+                      placeholder={
+                        <View style={styles.placeholder}>
+                          <Icon name='people-sharp' size={20} color={'white'} />
+                          <Text style={styles.text}>{schoolStudy_}</Text>
+                        </View>
+                      }
+                      boxStyles={styles.event}
+                      inputStyles={styles.input}
+                      dropdownStyles={styles.box}
+                      dropdownItemStyles={{color: 'white'}}
+                      dropdownTextStyles={{color: 'white'}}
+                      arrowicon={<Icon name="chevron-down" size={20} color={'white'} />} 
+                      searchicon={<Icon name="search" size={20} color={'white'} />} 
+                      closeicon={<Icon name="close" size={20} color={'white'} />} 
+                      search={true}
+                      />
+                      <ScheduleBtn 
+                          style={{backgroundColor: '#F9F9B5',}}
+                          title={'Submit'}
+                          onPress={() => setWeekStudy(selected)}
+                      />
+                    </View>
+                    
+                                        
                 }
-                boxStyles={styles.event}
-                inputStyles={styles.input}
-                dropdownStyles={styles.box}
-                dropdownItemStyles={{color: 'white'}}
-                dropdownTextStyles={{color: 'white'}}
-                arrowicon={<Icon name="chevron-down" size={20} color={'white'} />} 
-                searchicon={<Icon name="search" size={20} color={'white'} />} 
-                closeicon={<Icon name="close" size={20} color={'white'} />} 
-                search={true}
-              />
-              <ScheduleBtn 
-                  style={{backgroundColor: '#F9F9B5',}}
-                  title={'Submit'}
-                  onPress={() => setWeekStudy(selected)}
-              />
-            </View>
-        )}
+            }) 
+    
+            )
+    }else if(dateWeekStudy.length >= 1 && stuff === false){
+      return ( 
+        dateWeekStudy.map((e) => {
+            if(e.date === day && e.action === 'School: Study'){  
+                return  <View style={styles.user}>
+                <Icon name='people-sharp' size={20} color={'#F9F9B5'} />
+                <Text style={styles.user_text}>{USERS[e.user]}</Text>
+                </View>  
+    
+            }
+        }) 
+    
+      )
+        }
 }
 
 const styles = StyleSheet.create({

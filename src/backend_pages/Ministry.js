@@ -10,7 +10,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Ministry = ({day, navigation}) => {
 
-  const {proxy, congr} = useContext(AuthContext);
+  const {proxy, stuff} = useContext(AuthContext);
   const {ministryLeaders_} = useContext(LanguageContext);
   const [selected, setSelected] = useState('')
   const [users, setUsers] = useState([])
@@ -119,7 +119,7 @@ const Ministry = ({day, navigation}) => {
 console.log('dateMinistry:', dateMinistry, day)
 console.log('selected:', selected)
 
-if(dateMinistry.length > 1){
+if(dateMinistry.length > 1 && stuff === true){
   return ( 
     dateMinistry.map((e) => {
         if(e.date === day && e.action === 'Ministry leader'){  
@@ -139,7 +139,7 @@ if(dateMinistry.length > 1){
     }) 
 
   )
-    }else if(dateMinistry.length === 0){
+    }else if(dateMinistry.length === 0 && stuff === true){
         return (
             <View style={styles.container}>
               <MultipleSelectList 
@@ -170,7 +170,7 @@ if(dateMinistry.length > 1){
               />
             </View>
         )
-    }else if(dateMinistry.length === 1){
+    }else if(dateMinistry.length === 1 && stuff === true){
         return ( 
           dateMinistry.map((e) => {
               if(e.date === day && e.action === 'Ministry leader'){  
@@ -212,13 +212,22 @@ if(dateMinistry.length > 1){
                       title={'Submit'}
                       onPress={() => setMinistryUsers(selected)}
                     />
-                  </View>          
-                                      
+                  </View>                                  
               }
           }) 
-  
-          )
-  }
+        )
+      }else if(dateMinistry.length >= 1 && stuff === false){
+        return ( 
+          dateMinistry.map((e) => {
+            if(e.date === day && e.action === 'Ministry leader'){  
+              return <View style={styles.user}>
+                <Icon name='people-circle-outline' size={20} color={'#F9F9B5'} />
+                <Text style={styles.user_text}>{USERS[e.user]}</Text>
+                </View>  
+            }
+          }) 
+        )
+      }
 }
 
 const { width, height } = Dimensions.get('window');

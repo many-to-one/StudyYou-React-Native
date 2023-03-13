@@ -10,7 +10,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const WeekReadingBible = ({day, navigation}) => {
 
-    const {proxy, congr} = useContext(AuthContext);
+    const {proxy, stuff} = useContext(AuthContext);
     const {bibleReading_} = useContext(LanguageContext);
     const [selected, setSelected] = useState('')
     const [users, setUsers] = useState([])
@@ -110,7 +110,7 @@ const WeekReadingBible = ({day, navigation}) => {
 
   console.log('dateWeekReadingBible:', dateWeekReadingBible, day)
 
-if(dateWeekReadingBible.length === 1){
+if(dateWeekReadingBible.length === 1 && stuff === true){
   return ( 
     dateWeekReadingBible.map((e) => {
       if(e.date === day && e.action === 'Bible reading (week)'){  
@@ -130,7 +130,7 @@ if(dateWeekReadingBible.length === 1){
 
   )
      
-}else if(dateWeekReadingBible.length === 0){
+}else if(dateWeekReadingBible.length === 0 && stuff === true){
         return (
             <View >
               <SelectList 
@@ -160,7 +160,18 @@ if(dateWeekReadingBible.length === 1){
                   onPress={() => setWeekReadingBible(selected)}
               />
             </View>
-        )}
+  )}else if(dateWeekReadingBible.length === 1 && stuff === false){
+    return ( 
+      dateWeekReadingBible.map((e) => {
+        if(e.date === day && e.action === 'Bible reading (week)'){  
+          return  <View style={styles.user}>
+          <Icon name='albums' size={20} color={'#F9F9B5'} />
+          <Text style={styles.user_text}>{USERS[e.user]}</Text>
+          </View>                          
+        }
+      })
+    )     
+  }
 }
 
 const styles = StyleSheet.create({

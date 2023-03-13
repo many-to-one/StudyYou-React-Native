@@ -10,7 +10,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Duty = ({day, navigation}) => {
 
-    const {proxy, congr} = useContext(AuthContext);
+    const {proxy, stuff} = useContext(AuthContext);
     const {duty_} = useContext(LanguageContext);
     const [selected, setSelected] = useState('')
     const [users, setUsers] = useState([])
@@ -114,7 +114,7 @@ const Duty = ({day, navigation}) => {
 
   console.log('dateDuty:', dateDuty, day)
 
-if(dateDuty.length > 1){
+if(dateDuty.length > 1 && stuff === true){
   return ( 
     dateDuty.map((e) => {
       if(e.date === day && e.action === 'Duty'){            
@@ -132,7 +132,7 @@ if(dateDuty.length > 1){
   }) 
 
   )
-    }else if(dateDuty.length === 0){
+    }else if(dateDuty.length === 0 && stuff === true){
         return (
             <View >
               <MultipleSelectList 
@@ -163,7 +163,7 @@ if(dateDuty.length > 1){
               />
             </View>
         )
-    }else if(dateDuty.length === 1){
+    }else if(dateDuty.length === 1 && stuff === true){
       return ( 
         dateDuty.map((e) => {
             if(e.date === day && e.action === 'Duty'){  
@@ -211,7 +211,19 @@ if(dateDuty.length > 1){
         }) 
 
         )
-}
+}else if(dateDuty.length >= 1 && stuff === false){
+  return ( 
+    dateDuty.map((e) => {
+      if(e.date === day && e.action === 'Duty'){            
+        return  <View style={styles.user}>
+                  <Icon name='man-sharp' size={20} color={'#F9F9B5'} />
+                  <Text style={styles.user_text}>{USERS[e.user]}</Text>
+                </View>                           
+      }
+  }) 
+
+  )
+    }
 }
 
 const styles = StyleSheet.create({

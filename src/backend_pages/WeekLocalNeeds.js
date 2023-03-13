@@ -108,7 +108,7 @@ const WeekLocalNeeds = ({day, navigation}) => {
     }
   }
 
-  console.log('dateWeekLocalNeeds:', dateWeekLocalNeeds, day)
+  console.log('dateWeekLocalNeeds:', dateWeekLocalNeeds, stuff)
 
 if(dateWeekLocalNeeds.length === 1 && stuff === true){
   return ( 
@@ -161,7 +161,7 @@ if(dateWeekLocalNeeds.length === 1 && stuff === true){
               />
             </View>
         )
-  }if(dateWeekLocalNeeds.length === 1 && stuff === false){
+  }else if(dateWeekLocalNeeds.length === 1 && stuff === false){
     return ( 
       dateWeekLocalNeeds.map((e) => {
         if(e.date === day && e.action === 'Local Needs'){  

@@ -81,9 +81,10 @@ export const AuthProvider = ({children}) => {
                 }
               });
               const data = await resp.json()
-              if(resp === 200){
-                console.log('profile', data.data.helper)
+              if(data.status === 200){
                 setStuff(data.data.helper)
+              }else if(resp === 200){
+                console.log('profile', data.data.helper)
                 // await AsyncStorage.setItem("is_stuff", JSON.stringify(data.is_stuff));
                 setProfileToken(data.token)
                 setLogged(true)

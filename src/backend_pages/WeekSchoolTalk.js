@@ -10,7 +10,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const WeekSchoolTalk = ({day, navigation}) => {
 
-    const {proxy, congr} = useContext(AuthContext);
+    const {proxy, stuff} = useContext(AuthContext);
     const {schoolTalk_} = useContext(LanguageContext);
     const [selected, setSelected] = useState('')
     const [users, setUsers] = useState([])
@@ -110,7 +110,7 @@ const WeekSchoolTalk = ({day, navigation}) => {
 
   console.log('dateWeekSchoolTalk:', dateWeekSchoolTalk, day)
 
-if(dateWeekSchoolTalk.length === 1){
+if(dateWeekSchoolTalk.length === 1 && stuff === true){
   return ( 
     dateWeekSchoolTalk.map((e) => {
       if(e.date === day && e.action === 'School: Talk'){  
@@ -130,7 +130,7 @@ if(dateWeekSchoolTalk.length === 1){
 
   )
      
-}else if(dateWeekSchoolTalk.length === 0){
+}else if(dateWeekSchoolTalk.length === 0 && stuff === true){
         return (
             <View >
               <SelectList 
@@ -160,7 +160,18 @@ if(dateWeekSchoolTalk.length === 1){
                   onPress={() => setWeekSchoolTalk(selected)}
               />
             </View>
-        )}
+  )}else if(dateWeekSchoolTalk.length === 1 && stuff === false){
+    return ( 
+      dateWeekSchoolTalk.map((e) => {
+        if(e.date === day && e.action === 'School: Talk'){  
+          return  <View style={styles.user}>
+          <Icon name='md-man-outline' size={20} color={'#F9F9B5'} />
+          <Text style={styles.user_text}>{USERS[e.user]}</Text>
+          </View>                          
+        }
+      }) 
+    )     
+  }
 }
 
 const styles = StyleSheet.create({

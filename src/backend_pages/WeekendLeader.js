@@ -10,7 +10,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const WeekendLeader = ({day, navigation}) => {
 
-    const {proxy, congr} = useContext(AuthContext);
+    const {proxy, stuff} = useContext(AuthContext);
     const {weekendLeader_} = useContext(LanguageContext);
     const [selected, setSelected] = useState('')
     const [users, setUsers] = useState([])
@@ -110,7 +110,7 @@ const WeekendLeader = ({day, navigation}) => {
 
   console.log('dateWeekendLeader:', dateWeekendLeader, day)
 
-if(dateWeekendLeader.length === 1){
+if(dateWeekendLeader.length === 1 && stuff === true){
   return ( 
     dateWeekendLeader.map((e) => {
       if(e.date === day && e.action === 'Weekend Leader'){  
@@ -130,7 +130,7 @@ if(dateWeekendLeader.length === 1){
 
   )
      
-}else if(dateWeekendLeader.length === 0){
+}else if(dateWeekendLeader.length === 0 && stuff === true){
         return (
             <View >
               <SelectList 
@@ -160,7 +160,19 @@ if(dateWeekendLeader.length === 1){
                   onPress={() => setWeekendLeader(selected)}
               />
             </View>
-        )}
+        )
+      }else if(dateWeekendLeader.length === 1 && stuff === false){
+        return ( 
+          dateWeekendLeader.map((e) => {
+            if(e.date === day && e.action === 'Weekend Leader'){  
+              return  <View style={styles.user}>
+              <Icon name='person-outline' size={20} color={'#F9F9B5'} />
+              <Text style={styles.user_text}>{USERS[e.user]}</Text>
+              </View>                          
+            }
+          }) 
+        )     
+      }
 }
 
 const styles = StyleSheet.create({

@@ -108,7 +108,7 @@ const WeekFindTreasures = ({day, navigation}) => {
     }
   }
 
-  console.log('dateWeekFindTreasures:', dateWeekFindTreasures, day)
+  console.log('dateWeekFindTreasures:', dateWeekFindTreasures, stuff)
 
 if(dateWeekFindTreasures.length === 1 && stuff === true){
   return ( 

@@ -171,8 +171,7 @@ if(dateWeekPrayer1.length === 1 && stuff === true){
           </View>  
                               
       }
-  }) 
-
+    }) 
   )     
 }
 }
