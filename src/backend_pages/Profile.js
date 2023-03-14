@@ -8,29 +8,61 @@ import Icon from "react-native-vector-icons/Ionicons";
 import Calendar from './Calendar';
 import Timetable from './Timetable';
 import { LanguageContext } from '../context/LanguageContext';
+import {
+  LineChart,
+  BarChart,
+  PieChart,
+  ProgressChart,
+  ContributionGraph,
+  StackedBarChart
+} from "react-native-chart-kit";
 
 const Profile = ({navigation}) => {
     const { width, height } = Dimensions.get('window');
-    const {profile} = useContext(AuthContext);
+    const {profile, proxy, userData} = useContext(AuthContext);
     const {setLanguage, Changepassword_} = useContext(LanguageContext);
     const [profileData, setProfileData] = useState([]);
     const [selected, setSelected] = useState('')
+    const [result, setResult] = useState({})
+
     const Data = [
       {key: 'PL', value: 'PL'},
       {key: 'RU', value: 'RU'},
       {key: 'UA', value: 'UA'},
     ] 
 
+    const progresData = [
+      {
+        name: 'hours',
+        population: result.all_hours,
+        color: 'rgba(131, 167, 234, 1)',
+        legendFontColor: '#7F7F7F',
+        legendFontSize: 15,
+      },
+      {
+        name: 'Pioneer Norm',
+        population: 600,
+        color: 'rgba(0, 127, 161, 0.1)',
+        legendFontColor: '#7F7F7F',
+        legendFontSize: 15,
+      },
+    ];
+
     useEffect(() => {
         getProfile()
     }, [])
 
     const getProfile = async() => {
-
-        const resp = await profile()
-        const data = resp
-        setProfileData(data.data)
-        console.log('pro', data.data)
+      const resp = await profile()
+      const data = resp
+      setProfileData(data.data)
+      console.log('pro', data.data)
+      
+      const resp2 = await fetch(`${proxy}/backend/get_months_results/${data.data.id}/`)
+      const data2 = await resp2.json()
+      if(data2.status === 200){
+        setResult(data2)
+      }
     }
 
     const language = async(selected) => {
@@ -42,6 +74,8 @@ const Profile = ({navigation}) => {
     return <Icon name='globe-outline' size={30} color={'white'} />
   }
 
+  console.log('all_hours', result.all_hours)
+  console.log('all_hours', result.all_minutes)
   return (
 
     <View style={styles.container}>
@@ -158,6 +192,17 @@ const Profile = ({navigation}) => {
 
         <Calendar />
 
+        <PieChart
+          data={progresData}
+          width={width}
+          height={220}
+          chartConfig={styles.chartConfig}
+          accessor="population"
+          backgroundColor="transparent"
+          paddingLeft="15"
+          absolute
+        />
+
     </View> 
     </ScrollView>
     </View>
@@ -268,6 +313,22 @@ const styles = StyleSheet.create({
         position: 'absolute',
         marginTop: 470,
         marginLeft: 30,
+    },
+    chartConfig: {
+      // backgroundColor: "#e26a00",
+      // backgroundGradientFrom: "#fb8c00",
+      // backgroundGradientTo: "#ffa726",
+      // decimalPlaces: 2, // optional, defaults to 2dp
+      color: (opacity = 1) => `rgba(114, 159, 172, ${opacity})`,
+      labelColor: (opacity = 1) => `rgba(114, 159, 172, ${opacity})`,
+      style: {
+        borderRadius: 16
+      },
+      propsForDots: {
+        r: "6",
+        strokeWidth: "2",
+        stroke: "#ffa726"
+      }
     },
   });
 

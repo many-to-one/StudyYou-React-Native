@@ -83,6 +83,7 @@ export const AuthProvider = ({children}) => {
               const data = await resp.json()
               if(data.status === 200){
                 setStuff(data.data.helper)
+                setUserData(data.data)
               }else if(resp === 200){
                 console.log('profile', data.data.helper)
                 // await AsyncStorage.setItem("is_stuff", JSON.stringify(data.is_stuff));

@@ -11,11 +11,10 @@ import MinistryWithPerson from './MinistryWithPerson';
 
 const MinistryWith2 = ({day, navigation}) => {
 
-    const {proxy, congr} = useContext(AuthContext);
+    const {proxy, userData} = useContext(AuthContext);
     const {ministryWith_, time_} = useContext(LanguageContext);
     const [selected, setSelected] = useState('')
     const [time, setTime] = useState('')
-    const [choose, setChoose] = useState(true)
     const [users, setUsers] = useState([])
     const [dateMinistryWith, setDateMinistryWith] = useState([])
     const USERS = {}
@@ -26,9 +25,8 @@ const MinistryWith2 = ({day, navigation}) => {
   }, [isFocused])
 
   const getUsers = async() => {
-    let datas = JSON.parse(await AsyncStorage.getItem("asyncUserData"))
-    console.log('datas', datas)
-    const resp = await fetch(`${proxy}/users/users/${datas.congregation}/`)
+    console.log('userData id', userData.id)
+    const resp = await fetch(`${proxy}/users/users/${userData.congregation}/`)
       const data = await resp.json();
       if(resp.status === 200){
         setUsers(data)
@@ -37,8 +35,7 @@ const MinistryWith2 = ({day, navigation}) => {
   }
 
   const getCalendarDatesByDate = async() => {
-    let datas = JSON.parse(await AsyncStorage.getItem("asyncUserData"))
-    const body = {'date': day, 'action': 'MinistryWith', 'congregation': datas.congregation} //'person': selected
+    const body = {'date': day, 'action': 'MinistryWith', 'congregation': userData.congregation} //'person': selected
     const resp = await fetch(`${proxy}/backend/get_calendar_date/`, {
       method: 'POST',
           headers: {
@@ -86,9 +83,7 @@ const MinistryWith2 = ({day, navigation}) => {
   }
 
   const setMinistryWith = async(selected, time) => {
-    let datas = JSON.parse(await AsyncStorage.getItem("asyncUserData"))
-    // selected.map((e) => {
-      const response = fetch(`${proxy}/backend/set_calendar_person/${datas.id}/`, {
+      const response1 = await fetch(`${proxy}/backend/set_calendar_person/${userData.id}/`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'
@@ -98,11 +93,29 @@ const MinistryWith2 = ({day, navigation}) => {
             'action': 'MinistryWith',
             'person': `${selected}`,
             'time': `${time}`,
-            'congregation': datas.congregation,
+            'congregation': userData.congregation,
           })
         })
-      // })
-        const body = {'date': day, 'action': 'MinistryWith', 'congregation': datas.congregation} //'person': selected
+
+      const response2 = await fetch(`${proxy}/backend/set_calendar_from_person/${selected}/`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          'date': `${day}`,
+          'action': 'MinistryWith',
+          'person': `${userData.id}`,
+          'time': `${time}`,
+          'congregation': userData.congregation,
+        })
+      })
+
+        const body = {
+          'date': day, 
+          'action': 'MinistryWith', 
+          'congregation': userData.congregation,
+        }
         const resp = await fetch(`${proxy}/backend/get_calendar_date/`, {
           method: 'POST',
               headers: {

@@ -4,7 +4,7 @@ import Icon from "react-native-vector-icons/Ionicons";
 import { AuthContext } from '../context/AuthContext';
 
 const MinistryWithPerson = ({person, day}) => {
-    const {proxy} = useContext(AuthContext);
+    const {proxy, userData} = useContext(AuthContext);
     const [live, setLive] = useState(true)
 
     const deleteMinistryWith = async(user) => {
@@ -20,7 +20,7 @@ const MinistryWithPerson = ({person, day}) => {
         }
       }
 
-    if(live === true && person.date === day && person.action === 'MinistryWith'){  
+    if(live === true && person.date === day && person.action === 'MinistryWith' && person.user === userData.id){  
         return  <View style={styles.user}>
         <Icon name='briefcase-sharp' size={20} color={'#F9F9B5'} />
         <Text style={styles.user_text}>{person.person}</Text>
