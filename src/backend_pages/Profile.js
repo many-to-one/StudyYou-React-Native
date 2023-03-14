@@ -16,9 +16,11 @@ import {
   ContributionGraph,
   StackedBarChart
 } from "react-native-chart-kit";
+import { useIsFocused } from '@react-navigation/native';
 
 const Profile = ({navigation}) => {
     const { width, height } = Dimensions.get('window');
+    const isFocused = useIsFocused();
     const {profile, proxy, userData} = useContext(AuthContext);
     const {setLanguage, Changepassword_} = useContext(LanguageContext);
     const [profileData, setProfileData] = useState([]);
@@ -35,22 +37,22 @@ const Profile = ({navigation}) => {
       {
         name: 'hours',
         population: result.all_hours,
-        color: 'rgba(131, 167, 234, 1)',
-        legendFontColor: '#7F7F7F',
+        color: '#a1efff',
+        legendFontColor: 'white',
         legendFontSize: 15,
       },
       {
-        name: 'Pioneer Norm',
-        population: 600,
-        color: 'rgba(0, 127, 161, 0.1)',
-        legendFontColor: '#7F7F7F',
+        name: 'Rest',
+        population: 600 - result.all_hours,
+        color: '#0227ba', 
+        legendFontColor: 'white',
         legendFontSize: 15,
       },
     ];
 
     useEffect(() => {
         getProfile()
-    }, [])
+    }, [isFocused])
 
     const getProfile = async() => {
       const resp = await profile()
@@ -62,6 +64,7 @@ const Profile = ({navigation}) => {
       const data2 = await resp2.json()
       if(data2.status === 200){
         setResult(data2)
+        console.log('data2', data2)
       }
     }
 
@@ -203,6 +206,45 @@ const Profile = ({navigation}) => {
           absolute
         />
 
+        <View style={styles.result}>
+
+          <View style={styles.result_row}>
+            <Text style={styles.text}>
+              Minuty:
+            </Text>
+            <Text style={styles.text}>
+              {result.all_minutes}
+            </Text>
+          </View>
+
+          <View style={styles.result_row}>
+            <Text style={styles.text}>
+              Odwiedziny:
+            </Text>
+            <Text style={styles.text}>
+              {result.all_visits}
+            </Text>
+          </View>
+          
+          <View style={styles.result_row}>
+            <Text style={styles.text}>
+              Publicacje:
+            </Text>
+            <Text style={styles.text}>
+              {result.all_publications}
+            </Text>
+          </View>
+
+          <View style={styles.result_row}>
+            <Text style={styles.text}>
+              Films:
+            </Text>
+            <Text style={styles.text}>
+              {result.all_films}
+            </Text>
+          </View>
+        </View>
+
     </View> 
     </ScrollView>
     </View>
@@ -329,6 +371,15 @@ const styles = StyleSheet.create({
         strokeWidth: "2",
         stroke: "#ffa726"
       }
+    },
+    result: {
+      flexDirection: 'column',
+      gap: 20,
+    },
+    result_row: {
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+      gap: 210,
     },
   });
 
