@@ -34,7 +34,7 @@ const WeekPrayer1 = ({day, navigation}) => {
 
   const getCalendarDatesByDate = async() => {
     let datas = JSON.parse(await AsyncStorage.getItem("asyncUserData"))
-    const body = {'date': day, 'action': 'Prayer 1 (week)', 'congregation': datas.congregation}
+    const body = {'date': day, 'action': 'FirstPrayer', 'congregation': datas.congregation}
     const resp = await fetch(`${proxy}/backend/get_calendar_date/`, {
       method: 'POST',
           headers: {
@@ -72,7 +72,7 @@ const WeekPrayer1 = ({day, navigation}) => {
             },
             body: JSON.stringify({
               'date': `${day}`,
-              'action': 'Prayer 1 (week)',
+              'action': 'FirstPrayer',
               'congregation': datas.congregation,
             })
           })    
@@ -113,7 +113,7 @@ const WeekPrayer1 = ({day, navigation}) => {
 if(dateWeekPrayer1.length === 1 && stuff === true){
   return ( 
     dateWeekPrayer1.map((e) => {
-      if(e.date === day && e.action === 'Prayer 1 (week)'){  
+      if(e.date === day && e.action === 'FirstPrayer'){  
           return  <View style={styles.user}>
           <Icon name='ios-layers' size={20} color={'#F9F9B5'} />
           <Text style={styles.user_text}>{USERS[e.user]}</Text>
@@ -164,7 +164,7 @@ if(dateWeekPrayer1.length === 1 && stuff === true){
 }else if(dateWeekPrayer1.length === 1 && stuff === false){
   return ( 
     dateWeekPrayer1.map((e) => {
-      if(e.date === day && e.action === 'Prayer 1 (week)'){  
+      if(e.date === day && e.action === 'FirstPrayer'){  
           return  <View style={styles.user}>
           <Icon name='ios-layers' size={20} color={'#F9F9B5'} />
           <Text style={styles.user_text}>{USERS[e.user]}</Text>

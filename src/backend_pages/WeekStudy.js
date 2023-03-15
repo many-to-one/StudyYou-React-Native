@@ -34,7 +34,7 @@ const WeekStudy = ({day, navigation}) => {
 
   const getCalendarDatesByDate = async() => {
     let datas = JSON.parse(await AsyncStorage.getItem("asyncUserData"))
-    const body = {'date': day, 'action': 'School: Study', 'congregation': datas.congregation}
+    const body = {'date': day, 'action': 'SchoolStudy', 'congregation': datas.congregation}
     const resp = await fetch(`${proxy}/backend/get_calendar_date/`, {
       method: 'POST',
           headers: {
@@ -74,14 +74,14 @@ const WeekStudy = ({day, navigation}) => {
             },
             body: JSON.stringify({
               'date': `${day}`,
-              'action': 'School: Study',
+              'action': 'SchoolStudy',
               'congregation': datas.congregation,
             })
           })    
         }
       }
     })
-    const body = {'date': day, 'action': 'School: Study', 'congregation': datas.congregation,}
+    const body = {'date': day, 'action': 'SchoolStudy', 'congregation': datas.congregation,}
     const resp = await fetch(`${proxy}/backend/get_calendar_date/`, {
       method: 'POST',
           headers: {
@@ -116,7 +116,7 @@ const WeekStudy = ({day, navigation}) => {
   if(dateWeekStudy.length > 1 && stuff === true){
     return ( 
       dateWeekStudy.map((e) => {
-          if(e.date === day && e.action === 'School: Study'){  
+          if(e.date === day && e.action === 'SchoolStudy'){  
               return  <View style={styles.user}>
               <Icon name='people-sharp' size={20} color={'#F9F9B5'} />
               <Text style={styles.user_text}>{USERS[e.user]}</Text>
@@ -166,7 +166,7 @@ const WeekStudy = ({day, navigation}) => {
       }else if(dateWeekStudy.length === 1 && stuff === true){
           return ( 
             dateWeekStudy.map((e) => {
-                if(e.date === day && e.action === 'School: Study'){  
+                if(e.date === day && e.action === 'SchoolStudy'){  
                     return  <View>
                       <View style={styles.user}>
                       <Icon name='people-sharp' size={20} color={'#F9F9B5'} />
@@ -214,7 +214,7 @@ const WeekStudy = ({day, navigation}) => {
     }else if(dateWeekStudy.length >= 1 && stuff === false){
       return ( 
         dateWeekStudy.map((e) => {
-            if(e.date === day && e.action === 'School: Study'){  
+            if(e.date === day && e.action === 'SchoolStudy'){  
                 return  <View style={styles.user}>
                 <Icon name='people-sharp' size={20} color={'#F9F9B5'} />
                 <Text style={styles.user_text}>{USERS[e.user]}</Text>

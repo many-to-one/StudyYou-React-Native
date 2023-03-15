@@ -34,7 +34,7 @@ const WatchTowerLeader = ({day, navigation}) => {
 
   const getCalendarDatesByDate = async() => {
     let datas = JSON.parse(await AsyncStorage.getItem("asyncUserData"))
-    const body = {'date': day, 'action': 'Watch Tower Leader', 'congregation': datas.congregation}
+    const body = {'date': day, 'action': 'WatchTowerLeader', 'congregation': datas.congregation}
     const resp = await fetch(`${proxy}/backend/get_calendar_date/`, {
       method: 'POST',
           headers: {
@@ -73,13 +73,13 @@ const WatchTowerLeader = ({day, navigation}) => {
             },
             body: JSON.stringify({
               'date': `${day}`,
-              'action': 'Watch Tower Leader',
+              'action': 'WatchTowerLeader',
               'congregation': datas.congregation,
             })
           })   
         }
       }
-    const body = {'date': day, 'action': 'Watch Tower Leader', 'congregation': datas.congregation}
+    const body = {'date': day, 'action': 'WatchTowerLeader', 'congregation': datas.congregation}
     const resp = await fetch(`${proxy}/backend/get_calendar_date/`, {
       method: 'POST',
           headers: {
@@ -114,7 +114,7 @@ const WatchTowerLeader = ({day, navigation}) => {
 if(dateWatchTowerLeader.length === 1 && stuff === true){
   return ( 
     dateWatchTowerLeader.map((e) => {
-      if(e.date === day && e.action === 'Watch Tower Leader'){  
+      if(e.date === day && e.action === 'WatchTowerLeader'){  
           return  <View style={styles.user}>
           <Icon name='person-sharp' size={20} color={'#F9F9B5'} />
           <Text style={styles.user_text}>{USERS[e.user]}</Text>
@@ -165,7 +165,7 @@ if(dateWatchTowerLeader.length === 1 && stuff === true){
   }else if(dateWatchTowerLeader.length === 1 && stuff === false){
       return ( 
         dateWatchTowerLeader.map((e) => {
-          if(e.date === day && e.action === 'Watch Tower Leader'){  
+          if(e.date === day && e.action === 'WatchTowerLeader'){  
               return  <View style={styles.user}>
               <Icon name='person-sharp' size={20} color={'#F9F9B5'} />
               <Text style={styles.user_text}>{USERS[e.user]}</Text>

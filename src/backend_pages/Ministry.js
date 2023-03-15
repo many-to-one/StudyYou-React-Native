@@ -34,7 +34,7 @@ const Ministry = ({day, navigation}) => {
 
   const getCalendarDatesByDate = async() => {
     let datas = JSON.parse(await AsyncStorage.getItem("asyncUserData"))
-    const body = {'date': day, 'action': 'Ministry leader', 'congregation': datas.congregation}
+    const body = {'date': day, 'action': 'MinistryLeader', 'congregation': datas.congregation}
     const resp = await fetch(`${proxy}/backend/get_calendar_date/`, {
       method: 'POST',
           headers: {
@@ -74,7 +74,7 @@ const Ministry = ({day, navigation}) => {
             },
             body: JSON.stringify({
               'date': `${day}`,
-              'action': 'Ministry leader',
+              'action': 'MinistryLeader',
               'congregation': datas.congregation,
             })
           })
@@ -85,7 +85,7 @@ const Ministry = ({day, navigation}) => {
         }
       }
     })
-    const body = {'date': day, 'action': 'Ministry leader', 'congregation': datas.congregation,}
+    const body = {'date': day, 'action': 'MinistryLeader', 'congregation': datas.congregation,}
     const resp = await fetch(`${proxy}/backend/get_calendar_date/`, {
       method: 'POST',
           headers: {
@@ -122,7 +122,7 @@ console.log('selected:', selected)
 if(dateMinistry.length > 1 && stuff === true){
   return ( 
     dateMinistry.map((e) => {
-        if(e.date === day && e.action === 'Ministry leader'){  
+        if(e.date === day && e.action === 'MinistryLeader'){  
                     return <View style={styles.user}>
                       <Icon name='people-circle-outline' size={20} color={'#F9F9B5'} />
                       <Text style={styles.user_text}>{USERS[e.user]}</Text>
@@ -173,7 +173,7 @@ if(dateMinistry.length > 1 && stuff === true){
     }else if(dateMinistry.length === 1 && stuff === true){
         return ( 
           dateMinistry.map((e) => {
-              if(e.date === day && e.action === 'Ministry leader'){  
+              if(e.date === day && e.action === 'MinistryLeader'){  
                   return  <View>
                     <View style={styles.user}>
                     <Icon name='people-circle-outline' size={20} color={'#F9F9B5'} />
@@ -219,7 +219,7 @@ if(dateMinistry.length > 1 && stuff === true){
       }else if(dateMinistry.length >= 1 && stuff === false){
         return ( 
           dateMinistry.map((e) => {
-            if(e.date === day && e.action === 'Ministry leader'){  
+            if(e.date === day && e.action === 'MinistryLeader'){  
               return <View style={styles.user}>
                 <Icon name='people-circle-outline' size={20} color={'#F9F9B5'} />
                 <Text style={styles.user_text}>{USERS[e.user]}</Text>

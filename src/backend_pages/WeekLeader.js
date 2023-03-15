@@ -35,7 +35,7 @@ const WeekLeader = ({day, navigation}) => {
 
   const getCalendarDatesByDate = async() => {
     let datas = JSON.parse(await AsyncStorage.getItem("asyncUserData"))  
-    const body = {'date': day, 'action': 'Leader (week)', 'congregation': datas.congregation}
+    const body = {'date': day, 'action': 'LeaderAndIntroductoryRemarks', 'congregation': datas.congregation}
     const resp = await fetch(`${proxy}/backend/get_calendar_date/`, {
       method: 'POST',
           headers: {
@@ -73,13 +73,13 @@ const WeekLeader = ({day, navigation}) => {
             },
             body: JSON.stringify({
               'date': `${day}`,
-              'action': 'Leader (week)',
+              'action': 'LeaderAndIntroductoryRemarks',
               'congregation': datas.congregation,
             })
           })   
         }
       }
-    const body = {'date': day, 'action': 'Leader (week)', 'congregation': datas.congregation,}
+    const body = {'date': day, 'action': 'LeaderAndIntroductoryRemarks', 'congregation': datas.congregation,}
     const resp = await fetch(`${proxy}/backend/get_calendar_date/`, {
       method: 'POST',
           headers: {
@@ -114,7 +114,7 @@ const WeekLeader = ({day, navigation}) => {
 if(dateLeaderWeek.length === 1 && stuff === true){
   return ( 
     dateLeaderWeek.map((e) => {
-      if(e.date === day && e.action === 'Leader (week)'){  
+      if(e.date === day && e.action === 'LeaderAndIntroductoryRemarks'){  
           return  <View style={styles.user}>
           <Icon name='person-outline' size={20} color={'#F9F9B5'} />
           <Text style={styles.user_text}>{USERS[e.user]}</Text>
@@ -164,7 +164,7 @@ if(dateLeaderWeek.length === 1 && stuff === true){
       )}else if(dateLeaderWeek.length === 1 && stuff === false){
         return ( 
           dateLeaderWeek.map((e) => {
-            if(e.date === day && e.action === 'Leader (week)'){  
+            if(e.date === day && e.action === 'LeaderAndIntroductoryRemarks'){  
               return  <View style={styles.user}>
               <Icon name='person-outline' size={20} color={'#F9F9B5'} />
               <Text style={styles.user_text}>{USERS[e.user]}</Text>

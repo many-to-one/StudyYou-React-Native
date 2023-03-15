@@ -34,7 +34,7 @@ const WeekTreasures = ({day, navigation}) => {
 
   const getCalendarDatesByDate = async() => {
     let datas = JSON.parse(await AsyncStorage.getItem("asyncUserData"))
-    const body = {'date': day, 'action': 'Treasures (week)', 'congregation': datas.congregation}
+    const body = {'date': day, 'action': 'SpiritualGems', 'congregation': datas.congregation}
     const resp = await fetch(`${proxy}/backend/get_calendar_date/`, {
       method: 'POST',
           headers: {
@@ -72,13 +72,13 @@ const WeekTreasures = ({day, navigation}) => {
             },
             body: JSON.stringify({
               'date': `${day}`,
-              'action': 'Treasures (week)',
+              'action': 'SpiritualGems',
               'congregation': datas.congregation,
             })
           })    
         }
       }
-    const body = {'date': day, 'action': 'Treasures (week)', 'congregation': datas.congregation,}
+    const body = {'date': day, 'action': 'SpiritualGems', 'congregation': datas.congregation,}
     const resp = await fetch(`${proxy}/backend/get_calendar_date/`, {
       method: 'POST',
           headers: {
@@ -113,7 +113,7 @@ const WeekTreasures = ({day, navigation}) => {
 if(dateWeekTreasures.length === 1 && stuff === true){
   return ( 
     dateWeekTreasures.map((e) => {
-      if(e.date === day && e.action === 'Treasures (week)'){  
+      if(e.date === day && e.action === 'SpiritualGems'){  
           return  <View style={styles.user}>
           <Icon name='md-shield' size={20} color={'#F9F9B5'} />
           <Text style={styles.user_text}>{USERS[e.user]}</Text>
@@ -163,7 +163,7 @@ if(dateWeekTreasures.length === 1 && stuff === true){
         )}else if(dateWeekTreasures.length === 1 && stuff === false){
           return ( 
             dateWeekTreasures.map((e) => {
-              if(e.date === day && e.action === 'Treasures (week)'){  
+              if(e.date === day && e.action === 'SpiritualGems'){  
                   return  <View style={styles.user}>
                   <Icon name='md-shield' size={20} color={'#F9F9B5'} />
                   <Text style={styles.user_text}>{USERS[e.user]}</Text>

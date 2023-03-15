@@ -100,7 +100,7 @@ const { width, height } = Dimensions.get('window');
 const styles = StyleSheet.create({
   event:{
     width: width / 1.2,
-    height: height / 2.6,
+    height: 350,
     borderRadius: 10,
     // borderWidth: 1,
     // borderColor: '#78D7D9',

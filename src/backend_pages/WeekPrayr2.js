@@ -34,7 +34,7 @@ const WeekPrayer2 = ({day, navigation}) => {
 
   const getCalendarDatesByDate = async() => {
     let datas = JSON.parse(await AsyncStorage.getItem("asyncUserData"))
-    const body = {'date': day, 'action': 'Prayer 2 (week)', 'congregation': datas.congregation}
+    const body = {'date': day, 'action': 'LastPrayer', 'congregation': datas.congregation}
     const resp = await fetch(`${proxy}/backend/get_calendar_date/`, {
       method: 'POST',
           headers: {
@@ -72,13 +72,13 @@ const WeekPrayer2 = ({day, navigation}) => {
             },
             body: JSON.stringify({
               'date': `${day}`,
-              'action': 'Prayer 2 (week)',
+              'action': 'LastPrayer',
               'congregation': datas.congregation,
             })
           })    
         }
       }
-    const body = {'date': day, 'action': 'Prayer 2 (week)', 'congregation': datas.congregation,}
+    const body = {'date': day, 'action': 'LastPrayer', 'congregation': datas.congregation,}
     const resp = await fetch(`${proxy}/backend/get_calendar_date/`, {
       method: 'POST',
           headers: {
@@ -113,7 +113,7 @@ const WeekPrayer2 = ({day, navigation}) => {
 if(dateWeekPrayer2.length === 1 && stuff === true){
   return ( 
     dateWeekPrayer2.map((e) => {
-      if(e.date === day && e.action === 'Prayer 2 (week)'){  
+      if(e.date === day && e.action === 'LastPrayer'){  
           return  <View style={styles.user}>
           <Icon name='ios-layers' size={20} color={'#F9F9B5'} />
           <Text style={styles.user_text}>{USERS[e.user]}</Text>
@@ -163,7 +163,7 @@ if(dateWeekPrayer2.length === 1 && stuff === true){
   )}else if(dateWeekPrayer2.length === 1 && stuff === false){
     return ( 
       dateWeekPrayer2.map((e) => {
-        if(e.date === day && e.action === 'Prayer 2 (week)'){  
+        if(e.date === day && e.action === 'LastPrayer'){  
           return  <View style={styles.user}>
           <Icon name='ios-layers' size={20} color={'#F9F9B5'} />
           <Text style={styles.user_text}>{USERS[e.user]}</Text>

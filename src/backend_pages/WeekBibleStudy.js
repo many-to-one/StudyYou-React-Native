@@ -34,7 +34,7 @@ const WeekBibleStudy = ({day, navigation}) => {
 
   const getCalendarDatesByDate = async() => {
     let datas = JSON.parse(await AsyncStorage.getItem("asyncUserData"))
-    const body = {'date': day, 'action': 'Bible Study Leader', 'congregation': datas.congregation}
+    const body = {'date': day, 'action': 'BibleStudyLeader', 'congregation': datas.congregation}
     const resp = await fetch(`${proxy}/backend/get_calendar_date/`, {
       method: 'POST',
           headers: {
@@ -73,13 +73,13 @@ const WeekBibleStudy = ({day, navigation}) => {
             },
             body: JSON.stringify({
               'date': `${day}`,
-              'action': 'Bible Study Leader',
+              'action': 'BibleStudyLeader',
               'congregation': datas.congregation
             })
           })    
         }
       }
-    const body = {'date': day, 'action': 'Bible Study Leader', 'congregation': datas.congregation}
+    const body = {'date': day, 'action': 'BibleStudyLeader', 'congregation': datas.congregation}
     const resp = await fetch(`${proxy}/backend/get_calendar_date/`, {
       method: 'POST',
           headers: {
@@ -114,7 +114,7 @@ const WeekBibleStudy = ({day, navigation}) => {
 if(dateWeekBibleStudy.length === 1 && stuff === true){
   return ( 
     dateWeekBibleStudy.map((e) => {
-      if(e.date === day && e.action === 'Bible Study Leader'){  
+      if(e.date === day && e.action === 'BibleStudyLeader'){  
           return  <View style={styles.user}>
           <Icon name='md-library' size={20} color={'#F9F9B5'} />
           <Text style={styles.user_text}>{USERS[e.user]}</Text>
@@ -165,7 +165,7 @@ if(dateWeekBibleStudy.length === 1 && stuff === true){
   }if(dateWeekBibleStudy.length === 1 && stuff === false){
     return ( 
       dateWeekBibleStudy.map((e) => {
-        if(e.date === day && e.action === 'Bible Study Leader'){  
+        if(e.date === day && e.action === 'BibleStudyLeader'){  
             return  <View style={styles.user}>
             <Icon name='md-library' size={20} color={'#F9F9B5'} />
             <Text style={styles.user_text}>{USERS[e.user]}</Text>

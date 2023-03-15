@@ -34,7 +34,7 @@ const WatchTowerLector = ({day, navigation}) => {
 
   const getCalendarDatesByDate = async() => {
     let datas = JSON.parse(await AsyncStorage.getItem("asyncUserData"))
-    const body = {'date': day, 'action': 'Watch Tower Lector', 'congregation': datas.congregation}
+    const body = {'date': day, 'action': 'WatchTowerLector', 'congregation': datas.congregation}
     const resp = await fetch(`${proxy}/backend/get_calendar_date/`, {
       method: 'POST',
           headers: {
@@ -73,13 +73,13 @@ const WatchTowerLector = ({day, navigation}) => {
             },
             body: JSON.stringify({
               'date': `${day}`,
-              'action': 'Watch Tower Lector',
+              'action': 'WatchTowerLector',
               'congregation': datas.congregation, 
             })
           })    
         }
       }
-    const body = {'date': day, 'action': 'Watch Tower Lector', 'congregation': datas.congregation, }
+    const body = {'date': day, 'action': 'WatchTowerLector', 'congregation': datas.congregation, }
     const resp = await fetch(`${proxy}/backend/get_calendar_date/`, {
       method: 'POST',
           headers: {
@@ -114,7 +114,7 @@ const WatchTowerLector = ({day, navigation}) => {
 if(dateWatchTowerLector.length === 1 && stuff === true){
   return ( 
     dateWatchTowerLector.map((e) => {
-      if(e.date === day && e.action === 'Watch Tower Lector'){  
+      if(e.date === day && e.action === 'WatchTowerLector'){  
           return  <View style={styles.user}>
           <Icon name='md-reader' size={20} color={'#F9F9B5'} />
           <Text style={styles.user_text}>{USERS[e.user]}</Text>
@@ -165,7 +165,7 @@ if(dateWatchTowerLector.length === 1 && stuff === true){
   }else if(dateWatchTowerLector.length === 1 && stuff === false){
     return ( 
       dateWatchTowerLector.map((e) => {
-        if(e.date === day && e.action === 'Watch Tower Lector'){  
+        if(e.date === day && e.action === 'WatchTowerLector'){  
             return  <View style={styles.user}>
             <Icon name='md-reader' size={20} color={'#F9F9B5'} />
             <Text style={styles.user_text}>{USERS[e.user]}</Text>

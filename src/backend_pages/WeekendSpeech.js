@@ -34,7 +34,7 @@ const WeekendSpeach = ({day, navigation}) => {
 
   const getCalendarDatesByDate = async() => {
     let datas = JSON.parse(await AsyncStorage.getItem("asyncUserData"))
-    const body = {'date': day, 'action': 'Weekend Speach', 'congregation': datas.congregation}
+    const body = {'date': day, 'action': 'WeekendSpeach', 'congregation': datas.congregation}
     const resp = await fetch(`${proxy}/backend/get_calendar_date/`, {
       method: 'POST',
           headers: {
@@ -73,13 +73,13 @@ const WeekendSpeach = ({day, navigation}) => {
             },
             body: JSON.stringify({
               'date': `${day}`,
-              'action': 'Weekend Speach',
+              'action': 'WeekendSpeach',
               'congregation': datas.congregation,
             })
           })    
         }
       }
-    const body = {'date': day, 'action': 'Weekend Speach', 'congregation': datas.congregation,}
+    const body = {'date': day, 'action': 'WeekendSpeach', 'congregation': datas.congregation,}
     const resp = await fetch(`${proxy}/backend/get_calendar_date/`, {
       method: 'POST',
           headers: {
@@ -114,7 +114,7 @@ const WeekendSpeach = ({day, navigation}) => {
 if(dateWeekendSpeach.length === 1 && stuff === true){
   return ( 
     dateWeekendSpeach.map((e) => {
-      if(e.date === day && e.action === 'Weekend Speach'){  
+      if(e.date === day && e.action === 'WeekendSpeach'){  
           return  <View style={styles.user}>
           <Icon name='md-man-outline' size={20} color={'#F9F9B5'} />
           <Text style={styles.user_text}>{USERS[e.user]}</Text>
@@ -164,7 +164,7 @@ if(dateWeekendSpeach.length === 1 && stuff === true){
   )}else if(dateWeekendSpeach.length === 1 && stuff === false){
     return ( 
       dateWeekendSpeach.map((e) => {
-        if(e.date === day && e.action === 'Weekend Speach'){  
+        if(e.date === day && e.action === 'WeekendSpeach'){  
           return  <View style={styles.user}>
           <Icon name='md-man-outline' size={20} color={'#F9F9B5'} />
           <Text style={styles.user_text}>{USERS[e.user]}</Text>

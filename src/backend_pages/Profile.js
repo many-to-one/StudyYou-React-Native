@@ -383,6 +383,7 @@ const { width, height } = Dimensions.get('window');
 const styles = StyleSheet.create({
     container: {
       flex: 1,
+      width: width,
       backgroundColor: 'black',
       flexDirection: 'column',
       justifyContent: 'center',
@@ -404,7 +405,8 @@ const styles = StyleSheet.create({
     },
     cont: {
       alignItems: 'center',
-      gap: 10
+      gap: 10,
+      width: width,
     },
     selectlist:{
       width: 300,

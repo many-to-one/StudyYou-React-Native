@@ -34,7 +34,7 @@ const WeekVisit1 = ({day, navigation}) => {
 
   const getCalendarDatesByDate = async() => {
     let datas = JSON.parse(await AsyncStorage.getItem("asyncUserData"))
-    const body = {'date': day, 'action': 'School: Initial Call', 'congregation': datas.congregation}
+    const body = {'date': day, 'action': 'InitialCall', 'congregation': datas.congregation}
     const resp = await fetch(`${proxy}/backend/get_calendar_date/`, {
       method: 'POST',
           headers: {
@@ -74,14 +74,14 @@ const WeekVisit1 = ({day, navigation}) => {
             },
             body: JSON.stringify({
               'date': `${day}`,
-              'action': 'School: Initial Call',
+              'action': 'InitialCall',
               'congregation': datas.congregation,
             })
           })    
         }
       }
     })
-    const body = {'date': day, 'action': 'School: Initial Call', 'congregation': datas.congregation,}
+    const body = {'date': day, 'action': 'InitialCall', 'congregation': datas.congregation,}
     const resp = await fetch(`${proxy}/backend/get_calendar_date/`, {
       method: 'POST',
           headers: {
@@ -116,7 +116,7 @@ const WeekVisit1 = ({day, navigation}) => {
   if(dateWeekVisit1.length > 1 && stuff === true){
     return ( 
       dateWeekVisit1.map((e) => {
-          if(e.date === day && e.action === 'School: Initial Call'){  
+          if(e.date === day && e.action === 'InitialCall'){  
               return  <View style={styles.user}>
               <Icon name='people-outline' size={20} color={'#F9F9B5'} />
               <Text style={styles.user_text}>{USERS[e.user]}</Text>
@@ -166,7 +166,7 @@ const WeekVisit1 = ({day, navigation}) => {
       }else if(dateWeekVisit1.length === 1 && stuff === true){
           return ( 
             dateWeekVisit1.map((e) => {
-                if(e.date === day && e.action === 'School: Initial Call'){  
+                if(e.date === day && e.action === 'InitialCall'){  
                     return  <View>
                       <View style={styles.user}>
                       <Icon name='people-outline' size={20} color={'#F9F9B5'} />
@@ -214,7 +214,7 @@ const WeekVisit1 = ({day, navigation}) => {
     }else if(dateWeekVisit1.length >= 1 && stuff === false){
       return ( 
         dateWeekVisit1.map((e) => {
-            if(e.date === day && e.action === 'School: Initial Call'){  
+            if(e.date === day && e.action === 'InitialCall'){  
                 return  <View style={styles.user}>
                 <Icon name='people-outline' size={20} color={'#F9F9B5'} />
                 <Text style={styles.user_text}>{USERS[e.user]}</Text>

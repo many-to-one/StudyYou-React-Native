@@ -4,7 +4,7 @@ import Home from './Home';
 import Login from './Login';
 import Logout from './Logout';
 import Icon from "react-native-vector-icons/MaterialIcons";
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Dimensions } from 'react-native';
 import Registration from './Registration';
 import AllEvents from '../backend_pages/AllEvents';
 import AddEvent from '../backend_pages/AddEvent';
@@ -35,32 +35,8 @@ const Tab = createBottomTabNavigator();
 
 function BottomNavigator() {
 
-  const {
-    // Menu_,
-    // Profile_,
-    // Timer_,
-    // Result_,
-    // History_,
-    // Events_,
-    // AddEvent_,
-    // UpdateEvent_,
-    // AllEvents_,
-    // login_,
-    // Logout_,
-    // registration_,
-    // requestResetMail_,
-    // createCalendarEvent_,
-    // technicalSupport_,
-    // ministryLeaders_,
-    // midweekMeetings_,
-    // microphones_,
-    // music_,
-    // duty_,
-    // weekendMeetings_,
-    // ministryWith_,
-    // forgotPassword_,
-    trans
-  } = React.useContext(LanguageContext);  
+  const {trans} = React.useContext(LanguageContext);  
+  const { width, height } = Dimensions.get('window');
 
   const screenOptions = (route, color) => {
     let iconName;
@@ -116,7 +92,7 @@ function BottomNavigator() {
           title: `${trans.Menu}`,
           headerTitleStyle: {
             color: 'white',
-            marginLeft: '8rem',
+            marginLeft: width / 2.5,
           },
           headerStyle: {
             backgroundColor: 'black',
@@ -130,7 +106,7 @@ function BottomNavigator() {
           title: `${trans.Events}`,
           headerTitleStyle: {
             color: 'white',
-            marginLeft: '6rem',
+            marginLeft: width / 4,
           },
           headerStyle: {
             backgroundColor: 'black',
@@ -144,10 +120,10 @@ function BottomNavigator() {
         name="Login" 
         component={Login} 
         options={{
-          title: `${trans.Login}`,
+          title: "Login",
           headerTitleStyle: {
             color: 'white',
-            marginLeft: '8rem',
+            marginLeft: width / 2.7,
           },
           headerStyle: {
             backgroundColor: 'black',
@@ -196,7 +172,7 @@ function BottomNavigator() {
           title: `${trans.Profile}`,
           headerTitleStyle: {
             color: 'white',
-            marginLeft: '6rem',
+            marginLeft: width / 3.5,
           },
           headerStyle: {
             backgroundColor: 'black',
@@ -211,18 +187,21 @@ function BottomNavigator() {
         <Tab.Screen 
         name="RequestResetMail" 
         component={RequestResetMail} 
-        options={{
-          title: `${trans.requestResetMail}`,
+        options={({ navigation }) => ({
+          title: `${trans.RequestResetMail}`,
           headerTitleStyle: {
             color: 'white',
-            marginLeft: '8rem',
+            marginLeft: width / 5.5,
           },
           headerStyle: {
             backgroundColor: 'black',
           },
           tabBarVisible: false, // hide the button
           tabBarButton: (props) => null, // hide the button
-        }}
+          headerLeft: () => (
+            <BackButton onPress={() => navigation.navigate('Profile')} />
+          ),
+        })}
         />
         <Tab.Screen 
         name="ForgotPassword" 
@@ -231,7 +210,7 @@ function BottomNavigator() {
           title: `${trans.ForgotPassword}`,
           headerTitleStyle: {
             color: 'white',
-            marginLeft: '6rem',
+            marginLeft: width / 5.5,
           },
           headerStyle: {
             backgroundColor: 'black',
@@ -250,7 +229,7 @@ function BottomNavigator() {
           title: `${trans.Timer}`,
           headerTitleStyle: {
             color: 'white',
-            marginLeft: '6rem',
+            marginLeft: width / 3.5,
           },
           headerStyle: {
             backgroundColor: 'black',
@@ -288,7 +267,7 @@ function BottomNavigator() {
           title: `${trans.AddEvent}`,
           headerTitleStyle: {
             color: 'white',
-            marginLeft: '4rem',
+            marginLeft: width / 5.5,
           },
           headerStyle: {
             backgroundColor: 'black',
@@ -307,7 +286,7 @@ function BottomNavigator() {
           title: `${trans.UpdateEvent}`,
           headerTitleStyle: {
             color: 'white',
-            marginLeft: '2rem',
+            marginLeft: width / 5.5,
           },
           headerStyle: {
             backgroundColor: 'black',
@@ -326,7 +305,7 @@ function BottomNavigator() {
           title: `${trans.Result}`,
           headerTitleStyle: {
             color: 'white',
-            marginLeft: '6rem',
+            marginLeft: width / 3.5,
           },
           headerStyle: {
             backgroundColor: 'black',
@@ -345,7 +324,7 @@ function BottomNavigator() {
           title: `${trans.History}`,
           headerTitleStyle: {
             color: 'white',
-            marginLeft: '6rem',
+            marginLeft: width / 3.5,
           },
           headerStyle: {
             backgroundColor: 'black',
@@ -379,7 +358,7 @@ function BottomNavigator() {
           title: `${trans.CreateCalendarEvent}`,
           headerTitleStyle: {
             color: 'white',
-            marginLeft: '4rem',
+            marginLeft: width / 5.5,
           },
           headerStyle: {
             backgroundColor: 'black',
@@ -398,7 +377,7 @@ function BottomNavigator() {
           title: `${trans.TechnicalSupport}`,
           headerTitleStyle: {
             color: 'white',
-            marginLeft: '2rem',
+            marginLeft: width / 5.5,
           },
           headerStyle: {
             backgroundColor: 'black',
@@ -417,7 +396,7 @@ function BottomNavigator() {
           title: `${trans.MinistryLeaders}`,
           headerTtleStyle: {
             color: 'white',
-            marginLeft: '6rem',
+            marginLeft: width / 3.5,
           },
           headerStyle: {
             backgroundColor: 'black',
@@ -431,12 +410,12 @@ function BottomNavigator() {
         />
         <Tab.Screen 
         name="MiddleOfTheWeek" 
-        component={MiddleOfTheWeek} 
+        component={MiddleOfTheWeek}  
         options={({ navigation }) => ({
           title: `${trans.MidweekMeetings}`,
-          headerTtleStyle: {
+          headerTitleStyle: {
             color: 'white',
-            marginLeft: '6rem',
+            marginLeft: width / 12,
           },
           headerStyle: {
             backgroundColor: 'black',
@@ -500,7 +479,7 @@ function BottomNavigator() {
           title: `${trans.WeekendMeetings}`,
           headerTtleStyle: {
             color: 'white',
-            marginLeft: '6rem',
+            marginLeft: width / 5.5,
           },
           headerStyle: {
             backgroundColor: 'black',
@@ -534,7 +513,7 @@ function BottomNavigator() {
           title: `${trans.MinistryWith}`,
           headerTtleStyle: {
             color: 'white',
-            marginLeft: '6rem',
+            marginLeft: width / 5.5,
           },
           headerStyle: {
             backgroundColor: 'black',

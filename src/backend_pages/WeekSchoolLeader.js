@@ -34,7 +34,7 @@ const WeekSchoolLeader = ({day, navigation}) => {
 
   const getCalendarDatesByDate = async() => {
     let datas = JSON.parse(await AsyncStorage.getItem("asyncUserData"))
-    const body = {'date': day, 'action': 'School leader (week)', 'congregation': datas.congregation}
+    const body = {'date': day, 'action': 'SchoolLeader', 'congregation': datas.congregation}
     const resp = await fetch(`${proxy}/backend/get_calendar_date/`, {
       method: 'POST',
           headers: {
@@ -72,13 +72,13 @@ const WeekSchoolLeader = ({day, navigation}) => {
             },
             body: JSON.stringify({
               'date': `${day}`,
-              'action': 'School leader (week)',
+              'action': 'SchoolLeader',
               'congregation': datas.congregation,
             })
           })    
         }
       }
-    const body = {'date': day, 'action': 'School leader (week)', 'congregation': datas.congregation,}
+    const body = {'date': day, 'action': 'SchoolLeader', 'congregation': datas.congregation,}
     const resp = await fetch(`${proxy}/backend/get_calendar_date/`, {
       method: 'POST',
           headers: {
@@ -113,7 +113,7 @@ const WeekSchoolLeader = ({day, navigation}) => {
 if(dateWeekSchoolLeader.length === 1 && stuff === true){
   return ( 
     dateWeekSchoolLeader.map((e) => {
-      if(e.date === day && e.action === 'School leader (week)'){  
+      if(e.date === day && e.action === 'SchoolLeader'){  
           return  <View style={styles.user}>
           <Icon name='school-sharp' size={20} color={'#F9F9B5'} />
           <Text style={styles.user_text}>{USERS[e.user]}</Text>
@@ -163,7 +163,7 @@ if(dateWeekSchoolLeader.length === 1 && stuff === true){
   )}else if(dateWeekSchoolLeader.length === 1 && stuff === false){
     return ( 
       dateWeekSchoolLeader.map((e) => {
-        if(e.date === day && e.action === 'School leader (week)'){  
+        if(e.date === day && e.action === 'SchoolLeader'){  
             return  <View style={styles.user}>
             <Icon name='school-sharp' size={20} color={'#F9F9B5'} />
             <Text style={styles.user_text}>{USERS[e.user]}</Text>

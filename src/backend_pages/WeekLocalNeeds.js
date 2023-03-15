@@ -34,7 +34,7 @@ const WeekLocalNeeds = ({day, navigation}) => {
 
   const getCalendarDatesByDate = async() => {
     let datas = JSON.parse(await AsyncStorage.getItem("asyncUserData")) 
-    const body = {'date': day, 'action': 'Local Needs', 'congregation': datas.congregation}
+    const body = {'date': day, 'action': 'LocalNeeds', 'congregation': datas.congregation}
     const resp = await fetch(`${proxy}/backend/get_calendar_date/`, {
       method: 'POST',
           headers: {
@@ -72,7 +72,7 @@ const WeekLocalNeeds = ({day, navigation}) => {
             },
             body: JSON.stringify({
               'date': `${day}`,
-              'action': 'Local Needs',
+              'action': 'LocalNeeds',
               'congregation': datas.congregation,
             })
           })    
@@ -113,7 +113,7 @@ const WeekLocalNeeds = ({day, navigation}) => {
 if(dateWeekLocalNeeds.length === 1 && stuff === true){
   return ( 
     dateWeekLocalNeeds.map((e) => {
-      if(e.date === day && e.action === 'Local Needs'){  
+      if(e.date === day && e.action === 'LocalNeeds'){  
           return  <View style={styles.user}>
           <Icon name='md-file-tray-full' size={20} color={'#F9F9B5'} />
           <Text style={styles.user_text}>{USERS[e.user]}</Text>
@@ -164,7 +164,7 @@ if(dateWeekLocalNeeds.length === 1 && stuff === true){
   }else if(dateWeekLocalNeeds.length === 1 && stuff === false){
     return ( 
       dateWeekLocalNeeds.map((e) => {
-        if(e.date === day && e.action === 'Local Needs'){  
+        if(e.date === day && e.action === 'LocalNeeds'){  
             return  <View style={styles.user}>
             <Icon name='md-file-tray-full' size={20} color={'#F9F9B5'} />
             <Text style={styles.user_text}>{USERS[e.user]}</Text>

@@ -34,7 +34,7 @@ const WeekBibleStudyLector = ({day, navigation}) => {
 
   const getCalendarDatesByDate = async() => {
     let datas = JSON.parse(await AsyncStorage.getItem("asyncUserData"))
-    const body = {'date': day, 'action': 'Bible Study Lector', 'congregation': datas.congregation}
+    const body = {'date': day, 'action': 'BibleStudyLector', 'congregation': datas.congregation}
     const resp = await fetch(`${proxy}/backend/get_calendar_date/`, {
       method: 'POST',
           headers: {
@@ -72,13 +72,13 @@ const WeekBibleStudyLector = ({day, navigation}) => {
             },
             body: JSON.stringify({
               'date': `${day}`,
-              'action': 'Bible Study Lector',
+              'action': 'BibleStudyLector',
               'congregation': datas.congregation,
             })
           })   
         }
       }
-    const body = {'date': day, 'action': 'Bible Study Lector', 'congregation': datas.congregation,}
+    const body = {'date': day, 'action': 'BibleStudyLector', 'congregation': datas.congregation,}
     const resp = await fetch(`${proxy}/backend/get_calendar_date/`, {
       method: 'POST',
           headers: {
@@ -113,7 +113,7 @@ const WeekBibleStudyLector = ({day, navigation}) => {
 if(dateWeekBibleStudyLector.length === 1 && stuff === true){
   return ( 
     dateWeekBibleStudyLector.map((e) => {
-      if(e.date === day && e.action === 'Bible Study Lector'){  
+      if(e.date === day && e.action === 'BibleStudyLector'){  
           return  <View style={styles.user}>
           <Icon name='md-reader' size={20} color={'#F9F9B5'} />
           <Text style={styles.user_text}>{USERS[e.user]}</Text>
@@ -164,7 +164,7 @@ if(dateWeekBibleStudyLector.length === 1 && stuff === true){
   }if(dateWeekBibleStudyLector.length === 1 && stuff === false){
     return ( 
       dateWeekBibleStudyLector.map((e) => {
-        if(e.date === day && e.action === 'Bible Study Lector'){  
+        if(e.date === day && e.action === 'BibleStudyLector'){  
             return  <View style={styles.user}>
             <Icon name='md-reader' size={20} color={'#F9F9B5'} />
             <Text style={styles.user_text}>{USERS[e.user]}</Text>
