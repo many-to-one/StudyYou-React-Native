@@ -11,7 +11,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 const WeekBibleStudyLector = ({day, navigation}) => {
 
     const {proxy, stuff} = useContext(AuthContext);
-    const {bibleStudyLector_} = useContext(LanguageContext);
+    const {trans} = useContext(LanguageContext);
     const [selected, setSelected] = useState('')
     const [users, setUsers] = useState([])
     const [dateWeekBibleStudyLector, setDateWeekBibleStudyLector] = useState([])
@@ -141,7 +141,7 @@ if(dateWeekBibleStudyLector.length === 1 && stuff === true){
                 placeholder={
                   <View style={styles.placeholder}>
                     <Icon name='md-reader' size={20} color={'white'} />
-                    <Text style={styles.text}>{bibleStudyLector_}</Text>
+                    <Text style={styles.text}>{trans.BibleStudyLector}</Text>
                   </View>
                 }
                 boxStyles={styles.event}

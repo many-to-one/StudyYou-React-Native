@@ -69,66 +69,77 @@ export const LanguageProvider = ({children}) => {
     const [delHistory_, setDelHistory] = useState([])
     const [yes_, setYes] = useState([])
     const [no_, setNo] = useState([]) 
+    const [trans, setTrans] = useState({})
 
 
     const setLanguage = async() => {
         let lng = await AsyncStorage.getItem('language')
         if(lng === 'PL'){
-            setHours('Godziny')
-            setMinutes('Minuty')
-            setVisits('Odwiedziny')
-            setPublications('Publikacje')
-            setFilms('Filmy')
-            setMenu('Menu')
-            setEvents('Wydarzenia')
-            setProfile('Profil')
-            setTimer('Timer')
-            setResult('Wynik')
-            setHistory('Historia')
-            setAddEvent('Nowe Wydarzenia')
-            setUpdateEvent('Edytuj wydarzenie')
-            setAllEvents('Wszystkie wydarzenia')
-            setLogin('Logowanie')
-            setLogout('Wyłoguj')
-            setChangepassword('Zmienić hasło')
-            setTechnicalSupport('Obsługa Techniczna')
-            setMinistryLeaders('Zbiórki')
-            setMinistryLeader('Zbiórka')
-            setMidweekMeetings('Spotkania w środku tygodnia')
-            setWeekendMeetings('Spotkania na koniec tygodnia')
-            setLeaderAndIntroductoryRemarks('Prowadzący i uwagi wstępne')
-            setFirstPrayer('Początkowa modlitwa')
-            setTreasuresFromGodsWord('Skarby ze słowa Bożego')
-            setSpiritualGems('Duchowe Skarby')
-            setBibleReading('Czytanie Biblii')
-            setSchoolLeader('Prowadzący szkoły')
-            setInitialCall('Pierwsza rozmowa')
-            setReturnVisit('Odwiedziny')
-            setSchoolStudy('Studium Biblii w szkole')
-            setSchoolTalk('Przemówienie')
-            setDiscussion('Omówienie z udziałem obecnych')
-            setLocalNeeds('Potrzeby zboru')
-            setBibleStudyLeader('Zborowy studium Biblii')
-            setBibleStudyLector('Zborowy studium Biblii (Lektor)')
-            setLastPrayer('Modlitwa końcowa')
-            setWeekendLeader('Prowadzący i modlitwa poczatkowa')
-            setWeekendSpeach('Przemówienie i modlitwa końcowa')
-            setWatchTowerLeader('Prowadzący strażnicy')
-            setWatchTowerLector('Strażnica (Lektor)')
-            setRegistration('Rejestracja')
-            setRequestResetMail('Zresetować hasło')
-            setCreateCalendarEvent('Grafik spotkań')
-            setMicrophones('Mikrofony')
-            setMusic('Nagłośnienie')
-            setDuty('Porządkowy')
-            setMinistryWith('Służba')
-            setPROFILE('PROFIL')
-            setTIMER('TIMER')
-            setEVENTS('WYDARZENIA')
-            setRESULT('WYNIK')
-            setHISTORY('HISTORIA')
-            setWith('z')
-            setTime('Czas')
+            setTrans({
+                'Hours': 'Godziny',
+                'Minutes': 'Minuty',
+                'Visits': 'Odwiedziny',
+                'Publications': 'Publikacje',
+                'Films': 'Filmy',
+                'Menu': 'Menu',
+                'Events': 'Wydarzenia',
+                'Profile': 'Profil',
+                'Timer': 'Timer',
+                'Result': 'Wynik',
+                'History': 'Historia',
+                'AddEvent': 'Nowe Wydarzenia',
+                'UpdateEvent': 'Edytuj wydarzenie',
+                'AllEvents': 'Wszystkie wydarzenia',
+                'Login': 'Logowanie',
+                'Logout': 'Wyłoguj',
+                'Changepassword': 'Zmienić hasło',
+                'TechnicalSupport': 'Obsługa Techniczna',
+                'MinistryLeaders': 'Zbiórki',
+                'MinistryLeader': 'Zbiórka',
+                'MidweekMeetings': 'Spotkania w środku tygodnia', 
+                'WeekendMeetings': 'Spotkania na koniec tygodnia',
+                'LeaderAndIntroductoryRemarks': 'Prowadzący i uwagi wstępne',
+                'FirstPrayer': 'Początkowa modlitwa',
+                'TreasuresFromGodsWord': 'Skarby ze słowa Bożego',
+                'SpiritualGems': 'Duchowe Skarby',
+                'BibleReading': 'Czytanie Biblii',
+                'SchoolLeader' : 'Prowadzący szkoły',
+                'InitialCall' : 'Pierwsza rozmowa',
+                'ReturnVisit' : 'Odwiedziny',
+                'SchoolStudy' : 'Studium Biblii w szkole',
+                'SchoolTalk' : 'Przemówienie',
+                'Discussion' : 'Omówienie z udziałem obecnych',
+                'LocalNeeds' : 'Potrzeby zboru',
+                'BibleStudyLeader' : 'Zborowy studium Biblii',
+                'BibleStudyLector' : 'Zborowy studium Biblii (Lektor)',
+                'LastPrayer' : 'Modlitwa końcowa',
+                'WeekendLeader' : 'Prowadzący i modlitwa poczatkowa',
+                'WeekendSpeach' : 'Przemówienie i modlitwa końcowa',
+                'WatchTowerLeader' : 'Prowadzący strażnicy',
+                'WatchTowerLector' : 'Strażnica (Lektor)',
+                'Registration' : 'Rejestracja',
+                'RequestResetMail' :'Zresetować hasło',
+                'CreateCalendarEvent' : 'Grafik spotkań',
+                'Microphones' : 'Mikrofony',
+                'Music' : 'Nagłośnienie',
+                'Duty' : 'Porządkowy',
+                'MinistryWith' : 'Służba',
+                'PROFILE' : 'PROFIL',
+                'TIMER' : 'TIMER',
+                'EVENTS' : 'WYDARZENIA',
+                'RESULT' : 'WYNIK',
+                'HISTORY' : 'HISTORIA',
+                'With' : 'z',
+                'Time' : 'Czas',
+                'DelHistory' : 'Po usunięciu dane za ten miesiąc zostaną całkowicie stracone, usunąć?',
+                'No' : 'Nie',
+                'Yes' : 'Tak',
+                'ForgotPassword' : 'Nie Pamiętam hasła',
+                'Dhaccount' : 'Załóż konto',
+                'Submit' : 'Potwierdzić',
+                'Click' : 'Kliknij tutaj',
+                'Rest' : 'Pozostało',
+            })
             setDaynames(['Pon', 'Wt', 'Śr', 'Czw', 'Pt', 'Sob', 'Niedz'])
             setMonthnames([
                 'styczeń', 
@@ -144,71 +155,73 @@ export const LanguageProvider = ({children}) => {
                 'listopad', 
                 'grudzień'
             ])
-            setDelHistory('Po usunięciu dane za ten miesiąc zostaną całkowicie stracone, usunąć?')
-            setNo('Nie')
-            setYes('Tak')
-            setForgotPassword('Nie Pamiętam hasła')
-            setDhaccount('Załóż konto')
-            setSubmit('Potwierdzić')
-            setClick('Kliknij tutaj')
-            
 
         }else if(lng === 'RU'){
-            setHours('Часы')
-            setMinutes('Минуты')
-            setVisits('Повторы')
-            setPublications('Публикации')
-            setFilms('Фильмы')
-            setMenu('Меню')
-            setEvents('События')
-            setProfile('Профиль')
-            setTimer('Таймер')
-            setResult('Результат')
-            setHistory('История')
-            setAddEvent('Новое событие')
-            setUpdateEvent('Редактировать событие')
-            setAllEvents('Все события')
-            setLogin('Авторизация')
-            setLogout('Выйти')
-            setChangepassword('Изменить пароль')
-            setTechnicalSupport('Техническая поддержка')
-            setMinistryLeaders('Проповедническое служение')
-            setMinistryLeader('Встреча пр.служения')
-            setMidweekMeetings('Встречи в середине недели')
-            setWeekendMeetings('Встречи конца недели')
-            setLeaderAndIntroductoryRemarks('Ведущий и вступление')
-            setFirstPrayer('Первая молитва')
-            setTreasuresFromGodsWord('Сокровища из Божьего слова')
-            setSpiritualGems('Духовные жемчужины')
-            setBibleReading('Чтение Библии')
-            setSchoolLeader('Ведущий школи')
-            setInitialCall('Первое посещение')
-            setReturnVisit('Повторное посещение')
-            setSchoolStudy('Изучение Библии в школе')
-            setSchoolTalk('Речь')
-            setDiscussion('Обсуждение с участием присутствующих')
-            setLocalNeeds('Потребности собрания')
-            setBibleStudyLeader('Изучение Библии в собрании')
-            setBibleStudyLector('Изучение Библии в собрании (Лектор)')
-            setLastPrayer('Заключительная молитва')
-            setWeekendLeader('Ведущий и вступительная молитва')
-            setWeekendSpeach('Речь и заключительная молитва')
-            setWatchTowerLeader('Ведущий Сторожевой Башни')
-            setWatchTowerLector('Сторожевая Башня (Лектор)')
-            setRegistration('Регистрация')
-            setRequestResetMail('Сбросить пароль')
-            setCreateCalendarEvent('Расписание встреч')
-            setMicrophones('Mикрофоны')
-            setMusic('Музыка')
-            setDuty('Дежурный')
-            setMinistryWith('Служение')
-            setPROFILE('ПРОФИЛЬ')
-            setTIMER('ТАЙМЕР')
-            setEVENTS('СОБЫТИЯ')
-            setRESULT('РЕЗУЛЬТАТ')
-            setHISTORY('ИСТОРИЯ')
-            setWith('c')
-            setTime('Время')
+            setTrans({
+                'Hours': 'Часы',
+                'Minutes': 'Минуты',
+                'Visits': 'Повторы',
+                'Publications': 'Публикации',
+                'Films': 'Фильмы',
+                'Menu': 'Меню',
+                'Events': 'События',
+                'Profile': 'Профиль',
+                'Timer': 'Таймер',
+                'Result': 'Результат',
+                'History': 'История',
+                'AddEvent': 'Новое событие',
+                'UpdateEvent': 'Редактировать событие',
+                'AllEvents': 'Все события',
+                'Login': 'Авторизация',
+                'Logout': 'Выйти',
+                'Changepassword': 'Изменить пароль',
+                'TechnicalSupport': 'Техническая поддержка',
+                'MinistryLeaders': 'Проповедническое служение',
+                'MinistryLeader': 'Встреча пр.служения',
+                'MidweekMeetings': 'Встречи в середине недели', 
+                'WeekendMeetings': 'Встречи конца недели',
+                'LeaderAndIntroductoryRemarks': 'Ведущий и вступление',
+                'FirstPrayer': 'Первая молитва',
+                'TreasuresFromGodsWord': 'Сокровища из Божьего слова',
+                'SpiritualGems': 'Духовные жемчужины',
+                'BibleReading': 'Чтение Библии',
+                'SchoolLeader' : 'Ведущий школи',
+                'InitialCall' : 'Первое посещение',
+                'ReturnVisit' : 'Повторное посещение',
+                'SchoolStudy' : 'Изучение Библии в школе',
+                'SchoolTalk' : 'Речь',
+                'Discussion' : 'Обсуждение с участием присутствующих',
+                'LocalNeeds' : 'Потребности собрания',
+                'BibleStudyLeader' : 'Изучение Библии в собрании',
+                'BibleStudyLector' : 'Изучение Библии в собрании (Лектор)',
+                'LastPrayer' : 'Заключительная молитва',
+                'WeekendLeader' : 'Ведущий и вступительная молитва',
+                'WeekendSpeach' : 'Речь и заключительная молитва',
+                'WatchTowerLeader' : 'Ведущий Сторожевой Башни',
+                'WatchTowerLector' : 'Сторожевая Башня (Лектор)',
+                'Registration' : 'Регистрация',
+                'RequestResetMail' :'Сбросить пароль',
+                'CreateCalendarEvent' : 'Расписание встреч',
+                'Microphones' : 'Mикрофоны',
+                'Music' : 'Музыка',
+                'Duty' : 'Распорядитель',
+                'MinistryWith' : 'Служение',
+                'PROFILE' : 'ПРОФИЛЬ',
+                'TIMER' : 'ТАЙМЕР',
+                'EVENTS' : 'СОБЫТИЯ',
+                'RESULT' : 'РЕЗУЛЬТАТ',
+                'HISTORY' : 'ИСТОРИЯ',
+                'With' : 'c',
+                'Time' : 'Время',
+                'DelHistory' : 'Данные за текущий месяц будут полностью утрачены, удалить?',
+                'No' : 'Нет',
+                'Yes' : 'Да',
+                'ForgotPassword' : 'Не помню пароль',
+                'Dhaccount' : 'Ещё не зарегистрированы?',
+                'Submit' : 'Подтвердить',
+                'Click' : 'Нажмите здесь',
+                'Rest' : 'Осталось',
+            })
             setDaynames(['Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб', 'Вс'])
             setMonthnames([
                 'Январь', 
@@ -223,70 +236,73 @@ export const LanguageProvider = ({children}) => {
                 'Ноябрь', 
                 'Декабрь'
             ])
-            setDelHistory('Данные за текущий месяц будут полностью утрачены, удалить?')
-            setNo('Нет')
-            setYes('Да')
-            setForgotPassword('Не помню пароль')
-            setDhaccount('Ещё не зарегистрированы?')
-            setSubmit('Подтвердить')
-            setClick('Нажмите здесь')
 
         }else if(lng === 'UA'){
-            setHours('Години')
-            setMinutes('Хвилини')
-            setVisits('Повтори')
-            setPublications('Публiкацiї')
-            setFilms('Фiльми')
-            setMenu('Меню')
-            setEvents('Подiї')
-            setProfile('Профiль')
-            setTimer('Таймер')
-            setResult('Результат')
-            setHistory('Iсторiя')
-            setAddEvent('Нова подiя')
-            setUpdateEvent('Редагувати подiю')
-            setAllEvents('Усi подiї')
-            setLogin('Авторизація')
-            setLogout('Вийти')
-            setChangepassword('Змiнити пароль')
-            setTechnicalSupport('Технічна підтримка')
-            setMinistryLeaders('Проповідницьке служіння')
-            setMinistryLeader('Проп. служіння')
-            setMidweekMeetings('Зустрічі у середині тижня')
-            setWeekendMeetings('Зустрічі кінця тижня')
-            setLeaderAndIntroductoryRemarks('Ведучий і вступ')
-            setFirstPrayer('Початкова молитва')
-            setTreasuresFromGodsWord('Скарби з Божого слова')
-            setSpiritualGems('Духовнi перлини')
-            setBibleReading('Читання Біблії')
-            setSchoolLeader('Ведучий школи')
-            setInitialCall('Перша розмова')
-            setInitialCall('Повторне відвідування')
-            setSchoolStudy('Вивчення Біблії у школі')
-            setSchoolTalk('Виступ')
-            setDiscussion('Обговорення за участю присутніх')
-            setLocalNeeds('Потреби збору')
-            setBibleStudyLeader('Вивчення Біблії в зборі')
-            setBibleStudyLector('Вивчення Біблії в зборі (Лектор)')
-            setLastPrayer('Заключна молитва')
-            setWeekendLeader('Ведучий і вступна молитва')
-            setWeekendSpeach('Промова та заключна молитва')
-            setWatchTowerLeader('Ведучий Вартової Башти')
-            setWatchTowerLector('Вартова Башта (Лектор)')
-            setRegistration('Реєстрація')
-            setRequestResetMail('Ануляцiя паролю')
-            setCreateCalendarEvent('Розклад зустрічей')
-            setMicrophones('Mікрофони')
-            setMusic('Музика')
-            setDuty('Черговий')
-            setMinistryWith('Служіння')
-            setPROFILE('ПРОФІЛЬ')
-            setTIMER('ТАЙМЕР')
-            setEVENTS('ПОДІЇ')
-            setRESULT('РЕЗУЛЬТАТ')
-            setHISTORY('ІСТОРІЯ')
-            setWith('з')
-            setTime('Час')
+            setTrans({
+                'Hours': 'Години',
+                'Minutes': 'Минуты',
+                'Visits': 'Повтори',
+                'Publications': 'Публiкацiї',
+                'Films': 'Фiльми',
+                'Menu': 'Меню',
+                'Events': 'Подiї',
+                'Profile': 'Профiль',
+                'Timer': 'Таймер',
+                'Result': 'Результат',
+                'History': 'Iсторiя',
+                'AddEvent': 'Нова подiя',
+                'UpdateEvent': 'Редагувати подiю',
+                'AllEvents': 'Усi подiї',
+                'Login': 'Авторизація',
+                'Logout': 'Вийти',
+                'Changepassword': 'Змiнити пароль',
+                'TechnicalSupport': 'Технічна підтримка',
+                'MinistryLeaders': 'Проповідницьке служіння',
+                'MinistryLeader': 'Проп. служіння',
+                'MidweekMeetings': 'Зустрічі у середині тижня', 
+                'WeekendMeetings': 'Зустрічі кінця тижня',
+                'LeaderAndIntroductoryRemarks': 'Ведучий і вступ',
+                'FirstPrayer': 'Початкова молитва',
+                'TreasuresFromGodsWord': 'Скарби з Божого слова',
+                'SpiritualGems': 'Духовнi перлини',
+                'BibleReading': 'Читання Біблії',
+                'SchoolLeader' : 'Ведучий школи',
+                'InitialCall' : 'Перша розмова',
+                'ReturnVisit' : 'Повторне відвідування',
+                'SchoolStudy' : 'Вивчення Біблії у школі',
+                'SchoolTalk' : 'Виступ',
+                'Discussion' : 'Обговорення за участю присутніх',
+                'LocalNeeds' : 'Потреби збору',
+                'BibleStudyLeader' : 'Вивчення Біблії в зборі',
+                'BibleStudyLector' : 'Вивчення Біблії в зборі (Лектор)',
+                'LastPrayer' : 'Заключна молитва',
+                'WeekendLeader' : 'Ведучий і вступна молитва',
+                'WeekendSpeach' : 'Промова та заключна молитва',
+                'WatchTowerLeader' : 'Ведучий Вартової Башти',
+                'WatchTowerLector' : 'Вартова Башта (Лектор)',
+                'Registration' : 'Реєстрація',
+                'RequestResetMail' :'Ануляцiя паролю',
+                'CreateCalendarEvent' : 'Розклад зустрічей',
+                'Microphones' : 'Mікрофони',
+                'Music' : 'Музика',
+                'Duty' : 'Черговий',
+                'MinistryWith' : 'Служіння',
+                'PROFILE' : 'ПРОФІЛЬ',
+                'TIMER' : 'ТАЙМЕР',
+                'EVENTS' : 'ПОДІЇ',
+                'RESULT' : 'РЕЗУЛЬТАТ',
+                'HISTORY' : 'ІСТОРІЯ',
+                'With' : 'з',
+                'Time' : 'Час',
+                'DelHistory' : 'Дані за цей місяць будуть повністю видалені, видалити?',
+                'No' : 'Hі',
+                'Yes' : 'Так',
+                'ForgotPassword' : "Hе пам'ятаю пароль",
+                'Dhaccount' : 'Ще не зареєстровані?',
+                'Submit' : 'Підтвердити',
+                'Click' : 'Натиснути тут',
+                'Rest' : 'Залишилось',
+            })
             setDaynames(['Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб', 'Нд'])
             setMonthnames([
                 'січень ', 
@@ -302,14 +318,6 @@ export const LanguageProvider = ({children}) => {
                 'листопад ', 
                 'грудень'
             ])
-            setDelHistory('Дані за цей місяць будуть повністю видалені, видалити?')
-            setNo('Hі')
-            setYes('Так')
-            setForgotPassword("Hе пам'ятаю пароль")
-            setDhaccount('Ще не зареєстровані?')
-            setSubmit('Підтвердити')
-            setClick('Натиснути тут')
-
         }
       };
 
@@ -381,6 +389,7 @@ export const LanguageProvider = ({children}) => {
             delHistory_,
             no_,
             yes_,
+            trans,
         }}>
             {children}
         </LanguageContext.Provider>

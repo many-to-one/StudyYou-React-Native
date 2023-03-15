@@ -12,7 +12,7 @@ const Microphones = ({day, navigation}) => {
 
     const {proxy, congr, stuff} = useContext(AuthContext); //////////////////
     const c = congr() /////////////////////
-    const {microphones_} = useContext(LanguageContext);
+    const {trans} = useContext(LanguageContext);
     const [selected, setSelected] = useState('')
     const [users, setUsers] = useState([])
     const [dateMicrophones, setDateMicrophones] = useState([])
@@ -146,7 +146,7 @@ if(dateMicrophones.length > 1 && stuff === true){
                 placeholder={
                   <View style={styles.placeholder}>
                     <Icon name='mic' size={20} color={'white'} />
-                    <Text style={styles.text}>{microphones_}</Text>
+                    <Text style={styles.text}>{trans.Microphones}</Text>
                   </View>
                 }
                 boxStyles={styles.event}
@@ -189,7 +189,7 @@ if(dateMicrophones.length > 1 && stuff === true){
                     placeholder={
                       <View style={styles.placeholder}>
                         <Icon name='mic' size={20} color={'white'} />
-                        <Text style={styles.text}>{microphones_}</Text>
+                        <Text style={styles.text}>{trans.Microphones}</Text>
                       </View>
                     }
                     boxStyles={styles.event}

@@ -9,34 +9,29 @@ import WeekendSpeach from './WeekendSpeech';
 
 const WeekendMeetings = ({route, navigation}) => {
     const {day} = route.params;
-    const {
-      weekendLeader_,
-      weekendSpeach_,
-      watchTowerLeader_,
-      watchTowerLector_,
-    } = useContext(LanguageContext);
+    const {trans} = useContext(LanguageContext);
 
   return (
     <ScrollView style={styles.scroll}>
         <View style={styles.container}>
 
         <View style={styles.event}>
-          <Text style={styles.text}>{weekendLeader_}:</Text>
+          <Text style={styles.text}>{trans.WeekendLeader}:</Text>
           <WeekendLeader  day={day}/>
         </View>
 
         <View style={styles.event}>
-          <Text style={styles.text}>{weekendSpeach_}:</Text>
+          <Text style={styles.text}>{trans.WeekendSpeach}:</Text>
           <WeekendSpeach  day={day}/>
         </View>
 
         <View style={styles.event}>
-          <Text style={styles.text}>{watchTowerLeader_}:</Text>
+          <Text style={styles.text}>{trans.WatchTowerLeader}:</Text>
           <WatchTowerLeader  day={day}/>
         </View>
 
         <View style={styles.event}>
-          <Text style={styles.text}>{watchTowerLector_}:</Text>
+          <Text style={styles.text}>{trans.WatchTowerLector}:</Text>
           <WatchTowerLector  day={day}/>
         </View>
 

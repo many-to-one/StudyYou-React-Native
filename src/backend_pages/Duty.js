@@ -11,7 +11,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 const Duty = ({day, navigation}) => {
 
     const {proxy, stuff} = useContext(AuthContext);
-    const {duty_} = useContext(LanguageContext);
+    const {trans} = useContext(LanguageContext);
     const [selected, setSelected] = useState('')
     const [users, setUsers] = useState([])
     const [dateDuty, setDateDuty] = useState([])
@@ -143,7 +143,7 @@ if(dateDuty.length > 1 && stuff === true){
                 placeholder={
                   <View style={styles.placeholder}>
                     <Icon name='man-sharp' size={20} color={'white'} />
-                    <Text style={styles.text}>{duty_}</Text>
+                    <Text style={styles.text}>{trans.Duty}</Text>
                   </View>
                 }
                 boxStyles={styles.event}
@@ -186,7 +186,7 @@ if(dateDuty.length > 1 && stuff === true){
                   placeholder={
                     <View style={styles.placeholder}>
                       <Icon name='man-sharp' size={20} color={'white'} />
-                      <Text style={styles.text}>{duty_}</Text>
+                      <Text style={styles.text}>{trans.Duty}</Text>
                     </View>
                   }
                   boxStyles={styles.event}

@@ -11,7 +11,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 const WatchTowerLector = ({day, navigation}) => {
 
     const {proxy, stuff} = useContext(AuthContext);
-    const {watchTowerLector_} = useContext(LanguageContext);
+    const {trans} = useContext(LanguageContext);
     const [selected, setSelected] = useState('')
     const [users, setUsers] = useState([])
     const [dateWatchTowerLector, setDateWatchTowerLector] = useState([])
@@ -142,7 +142,7 @@ if(dateWatchTowerLector.length === 1 && stuff === true){
                 placeholder={
                   <View style={styles.placeholder}>
                     <Icon name='md-reader' size={20} color={'white'} />
-                    <Text style={styles.text}>{watchTowerLector_}</Text>
+                    <Text style={styles.text}>{trans.WatchTowerLector}</Text>
                   </View>
                 }
                 boxStyles={styles.event}

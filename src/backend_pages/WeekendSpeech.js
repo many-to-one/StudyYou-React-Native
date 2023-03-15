@@ -11,7 +11,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 const WeekendSpeach = ({day, navigation}) => {
 
     const {proxy, stuff} = useContext(AuthContext);
-    const {weekendSpeach_} = useContext(LanguageContext);
+    const {trans} = useContext(LanguageContext);
     const [selected, setSelected] = useState('')
     const [users, setUsers] = useState([])
     const [dateWeekendSpeach, setDateWeekendSpeach] = useState([])
@@ -142,7 +142,7 @@ if(dateWeekendSpeach.length === 1 && stuff === true){
                 placeholder={
                   <View style={styles.placeholder}>
                     <Icon name='md-man-outline' size={20} color={'white'} />
-                    <Text style={styles.text}>{weekendSpeach_}</Text>
+                    <Text style={styles.text}>{trans.WeekendSpeach}</Text>
                   </View>
                 }
                 boxStyles={styles.event}

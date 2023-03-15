@@ -9,13 +9,13 @@ import Ministry from './Ministry';
 const Ministries = ({route, navigation}) => {
 
     const {day} = route.params;
-    const {ministryLeaders_} = useContext(LanguageContext);
+    const {trans} = useContext(LanguageContext);
 
   return (
     <ScrollView style={styles.scroll}>
         <View style={styles.container}>
         <View style={styles.event}>
-          <Text style={styles.text}>{ministryLeaders_}</Text>
+          <Text style={styles.text}>{trans.MinistryLeaders}</Text>
           <Ministry  day={day}/>
         </View>
       </View>

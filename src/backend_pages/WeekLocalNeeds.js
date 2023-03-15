@@ -11,7 +11,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 const WeekLocalNeeds = ({day, navigation}) => {
 
     const {proxy, stuff} = useContext(AuthContext);
-    const {localNeeds_} = useContext(LanguageContext);
+    const {trans} = useContext(LanguageContext);
     const [selected, setSelected] = useState('')
     const [users, setUsers] = useState([])
     const [dateWeekLocalNeeds, setDateWeekLocalNeeds] = useState([])
@@ -141,7 +141,7 @@ if(dateWeekLocalNeeds.length === 1 && stuff === true){
                 placeholder={
                   <View style={styles.placeholder}>
                     <Icon name='md-file-tray-full' size={20} color={'white'} />
-                    <Text style={styles.text}>{localNeeds_}</Text>
+                    <Text style={styles.text}>{trans.LocalNeeds}</Text>
                   </View>
                 }
                 boxStyles={styles.event}

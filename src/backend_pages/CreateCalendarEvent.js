@@ -8,11 +8,7 @@ const CreateCalendarEvent = ({route, navigation}) => {
 
   const {day} = route.params;
   const {
-    technicalSupport_,
-    ministryLeaders_,
-    midweekMeetings_,
-    weekendMeetings_,
-    ministryWith_,
+    trans,
   } = useContext(LanguageContext);
 
     return (
@@ -27,7 +23,7 @@ const CreateCalendarEvent = ({route, navigation}) => {
               color={'#78D7D9'} 
               onPress={() => navigation.navigate('Service', {day: day})}     
             />
-            <Text style={styles.text}>{technicalSupport_}</Text>
+            <Text style={styles.text}>{trans.TechnicalSupport}</Text>
           </View>
         </TouchableOpacity>
 
@@ -39,7 +35,7 @@ const CreateCalendarEvent = ({route, navigation}) => {
               color={'#78D7D9'} 
               onPress={() => navigation.navigate('Ministries', {day: day})}     
             />
-            <Text style={styles.text}>{ministryLeaders_}</Text>
+            <Text style={styles.text}>{trans.MinistryLeaders}</Text>
           </View>
         </TouchableOpacity>
 
@@ -51,7 +47,7 @@ const CreateCalendarEvent = ({route, navigation}) => {
               color={'#78D7D9'} 
               onPress={() => navigation.navigate('MiddleOfTheWeek', {day: day})}     
             />
-            <Text style={styles.text}>{midweekMeetings_}</Text>
+            <Text style={styles.text}>{trans.MidweekMeetings}</Text>
           </View>
         </TouchableOpacity>
 
@@ -63,7 +59,7 @@ const CreateCalendarEvent = ({route, navigation}) => {
               color={'#78D7D9'} 
               onPress={() => navigation.navigate('WeekendMeetings', {day: day})}     
             />
-            <Text style={styles.text}>{weekendMeetings_}</Text>
+            <Text style={styles.text}>{trans.WeekendMeetings}</Text>
           </View>
         </TouchableOpacity>
 
@@ -75,7 +71,7 @@ const CreateCalendarEvent = ({route, navigation}) => {
               color={'#78D7D9'} 
               onPress={() => navigation.navigate('MinistryWithEvent', {day: day})}     
             />
-            <Text style={styles.text}>{ministryWith_}</Text>
+            <Text style={styles.text}>{trans.MinistryWith}</Text>
           </View>
         </TouchableOpacity>
 

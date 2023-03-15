@@ -11,7 +11,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 const WeekDiscussion = ({day, navigation}) => {
 
     const {proxy, stuff} = useContext(AuthContext);
-    const {discussion_} = useContext(LanguageContext);
+    const {trans} = useContext(LanguageContext);
     const [selected, setSelected] = useState('')
     const [users, setUsers] = useState([])
     const [dateWeekDiscussion, setDateWeekDiscussion] = useState([])
@@ -141,7 +141,7 @@ if(dateWeekDiscussion.length === 1 && stuff === true){
                 placeholder={
                   <View style={styles.placeholder}>
                     <Icon name='md-film-outline' size={20} color={'white'} />
-                    <Text style={styles.text}>{discussion_}</Text>
+                    <Text style={styles.text}>{trans.Discussion}</Text>
                   </View>
                 }
                 boxStyles={styles.event}

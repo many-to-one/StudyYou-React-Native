@@ -10,32 +10,7 @@ import moment from 'moment';
 
 const Timetable = ({navigation}) => {
     const {proxy} = useContext(AuthContext);
-    const {
-      microphones_,
-      music_,
-      duty_,
-      ministryLeader_,
-      leaderAndIntroductoryRemarks_,
-      firstPrayer_,
-      treasuresFromGodsWord_,
-      spiritualGems_,
-      bibleReading_,
-      schoolLeader_,
-      initialCall_,
-      returnVisit_,
-      schoolStudy_,
-      schoolTalk_,
-      discussion_,
-      localNeeds_,
-      bibleStudyLeader_,
-      bibleStudyLector_,
-      lastPrayer_,
-      weekendLeader_,
-      weekendSpeach_,
-      watchTowerLeader_,
-      ministryWith_,
-      with_
-    } = useContext(LanguageContext)
+    const {trans} = useContext(LanguageContext)
     const isFocused = useIsFocused();
     const [data, setData] = useState([])
 
@@ -85,7 +60,7 @@ const Timetable = ({navigation}) => {
                     {e.date}
                   </Text>
                   <Text style={styles.text}>
-                    {microphones_}
+                    {trans.Microphones}
                   </Text>
                 </View>
               </ImageBackground>
@@ -105,7 +80,7 @@ const Timetable = ({navigation}) => {
                     {e.date}
                   </Text>
                   <Text style={styles.text}>
-                    {music_}
+                    {trans.Music}
                   </Text>
                 </View>
               </ImageBackground>
@@ -125,7 +100,7 @@ const Timetable = ({navigation}) => {
                     {e.date}
                   </Text>
                   <Text style={styles.text}>
-                    {duty_}
+                    {trans.Duty}
                   </Text>
                 </View>
               </ImageBackground>
@@ -145,7 +120,7 @@ const Timetable = ({navigation}) => {
                     {e.date}
                   </Text>
                   <Text style={styles.text}>
-                    {ministryLeader_}
+                    {trans.MinistryLeader}
                   </Text>
                 </View>
               </ImageBackground>
@@ -165,7 +140,7 @@ const Timetable = ({navigation}) => {
                     {e.date}
                   </Text>
                   <Text style={styles.text}>
-                    {leaderAndIntroductoryRemarks_}
+                    {trans.LeaderAndIntroductoryRemarks}
                   </Text>
                 </View>
               </ImageBackground>
@@ -185,7 +160,7 @@ const Timetable = ({navigation}) => {
                     {e.date}
                   </Text>
                   <Text style={styles.text}>
-                    {firstPrayer_}
+                    {trans.FirstPrayer}
                   </Text>
                 </View>
               </ImageBackground>
@@ -205,7 +180,7 @@ const Timetable = ({navigation}) => {
                     {e.date}
                   </Text>
                   <Text style={styles.text}>
-                    {treasuresFromGodsWord_}
+                    {trans.TreasuresFromGodsWord}
                   </Text>
                 </View>
               </ImageBackground>
@@ -225,7 +200,7 @@ const Timetable = ({navigation}) => {
                     {e.date}
                   </Text>
                   <Text style={styles.text}>
-                    {spiritualGems_}
+                    {trans.SpiritualGems}
                   </Text>
                 </View>
               </ImageBackground>
@@ -245,7 +220,7 @@ const Timetable = ({navigation}) => {
                     {e.date}
                   </Text>
                   <Text style={styles.text}>
-                    {bibleReading_}
+                    {trans.BibleReading}
                   </Text>
                 </View>
               </ImageBackground>
@@ -265,7 +240,7 @@ const Timetable = ({navigation}) => {
                     {e.date}
                   </Text>
                   <Text style={styles.text}>
-                    {schoolLeader_}
+                    {trans.SchoolLeader}
                   </Text>
                 </View>
               </ImageBackground>
@@ -285,7 +260,7 @@ const Timetable = ({navigation}) => {
                     {e.date}
                   </Text>
                   <Text style={styles.text}>
-                    {initialCall_}
+                    {trans.InitialCall}
                   </Text>
                 </View>
               </ImageBackground>
@@ -305,7 +280,7 @@ const Timetable = ({navigation}) => {
                     {e.date}
                   </Text>
                   <Text style={styles.text}>
-                    {returnVisit_}
+                    {trans.ReturnVisit}
                   </Text>
                 </View>
               </ImageBackground>
@@ -325,7 +300,7 @@ const Timetable = ({navigation}) => {
                     {e.date}
                   </Text>
                   <Text style={styles.text}>
-                    {schoolStudy_}
+                    {trans.SchoolStudy}
                   </Text>
                 </View>
               </ImageBackground>
@@ -345,7 +320,7 @@ const Timetable = ({navigation}) => {
                     {e.date}
                   </Text>
                   <Text style={styles.text}>
-                    {schoolTalk_}
+                    {trans.SchoolTalk}
                   </Text>
                 </View>
               </ImageBackground>
@@ -365,7 +340,7 @@ const Timetable = ({navigation}) => {
                     {e.date}
                   </Text>
                   <Text style={styles.text}>
-                    {discussion_}
+                    {trans.Discussion}
                   </Text>
                 </View>
               </ImageBackground>
@@ -385,7 +360,7 @@ const Timetable = ({navigation}) => {
                     {e.date}
                   </Text>
                   <Text style={styles.text}>
-                    {localNeeds_}
+                    {trans.LocalNeeds}
                   </Text>
                 </View>
               </ImageBackground>
@@ -405,7 +380,7 @@ const Timetable = ({navigation}) => {
                     {e.date}
                   </Text>
                   <Text style={styles.text}>
-                    {bibleStudyLeader_}
+                    {trans.BibleStudyLeader}
                   </Text>
                 </View>
               </ImageBackground>
@@ -425,7 +400,7 @@ const Timetable = ({navigation}) => {
                     {e.date}
                   </Text>
                   <Text style={styles.text}>
-                    {bibleStudyLector_}
+                    {trans.BibleStudyLector}
                   </Text>
                 </View>
               </ImageBackground>
@@ -445,7 +420,7 @@ const Timetable = ({navigation}) => {
                     {e.date}
                   </Text>
                   <Text style={styles.text}>
-                    {lastPrayer_}
+                    {trans.LastPrayer}
                   </Text>
                 </View>
               </ImageBackground>
@@ -465,7 +440,7 @@ const Timetable = ({navigation}) => {
                     {e.date}
                   </Text>
                   <Text style={styles.text}>
-                    {weekendLeader_}
+                    {trans.WeekendLeader}
                   </Text>
                 </View>
               </ImageBackground>
@@ -485,7 +460,7 @@ const Timetable = ({navigation}) => {
                     {e.date}
                   </Text>
                   <Text style={styles.text}>
-                    {weekendSpeach_}
+                    {trans.WeekendSpeach}
                   </Text>
                 </View>
               </ImageBackground>
@@ -505,7 +480,7 @@ const Timetable = ({navigation}) => {
                     {e.date}
                   </Text>
                   <Text style={styles.text}>
-                    {watchTowerLeader_}
+                    {trans.WatchTowerLeader}
                   </Text>
                 </View>
               </ImageBackground>
@@ -525,7 +500,7 @@ const Timetable = ({navigation}) => {
                     {e.date}
                   </Text>
                   <Text style={styles.text}>
-                    {ministryWith_} {with_} {e.person} {e.time}
+                    {trans.MinistryWith} {trans.With} {e.person} {e.time}
                   </Text>
                 </View>
               </ImageBackground>

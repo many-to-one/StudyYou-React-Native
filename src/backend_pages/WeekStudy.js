@@ -11,7 +11,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 const WeekStudy = ({day, navigation}) => {
 
     const {proxy, stuff} = useContext(AuthContext);
-    const {schoolStudy_} = useContext(LanguageContext);
+    const {trans} = useContext(LanguageContext);
     const [selected, setSelected] = useState('')
     const [users, setUsers] = useState([])
     const [dateWeekStudy, setDateWeekStudy] = useState([])
@@ -143,7 +143,7 @@ const WeekStudy = ({day, navigation}) => {
                   placeholder={
                     <View style={styles.placeholder}>
                       <Icon name='people-sharp' size={20} color={'white'} />
-                      <Text style={styles.text}>{schoolStudy_}</Text>
+                      <Text style={styles.text}>{trans.SchoolStudy}</Text>
                     </View>
                   }
                   boxStyles={styles.event}
@@ -186,7 +186,7 @@ const WeekStudy = ({day, navigation}) => {
                       placeholder={
                         <View style={styles.placeholder}>
                           <Icon name='people-sharp' size={20} color={'white'} />
-                          <Text style={styles.text}>{schoolStudy_}</Text>
+                          <Text style={styles.text}>{trans.SchoolStudy}</Text>
                         </View>
                       }
                       boxStyles={styles.event}

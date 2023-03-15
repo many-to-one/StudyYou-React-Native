@@ -11,7 +11,7 @@ const AllEvents = ({datas}) => {
     const navigation = useNavigation();
     const { width, height } = Dimensions.get('window');
     const BACKDROP_HEIGHT = height * 0.65;
-    const { userData, proxy } = useContext(AuthContext);
+    const { userData, proxy, } = useContext(AuthContext);
     const [ events, setEvents] = useState([]);
     const isFocused = useIsFocused();
 

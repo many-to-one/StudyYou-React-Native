@@ -2,20 +2,17 @@ import React, { useContext } from 'react'
 import { Dimensions, ScrollView, StyleSheet, Text, View } from 'react-native'
 import { LanguageContext } from '../context/LanguageContext';
 import MinistryWith from './MinistryWith';
-import MinistryWith2 from './MinistryWith2';
 
 const MinistryWithEvent = ({route, navigation}) => {
     const {day} = route.params;
-    const {
-        ministryWith_,
-    } = useContext(LanguageContext);
+    const {trans} = useContext(LanguageContext);
   return (
     <ScrollView style={styles.scroll}>
         <View style={styles.container}>
 
         <View style={styles.event}>
-          <Text style={styles.text}>{ministryWith_}:</Text>
-          <MinistryWith2  day={day}/>
+          <Text style={styles.text}>{trans.MinistryWith}:</Text>
+          <MinistryWith day={day}/>
         </View>
 
       </View>

@@ -1,5 +1,5 @@
 import { Calendar, LocaleConfig, XDate } from 'react-native-calendars';
-import { StyleSheet } from 'react-native';
+import { Dimensions, StyleSheet } from 'react-native';
 
 import React, { useContext, useEffect, useMemo, useState } from 'react'
 import { AuthContext } from '../context/AuthContext';
@@ -96,9 +96,11 @@ const Calendar_ = (props) => {
   
 }
 
+const { width, height } = Dimensions.get('window');
 const styles = StyleSheet.create({
   event:{
-    width: 300,
+    width: width / 1.2,
+    height: height / 2.6,
     borderRadius: 10,
     // borderWidth: 1,
     // borderColor: '#78D7D9',
@@ -115,7 +117,8 @@ const styles = StyleSheet.create({
       width: 0,
       height: 0,
     },
-    shadowRadius: 4
+    shadowRadius: 4,
+    marginBottom: 20,
   }
 })
 

@@ -11,7 +11,7 @@ const Result = ({navigation}) => {
 
     const { width, height } = Dimensions.get('window');
     const {proxy} = useContext(AuthContext);
-    const {Hours, Minutes, Publications, Visits, Films} = useContext(LanguageContext);
+    const {trans} = useContext(LanguageContext);
     const [ result, setResult ] = useState([]);
     const isFocused = useIsFocused();
 
@@ -74,7 +74,7 @@ const Result = ({navigation}) => {
           <View style={styles.row}>
             <View style={styles.left_row}>
               <Text style={styles.text}>
-                {Hours}:
+                {trans.Hours}:
               </Text>
             </View>
             <View style={styles.input}>
@@ -87,7 +87,7 @@ const Result = ({navigation}) => {
           <View style={styles.row}>
             <View style={styles.left_row}>
               <Text style={styles.text}>
-                {Minutes}:
+                {trans.Minutes}:
               </Text>
             </View>
             <View style={styles.input}>
@@ -100,7 +100,7 @@ const Result = ({navigation}) => {
           <View style={styles.row}>
             <View style={styles.left_row}>
               <Text style={styles.text}>
-                {Publications}:
+                {trans.Publications}:
               </Text>
             </View>
             <View style={styles.input}>
@@ -113,7 +113,7 @@ const Result = ({navigation}) => {
           <View style={styles.row}>
             <View style={styles.left_row}>
               <Text style={styles.text}>
-                {Visits}:
+                {trans.Visits}:
               </Text>
             </View>
             <View style={styles.input}>
@@ -126,7 +126,7 @@ const Result = ({navigation}) => {
           <View style={styles.row}>
             <View style={styles.left_row}>
               <Text style={styles.text}>
-                {Films}:
+                {trans.Films}:
               </Text>
             </View>
             <View style={styles.input}>

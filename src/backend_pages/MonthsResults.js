@@ -23,6 +23,7 @@ const MonthsResults = ({navigation}) => {
         const resp = await fetch(`${proxy}/backend/get_months_results/${datas.id}/`)
         const data = await resp.json()
         setResults(data.data)
+        await AsyncStorage.setItem("monthsResult", JSON.stringify(data.data));
         console.log('getMonthsResults', data)
     };
 

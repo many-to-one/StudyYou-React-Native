@@ -8,25 +8,21 @@ import Duty from './Duty';
 const Service = ({route, navigation}) => {
 
     const {day} = route.params;
-    const {
-      microphones_,
-      music_,
-      duty_,
-    } = useContext(LanguageContext);
+    const {trans} = useContext(LanguageContext);
 
   return (
     <ScrollView style={styles.scroll}>
       <View style={styles.container}>
         <View style={styles.event}>
-          <Text style={styles.text}>{microphones_}:</Text>
+          <Text style={styles.text}>{trans.Microphones}:</Text>
           <Microphones  day={day}/>
         </View>
         <View style={styles.event}>
-          <Text style={styles.text}>{music_}:</Text>
+          <Text style={styles.text}>{trans.Music}:</Text>
           <Music  day={day}/>
         </View>
         <View style={styles.event}>
-          <Text style={styles.text}>{duty_}:</Text>
+          <Text style={styles.text}>{trans.Duty}:</Text>
           <Duty  day={day}/>
         </View>
       </View>

@@ -12,7 +12,7 @@ const AddEvent = ({ navigation }) => {
 
   const { width, height } = Dimensions.get('window');
   const {proxy} = useContext(AuthContext);
-  const {Hours, Minutes, Publications, Visits, Films} = useContext(LanguageContext);
+  const {Hours, Minutes, Publications, Visits, Films, trans} = useContext(LanguageContext);
   const isFocused = useIsFocused();
   const [events, setEvents] = useState({name:{}})
 
@@ -83,7 +83,7 @@ const AddEvent = ({ navigation }) => {
       <View style={styles.row}>
         <View style={styles.left_row}>
           <Text style={styles.text}>
-            {Hours}:
+            {trans.Hours}:
           </Text>
         </View>
         <View>
@@ -98,7 +98,7 @@ const AddEvent = ({ navigation }) => {
       <View style={styles.row}>
         <View style={styles.left_row}>
           <Text style={styles.text}>
-            {Minutes}:
+            {trans.Minutes}:
           </Text>
         </View>
         <View>
@@ -113,7 +113,7 @@ const AddEvent = ({ navigation }) => {
       <View style={styles.row}>
         <View style={styles.left_row}>
           <Text style={styles.text}>
-            {Visits}:
+            {trans.Visits}:
           </Text>
         </View>
         <View>
@@ -128,7 +128,7 @@ const AddEvent = ({ navigation }) => {
       <View style={styles.row}>
         <View style={styles.left_row}>
           <Text style={styles.text}>
-            {Publications}:
+            {trans.Publications}:
           </Text>
         </View>
         <View>
@@ -143,7 +143,7 @@ const AddEvent = ({ navigation }) => {
       <View style={styles.row}>
         <View style={styles.left_row}>
           <Text style={styles.text}>
-            {Films}:
+            {trans.Films}:
           </Text>
         </View>
         <View >

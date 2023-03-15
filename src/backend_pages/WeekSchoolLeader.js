@@ -11,7 +11,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 const WeekSchoolLeader = ({day, navigation}) => {
 
     const {proxy, stuff} = useContext(AuthContext);
-    const {schoolLeader_} = useContext(LanguageContext);
+    const {trans} = useContext(LanguageContext);
     const [selected, setSelected] = useState('')
     const [users, setUsers] = useState([])
     const [dateWeekSchoolLeader, setDateWeekSchoolLeader] = useState([])
@@ -117,12 +117,12 @@ if(dateWeekSchoolLeader.length === 1 && stuff === true){
           return  <View style={styles.user}>
           <Icon name='school-sharp' size={20} color={'#F9F9B5'} />
           <Text style={styles.user_text}>{USERS[e.user]}</Text>
-              <Icon 
-                  name="close-circle-outline" 
-                  size={20} 
-                  color={'white'} 
-                  onPress={() => deleteWeekSchoolLeader(e)}     
-                  />
+            <Icon 
+              name="close-circle-outline" 
+              size={20} 
+              color={'white'} 
+              onPress={() => deleteWeekSchoolLeader(e)}     
+              />
           </View>  
                               
       }
@@ -141,7 +141,7 @@ if(dateWeekSchoolLeader.length === 1 && stuff === true){
                 placeholder={
                   <View style={styles.placeholder}>
                     <Icon name='school-sharp' size={20} color={'white'} />
-                    <Text style={styles.text}>{schoolLeader_}</Text>
+                    <Text style={styles.text}>{trans.SchoolLeader}</Text>
                   </View>
                 }
                 boxStyles={styles.event}

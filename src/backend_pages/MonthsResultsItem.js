@@ -9,16 +9,7 @@ import Modal from "react-native-modal";
 
 const MonthsResultsItem = ({res}) => {
   const {proxy} = useContext(AuthContext);
-  const {
-    Hours, 
-    Minutes, 
-    Publications, 
-    Visits, 
-    Films,
-    delHistory_,
-    no_,
-    yes_,
-  } = useContext(LanguageContext);
+  const {trans} = useContext(LanguageContext);
   // const navigation = useNavigation();
   const [live, setLive] = useState(true)
   const [isModalVisible, setIsModalVisible] = useState(false)
@@ -64,17 +55,17 @@ const MonthsResultsItem = ({res}) => {
                 <View style={styles.cont_modal}>
                   <View style={styles.modal}>
                     <Text style={styles.modalText}> 
-                      {delHistory_}
+                      {trans.DelHistory}
                     </Text>
                     <View style={styles.btn_cont_modal}>
                       <Button 
                         style={styles.btn_modal}
-                        title={yes_}
+                        title={trans.Yes}
                         onPress={() => deleteMonthResult()}
                       />
                       <Button 
                         style={styles.btn_modal}
-                        title={no_}
+                        title={trans.No}
                         onPress={() => setIsModalVisible(false)}
                       />
                     </View>
@@ -84,7 +75,7 @@ const MonthsResultsItem = ({res}) => {
 
               <View style={styles.left_row}>
                 <Text style={styles.text}>
-                  {Hours}:
+                  {trans.Hours}:
                 </Text>
               </View>
               <View style={styles.input}>
@@ -97,7 +88,7 @@ const MonthsResultsItem = ({res}) => {
             <View style={styles.row}>
               <View style={styles.left_row}>
                 <Text style={styles.text}>
-                  {Minutes}:
+                  {trans.Minutes}:
                 </Text>
               </View>
               <View style={styles.input}>
@@ -110,7 +101,7 @@ const MonthsResultsItem = ({res}) => {
             <View style={styles.row}>
               <View style={styles.left_row}>
                 <Text style={styles.text}>
-                  {Publications}:
+                  {trans.Publications}:
                 </Text>
               </View>
               <View style={styles.input}>
@@ -123,7 +114,7 @@ const MonthsResultsItem = ({res}) => {
             <View style={styles.row}>
               <View style={styles.left_row}>
                 <Text style={styles.text}>
-                  {Visits}:
+                  {trans.Visits}:
                 </Text>
               </View>
               <View style={styles.input}>
@@ -136,7 +127,7 @@ const MonthsResultsItem = ({res}) => {
             <View style={styles.row}>
               <View style={styles.left_row}>
                 <Text style={styles.text}>
-                  {Films}:
+                  {trans.Films}:
                 </Text>
               </View>
               <View style={styles.input}>

@@ -12,7 +12,7 @@ const Music = ({day, navigation}) => {
 
     const {proxy, congr, stuff} = useContext(AuthContext);
     const c = congr()
-    const {music_} = useContext(LanguageContext);
+    const {trans} = useContext(LanguageContext);
     const [selected, setSelected] = useState('')
     const [users, setUsers] = useState([])
     const [dateMusic, setDateMusic] = useState([])
@@ -145,7 +145,7 @@ if(dateMusic.length > 1 && stuff === true){
                 placeholder={
                   <View style={styles.placeholder}>
                     <Icon name='md-headset' size={20} color={'white'} />
-                    <Text style={styles.text}>{music_}</Text>
+                    <Text style={styles.text}>{trans.Music}</Text>
                   </View>
                 }
                 boxStyles={styles.event}

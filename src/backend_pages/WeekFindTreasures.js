@@ -11,7 +11,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 const WeekFindTreasures = ({day, navigation}) => {
 
     const {proxy, stuff} = useContext(AuthContext);
-    const {spiritualGems_} = useContext(LanguageContext);
+    const {trans} = useContext(LanguageContext);
     const [selected, setSelected] = useState('')
     const [users, setUsers] = useState([])
     const [dateWeekFindTreasures, setDateWeekFindTreasures] = useState([])
@@ -141,7 +141,7 @@ if(dateWeekFindTreasures.length === 1 && stuff === true){
                 placeholder={
                   <View style={styles.placeholder}>
                     <Icon name='albums' size={20} color={'white'} />
-                    <Text style={styles.text}>{spiritualGems_}</Text>
+                    <Text style={styles.text}>{trans.SpiritualGems}</Text>
                   </View>
                 }
                 boxStyles={styles.event}

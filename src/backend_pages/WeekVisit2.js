@@ -11,7 +11,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 const WeekVisit2 = ({day, navigation}) => {
 
     const {proxy, stuff} = useContext(AuthContext);
-    const {returnVisit_} = useContext(LanguageContext);
+    const {trans} = useContext(LanguageContext);
     const [selected, setSelected] = useState('')
     const [users, setUsers] = useState([])
     const [dateWeekVisit2, setDateWeekVisit2] = useState([])
@@ -143,7 +143,7 @@ const WeekVisit2 = ({day, navigation}) => {
                   placeholder={
                     <View style={styles.placeholder}>
                       <Icon name='people-outline' size={20} color={'white'} />
-                      <Text style={styles.text}>{returnVisit_}</Text>
+                      <Text style={styles.text}>{trans.ReturnVisit}</Text>
                     </View>
                   }
                   boxStyles={styles.event}
@@ -186,7 +186,7 @@ const WeekVisit2 = ({day, navigation}) => {
                       placeholder={
                         <View style={styles.placeholder}>
                           <Icon name='people-outline' size={20} color={'white'} />
-                          <Text style={styles.text}>{returnVisit_}</Text>
+                          <Text style={styles.text}>{trans.ReturnVisit}</Text>
                         </View>
                       }
                       boxStyles={styles.event}

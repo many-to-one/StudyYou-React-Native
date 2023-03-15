@@ -19,99 +19,83 @@ import WeekVisit2 from './WeekVisit2';
 
 const MiddleOfTheWeek = ({route, navigation}) => {
     const {day} = route.params;
-    const {
-      leaderAndIntroductoryRemarks_,
-      firstPrayer_,
-      treasuresFromGodsWord_,
-      spiritualGems_,
-      bibleReading_,
-      schoolLeader_,
-      initialCall_,
-      returnVisit_,
-      schoolStudy_,
-      schoolTalk_,
-      discussion_,
-      localNeeds_,
-      bibleStudyLeader_,
-      bibleStudyLector_,
-      lastPrayer_,
-    } = useContext(LanguageContext);
+    const {trans} = useContext(LanguageContext);
   return (
     <ScrollView style={styles.scroll}>
         <View style={styles.container}>
 
         <View style={styles.event}>
-          <Text style={styles.text}>{leaderAndIntroductoryRemarks_}:</Text>
+          <Text style={styles.text}>{trans.LeaderAndIntroductoryRemarks}:</Text>
           <WeekLeader  day={day}/>
         </View>
 
         <View style={styles.event}> 
-          <Text style={styles.text}>{firstPrayer_}:</Text>
+          <Text style={styles.text}>{trans.FirstPrayer}:</Text>
           <WeekPrayer1  day={day}/>
         </View>
 
         <View style={styles.event}>
-          <Text style={styles.text}>{treasuresFromGodsWord_}:</Text>
+          <Text style={styles.text}>{trans.TreasuresFromGodsWord}:</Text>
           <WeekTreasures day={day}/>
         </View>
 
         <View style={styles.event}>
-          <Text style={styles.text}>{spiritualGems_}:</Text>
+          <Text style={styles.text}>{trans.SpiritualGems}:</Text>
           <WeekFindTreasures day={day}/>
         </View>
 
         <View style={styles.event}>
-          <Text style={styles.text}>{bibleReading_}:</Text>
+          <Text style={styles.text}>{trans.BibleReading}:</Text>
           <WeekReadingBible day={day}/>
         </View>
 
         <View style={styles.event}>
-          <Text style={styles.text}>{schoolLeader_}:</Text>
+          <Text style={styles.text}>{trans.SchoolLeader}:</Text>
           <WeekSchoolLeader day={day}/>
         </View>
 
         <View style={styles.event}>
-          <Text style={styles.text}>{initialCall_}:</Text>
+          <Text style={styles.text}>{trans.InitialCall}:</Text>
           <WeekVisit1 day={day}/>
         </View>
 
         <View style={styles.event}>
-          <Text style={styles.text}>{returnVisit_}:</Text>
+          <Text style={styles.text}>{trans.ReturnVisit}:</Text>
           <WeekVisit2 day={day}/>
         </View>
 
         <View style={styles.event}>
-          <Text style={styles.text}>{schoolStudy_}:</Text>
+          <Text style={styles.text}>{trans.SchoolStudy}:</Text>
           <WeekStudy day={day}/>
         </View>
 
         <View style={styles.event}>
-          <Text style={styles.text}>{schoolTalk_}:</Text>
+          <Text style={styles.text}>{trans.SchoolTalk}:</Text>
           <WeekSchoolTalk day={day}/>
         </View>
 
         <View style={styles.event}>
-          <Text style={styles.text}>{discussion_}:</Text>
+          <Text style={styles.text}>{trans.Discussion}:</Text>
           <WeekDiscussion day={day}/>
         </View>
 
         <View style={styles.event}>
-          <Text style={styles.text}>{localNeeds_}:</Text>
+          <Text style={styles.text}>{trans.LocalNeeds}:</Text>
           <WeekLocalNeeds day={day}/>
         </View>
 
         <View style={styles.event}>
-          <Text style={styles.text}>{bibleStudyLeader_}:</Text>
+          <Text style={styles.text}>{trans.BibleStudyLeader}:</Text>
           <WeekBibleStudy day={day}/>
         </View>
 
         <View style={styles.event}>
-          <Text style={styles.text}>{bibleStudyLector_}:</Text>
+          <Text style={styles.text}>{trans.BibleStudyLector}:</Text>
           <WeekBibleStudyLector day={day}/>
         </View>
 
         <View style={styles.event}>
-          <Text style={styles.text}>{lastPrayer_}:</Text>
+          <Text style={styles.text}>{trans.LastPrayer}:</Text>
           <WeekPrayer2 day={day}/>
         </View>
 

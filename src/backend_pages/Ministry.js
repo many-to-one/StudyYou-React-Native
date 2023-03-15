@@ -11,7 +11,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 const Ministry = ({day, navigation}) => {
 
   const {proxy, stuff} = useContext(AuthContext);
-  const {ministryLeaders_} = useContext(LanguageContext);
+  const {trans} = useContext(LanguageContext);
   const [selected, setSelected] = useState('')
   const [users, setUsers] = useState([])
   const [dateMinistry, setDateMinistry] = useState([])
@@ -150,7 +150,7 @@ if(dateMinistry.length > 1 && stuff === true){
                 placeholder={
                   <View style={styles.placeholder}>
                     <Icon name='people-circle-outline' size={20} color={'white'} />
-                    <Text style={styles.text}>{ministryLeaders_}</Text>
+                    <Text style={styles.text}>{trans.MinistryLeaders}</Text>
                   </View>
               }
                 boxStyles={styles.event}
@@ -194,7 +194,7 @@ if(dateMinistry.length > 1 && stuff === true){
                     placeholder={
                       <View style={styles.placeholder}>
                         <Icon name='people-circle-outline' size={20} color={'white'} />
-                        <Text style={styles.text}>{ministryLeaders_}</Text>
+                        <Text style={styles.text}>{trans.MinistryLeaders}</Text>
                       </View>
                     }
                     boxStyles={styles.event}

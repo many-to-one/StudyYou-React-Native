@@ -22,10 +22,15 @@ const Profile = ({navigation}) => {
     const { width, height } = Dimensions.get('window');
     const isFocused = useIsFocused();
     const {profile, proxy, userData} = useContext(AuthContext);
-    const {setLanguage, Changepassword_} = useContext(LanguageContext);
+    const {trans, setLanguage} = useContext(LanguageContext);
     const [profileData, setProfileData] = useState([]);
     const [selected, setSelected] = useState('')
     const [result, setResult] = useState({})
+    const [visits, setVisits] = useState([])
+    const [publications, setPublications] = useState([])
+    const [films, setFilms] = useState([])
+    const [months, setMonths] = useState([]);
+    const [monthsHours, setMonthsHours] = useState([]);
 
     const Data = [
       {key: 'PL', value: 'PL'},
@@ -35,20 +40,23 @@ const Profile = ({navigation}) => {
 
     const progresData = [
       {
-        name: 'hours',
+        // name: `(${trans.Hours})`,
+        name: '',
         population: result.all_hours,
-        color: '#a1efff',
+        color: '#3ea7ab',
         legendFontColor: 'white',
         legendFontSize: 15,
       },
       {
-        name: 'Rest',
+        // name: `(${trans.Rest})`,
+        name: '',
         population: 600 - result.all_hours,
-        color: '#0227ba', 
+        color: '#a1efff',  //a1efff
         legendFontColor: 'white',
         legendFontSize: 15,
       },
     ];
+
 
     useEffect(() => {
         getProfile()
@@ -64,9 +72,50 @@ const Profile = ({navigation}) => {
       const data2 = await resp2.json()
       if(data2.status === 200){
         setResult(data2)
+        setMonths(data2.date)
+        setMonthsHours(data2.hours)
+        setVisits(data2.visits)
+        setPublications(data2.publications)
+        setFilms(data2.films)
         console.log('data2', data2)
       }
     }
+
+    const monthsStatisticData = {
+      labels: result.months,
+      datasets: [
+        {
+          data: monthsHours
+        }
+      ]
+    };
+
+    const visitsStatisticData = {
+      labels: result.months,
+      datasets: [
+        {
+          data: visits
+        }
+      ]
+    };
+
+    const publicationsStatisticData = {
+      labels: result.months,
+      datasets: [
+        {
+          data: publications
+        }
+      ]
+    };
+
+    const filmsStatisticData = {
+      labels: result.months,
+      datasets: [
+        {
+          data: films
+        }
+      ]
+    };
 
     const language = async(selected) => {
       await AsyncStorage.setItem('language', selected) 
@@ -77,8 +126,6 @@ const Profile = ({navigation}) => {
     return <Icon name='globe-outline' size={30} color={'white'} />
   }
 
-  console.log('all_hours', result.all_hours)
-  console.log('all_hours', result.all_minutes)
   return (
 
     <View style={styles.container}>
@@ -185,7 +232,7 @@ const Profile = ({navigation}) => {
          <View />
     }
         <ChangePasswordBtn 
-            title={Changepassword_}
+            title={trans.Changepassword}
             onPress={() => navigation.navigate('RequestResetMail')}
         />
 
@@ -195,54 +242,133 @@ const Profile = ({navigation}) => {
 
         <Calendar />
 
-        <PieChart
-          data={progresData}
-          width={width}
+        <Text style={styles.text}>
+            Norma Pionierska
+          </Text>
+        <View style={styles.diagram}>
+          <PieChart
+            data={progresData}
+            width={width}
+            height={220}
+            chartConfig={styles.chartConfig}
+            accessor="population"
+            backgroundColor="transparent"
+            paddingLeft="15"
+            absolute
+          />
+        </View>
+
+        <Text style={styles.text}>
+            Godziny
+          </Text>
+        <View style={styles.diagram}>
+        <BarChart
+          style={styles.chartConfig}
+          data={monthsStatisticData}
+          width={width / 1.2}
           height={220}
+          yAxisLabel=""
           chartConfig={styles.chartConfig}
-          accessor="population"
-          backgroundColor="transparent"
-          paddingLeft="15"
-          absolute
+          verticalLabelRotation={0}
         />
+        </View>
 
-        <View style={styles.result}>
+        <Text style={styles.text}>
+          Odwiedziny
+        </Text>
+        <View style={styles.diagram}>
+        <BarChart
+          style={styles.chartConfig}
+          data={visitsStatisticData}
+          width={width / 1.2}
+          height={220}
+          yAxisLabel=""
+          chartConfig={styles.chartConfig}
+          verticalLabelRotation={0}
+        />
+        </View>
 
-          <View style={styles.result_row}>
-            <Text style={styles.text}>
-              Minuty:
-            </Text>
-            <Text style={styles.text}>
-              {result.all_minutes}
-            </Text>
-          </View>
+        <Text style={styles.text}>
+          Publikacje
+        </Text>
+        <View style={styles.diagram}>
+        <BarChart
+          style={styles.chartConfig}
+          data={publicationsStatisticData}
+          width={width / 1.2}
+          height={220}
+          yAxisLabel=""
+          chartConfig={styles.chartConfig}
+          verticalLabelRotation={0}
+        />
+        </View>
 
-          <View style={styles.result_row}>
-            <Text style={styles.text}>
-              Odwiedziny:
-            </Text>
-            <Text style={styles.text}>
-              {result.all_visits}
-            </Text>
-          </View>
-          
-          <View style={styles.result_row}>
-            <Text style={styles.text}>
-              Publicacje:
-            </Text>
-            <Text style={styles.text}>
-              {result.all_publications}
-            </Text>
-          </View>
+        <Text style={styles.text}>
+          Filmy
+        </Text>
+        <View style={styles.diagram}>
+        <BarChart
+          style={styles.chartConfig}
+          data={filmsStatisticData}
+          width={width / 1.2}
+          height={220}
+          yAxisLabel=""
+          chartConfig={styles.chartConfig}
+          verticalLabelRotation={0}
+        />
+        </View>
 
-          <View style={styles.result_row}>
-            <Text style={styles.text}>
-              Films:
-            </Text>
-            <Text style={styles.text}>
-              {result.all_films}
-            </Text>
-          </View>
+        <Text style={styles.text}>
+          Wynik ogólny
+        </Text>
+        <View style={styles.diagram}>
+          <View style={styles.result}>
+
+            <View style={styles.result_row}>
+              <Text style={styles.text2}>
+              {trans.Hours}:
+              </Text>
+              <Text style={styles.text2}>
+                {result.all_hours}
+              </Text>
+            </View>
+
+            <View style={styles.result_row}>
+              <Text style={styles.text2}>
+              {trans.Minutes}:
+              </Text>
+              <Text style={styles.text2}>
+                {result.all_minutes}
+              </Text>
+            </View>
+
+            <View style={styles.result_row}>
+              <Text style={styles.text2}>
+              {trans.Visits}:
+              </Text>
+              <Text style={styles.text2}>
+                {result.all_visits}
+              </Text>
+            </View>
+
+            <View style={styles.result_row}>
+              <Text style={styles.text2}>
+              {trans.Publications}:
+              </Text>
+              <Text style={styles.text2}>
+                {result.all_publications}
+              </Text>
+            </View>
+
+            <View style={styles.result_row}>
+              <Text style={styles.text2}>
+              {trans.Films}:
+              </Text>
+              <Text style={styles.text2}>
+                {result.all_films}
+              </Text>
+            </View>
+            </View>
         </View>
 
     </View> 
@@ -253,6 +379,7 @@ const Profile = ({navigation}) => {
   )
 }
 
+const { width, height } = Dimensions.get('window');
 const styles = StyleSheet.create({
     container: {
       flex: 1,
@@ -268,7 +395,11 @@ const styles = StyleSheet.create({
       flexDirection: 'row'
     },
     text: {
-      color: '#a1efff',
+      color: '#a1efff', 
+      fontSize: 15,
+    },
+    text2: {
+      color: '#f5fcfc', 
       fontSize: 15,
     },
     cont: {
@@ -361,6 +492,7 @@ const styles = StyleSheet.create({
       // backgroundGradientFrom: "#fb8c00",
       // backgroundGradientTo: "#ffa726",
       // decimalPlaces: 2, // optional, defaults to 2dp
+      opacity: 0.8,
       color: (opacity = 1) => `rgba(114, 159, 172, ${opacity})`,
       labelColor: (opacity = 1) => `rgba(114, 159, 172, ${opacity})`,
       style: {
@@ -375,11 +507,29 @@ const styles = StyleSheet.create({
     result: {
       flexDirection: 'column',
       gap: 20,
+      margin: 20,
     },
     result_row: {
       flexDirection: 'row',
       justifyContent: 'space-between',
-      gap: 210,
+    },
+    diagram:{
+      width: width / 1.2,
+      height: 220,
+      // borderRadius: 10,
+      marginTop: 15,
+      color: 'white',
+      fontSize: 20,
+      zIndex: 999,
+      backgroundColor: 'transparent',
+      shadowColor: 'white',
+      shadowOpacity: 1,
+      shadowOffset: {
+        width: 0,
+        height: 0,
+      },
+      shadowRadius: 4,
+      marginBottom: 20,
     },
   });
 

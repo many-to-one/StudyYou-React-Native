@@ -11,7 +11,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 const WeekLeader = ({day, navigation}) => {
 
     const {proxy, stuff} = useContext(AuthContext);
-    const {leaderAndIntroductoryRemarks_} = useContext(LanguageContext);
+    const {trans} = useContext(LanguageContext);
     const [selected, setSelected] = useState('')
     const [users, setUsers] = useState([])
     const [dateLeaderWeek, setDateLeaderWeek] = useState([])
@@ -28,7 +28,6 @@ const WeekLeader = ({day, navigation}) => {
     const resp = await fetch(`${proxy}/users/users/${datas.congregation}/`)
       const data = await resp.json();
       if(resp.status === 200){
-        // setStuff(await AsyncStorage.getItem("is_stuff"))
         setUsers(data)
         getCalendarDatesByDate()
       }
@@ -143,7 +142,7 @@ if(dateLeaderWeek.length === 1 && stuff === true){
                 placeholder={
                   <View style={styles.placeholder}>
                     <Icon name='person-outline' size={20} color={'white'} />
-                    <Text style={styles.text}>{leaderAndIntroductoryRemarks_}</Text>
+                    <Text style={styles.text}>{trans.LeaderAndIntroductoryRemarks}</Text>
                   </View>
                 }
                 boxStyles={styles.event}

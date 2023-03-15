@@ -11,7 +11,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 const WeekPrayer2 = ({day, navigation}) => {
 
     const {proxy, stuff} = useContext(AuthContext);
-    const {lastPrayer_} = useContext(LanguageContext);
+    const {trans} = useContext(LanguageContext);
     const [selected, setSelected] = useState('')
     const [users, setUsers] = useState([])
     const [dateWeekPrayer2, setDateWeekPrayer2] = useState([])
@@ -141,7 +141,7 @@ if(dateWeekPrayer2.length === 1 && stuff === true){
                 placeholder={
                   <View style={styles.placeholder}>
                     <Icon name='ios-layers' size={20} color={'white'} />
-                    <Text style={styles.text}>{lastPrayer_}</Text>
+                    <Text style={styles.text}>{trans.LastPrayer}</Text>
                   </View>
                 }
                 boxStyles={styles.event}

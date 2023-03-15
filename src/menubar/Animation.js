@@ -1,6 +1,5 @@
 import React, { useEffect, useRef } from 'react'
-import { Animated, Easing, Image, StyleSheet, View } from 'react-native'
-import AntDesign from 'react-native-vector-icons/FontAwesome';
+import { Animated, Easing, StyleSheet, View } from 'react-native'
 
 const Animation = ({item}) => {
 

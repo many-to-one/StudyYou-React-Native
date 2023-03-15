@@ -3,11 +3,11 @@ import { Text, View, StyleSheet, TouchableOpacity } from 'react-native';
 import { LanguageContext } from '../context/LanguageContext';
 
 export default function ScheduleBtn({onPress}) {
-  const {submit_} = useContext(LanguageContext);
+  const {trans} = useContext(LanguageContext);
 
   return (
     <TouchableOpacity style={styles.button} onPress={onPress}>
-      <Text style={styles.text}>{submit_}</Text>
+      <Text style={styles.text}>{trans.Submit}</Text>
     </TouchableOpacity>
   );
 }

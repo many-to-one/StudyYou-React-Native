@@ -1,7 +1,6 @@
 import React from 'react';
 import { StyleSheet, TouchableOpacity } from 'react-native';
 import Icon from "react-native-vector-icons/MaterialIcons";
-import { Text } from 'react-native-web';
 
 export default function SaveButton({onPress}) {
   return (
