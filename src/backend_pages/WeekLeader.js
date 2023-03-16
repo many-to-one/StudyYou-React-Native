@@ -76,6 +76,7 @@ const WeekLeader = ({day, navigation}) => {
               'action': 'LeaderAndIntroductoryRemarks',
               'congregation': datas.congregation,
               'groupe': null,
+              'icon': 'person-outline',
             })
           })   
         }

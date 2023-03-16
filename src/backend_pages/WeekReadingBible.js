@@ -75,6 +75,7 @@ const WeekReadingBible = ({day, navigation}) => {
               'action': 'BibleReading',
               'congregation': datas.congregation,
               'groupe': null,
+              'icon': 'albums',
             })
           })    
         }

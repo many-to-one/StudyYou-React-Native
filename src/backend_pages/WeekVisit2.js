@@ -77,6 +77,7 @@ const WeekVisit2 = ({day, navigation}) => {
               'action': 'ReturnVisit',
               'congregation': datas.congregation,
               'groupe': null,
+              'icon': 'people-outline',
             })
           })   
         }

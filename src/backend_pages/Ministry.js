@@ -77,6 +77,7 @@ const Ministry = ({day, navigation}) => {
               'action': 'MinistryLeader',
               'congregation': datas.congregation,
               'groupe': null,
+              'icon': 'people-circle-outline',
             })
           })
 

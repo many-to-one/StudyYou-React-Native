@@ -75,6 +75,7 @@ const WeekLocalNeeds = ({day, navigation}) => {
               'action': 'LocalNeeds',
               'congregation': datas.congregation,
               'groupe': null,
+              'icon': 'md-file-tray-full',
             })
           })    
         }

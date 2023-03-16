@@ -77,6 +77,7 @@ const WeekStudy = ({day, navigation}) => {
               'action': 'SchoolStudy',
               'congregation': datas.congregation,
               'groupe': null,
+              'icon': 'people-sharp',
             })
           })    
         }

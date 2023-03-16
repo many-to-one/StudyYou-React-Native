@@ -102,6 +102,7 @@ const Cleaning = ({day, navigation}) => {
               'action': 'Cleaning',
               'congregation': datas.congregation, 
               'groupe': `${e}`, 
+              'icon': 'ios-water',
             })
           })   
         }
@@ -144,7 +145,7 @@ if(dateMicrophones.length > 1 && stuff === true){
     dateMicrophones.map((e) => {
         if(e.date === day && e.action === 'Cleaning'){  
             return  <View style={styles.user}>
-            <Icon name='mic' size={20} color={'#F9F9B5'} />
+            <Icon name='ios-water' size={20} color={'#F9F9B5'} />
             <Text style={styles.user_text}>{e.groupe}</Text>
                 <Icon 
                     name="close-circle-outline" 
@@ -168,7 +169,7 @@ if(dateMicrophones.length > 1 && stuff === true){
                 onSelect={() => getUsersByGroupe()} 
                 placeholder={
                   <View style={styles.placeholder}>
-                    <Icon name='mic' size={20} color={'white'} />
+                    <Icon name='ios-water' size={20} color={'white'} />
                     <Text style={styles.text}>{trans.Microphones}</Text>
                   </View>
                 }
@@ -195,7 +196,7 @@ if(dateMicrophones.length > 1 && stuff === true){
               if(e.date === day && e.action === 'Cleaning'){  
                   return  <View>
                     <View style={styles.user}>
-                    <Icon name='mic' size={20} color={'#F9F9B5'} />
+                    <Icon name='ios-water' size={20} color={'#F9F9B5'} />
                       <Text style={styles.user_text}>{e.groupe}</Text>
                           <Icon 
                               name="close-circle-outline" 
@@ -211,7 +212,7 @@ if(dateMicrophones.length > 1 && stuff === true){
                     // onSelect={() => alert('selected')} 
                     placeholder={
                       <View style={styles.placeholder}>
-                        <Icon name='mic' size={20} color={'white'} />
+                        <Icon name='ios-water' size={20} color={'white'} />
                         <Text style={styles.text}>{trans.Microphones}</Text>
                       </View>
                     }
@@ -242,7 +243,7 @@ if(dateMicrophones.length > 1 && stuff === true){
       dateMicrophones.map((e) => {
           if(e.date === day && e.action === 'Cleaning'){  
               return  <View style={styles.user}>
-              <Icon name='mic' size={20} color={'#F9F9B5'} />
+              <Icon name='ios-water' size={20} color={'#F9F9B5'} />
               <Text style={styles.user_text}>{e.groupe}</Text>
               </View>  
   

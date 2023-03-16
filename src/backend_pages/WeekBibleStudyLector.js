@@ -75,6 +75,7 @@ const WeekBibleStudyLector = ({day, navigation}) => {
               'action': 'BibleStudyLector',
               'congregation': datas.congregation,
               'groupe': null,
+              'icon': 'md-reader',
             })
           })   
         }

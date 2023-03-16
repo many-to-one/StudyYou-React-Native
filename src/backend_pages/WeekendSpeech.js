@@ -76,6 +76,7 @@ const WeekendSpeach = ({day, navigation}) => {
               'action': 'WeekendSpeach',
               'congregation': datas.congregation,
               'groupe': null,
+              'icon': 'md-man-outline',
             })
           })    
         }

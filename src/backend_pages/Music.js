@@ -79,6 +79,7 @@ const Music = ({day, navigation}) => {
               'action': 'Music',
               'congregation': datas.congregation,
               'groupe': null,
+              'icon': 'md-headset',
             })
           })   
         }

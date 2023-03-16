@@ -75,6 +75,7 @@ const WeekendLeader = ({day, navigation}) => {
               'action': 'WeekendLeader',
               'congregation': datas.congregation,
               'groupe': null,
+              'icon': 'person-outline',
             })
           })    
         }

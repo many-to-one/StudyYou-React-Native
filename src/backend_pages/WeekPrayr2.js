@@ -75,6 +75,7 @@ const WeekPrayer2 = ({day, navigation}) => {
               'action': 'LastPrayer',
               'congregation': datas.congregation,
               'groupe': null,
+              'icon': 'ios-layers',
             })
           })    
         }

@@ -80,6 +80,7 @@ const Microphones = ({day, navigation}) => {
               'action': 'Microphones',
               'congregation': datas.congregation,
               'groupe': null,
+              'icon': 'mic',
             })
           })   
         }

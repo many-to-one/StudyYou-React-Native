@@ -54,7 +54,7 @@ const Timetable = ({navigation}) => {
              style={styles.img}
            >
              <View style={styles.event}>
-               <Icon name="mic" size={20} color={'#F9F9B5'} />
+               <Icon name={e.icon} size={20} color={'#F9F9B5'} />
                <Text style={styles.text}>
                  {e.date}
                </Text>

@@ -76,6 +76,7 @@ const WatchTowerLeader = ({day, navigation}) => {
               'action': 'WatchTowerLeader',
               'congregation': datas.congregation,
               'groupe': null,
+              'icon': 'person-sharp',
             })
           })   
         }

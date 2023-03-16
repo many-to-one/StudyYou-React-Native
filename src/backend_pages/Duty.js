@@ -77,6 +77,7 @@ const Duty = ({day, navigation}) => {
               'action': 'Duty',
               'congregation': datas.congregation,
               'groupe': null,
+              'icon': 'man-sharp'
             })
           })   
         }

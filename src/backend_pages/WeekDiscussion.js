@@ -75,6 +75,7 @@ const WeekDiscussion = ({day, navigation}) => {
               'action': 'Discussion',
               'congregation': datas.congregation,
               'groupe': null,
+              'icon': 'md-film-outline',
             })
           })    
         }

@@ -75,6 +75,7 @@ const WeekSchoolTalk = ({day, navigation}) => {
               'action': 'SchoolTalk',
               'congregation': datas.congregation,
               'groupe': null,
+              'icon': 'md-man-outline',
             })
           })   
         }
