@@ -25,6 +25,8 @@ const Profile = ({navigation}) => {
     const {trans, setLanguage} = useContext(LanguageContext);
     const [profileData, setProfileData] = useState([]);
     const [selected, setSelected] = useState('')
+    const [groupe, setGroupe] = useState('')
+    const [groupePlsch, setGroupePlsch] = useState('')
     const [result, setResult] = useState({})
     const [visits, setVisits] = useState([])
     const [publications, setPublications] = useState([])
@@ -32,10 +34,23 @@ const Profile = ({navigation}) => {
     const [months, setMonths] = useState([]);
     const [monthsHours, setMonthsHours] = useState([]);
 
-    const Data = [
+    const dataLanguage = [
       {key: 'PL', value: 'PL'},
       {key: 'RU', value: 'RU'},
       {key: 'UA', value: 'UA'},
+    ] 
+
+    const dataGroupe = [
+      {key: '1', value: '1'},
+      {key: '2', value: '2'},
+      {key: '3', value: '3'},
+      {key: '4', value: '4'},
+      {key: '5', value: '5'},
+      {key: '6', value: '6'},
+      {key: '7', value: '7'},
+      {key: '8', value: '8'},
+      {key: '9', value: '9'},
+      {key: '10', value: '10'},
     ] 
 
     const progresData = [
@@ -66,6 +81,7 @@ const Profile = ({navigation}) => {
       const resp = await profile()
       const data = resp
       setProfileData(data.data)
+      setGroupePlsch(data.data.groupe)
       console.log('pro', data.data)
       
       const resp2 = await fetch(`${proxy}/backend/get_months_results/${data.data.id}/`)
@@ -122,9 +138,20 @@ const Profile = ({navigation}) => {
       await setLanguage()
     }
 
-  const plsHolder = () => {
-    return <Icon name='globe-outline' size={30} color={'white'} />
-  }
+    const setUserGroupe = async(groupe) => {
+      let datas = JSON.parse(await AsyncStorage.getItem("asyncUserData"))
+      const resp = await fetch(`${proxy}/users/set_user_groupe/${datas.id}/`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(groupe)
+      })
+      const data = await resp.json()
+      if(data){
+        setGroupePlsch(data.groupe) 
+      }
+    }
 
   return (
 
@@ -152,8 +179,27 @@ const Profile = ({navigation}) => {
       <SelectList 
           onSelect={() => language(selected)}
           setSelected={setSelected}
-          placeholder={plsHolder()}
-          data={Data} 
+          placeholder={
+            <Icon name='globe-outline' size={30} color={'white'} />
+          }
+          data={dataLanguage} 
+          boxStyles={styles.event}
+          inputStyles={styles.text}
+          dropdownStyles={styles.selectlist}
+          dropdownItemStyles={{color: 'white'}}
+          dropdownTextStyles={{color: 'white'}} 
+          arrowicon={<Icon name="chevron-down" size={20} color={'white'} />} 
+          searchicon={<Icon name="search" size={20} color={'white'} />} 
+          search={true} 
+        />
+      <Text style={styles.text}>
+        {trans.Groupe} 
+      </Text>
+      <SelectList 
+          onSelect={() => setUserGroupe(groupe)}
+          setSelected={setGroupe}
+          placeholder={groupePlsch}
+          data={dataGroupe} 
           boxStyles={styles.event}
           inputStyles={styles.text}
           dropdownStyles={styles.selectlist}

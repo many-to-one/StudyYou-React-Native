@@ -74,6 +74,7 @@ const WeekFindTreasures = ({day, navigation}) => {
               'date': `${day}`,
               'action': 'TreasuresFromGodsWord',
               'congregation': datas.congregation,
+              'groupe': null,
             })
           })   
         }

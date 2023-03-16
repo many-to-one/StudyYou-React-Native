@@ -74,7 +74,8 @@ const WeekBibleStudy = ({day, navigation}) => {
             body: JSON.stringify({
               'date': `${day}`,
               'action': 'BibleStudyLeader',
-              'congregation': datas.congregation
+              'congregation': datas.congregation,
+              'groupe': null,
             })
           })    
         }

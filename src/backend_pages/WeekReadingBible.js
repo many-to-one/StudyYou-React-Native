@@ -74,6 +74,7 @@ const WeekReadingBible = ({day, navigation}) => {
               'date': `${day}`,
               'action': 'BibleReading',
               'congregation': datas.congregation,
+              'groupe': null,
             })
           })    
         }

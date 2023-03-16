@@ -75,6 +75,7 @@ const WatchTowerLector = ({day, navigation}) => {
               'date': `${day}`,
               'action': 'WatchTowerLector',
               'congregation': datas.congregation, 
+              'groupe': null,
             })
           })    
         }

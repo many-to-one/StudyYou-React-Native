@@ -74,6 +74,7 @@ const WeekDiscussion = ({day, navigation}) => {
               'date': `${day}`,
               'action': 'Discussion',
               'congregation': datas.congregation,
+              'groupe': null,
             })
           })    
         }

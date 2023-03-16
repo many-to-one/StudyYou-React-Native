@@ -76,6 +76,7 @@ const Ministry = ({day, navigation}) => {
               'date': `${day}`,
               'action': 'MinistryLeader',
               'congregation': datas.congregation,
+              'groupe': null,
             })
           })
 

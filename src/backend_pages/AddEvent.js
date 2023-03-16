@@ -12,7 +12,7 @@ const AddEvent = ({ navigation }) => {
 
   const { width, height } = Dimensions.get('window');
   const {proxy} = useContext(AuthContext);
-  const {Hours, Minutes, Publications, Visits, Films, trans} = useContext(LanguageContext);
+  const {trans} = useContext(LanguageContext);
   const isFocused = useIsFocused();
   const [events, setEvents] = useState({name:{}})
 

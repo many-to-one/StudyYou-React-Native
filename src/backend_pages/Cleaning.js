@@ -8,7 +8,7 @@ import ScheduleBtn from '../buttons/ScheduleBtn';
 import { LanguageContext } from '../context/LanguageContext';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-const Microphones = ({day, navigation}) => {
+const Cleaning = ({day, navigation}) => {
 
     const {proxy, congr, stuff} = useContext(AuthContext); //////////////////
     const c = congr() /////////////////////
@@ -21,23 +21,27 @@ const Microphones = ({day, navigation}) => {
     const isFocused = useIsFocused();
 
     useEffect(() => {
-      getUsers()
+      getUsersByGroupe()
   }, [isFocused])
 
-  const getUsers = async() => {
+  useEffect(() => {
+    getCalendarDatesByDate()
+}, [isFocused])
+
+  const getUsersByGroupe = async() => {
     let datas = JSON.parse(await AsyncStorage.getItem("asyncUserData"))        ///////////////////
-    const resp = await fetch(`${proxy}/users/users/${datas.congregation}/`)    ///////////////
+    const resp = await fetch(`${proxy}/users/users_by_groupe/${datas.congregation}/${selected}/`)    ///////////////
       const data = await resp.json();
       if(resp.status === 200){
+        console.log('gra')
         setUsers(data)
-        getCalendarDatesByDate()
         setCongregation(datas.congregation)
       }
   }
 
   const getCalendarDatesByDate = async() => {
     let datas = JSON.parse(await AsyncStorage.getItem("asyncUserData"))  /////////////////
-    const body = {'date': day, 'action': 'Microphones', 'congregation': datas.congregation}  ////////////////
+    const body = {'date': day, 'action': 'Cleaning', 'congregation': datas.congregation}  ////////////////
     const resp = await fetch(`${proxy}/backend/get_calendar_date/`, {
       method: 'POST',
           headers: {
@@ -47,13 +51,16 @@ const Microphones = ({day, navigation}) => {
         });
         const data = await resp.json();
         if(data){
+          console.log('dateCl', data)
           setDateMicrophones(data)
+          setUsers(data)
           setSelected([])
+          // setDateMicrophones([])
         }  
   }
 
   for(let i=0; i<users.length; i++){
-    USERS[users[i].id] = users[i].username
+    USERS[users[i].id] = users[i].groupe
   }
 
   const data = []
@@ -64,8 +71,23 @@ const Microphones = ({day, navigation}) => {
     )
   }
 
-  const setMicrophones = async(selected) => {
-    let datas = JSON.parse(await AsyncStorage.getItem("asyncUserData"))  
+  const groups = [
+    {key: '1', value: '1'},
+    {key: '2', value: '2'},
+    {key: '3', value: '3'},
+    {key: '4', value: '4'},
+    {key: '5', value: '5'},
+    {key: '6', value: '6'},
+    {key: '7', value: '7'},
+    {key: '8', value: '8'},
+    {key: '9', value: '9'},
+    {key: '10', value: '10'},
+  ]
+
+  console.log('USERS', USERS)
+  console.log('selected', selected)
+  const setCleaning = async(selected) => {
+    let datas = JSON.parse(await AsyncStorage.getItem("asyncUserData"))  /////////////////////
     selected.map((e) => {
       for(let k in USERS){  
         if(e === USERS[k]){
@@ -77,15 +99,15 @@ const Microphones = ({day, navigation}) => {
             },
             body: JSON.stringify({
               'date': `${day}`,
-              'action': 'Microphones',
-              'congregation': datas.congregation,
-              'groupe': null,
+              'action': 'Cleaning',
+              'congregation': datas.congregation, 
+              'groupe': `${e}`, 
             })
           })   
         }
       }
     })
-    const body = {'date': day, 'action': 'Microphones', 'congregation': datas.congregation}  
+    const body = {'date': day, 'action': 'Cleaning', 'congregation': datas.congregation}   /////////////////////////
     const resp = await fetch(`${proxy}/backend/get_calendar_date/`, {
       method: 'POST',
           headers: {
@@ -115,15 +137,15 @@ const Microphones = ({day, navigation}) => {
     }
   }
 
-console.log('dateMicrophones:', dateMicrophones, stuff)
+console.log('dateCleaning:', dateMicrophones, stuff)
 
 if(dateMicrophones.length > 1 && stuff === true){
   return ( 
     dateMicrophones.map((e) => {
-        if(e.date === day && e.action === 'Microphones'){  
+        if(e.date === day && e.action === 'Cleaning'){  
             return  <View style={styles.user}>
             <Icon name='mic' size={20} color={'#F9F9B5'} />
-            <Text style={styles.user_text}>{USERS[e.user]}</Text>
+            <Text style={styles.user_text}>{e.groupe}</Text>
                 <Icon 
                     name="close-circle-outline" 
                     size={20} 
@@ -141,9 +163,9 @@ if(dateMicrophones.length > 1 && stuff === true){
             <View >
               <MultipleSelectList 
                 setSelected={(val) => setSelected(val)} 
-                data={data} 
+                data={groups} 
                 save="value"
-                // onSelect={(value) => alert(`${value}`)} 
+                onSelect={() => getUsersByGroupe()} 
                 placeholder={
                   <View style={styles.placeholder}>
                     <Icon name='mic' size={20} color={'white'} />
@@ -163,18 +185,18 @@ if(dateMicrophones.length > 1 && stuff === true){
               <ScheduleBtn 
                   style={{backgroundColor: '#F9F9B5',}}
                   title={'Submit'}
-                  onPress={() => setMicrophones(selected)}
+                  onPress={() => setCleaning(selected)}
               />
             </View>
         )
     }else if(dateMicrophones.length === 1 && stuff === true){
         return ( 
           dateMicrophones.map((e) => {
-              if(e.date === day && e.action === 'Microphones'){  
+              if(e.date === day && e.action === 'Cleaning'){  
                   return  <View>
                     <View style={styles.user}>
                     <Icon name='mic' size={20} color={'#F9F9B5'} />
-                      <Text style={styles.user_text}>{USERS[e.user]}</Text>
+                      <Text style={styles.user_text}>{e.groupe}</Text>
                           <Icon 
                               name="close-circle-outline" 
                               size={20} 
@@ -206,7 +228,7 @@ if(dateMicrophones.length > 1 && stuff === true){
                     <ScheduleBtn 
                         style={{backgroundColor: '#F9F9B5',}}
                         title={'Submit'}
-                        onPress={() => setMicrophones(selected)}
+                        onPress={() => setCleaning(selected)}
                     />
                   </View>
                   
@@ -218,10 +240,10 @@ if(dateMicrophones.length > 1 && stuff === true){
   }else if(dateMicrophones.length >= 1 && stuff === false){
     return ( 
       dateMicrophones.map((e) => {
-          if(e.date === day && e.action === 'Microphones'){  
+          if(e.date === day && e.action === 'Cleaning'){  
               return  <View style={styles.user}>
               <Icon name='mic' size={20} color={'#F9F9B5'} />
-              <Text style={styles.user_text}>{USERS[e.user]}</Text>
+              <Text style={styles.user_text}>{e.groupe}</Text>
               </View>  
   
           }
@@ -312,4 +334,4 @@ placeholder: {
 },     
 })
 
-export default Microphones
+export default Cleaning

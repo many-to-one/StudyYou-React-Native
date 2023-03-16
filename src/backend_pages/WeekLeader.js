@@ -75,6 +75,7 @@ const WeekLeader = ({day, navigation}) => {
               'date': `${day}`,
               'action': 'LeaderAndIntroductoryRemarks',
               'congregation': datas.congregation,
+              'groupe': null,
             })
           })   
         }

@@ -3,6 +3,7 @@ import { Button, Dimensions, ScrollView, StyleSheet, Text, View } from 'react-na
 import Microphones from '../backend_pages/Microphones';
 import Music from '../backend_pages/Music';
 import { LanguageContext } from '../context/LanguageContext';
+import Cleaning from './Cleaning';
 import Duty from './Duty';
 
 const Service = ({route, navigation}) => {
@@ -24,6 +25,10 @@ const Service = ({route, navigation}) => {
         <View style={styles.event}>
           <Text style={styles.text}>{trans.Duty}:</Text>
           <Duty  day={day}/>
+        </View>
+        <View style={styles.event}>
+          <Text style={styles.text}>{trans.Cleaning}:</Text>
+          <Cleaning  day={day}/>
         </View>
       </View>
       </ScrollView>

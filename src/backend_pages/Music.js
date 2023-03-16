@@ -78,6 +78,7 @@ const Music = ({day, navigation}) => {
               'date': `${day}`,
               'action': 'Music',
               'congregation': datas.congregation,
+              'groupe': null,
             })
           })   
         }

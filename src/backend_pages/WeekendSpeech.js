@@ -75,6 +75,7 @@ const WeekendSpeach = ({day, navigation}) => {
               'date': `${day}`,
               'action': 'WeekendSpeach',
               'congregation': datas.congregation,
+              'groupe': null,
             })
           })    
         }

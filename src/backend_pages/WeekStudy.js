@@ -76,6 +76,7 @@ const WeekStudy = ({day, navigation}) => {
               'date': `${day}`,
               'action': 'SchoolStudy',
               'congregation': datas.congregation,
+              'groupe': null,
             })
           })    
         }

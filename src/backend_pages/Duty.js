@@ -76,6 +76,7 @@ const Duty = ({day, navigation}) => {
               'date': `${day}`,
               'action': 'Duty',
               'congregation': datas.congregation,
+              'groupe': null,
             })
           })   
         }

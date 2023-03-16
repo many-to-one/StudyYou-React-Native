@@ -74,6 +74,7 @@ const WeekendLeader = ({day, navigation}) => {
               'date': `${day}`,
               'action': 'WeekendLeader',
               'congregation': datas.congregation,
+              'groupe': null,
             })
           })    
         }

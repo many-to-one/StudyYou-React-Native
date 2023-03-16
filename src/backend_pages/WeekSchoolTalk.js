@@ -74,6 +74,7 @@ const WeekSchoolTalk = ({day, navigation}) => {
               'date': `${day}`,
               'action': 'SchoolTalk',
               'congregation': datas.congregation,
+              'groupe': null,
             })
           })   
         }

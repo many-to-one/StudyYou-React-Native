@@ -74,6 +74,7 @@ const WeekLocalNeeds = ({day, navigation}) => {
               'date': `${day}`,
               'action': 'LocalNeeds',
               'congregation': datas.congregation,
+              'groupe': null,
             })
           })    
         }

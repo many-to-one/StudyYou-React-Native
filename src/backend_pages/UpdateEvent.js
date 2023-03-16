@@ -16,12 +16,12 @@ const UpdateEvent = ({route, navigation}) => {
     const {proxy,} = useContext(AuthContext);
     const {trans} = useContext(LanguageContext);
     const [events, setEvents] = useState({name: {}});
-    const [event, setEvent] = useState('');
-    const [hours, setHours] = useState(0);
-    const [minutes, setMinutes] = useState(0);
-    const [visits, setVisits] = useState(0);
-    const [publications, setPublications] = useState(0);
-    const [films, setFilms] = useState(0);
+    // const [event, setEvent] = useState('');
+    // const [hours, setHours] = useState(0);
+    // const [minutes, setMinutes] = useState(0);
+    // const [visits, setVisits] = useState(0);
+    // const [publications, setPublications] = useState(0);
+    // const [films, setFilms] = useState(0);
     const isFocused = useIsFocused();
 
     useEffect(() => {

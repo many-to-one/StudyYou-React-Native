@@ -76,6 +76,7 @@ const WeekVisit2 = ({day, navigation}) => {
               'date': `${day}`,
               'action': 'ReturnVisit',
               'congregation': datas.congregation,
+              'groupe': null,
             })
           })   
         }

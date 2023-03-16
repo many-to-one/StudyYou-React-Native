@@ -74,6 +74,7 @@ const WeekTreasures = ({day, navigation}) => {
               'date': `${day}`,
               'action': 'SpiritualGems',
               'congregation': datas.congregation,
+              'groupe': null,
             })
           })    
         }
