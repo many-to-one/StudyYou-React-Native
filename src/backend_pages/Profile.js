@@ -31,6 +31,8 @@ const Profile = ({navigation}) => {
     const [visits, setVisits] = useState([])
     const [publications, setPublications] = useState([])
     const [films, setFilms] = useState([])
+    const [studies, setStudies] = useState([])
+    const [studiesData, setStudiesData] = useState([])
     const [months, setMonths] = useState([]);
     const [monthsHours, setMonthsHours] = useState([]);
 
@@ -93,6 +95,8 @@ const Profile = ({navigation}) => {
         setVisits(data2.visits)
         setPublications(data2.publications)
         setFilms(data2.films)
+        // setStudies(data2.studies.slice(-1)[0])
+        setStudiesData(data2.studies)
         console.log('data2', data2)
       }
     }
@@ -129,6 +133,15 @@ const Profile = ({navigation}) => {
       datasets: [
         {
           data: films
+        }
+      ]
+    };
+
+    const studiesStatisticData = {
+      labels: result.months,
+      datasets: [
+        {
+          data: studiesData
         }
       ]
     };
@@ -278,8 +291,8 @@ const Profile = ({navigation}) => {
          <View />
     }
         <ChangePasswordBtn 
-            title={trans.Changepassword}
-            onPress={() => navigation.navigate('RequestResetMail')}
+          title={trans.Changepassword}
+          onPress={() => navigation.navigate('RequestResetMail')}
         />
 
         <ScrollView style={styles.timetable}>
@@ -289,7 +302,7 @@ const Profile = ({navigation}) => {
         <Calendar />
 
         <Text style={styles.text}>
-            Norma Pionierska
+            {trans.PioneerStandard}
           </Text>
         <View style={styles.diagram}>
           <PieChart
@@ -305,7 +318,7 @@ const Profile = ({navigation}) => {
         </View>
 
         <Text style={styles.text}>
-            Godziny
+        {trans.Hours}
           </Text>
         <View style={styles.diagram}>
         <BarChart
@@ -320,7 +333,7 @@ const Profile = ({navigation}) => {
         </View>
 
         <Text style={styles.text}>
-          Odwiedziny
+        {trans.Visits}
         </Text>
         <View style={styles.diagram}>
         <BarChart
@@ -335,7 +348,7 @@ const Profile = ({navigation}) => {
         </View>
 
         <Text style={styles.text}>
-          Publikacje
+        {trans.Publications}
         </Text>
         <View style={styles.diagram}>
         <BarChart
@@ -350,7 +363,7 @@ const Profile = ({navigation}) => {
         </View>
 
         <Text style={styles.text}>
-          Filmy
+        {trans.Films}
         </Text>
         <View style={styles.diagram}>
         <BarChart
@@ -365,7 +378,22 @@ const Profile = ({navigation}) => {
         </View>
 
         <Text style={styles.text}>
-          Wynik ogólny
+        {trans.BibleStudies}
+          </Text>
+        <View style={styles.diagram}>
+        <BarChart
+          style={styles.chartConfig}
+          data={studiesStatisticData}
+          width={width / 1.2}
+          height={220}
+          yAxisLabel=""
+          chartConfig={styles.chartConfig}
+          verticalLabelRotation={0}
+        />
+        </View>
+
+        <Text style={styles.text}>
+          {trans.OverallScore}
         </Text>
         <View style={styles.diagram}>
           <View style={styles.result}>
@@ -414,7 +442,8 @@ const Profile = ({navigation}) => {
                 {result.all_films}
               </Text>
             </View>
-            </View>
+
+          </View>
         </View>
 
     </View> 
@@ -564,7 +593,23 @@ const styles = StyleSheet.create({
     diagram:{
       width: width / 1.2,
       height: 220,
-      // borderRadius: 10,
+      marginTop: 15,
+      color: 'white',
+      fontSize: 20,
+      zIndex: 999,
+      backgroundColor: 'transparent',
+      shadowColor: 'white',
+      shadowOpacity: 1,
+      shadowOffset: {
+        width: 0,
+        height: 0,
+      },
+      shadowRadius: 4,
+      marginBottom: 20,
+    },
+    diagram_st:{
+      width: width / 1.2,
+      height: 260,
       marginTop: 15,
       color: 'white',
       fontSize: 20,

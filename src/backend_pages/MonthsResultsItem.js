@@ -136,6 +136,20 @@ const MonthsResultsItem = ({res}) => {
                 </Text>
               </View>
             </View>
+
+            <View style={styles.row}>
+              <View style={styles.left_row}>
+                <Text style={styles.text}>
+                  {trans.BibleStudies}:
+                </Text>
+              </View>
+              <View style={styles.input}>
+                <Text style={styles.text}>
+                  {res.studies}
+                </Text>
+              </View>
+            </View>  
+
           </View>
           </View>
   

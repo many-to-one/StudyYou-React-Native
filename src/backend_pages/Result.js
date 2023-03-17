@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { StyleSheet, Text, View, ScrollView, Animated, Dimensions } from 'react-native';
+import { StyleSheet, Text, View, ScrollView, Animated, Dimensions, TextInput } from 'react-native';
 import { AuthContext } from '../context/AuthContext';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import SaveButton from '../buttons/SaveButton';
@@ -13,6 +13,7 @@ const Result = ({navigation}) => {
     const {proxy} = useContext(AuthContext);
     const {trans} = useContext(LanguageContext);
     const [ result, setResult ] = useState([]);
+    const [ studies, setStudies ] = useState(0);
     const isFocused = useIsFocused();
 
     useEffect(() => {
@@ -36,7 +37,6 @@ const Result = ({navigation}) => {
       });
       const data = await resp.json()
       if (data){
-        // window.location.reload()
         navigation.navigate('MonthsResults')
       }
     };
@@ -44,8 +44,9 @@ const Result = ({navigation}) => {
     const saveMonthResult = async() => {
         let lng = await AsyncStorage.getItem('language')
         let datas = JSON.parse(await AsyncStorage.getItem("asyncUserData"))
-        const resp = await fetch(`${proxy}/backend/month/create/${datas.id}/${lng}/`)
+        const resp = await fetch(`${proxy}/backend/month/create/${datas.id}/${lng}/${studies}/`)
         const data = await resp.json()
+        console.log('std', data)
         if (resp.status === 200){
           deleteAll(datas)
           navigation.navigate('Menu')
@@ -78,7 +79,7 @@ const Result = ({navigation}) => {
               </Text>
             </View>
             <View style={styles.input}>
-              <Text style={styles.text}>
+              <Text style={styles.text_res}>
                 {result.hours}
               </Text>
             </View>
@@ -91,7 +92,7 @@ const Result = ({navigation}) => {
               </Text>
             </View>
             <View style={styles.input}>
-              <Text style={styles.text}>
+              <Text style={styles.text_res}>
                 {result.minutes}
               </Text>
             </View>
@@ -104,7 +105,7 @@ const Result = ({navigation}) => {
               </Text>
             </View>
             <View style={styles.input}>
-              <Text style={styles.text}>
+              <Text style={styles.text_res}>
                 {result.publications}
               </Text>
             </View>
@@ -117,7 +118,7 @@ const Result = ({navigation}) => {
               </Text>
             </View>
             <View style={styles.input}>
-              <Text style={styles.text}>
+              <Text style={styles.text_res}>
                 {result.visits}
               </Text>
             </View>
@@ -130,10 +131,23 @@ const Result = ({navigation}) => {
               </Text>
             </View>
             <View style={styles.input}>
-              <Text style={styles.text}>
+              <Text style={styles.text_res}>
                 {result.films}
               </Text>
             </View>
+          </View>
+
+          <View style={styles.row}>
+            <View style={styles.left_row}>
+              <Text style={styles.text}>
+                {trans.BibleStudies}:
+              </Text>
+            </View>
+            <TextInput 
+              value={studies}
+              onChangeText={(e) => {setStudies(e)}}
+              style={styles.input}
+            />
           </View>
     
           <SaveButton onPress={() => saveMonthResult()}/>
@@ -157,25 +171,22 @@ const Result = ({navigation}) => {
         flexDirection: 'row',
       },
       text: {
-        justifyContent: 'center',
-        alignItems: 'center',
+        // justifyContent: 'center',
+        // alignItems: 'center',
         color: '#FAFAE6',
         fontSize: 20,
       },
       text_res: {
-        justifyContent: 'center',
-        alignItems: 'center',
+        // justifyContent: 'center',
+        // alignItems: 'center',
         color: '#FAFAE6',
-        fontSize: 20,
-        padding: 20,
+        fontSize: 25,
+        // padding: 20,
       }, 
       left_row: {
-        // backgroundColor: '#282c34',
         width: 250,
         height:50,
         borderRadius: 10,
-        // borderWidth: 2,
-        // borderColor: '#C4BF1E',
         margin: 5,
         alignItems: 'flex-start',
         justifyContent: 'center',
@@ -192,10 +203,8 @@ const Result = ({navigation}) => {
         width: 50,
         height:50,
         borderRadius: 10,
-        // borderWidth: 1,
-        // borderColor: '#C4BF1E',
         margin: 5,
-        alignItems: 'center',
+        // alignItems: 'center',
         justifyContent: 'center',
         paddingLeft: 10,
         color: 'white',

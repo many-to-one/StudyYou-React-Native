@@ -144,6 +144,9 @@ export const LanguageProvider = ({children}) => {
                 'Stand': 'Głoszenie z wózkiem',
                 'Speaker': 'Mówca (gość)',
                 'Topic': 'Temat',
+                'PioneerStandard': 'Norma pioniera pełnoczasowego',
+                'OverallScore': 'Wynik ogólny',
+                'BibleStudies': 'Studia Biblijne',
             })
             setDaynames(['Pon', 'Wt', 'Śr', 'Czw', 'Pt', 'Sob', 'Niedz'])
             setMonthnames([
@@ -231,6 +234,9 @@ export const LanguageProvider = ({children}) => {
                 'Stand' : 'Служение со стендом',
                 'Speaker': 'Оратор (гость)',
                 'Topic': 'Тема',
+                'PioneerStandard': 'Норма полновременного пионера',
+                'OverallScore': 'Общий результат',
+                'BibleStudies': 'Изучения Библии',
             })
             setDaynames(['Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб', 'Вс'])
             setMonthnames([
@@ -317,6 +323,9 @@ export const LanguageProvider = ({children}) => {
                 'Stand' : 'Служіння зі стендом',
                 'Speaker': 'Спікер (гість)',
                 'Topic': 'Тема',
+                'PioneerStandard': 'Норма повночасного піонера',
+                'OverallScore': 'Загальний результат',
+                'BibleStudies': 'Bивчення Біблії',
             })
             setDaynames(['Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб', 'Нд'])
             setMonthnames([
