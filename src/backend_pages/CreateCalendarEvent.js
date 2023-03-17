@@ -75,6 +75,18 @@ const CreateCalendarEvent = ({route, navigation}) => {
           </View>
         </TouchableOpacity>
 
+        <TouchableOpacity>
+          <View style={styles.event}>
+            <Icon 
+              name="business" 
+              size={50} 
+              color={'#78D7D9'} 
+              onPress={() => navigation.navigate('MinistryWithStand', {day: day})}     
+            />
+            <Text style={styles.text}>{trans.Stand}</Text>
+          </View>
+        </TouchableOpacity>
+
       </View>
       </ScrollView>
     )

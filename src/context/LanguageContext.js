@@ -141,6 +141,9 @@ export const LanguageProvider = ({children}) => {
                 'Rest' : 'Pozostało',
                 'Groupe': 'Grupa',
                 'Cleaning': 'Sprzątanie',
+                'Stand': 'Głoszenie z wózkiem',
+                'Speaker': 'Mówca (gość)',
+                'Topic': 'Temat',
             })
             setDaynames(['Pon', 'Wt', 'Śr', 'Czw', 'Pt', 'Sob', 'Niedz'])
             setMonthnames([
@@ -225,6 +228,9 @@ export const LanguageProvider = ({children}) => {
                 'Rest' : 'Осталось',
                 'Groupe': 'Группа',
                 'Cleaning': 'Уборка',
+                'Stand' : 'Служение со стендом',
+                'Speaker': 'Оратор (гость)',
+                'Topic': 'Тема',
             })
             setDaynames(['Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб', 'Вс'])
             setMonthnames([
@@ -308,6 +314,9 @@ export const LanguageProvider = ({children}) => {
                 'Rest' : 'Залишилось',
                 'Groupe': 'Група',
                 'Cleaning': 'Прибирання',
+                'Stand' : 'Служіння зі стендом',
+                'Speaker': 'Спікер (гість)',
+                'Topic': 'Тема',
             })
             setDaynames(['Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб', 'Нд'])
             setMonthnames([

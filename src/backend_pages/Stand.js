@@ -8,7 +8,7 @@ import ScheduleBtn from '../buttons/ScheduleBtn';
 import { LanguageContext } from '../context/LanguageContext';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-const Duty = ({day, navigation}) => {
+const Stand = ({day, navigation}) => {
 
     const {proxy, stuff} = useContext(AuthContext);
     const {trans} = useContext(LanguageContext);
@@ -34,7 +34,7 @@ const Duty = ({day, navigation}) => {
 
   const getCalendarDatesByDate = async() => {
     let datas = JSON.parse(await AsyncStorage.getItem("asyncUserData"))  
-    const body = {'date': day, 'action': 'Duty', 'congregation': datas.congregation}
+    const body = {'date': day, 'action': 'Stand', 'congregation': datas.congregation}
     const resp = await fetch(`${proxy}/backend/get_calendar_date/`, {
       method: 'POST',
           headers: {
@@ -74,17 +74,16 @@ const Duty = ({day, navigation}) => {
             },
             body: JSON.stringify({
               'date': `${day}`,
-              'action': 'Duty',
+              'action': 'Stand',
               'congregation': datas.congregation,
               'groupe': null,
-              'icon': 'man-sharp',
-              'person': null
+              'icon': 'business'
             })
           })   
         }
       }
     })
-    const body = {'date': day, 'action': 'Duty', 'congregation': datas.congregation}
+    const body = {'date': day, 'action': 'Stand', 'congregation': datas.congregation}
     const resp = await fetch(`${proxy}/backend/get_calendar_date/`, {
       method: 'POST',
           headers: {
@@ -120,9 +119,9 @@ const Duty = ({day, navigation}) => {
 if(dateDuty.length > 1 && stuff === true){
   return ( 
     dateDuty.map((e) => {
-      if(e.date === day && e.action === 'Duty'){            
+      if(e.date === day && e.action === 'Stand'){            
         return  <View style={styles.user}>
-                  <Icon name='man-sharp' size={20} color={'#F9F9B5'} />
+                  <Icon name='business' size={20} color={'#F9F9B5'} />
                   <Text style={styles.user_text}>{USERS[e.user]}</Text>
                     <Icon 
                       name="close-circle-outline" 
@@ -145,8 +144,8 @@ if(dateDuty.length > 1 && stuff === true){
                 // onSelect={(value) => alert(`${value}`)} 
                 placeholder={
                   <View style={styles.placeholder}>
-                    <Icon name='man-sharp' size={20} color={'white'} />
-                    <Text style={styles.text}>{trans.Duty}</Text>
+                    <Icon name='business' size={20} color={'white'} />
+                    <Text style={styles.text}>{trans.Stand}</Text>
                   </View>
                 }
                 boxStyles={styles.event}
@@ -169,10 +168,10 @@ if(dateDuty.length > 1 && stuff === true){
     }else if(dateDuty.length === 1 && stuff === true){
       return ( 
         dateDuty.map((e) => {
-            if(e.date === day && e.action === 'Duty'){  
+            if(e.date === day && e.action === 'Stand'){  
                 return  <View>
                   <View style={styles.user}>
-                  <Icon name='man-sharp' size={20} color={'#F9F9B5'} />
+                  <Icon name='business' size={20} color={'#F9F9B5'} />
                     <Text style={styles.user_text}>{USERS[e.user]}</Text>
                         <Icon 
                             name="close-circle-outline" 
@@ -188,8 +187,8 @@ if(dateDuty.length > 1 && stuff === true){
                   // onSelect={() => alert('selected')} 
                   placeholder={
                     <View style={styles.placeholder}>
-                      <Icon name='man-sharp' size={20} color={'white'} />
-                      <Text style={styles.text}>{trans.Duty}</Text>
+                      <Icon name='business' size={20} color={'white'} />
+                      <Text style={styles.text}>{trans.Stand}</Text>
                     </View>
                   }
                   boxStyles={styles.event}
@@ -217,9 +216,9 @@ if(dateDuty.length > 1 && stuff === true){
 }else if(dateDuty.length >= 1 && stuff === false){
   return ( 
     dateDuty.map((e) => {
-      if(e.date === day && e.action === 'Duty'){            
+      if(e.date === day && e.action === 'Stand'){            
         return  <View style={styles.user}>
-                  <Icon name='man-sharp' size={20} color={'#F9F9B5'} />
+                  <Icon name='business' size={20} color={'#F9F9B5'} />
                   <Text style={styles.user_text}>{USERS[e.user]}</Text>
                 </View>                           
       }
@@ -313,4 +312,4 @@ placeholder: {
 },   
 })
 
-export default Duty
+export default Stand
