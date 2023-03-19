@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react'
-import { StyleSheet, View, Text, TextInput, ScrollView, Animated, Dimensions } from 'react-native';
+import { StyleSheet, View, Text, TextInput, ScrollView, Animated, Dimensions, SafeAreaView } from 'react-native';
 import { AuthContext } from '../context/AuthContext'
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import DoneButton from '../buttons/DoneButton'
@@ -7,6 +7,7 @@ import { useIsFocused } from '@react-navigation/native';
 import { LinearGradient } from 'expo-linear-gradient';
 import BackButton from '../buttons/BackButton';
 import { LanguageContext } from '../context/LanguageContext';
+import moment from 'moment';
 
 const AddEvent = ({ navigation }) => {   
 
@@ -15,6 +16,7 @@ const AddEvent = ({ navigation }) => {
   const {trans} = useContext(LanguageContext);
   const isFocused = useIsFocused();
   const [events, setEvents] = useState({name:{}})
+  const event = moment().format('YYYY-MM-DD')
 
 
     useEffect(() => {
@@ -53,7 +55,7 @@ const AddEvent = ({ navigation }) => {
       }
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <Animated.Image 
           source={require("../../assets/events_ibg.png")}
           style={[
@@ -71,14 +73,15 @@ const AddEvent = ({ navigation }) => {
             }}
           /> */}
     <ScrollView>
-      <View style={styles.row}>
+
+      {/* <View style={styles.row}>
         <TextInput style={styles.event} 
           placeholder="Event..."
           placeholderTextColor={'gray'}
-          value={events.event}
+          value={event}
           onChangeText={(e) => {setEvents({...events, 'event': e})}}
         />
-      </View>
+      </View> */}
 
       <View style={styles.row}>
         <View style={styles.left_row}>
@@ -157,7 +160,7 @@ const AddEvent = ({ navigation }) => {
 
       <DoneButton onPress={() => addEvent()}/>
     </ScrollView>
-    </View>
+    </SafeAreaView>
   )
 }
 

@@ -47,12 +47,11 @@ const Home = ({navigation}) => {
 
   }
 
-  if(profileToken){
+  // if(profileToken){
 
     return (
   
-      // <View style={styles.main_container}>
-        <View style={styles.container_1}>
+        <SafeAreaView style={styles.container_1}>
           <Animated.Image 
             source={require("../../assets/events_ibg.png")}
             style={[
@@ -66,16 +65,16 @@ const Home = ({navigation}) => {
             navigation.navigate('AddEvent');
           }}
         />
-        </View>
-      // </View>
+        </SafeAreaView>
   
     )
 
-  } else {
-    return(
-      <Login />
-    )
-  }
+  // } 
+  // else {
+  //   return(
+  //     <Login />
+  //   )
+  // }
 
 }
 

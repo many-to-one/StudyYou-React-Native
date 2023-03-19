@@ -9,11 +9,11 @@ const Event = ({ev}) => {
   const navigation = useNavigation();
   const [live, setLive] = useState(true)
 
-  const onRefresh = React.useCallback(() => {
-    setTimeout(() => {
-    }, 100);
-    console.log('refreshed Event')
-  }, []);
+  // const onRefresh = React.useCallback(() => {
+  //   setTimeout(() => {
+  //   }, 100);
+  //   console.log('refreshed Event')
+  // }, []);
 
   const deleteEvent = async() => {
     await fetch(`${proxy}/backend/events/${ev.id}/${ev.user}/delete/`, {
@@ -22,7 +22,6 @@ const Event = ({ev}) => {
             'Content-Type': 'application/json'
         },
     });
-    // onRefresh()
     setLive(false)
     navigation.navigate('Home')
   }
@@ -40,7 +39,7 @@ const Event = ({ev}) => {
               <View style={styles.container}>
                 <View style={styles.event}>
                   <Text style={styles.event_date}>{ev.date.slice(0, 10)}</Text>
-                  <Text style={styles.event_text}>{ev.event.slice(0,25)} ...</Text>
+                  {/* <Text style={styles.event_text}>{ev.event.slice(0,25)} ...</Text> */}
                 </View>  
                 <View>
                   <Icon 

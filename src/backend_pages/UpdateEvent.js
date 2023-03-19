@@ -8,6 +8,7 @@ import Icon from "react-native-vector-icons/MaterialIcons";
 import { LinearGradient } from 'expo-linear-gradient';
 import { useFocusEffect, useIsFocused } from '@react-navigation/native';
 import { LanguageContext } from '../context/LanguageContext';
+import moment from 'moment';
 
 const UpdateEvent = ({route, navigation}) => {
 
@@ -16,12 +17,7 @@ const UpdateEvent = ({route, navigation}) => {
     const {proxy,} = useContext(AuthContext);
     const {trans} = useContext(LanguageContext);
     const [events, setEvents] = useState({name: {}});
-    // const [event, setEvent] = useState('');
-    // const [hours, setHours] = useState(0);
-    // const [minutes, setMinutes] = useState(0);
-    // const [visits, setVisits] = useState(0);
-    // const [publications, setPublications] = useState(0);
-    // const [films, setFilms] = useState(0);
+    const event = moment().format('YYYY-MM-DD')
     const isFocused = useIsFocused();
 
     useEffect(() => {
@@ -47,6 +43,7 @@ const UpdateEvent = ({route, navigation}) => {
         setEvents(data)
         // setEvents({...events, 'hours': ev.hours})
         console.log('ev.id:', ev.id)
+        console.log('data:',  data)
         // onRefresh()
       }
     }
@@ -61,17 +58,18 @@ const UpdateEvent = ({route, navigation}) => {
           });
           const data = await resp.json()
           if(data){
-            onRefresh()
+            // onRefresh()
+            console.log('upd', data)
             navigation.navigate('Home')
           }else{
             alert('Something went wrong...')
           }
         }
 
-        const back = () => {
-            onRefresh()
-            navigation.navigate('Home')
-        }
+        // const back = () => {
+        //     onRefresh()
+        //     navigation.navigate('Home')
+        // }
 
   return (
     <View style={styles.container}>
@@ -91,17 +89,16 @@ const UpdateEvent = ({route, navigation}) => {
             bottom: -50,
             }}
           /> */}
-    <ScrollView>
-      {/* <BackButton onPress={() => back()}/> */}
+    <ScrollView> 
 
-      <View style={styles.row}>
+      {/* <View style={styles.row}>
         <TextInput style={styles.event} 
           placeholder="Event..."
           placeholderTextColor={'gray'}
           value={events.event}
           onChangeText={(e) => {setEvents({...events, 'event': e})}}
         />
-      </View>
+      </View> */}
       
 
       <View style={styles.row}>

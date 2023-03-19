@@ -1,12 +1,13 @@
 import React, { useContext, useEffect, useState } from 'react'
-import { Button, StyleSheet, Text, View } from 'react-native'
+import { Text, View } from 'react-native'
 import { AuthContext } from '../context/AuthContext';
 import { MultipleSelectList  } from 'react-native-dropdown-select-list';
 import Icon from "react-native-vector-icons/Ionicons";
 import { useIsFocused } from '@react-navigation/native';
-import ScheduleBtn from '../buttons/ScheduleBtn';
 import { LanguageContext } from '../context/LanguageContext';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import TalkBtn from '../buttons/TalkBtn';
+import { styles } from '../styles/Styles';
 
 const Microphones = ({day, navigation}) => {
 
@@ -139,7 +140,7 @@ if(dateMicrophones.length > 1 && stuff === true){
   )
     }else if(dateMicrophones.length === 0 && stuff === true){
         return (
-            <View >
+            <View style={styles.row}>
               <MultipleSelectList 
                 setSelected={(val) => setSelected(val)} 
                 data={data} 
@@ -153,7 +154,6 @@ if(dateMicrophones.length > 1 && stuff === true){
                 }
                 boxStyles={styles.event}
                 inputStyles={styles.input}
-                dropdownStyles={styles.box}
                 dropdownItemStyles={{color: 'white'}}
                 dropdownTextStyles={{color: 'white'}}
                 arrowicon={<Icon name="chevron-down" size={20} color={'white'} />} 
@@ -161,11 +161,7 @@ if(dateMicrophones.length > 1 && stuff === true){
                 closeicon={<Icon name="close" size={20} color={'white'} />} 
                 search={true}
               />
-              <ScheduleBtn 
-                  style={{backgroundColor: '#F9F9B5',}}
-                  title={'Submit'}
-                  onPress={() => setMicrophones(selected)}
-              />
+              <TalkBtn onPress={() => setMicrophones(selected)}/>
             </View>
         )
     }else if(dateMicrophones.length === 1 && stuff === true){
@@ -183,32 +179,29 @@ if(dateMicrophones.length > 1 && stuff === true){
                               onPress={() => deleteMicrophone(e)}     
                               />
                     </View>
-                    <MultipleSelectList 
-                    setSelected={(val) => setSelected(val)} 
-                    data={data} 
-                    save="value"
-                    // onSelect={() => alert('selected')} 
-                    placeholder={
-                      <View style={styles.placeholder}>
-                        <Icon name='mic' size={20} color={'white'} />
-                        <Text style={styles.text}>{trans.Microphones}</Text>
-                      </View>
-                    }
-                    boxStyles={styles.event}
-                    inputStyles={styles.input}
-                    dropdownStyles={styles.box}
-                    dropdownItemStyles={{color: 'white'}}
-                    dropdownTextStyles={{color: 'white'}}
-                    arrowicon={<Icon name="chevron-down" size={20} color={'white'} />} 
-                    searchicon={<Icon name="search" size={20} color={'white'} />} 
-                    closeicon={<Icon name="close" size={20} color={'white'} />} 
-                    search={true}
-                    />
-                    <ScheduleBtn 
-                        style={{backgroundColor: '#F9F9B5',}}
-                        title={'Submit'}
-                        onPress={() => setMicrophones(selected)}
-                    />
+                    <View style={styles.row}>
+                      <MultipleSelectList 
+                      setSelected={(val) => setSelected(val)} 
+                      data={data} 
+                      save="value"
+                      // onSelect={() => alert('selected')} 
+                      placeholder={
+                        <View style={styles.placeholder}>
+                          <Icon name='mic' size={20} color={'white'} />
+                          <Text style={styles.text}>{trans.Microphones}</Text>
+                        </View>
+                      }
+                      boxStyles={styles.event}
+                      inputStyles={styles.input}
+                      dropdownItemStyles={{color: 'white'}}
+                      dropdownTextStyles={{color: 'white'}}
+                      arrowicon={<Icon name="chevron-down" size={20} color={'white'} />} 
+                      searchicon={<Icon name="search" size={20} color={'white'} />} 
+                      closeicon={<Icon name="close" size={20} color={'white'} />} 
+                      search={true}
+                      />
+                      <TalkBtn onPress={() => setMicrophones(selected)}/>
+                    </View>
                   </View>
                   
                                       
@@ -231,86 +224,5 @@ if(dateMicrophones.length > 1 && stuff === true){
     )
       }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: 'black',
-    flexDirection: 'column',
-    alignItems: 'center',
-    gap: 25,
-    paddingTop: 25,
-  },
-  text: {
-    color: 'white',
-    fontSize: 10,
-  },
-  event:{
-    width: 290,
-    margin: 2,
-    padding: 10,
-    color: 'white',
-    fontSize: 20,
-    zIndex: 999,
-    backgroundColor: "transparent"
-  },
-  input:{
-    width: 200,
-    height: 50,
-    borderRadius: 10,
-    borderWidth: 2,
-    borderColor: '#333333',
-    margin: 5,
-    padding: 10,
-    color: 'white',
-    fontSize: 20,
-    zIndex: 999,
-  },
-  box:{
-    width: 290,
-    borderRadius: 10,
-    borderWidth: 1,
-    borderColor: '#4f4f4f',
-    margin: 2,
-    padding: 10,
-    color: 'white',
-    fontSize: 20,
-    zIndex: 999,
-    backgroundColor: "#a6a6a6"
-  },
-  user: {
-    flexDirection: 'row',
-    justifyContent: 'space-around',
-    alignItems: 'center',
-    marginBottom: 10,
-    height: 50,
-    borderRadius: 15,
-    backgroundColor: "#333333",
-    gap: 10,
-  },
-  user_text: {
-    fontSize: 15,
-    color: 'white',
-  },
-  button: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginBottom: 10,
-    width: 320,
-    height: 50,
-    borderRadius: 10,
-    borderWidth: 2,
-    backgroundColor: '#78F5FA',
-    margin: 5,
-    padding: 10,
-    backgroundColor: '#F9F9B5',
-    zIndex: 999,
-},  
-placeholder: {
-  flexDirection: 'row',
-  alignItems: 'center',
-  gap: 10,
-},     
-})
 
 export default Microphones

@@ -1,6 +1,6 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import React, { useContext, useEffect, useState } from 'react'
-import { Animated, Dimensions, ImageBackground, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { Animated, Dimensions, ImageBackground, SafeAreaView, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { AuthContext } from '../context/AuthContext'
 import ChangePasswordBtn from '../buttons/ChangePasswordBtn';
 import { SelectList } from 'react-native-dropdown-select-list';
@@ -168,7 +168,7 @@ const Profile = ({navigation}) => {
 
   return (
 
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <Animated.Image 
           source={require("../../assets/profile_ibg.png")}
           style={[
@@ -448,7 +448,7 @@ const Profile = ({navigation}) => {
 
     </View> 
     </ScrollView>
-    </View>
+    </SafeAreaView>
     
 
   )

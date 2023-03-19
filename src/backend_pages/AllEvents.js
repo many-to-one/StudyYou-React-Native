@@ -19,12 +19,12 @@ const AllEvents = ({datas}) => {
       allEvents()
     }, [isFocused])
 
-    const onRefresh = React.useCallback(() => {
-      setTimeout(() => {
-        allEvents();
-      }, 100);
-      console.log('refreshed AllEvents')
-    }, []);
+    // const onRefresh = React.useCallback(() => {
+    //   setTimeout(() => {
+    //     allEvents();
+    //   }, 100);
+    //   console.log('refreshed AllEvents')
+    // }, []);
 
     const allEvents = async() => {
       let datas = JSON.parse(await AsyncStorage.getItem("asyncUserData"))
@@ -33,7 +33,6 @@ const AllEvents = ({datas}) => {
         setEvents(data)
         if (data){
           console.log('allEvents', data)
-        // onRefresh()
         }
     }
 

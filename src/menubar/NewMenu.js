@@ -9,7 +9,8 @@ import {
   Animated,
   FlatList,
   TouchableOpacity,
-  Platform
+  Platform,
+  SafeAreaView
 } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -112,7 +113,7 @@ const NewMenu = () => {
     if(profileToken){
 
       return(
-        <View style={{
+        <SafeAreaView style={{
           position: 'relative',
           backgroundColor: 'black',
           height: height,
@@ -239,7 +240,7 @@ const NewMenu = () => {
             }}
           />
     
-        </View>
+        </SafeAreaView>
       )
 
     }else{
