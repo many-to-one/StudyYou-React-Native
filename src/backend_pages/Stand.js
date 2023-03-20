@@ -6,7 +6,6 @@ import Icon from "react-native-vector-icons/Ionicons";
 import { useIsFocused } from '@react-navigation/native';
 import { LanguageContext } from '../context/LanguageContext';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import TalkBtn from '../buttons/TalkBtn';
 import { styles } from '../styles/Styles';
 import ScheduleBtn from '../buttons/ScheduleBtn';
 import StandWithPerson from './StandWithPerson';

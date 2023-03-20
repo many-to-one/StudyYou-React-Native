@@ -205,10 +205,11 @@ const Profile = ({navigation}) => {
           searchicon={<Icon name="search" size={20} color={'white'} />} 
           search={true} 
         />
-      <Text style={styles.text}>
-        {trans.Groupe} 
-      </Text>
-      <SelectList 
+
+        <Text style={styles.text}>
+          {trans.Groupe} 
+        </Text>
+        <SelectList 
           onSelect={() => setUserGroupe(groupe)}
           setSelected={setGroupe}
           placeholder={groupePlsch}
@@ -222,6 +223,7 @@ const Profile = ({navigation}) => {
           searchicon={<Icon name="search" size={20} color={'white'} />} 
           search={true} 
         />
+    
         <TouchableOpacity>
           <Animated.View style={styles.animated}>
             <ImageBackground
@@ -289,7 +291,29 @@ const Profile = ({navigation}) => {
         </TouchableOpacity>
          :
          <View />
-    }
+        }
+
+        {profileData.helper ? 
+
+          <TouchableOpacity onPress={() => navigation.navigate('PlacesStand')}>
+          <Animated.View style={styles.animated}>
+            <ImageBackground
+              source={require('../../assets/card.png')}
+              style={styles.img}
+            >
+              <View style={styles.inside}>
+                <Icon name="business" size={20} color={'#a1efff'} />
+                <Text style={styles.text}>
+                  {trans.PlacesStand}
+                </Text>
+              </View>
+            </ImageBackground>
+          </Animated.View>
+          </TouchableOpacity>
+          :
+          <View />
+        }
+
         <ChangePasswordBtn 
           title={trans.Changepassword}
           onPress={() => navigation.navigate('RequestResetMail')}

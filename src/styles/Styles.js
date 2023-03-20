@@ -37,8 +37,8 @@ const styles = StyleSheet.create({
   box:{
     width: 270,
     height: 50,
-    margin: 2,
-    padding: 1,
+    // margin: 5,
+    padding: 10,
     color: 'white',
     fontSize: 20,
     zIndex: 999,
