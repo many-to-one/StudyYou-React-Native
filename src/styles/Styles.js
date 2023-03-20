@@ -52,18 +52,45 @@ const styles = StyleSheet.create({
     fontSize: 15,
 
   },
+  stand:{
+    // width: 270,
+    margin: 2,
+    padding: 1,
+    color: 'white',
+    fontSize: 20,
+    zIndex: 999,
+    backgroundColor: "transparent",
+    borderWidth: 2,
+    borderRadius: 20,
+    borderColor: "#19868a",
+  },
   user: {
     flexDirection: 'row',
-    justifyContent: 'space-around',
+    justifyContent: 'space-between',
     alignItems: 'center',
+    padding: 10,
     marginBottom: 10,
+    borderWidth: 2,
+    borderColor: '#19868a',
+    borderRadius: 10,
     height: 50,
     borderRadius: 15,
-    backgroundColor: "#333333",
+    backgroundColor: "transparent",
     gap: 10,
+    shadowColor: '#19868a',
+      shadowOpacity: 1,
+      shadowOffset: {
+        width: 0,
+        height: 0,
+      },
+      shadowRadius: 8
   },
   user_text: {
     fontSize: 15,
+    color: 'white',
+  },
+  user_text_stand: {
+    fontSize: 10,
     color: 'white',
   },
   button: {

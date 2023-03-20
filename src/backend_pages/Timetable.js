@@ -47,7 +47,30 @@ const Timetable = ({navigation}) => {
 
     return(
       data.map((e) => {
-        return <TouchableOpacity>
+        if(e.action === 'Stand'){
+          return <TouchableOpacity>
+         <Animated.View style={styles.animated}>
+           <ImageBackground
+             source={require('../../assets/card_p.png')}
+             style={styles.img}
+           >
+             <View style={styles.event}>
+               <Icon name={e.icon} size={20} color={'#F9F9B5'} />
+               <Text style={styles.text}>
+                 {e.date}
+               </Text>
+               <Text style={styles.text}>
+                 {trans[e.action]}
+               </Text>
+               <Text style={styles.text}>
+                 {e.place}
+               </Text>
+             </View>
+           </ImageBackground>
+         </Animated.View>
+        </TouchableOpacity>
+        }else{
+          return <TouchableOpacity>
          <Animated.View style={styles.animated}>
            <ImageBackground
              source={require('../../assets/card_p.png')}
@@ -65,6 +88,7 @@ const Timetable = ({navigation}) => {
            </ImageBackground>
          </Animated.View>
         </TouchableOpacity>
+        }
       })
     )
 
