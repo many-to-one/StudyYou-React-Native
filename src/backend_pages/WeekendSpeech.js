@@ -250,21 +250,21 @@ if(dateWeekendSpeach.length === 1 && stuff === true && person === null){
         </View>
 
         <View style={styles.row}>
-          <TextInput style={styles.box} 
+          <TextInput style={styles.topic} 
             placeholder={trans.Topic}
             placeholderTextColor={'gray'}
             onChangeText={(e) => setTopic(e)}
           />
         </View>
-
         <View style={styles.row}>
-          <TextInput style={styles.box} 
+          <TextInput style={styles.topic} 
             placeholder={trans.Speaker}
             placeholderTextColor={'gray'}
             onChangeText={(e) => setPerson(e)}
           />
           <TalkBtn onPress={() => setGuestSpeaker()}/>
         </View>
+
       </View>
 
   )

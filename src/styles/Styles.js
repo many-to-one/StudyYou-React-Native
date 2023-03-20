@@ -22,9 +22,21 @@ const styles = StyleSheet.create({
     color: 'white',
     fontSize: 10,
   },
+  topic:{
+    width: width / 1.4,
+    marginBottom: 5,
+    marginTop: 5,
+    padding: 5,
+    color: 'white',
+    fontSize: 15,
+    backgroundColor: "transparent",
+    borderBottomWidth: 2,
+    borderColor: "#19868a",
+  },
   event:{
-    width: 270,
-    margin: 2,
+    width: width / 1.4,
+    marginBottom: 5,
+    marginTop: 5,
     padding: 1,
     color: 'white',
     fontSize: 20,
@@ -35,9 +47,8 @@ const styles = StyleSheet.create({
     borderColor: "#19868a",
   },
   box:{
-    width: 270,
+    width: width / 1.25,
     height: 50,
-    // margin: 5,
     padding: 10,
     color: 'white',
     fontSize: 20,
@@ -50,11 +61,13 @@ const styles = StyleSheet.create({
   input:{
     color: 'white',
     fontSize: 15,
+    width: width / 1.25,
 
   },
   stand:{
-    // width: 270,
-    margin: 2,
+    width: width / 1.25,
+    marginBottom: 5,
+    marginTop: 5,
     padding: 1,
     color: 'white',
     fontSize: 20,
@@ -65,6 +78,7 @@ const styles = StyleSheet.create({
     borderColor: "#19868a",
   },
   user: {
+    width: width / 1.25,
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',

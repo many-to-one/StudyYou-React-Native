@@ -147,7 +147,7 @@ return(
               <Text style={styles.text}>{trans.MinistryWith}</Text>
             </View>
           }
-          boxStyles={styles.event}
+          boxStyles={styles.stand}
           inputStyles={styles.input}
           dropdownItemStyles={{color: 'white'}}
           dropdownTextStyles={{color: 'white'}}
@@ -166,7 +166,7 @@ return(
               <Text style={styles.text}>{trans.Time}</Text>
             </View>
           }
-          boxStyles={styles.event}
+          boxStyles={styles.stand}
           inputStyles={styles.input}
           dropdownItemStyles={{color: 'white'}}
           dropdownTextStyles={{color: 'white'}}

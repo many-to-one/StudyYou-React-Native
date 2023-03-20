@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { Text, View, StyleSheet, TouchableOpacity } from 'react-native';
+import { Text, StyleSheet, TouchableOpacity, Dimensions } from 'react-native';
 import { LanguageContext } from '../context/LanguageContext';
 
 export default function ScheduleBtn({onPress}) {
@@ -12,16 +12,18 @@ export default function ScheduleBtn({onPress}) {
   );
 }
 
+const { width, height } = Dimensions.get('window');
 const styles = StyleSheet.create({
     button: {
         alignItems: 'center',
         justifyContent: 'center',
-        width: 270,
+        width: width / 1.25,
         height: 40,
-        borderRadius: 10,
+        borderRadius: 20,
         borderWidth: 2,
         borderColor: '#78F5FA',
-        margin: 5,
+        marginBottom: 10,
+        marginTop: 10,
         padding: 10,
         backgroundColor: '#78F5FA',
         zIndex: 999,

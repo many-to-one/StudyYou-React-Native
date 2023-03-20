@@ -17,6 +17,7 @@ const Stand = ({day, navigation}) => {
     const [person1, setPerson1] = useState('')
     const [person2, setPerson2] = useState('')
     const [place, setPlace] = useState('')
+    const [places, setPlaces] = useState([]);
     const [time, setTime] = useState('')
     const [users, setUsers] = useState([])
     const [Action, setAction] = useState('')
@@ -24,11 +25,7 @@ const Stand = ({day, navigation}) => {
     const USERS = {}
     const isFocused = useIsFocused();
 
-    const PLACES = [
-      {key:'1', value:'Skrzyżowanie Centrum'},
-      {key:'2', value:'Park przy zamku'},
-      {key:'3', value:'Wjazd do Galerii'},
-    ]
+    const PLACES = {}
 
     const TIME = [
       {key:'1', value:'06:00'},
@@ -53,6 +50,18 @@ const Stand = ({day, navigation}) => {
     useEffect(() => {
       getUsers()
   }, [isFocused])
+
+  useEffect(() => {
+    getPlacesStand()
+}, [isFocused])
+
+  const getPlacesStand = async() => {
+    const resp = await fetch(`${proxy}/backend/set_places_stand/${userData.congregation}/`)
+    const data = await resp.json()
+    if(data.status === 200){
+      setPlaces(data.data)
+    }
+  }
 
   const getUsers = async() => {
       let datas = JSON.parse(await AsyncStorage.getItem("asyncUserData"))
@@ -82,6 +91,20 @@ const Stand = ({day, navigation}) => {
           // setDateDuty([])
         }  
   }
+
+
+  for(let i=0; i<places.length; i++){
+    PLACES[places[i].id] = places[i].name
+  }
+
+  const dataPlaces = []
+
+  for (const [key, value] of Object.entries(PLACES)) {
+    dataPlaces.push(
+      {key:key, value:value},
+    )
+  }
+
 
   for(let i=0; i<users.length; i++){
     USERS[users[i].id] = users[i].username
@@ -167,7 +190,7 @@ const Stand = ({day, navigation}) => {
       <View>
         <SelectList 
           setSelected={(val) => setPlace(val)} 
-          data={PLACES} 
+          data={dataPlaces} 
           save="value" 
           placeholder={
             <View style={styles.placeholder}>

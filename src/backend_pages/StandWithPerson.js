@@ -36,7 +36,7 @@ const StandWithPerson = ({person, day}) => {
               />
           </View>
         </View> 
-    }else{
+    }else if(live === true && person.date === day && stuff === false){
         return  <View>
           <View style={styles.user}>
             <Icon name='business' size={20} color={'#F9F9B5'} />
@@ -45,7 +45,9 @@ const StandWithPerson = ({person, day}) => {
             <Text style={styles.user_text_stand}>{person.time}</Text>
           </View>
         </View> 
-    }
+    }else if(live === false){
+      return  <View></View> 
+  }
 
 }
 
