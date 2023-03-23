@@ -211,18 +211,18 @@ if(dateMinistry.length > 1 && stuff === true){
           }) 
         )
       }
-      // else if(dateMinistry.length >= 1 && stuff === false){
-      //   return ( 
-      //     dateMinistry.map((e) => {
-      //       if(e.date === day && e.action === 'MinistryLeader'){  
-      //         return <View style={styles.user}>
-      //           <Icon name='people-circle-outline' size={20} color={'#F9F9B5'} />
-      //           <Text style={styles.user_text}>{USERS[e.user]}</Text>
-      //           </View>  
-      //       }
-      //     }) 
-      //   )
-      // }
+      else if(dateMinistry.length >= 1 && stuff === false){
+        return ( 
+          dateMinistry.map((e) => {
+            if(e.date === day && e.action === 'MinistryLeader'){  
+              return <View style={styles.user}>
+                <Icon name='people-circle-outline' size={20} color={'#F9F9B5'} />
+                <Text style={styles.user_text}>{USERS[e.user]}</Text>
+                </View>  
+            }
+          }) 
+        )
+      }
 }
 
 export default Ministry

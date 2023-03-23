@@ -105,7 +105,7 @@ const Profile = ({navigation}) => {
       labels: result.months,
       datasets: [
         {
-          data: monthsHours
+          data: monthsHours.slice(-4)
         }
       ]
     };
@@ -114,7 +114,7 @@ const Profile = ({navigation}) => {
       labels: result.months,
       datasets: [
         {
-          data: visits
+          data: visits.slice(-4)
         }
       ]
     };
@@ -123,7 +123,7 @@ const Profile = ({navigation}) => {
       labels: result.months,
       datasets: [
         {
-          data: publications
+          data: publications.slice(-4)
         }
       ]
     };
@@ -132,7 +132,7 @@ const Profile = ({navigation}) => {
       labels: result.months,
       datasets: [
         {
-          data: films
+          data: films.slice(-4)
         }
       ]
     };
@@ -141,7 +141,7 @@ const Profile = ({navigation}) => {
       labels: result.months,
       datasets: [
         {
-          data: studiesData
+          data: studiesData.slice(-4)
         }
       ]
     };

@@ -108,6 +108,7 @@ const WeekendSpeach = ({day, navigation}) => {
           const data = await resp.json();
           if(data){
             setDateWeekendSpeach(data)
+            console.log('kkk', data)
           }  
       getCalendarDatesByDate()
   }
