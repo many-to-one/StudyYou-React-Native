@@ -26,7 +26,7 @@ const WeekendLeader = ({day, navigation}) => {
 
   const getUsers = async() => {
     let datas = JSON.parse(await AsyncStorage.getItem("asyncUserData"))
-    const resp = await fetch(`${proxy}/users/users/${datas.congregation}/`)
+    const resp = await fetch(`${proxy}/users/users_by_helper/${datas.congregation}/`)
       const data = await resp.json();
       if(resp.status === 200){
         setUsers(data)

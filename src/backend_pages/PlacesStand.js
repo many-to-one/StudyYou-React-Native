@@ -50,20 +50,20 @@ const PlacesStand = ({navigation}) => {
 
   return (
     <View style={styles.container}>
-        <Text style={styles.text}>
-        {trans.PlacesStand}
-        </Text>
-        <View style={styles.row}>
-          <TextInput style={styles.box} 
-            placeholder={'...'}
-            placeholderTextColor={'gray'}
-            onChangeText={(e) => setPlace(e)}
-          />
-          <TalkBtn onPress={() => setPlacesStand()}/>
-        </View>
-        {places.map((e, index) => (
-          <PlacesStandData e={e}/>
-        ))}
+      <Text style={styles.text}>
+      {trans.PlacesStand}
+      </Text>
+      <View style={styles.row}>
+        <TextInput style={styles.box} 
+          placeholder={'...'}
+          placeholderTextColor={'gray'}
+          onChangeText={(e) => setPlace(e)}
+        />
+        <TalkBtn onPress={() => setPlacesStand()}/>
+      </View>
+      {places.map((e, index) => (
+        <PlacesStandData e={e}/>
+      ))}
     </View>
   )
 }

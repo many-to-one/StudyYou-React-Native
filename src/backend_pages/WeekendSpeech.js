@@ -11,7 +11,7 @@ import { styles } from '../styles/Styles';
 
 const WeekendSpeach = ({day, navigation}) => {
 
-    const {proxy, stuff} = useContext(AuthContext);
+    const {proxy, stuff, userData} = useContext(AuthContext);
     const {trans} = useContext(LanguageContext);
     const [selected, setSelected] = useState('')
     const [users, setUsers] = useState([])
@@ -33,7 +33,7 @@ const WeekendSpeach = ({day, navigation}) => {
 
   const getUsers = async() => {
     let datas = JSON.parse(await AsyncStorage.getItem("asyncUserData"))
-    const resp = await fetch(`${proxy}/users/users/${datas.congregation}/`)
+    const resp = await fetch(`${proxy}/users/users_by_leader/${datas.congregation}/`)
       const data = await resp.json();
       if(resp.status === 200){
         setUsers(data)
@@ -81,7 +81,7 @@ const WeekendSpeach = ({day, navigation}) => {
       for(let k in USERS){  
         if(selected === USERS[k]){
 
-          const resp = fetch(`${proxy}/backend/set_calendar/${k}/`, {
+          const resp = fetch(`${proxy}/backend/set_calendar_speach_from_list/${k}/`, {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json'
@@ -90,7 +90,6 @@ const WeekendSpeach = ({day, navigation}) => {
               'date': `${day}`,
               'action': 'WeekendSpeach',
               'congregation': datas.congregation,
-              'groupe': null,
               'topic': topic,
               'icon': 'md-man-outline',
             })
