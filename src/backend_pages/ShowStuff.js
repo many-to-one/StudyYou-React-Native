@@ -4,7 +4,7 @@ import Icon from "react-native-vector-icons/Ionicons";
 import { AuthContext } from '../context/AuthContext';
 import { styles } from '../styles/Styles';
 
-const MinistryLeader = ({person, day}) => {
+const ShowStuff = ({person, USERS, action, day, stuff}) => {
     const {proxy, userData} = useContext(AuthContext);
     const [live, setLive] = useState(true)
 
@@ -21,10 +21,10 @@ const MinistryLeader = ({person, day}) => {
         }
       }
 
-    if(live === true && person.date === day && person.action === 'MinistryLeader' && person.user === userData.id){  
+    if(live === true && person.date === day && person.action === action && stuff === true){  
         return  <View style={styles.user}>
         <Icon name='briefcase-sharp' size={20} color={'#F9F9B5'} />
-        <Text style={styles.user_text}>{person.user}</Text>
+        <Text style={styles.user_text}>{USERS[person.user]}</Text>
         {/* <Text style={styles.user_text}>{person.time}</Text> */}
           <Icon 
             name="close-circle-outline" 
@@ -33,9 +33,14 @@ const MinistryLeader = ({person, day}) => {
             onPress={() => deleteMinistryLeader(person)}     
           />
         </View> 
-    }
+    }else if(live === true && person.date === day && person.action === action && stuff === false){  
+      return  <View style={styles.user}>
+      <Icon name='briefcase-sharp' size={20} color={'#F9F9B5'} />
+      <Text style={styles.user_text}>{USERS[person.user]}</Text>
+      </View> 
+  }
 
 }
 
-export default MinistryLeader
+export default ShowStuff
 

@@ -1,19 +1,20 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { Text, View } from 'react-native'
 import { AuthContext } from '../context/AuthContext';
-import { MultipleSelectList  } from 'react-native-dropdown-select-list';
+import { MultipleSelectList, SelectList  } from 'react-native-dropdown-select-list'; // react-native-multiple-select-list (also good)
 import Icon from "react-native-vector-icons/Ionicons";
 import { useIsFocused } from '@react-navigation/native';
 import { LanguageContext } from '../context/LanguageContext';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import TalkBtn from '../buttons/TalkBtn';
+import ShowStuff  from './ShowStuff'
 import { styles } from '../styles/Styles';
 
 const Ministry = ({day, navigation}) => {
 
   const {proxy, stuff} = useContext(AuthContext);
   const {trans} = useContext(LanguageContext);
-  const [selected, setSelected] = useState('')
+  const [selected, setSelected] = useState([])
   const [users, setUsers] = useState([])
   const [dateMinistry, setDateMinistry] = useState([])
   const USERS = {}
@@ -104,125 +105,155 @@ const Ministry = ({day, navigation}) => {
     getCalendarDatesByDate()
   }
 
-  const deleteMinistry = async(user) => {
-    const resp = await fetch(`${proxy}/backend/delete_calendar/${user.id}/`, {
-      method: 'DELETE',
-      headers: {
-          'Content-Type': 'application/json'
-      },
-    })
-    if(resp.status === 200){
-      console.log('deleted', user)
-      setSelected([])
-      setDateMinistry([])
-      getCalendarDatesByDate()
-    }
-  }
-
 console.log('dateMinistry:', dateMinistry, day)
 console.log('selected:', selected)
 
-if(dateMinistry.length > 1 && stuff === true){
-  return ( 
-    dateMinistry.map((e) => {
-        if(e.date === day && e.action === 'MinistryLeader'){  
-          return <View style={styles.user}>
-            <Icon name='people-circle-outline' size={20} color={'#F9F9B5'} />
-            <Text style={styles.user_text}>{USERS[e.user]}</Text>
-              <Icon 
-                name="close-circle-outline" 
-                size={20} 
-                color={'#F9F9B5'} 
-                onPress={() => deleteMinistry(e)}     
-                />
-            </View>  
-           
 
+
+  return (
+    <View>
+    <View style={styles.row}>
+      <MultipleSelectList 
+        setSelected={(val) => setSelected(val)} 
+        data={data} 
+        save="value" 
+        placeholder={
+          <View style={styles.placeholder}>
+            <Icon name='briefcase-sharp' size={20} color={'white'} />
+            <Text style={styles.text}>{trans.MinistryWith}</Text>
+          </View>
         }
-    }) 
+        boxStyles={styles.event}
+        inputStyles={styles.input}
+        dropdownItemStyles={{color: 'white'}}
+        dropdownTextStyles={{color: 'white'}}
+        arrowicon={<Icon name="chevron-down" size={20} color={'white'} />} 
+        searchicon={<Icon name="search" size={20} color={'white'} />} 
+        closeicon={<Icon name="close" size={20} color={'white'} />} 
+        search={true}
+        dropdownStyles={styles.dropdown}
+        disabledItemStyles={{width: 300}}
+        disabledCheckBoxStyles={{color: 'white'}}
+        dropdownShown={false}
+      />
+      <TalkBtn onPress={() => setMinistryUsers(selected)}/>
+      </View>
+      <View>
+        {dateMinistry.map((person, index) => (
+          <ShowStuff 
+          key={person.id}
+          person={person}
+          USERS={USERS}
+          action={'MinistryLeader'}
+          day={day}
+          stuff={stuff}
+        />
+        ))}
+      </View>
+    </View>
+        )
 
-  )
-    }else if(dateMinistry.length === 0 && stuff === true){
-        return (
-            <View style={styles.row}>
-              <MultipleSelectList 
-                setSelected={(val) => setSelected(val)} 
-                data={data} 
-                save="value"
-                // onSelect={(value) => alert(`${value}`)} 
-                placeholder={
-                  <View style={styles.placeholder}>
-                    <Icon name='people-circle-outline' size={20} color={'white'} />
-                    <Text style={styles.text}>{trans.MinistryLeaders}</Text>
-                  </View>
-              }
-                boxStyles={styles.event}
-                inputStyles={styles.input}
-                dropdownItemStyles={{color: 'white'}}
-                dropdownTextStyles={{color: 'white'}}
-                arrowicon={<Icon name="chevron-down" size={20} color={'white'} />} 
-                searchicon={<Icon name="search" size={20} color={'white'} />} 
-                closeicon={<Icon name="close" size={20} color={'white'} />} 
-                search={true}
-              />
-              <TalkBtn onPress={() => setMinistryUsers(selected)}/>
-            </View>
-        )
-    }else if(dateMinistry.length >= 1 && stuff === true){
-        return ( 
-          dateMinistry.map((e) => {
-              if(e.date === day && e.action === 'MinistryLeader'){  
-                  return  <View>
-                    <View style={styles.user}>
-                    <Icon name='people-circle-outline' size={20} color={'#F9F9B5'} />
-                      <Text style={styles.user_text}>{USERS[e.user]}</Text>
-                          <Icon 
-                              name="close-circle-outline" 
-                              size={20} 
-                              color={'#F9F9B5'} 
-                              onPress={() => deleteMinistry(e)}     
-                              />
-                    </View>
-                    <View style={styles.row}>
-                      <MultipleSelectList 
-                        setSelected={(val) => setSelected(val)} 
-                        data={data} 
-                        save="value"
-                        // onSelect={(value) => alert(`${value}`)} 
-                        placeholder={
-                          <View style={styles.placeholder}>
-                            <Icon name='people-circle-outline' size={20} color={'white'} />
-                            <Text style={styles.text}>{trans.MinistryLeaders}</Text>
-                          </View>
-                      }
-                        boxStyles={styles.event}
-                        inputStyles={styles.input}
-                        dropdownItemStyles={{color: 'white'}}
-                        dropdownTextStyles={{color: 'white'}}
-                        arrowicon={<Icon name="chevron-down" size={20} color={'white'} />} 
-                        searchicon={<Icon name="search" size={20} color={'white'} />} 
-                        closeicon={<Icon name="close" size={20} color={'white'} />} 
-                        search={true}
-                      />
-                      <TalkBtn onPress={() => setMinistryUsers(selected)}/>
-                    </View>
-                  </View>                                  
-              }
-          }) 
-        )
-      }
-      else if(dateMinistry.length >= 1 && stuff === false){
-        return ( 
-          dateMinistry.map((e) => {
-            if(e.date === day && e.action === 'MinistryLeader'){  
-              return <View style={styles.user}>
-                <Icon name='people-circle-outline' size={20} color={'#F9F9B5'} />
-                <Text style={styles.user_text}>{USERS[e.user]}</Text>
-                </View>  
-            }
-          }) 
-        )
-      }
+
+
+
+// if(dateMinistry.length > 1 && stuff === true){
+//   return ( 
+//     dateMinistry.map((e) => {
+//         if(e.date === day && e.action === 'MinistryLeader'){  
+//           return <View style={styles.user}>
+//             <Icon name='people-circle-outline' size={20} color={'#F9F9B5'} />
+//             <Text style={styles.user_text}>{USERS[e.user]}</Text>
+//               <Icon 
+//                 name="close-circle-outline" 
+//                 size={20} 
+//                 color={'#F9F9B5'} 
+//                 onPress={() => deleteMinistry(e)}     
+//                 />
+//             </View>  
+//         }
+//     }) 
+//   )
+//     }else if(dateMinistry.length === 0 && stuff === true){
+//         return (
+//             <View style={styles.row}>
+//               <MultipleSelectList 
+//                 setSelected={(val) => setSelected(val)} 
+//                 data={data} 
+//                 save="value"
+//                 // onSelect={(value) => alert(`${value}`)} 
+//                 placeholder={
+//                   <View style={styles.placeholder}>
+//                     <Icon name='people-circle-outline' size={20} color={'white'} />
+//                     <Text style={styles.text}>{trans.MinistryLeaders}</Text>
+//                   </View>
+//               }
+//                 boxStyles={styles.event}
+//                 inputStyles={styles.input}
+//                 dropdownItemStyles={{color: 'white'}}
+//                 dropdownTextStyles={{color: 'white'}}
+//                 arrowicon={<Icon name="chevron-down" size={20} color={'white'} />} 
+//                 searchicon={<Icon name="search" size={20} color={'white'} />} 
+//                 closeicon={<Icon name="close" size={20} color={'white'} />} 
+//                 search={true}
+//               />
+//               <TalkBtn onPress={() => setMinistryUsers(selected)}/>
+//             </View>
+//         )
+//     }else if(dateMinistry.length === 1 && stuff === true){
+//         return ( 
+//           dateMinistry.map((e) => {
+//               if(e.date === day && e.action === 'MinistryLeader'){  
+//                   return  <View>
+//                     <View style={styles.user}>
+//                     <Icon name='people-circle-outline' size={20} color={'#F9F9B5'} />
+//                       <Text style={styles.user_text}>{USERS[e.user]}</Text>
+//                           <Icon 
+//                               name="close-circle-outline" 
+//                               size={20} 
+//                               color={'#F9F9B5'} 
+//                               onPress={() => deleteMinistry(e)}     
+//                               />
+//                     </View>
+//                     <View style={styles.row}>
+//                       <MultipleSelectList 
+//                         setSelected={(val) => setSelected(val)} 
+//                         data={data} 
+//                         save="value"
+//                         // onSelect={(value) => alert(`${value}`)} 
+//                         placeholder={
+//                           <View style={styles.placeholder}>
+//                             <Icon name='people-circle-outline' size={20} color={'white'} />
+//                             <Text style={styles.text}>{trans.MinistryLeaders}</Text>
+//                           </View>
+//                       }
+//                         boxStyles={styles.event}
+//                         inputStyles={styles.input}
+//                         dropdownItemStyles={{color: 'white'}}
+//                         dropdownTextStyles={{color: 'white'}}
+//                         arrowicon={<Icon name="chevron-down" size={20} color={'white'} />} 
+//                         searchicon={<Icon name="search" size={20} color={'white'} />} 
+//                         closeicon={<Icon name="close" size={20} color={'white'} />} 
+//                         search={true}
+//                       />
+//                       <TalkBtn onPress={() => setMinistryUsers(selected)}/>
+//                     </View>
+//                   </View>                                  
+//               }
+//           }) 
+//         )
+//       }
+//       else if(dateMinistry.length >= 1 && stuff === false){
+//         return ( 
+//           dateMinistry.map((e) => {
+//             if(e.date === day && e.action === 'MinistryLeader'){  
+//               return <View style={styles.user}>
+//                 <Icon name='people-circle-outline' size={20} color={'#F9F9B5'} />
+//                 <Text style={styles.user_text}>{USERS[e.user]}</Text>
+//                 </View>  
+//             }
+//           }) 
+//         )
+//       }
 }
 
 export default Ministry

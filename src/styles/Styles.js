@@ -47,6 +47,8 @@ const styles = StyleSheet.create({
     borderColor: "#19868a",
   },
   box:{
+    flex: 1,
+    flexDirection: 'column',
     width: width / 1.25,
     height: 50,
     padding: 10,
@@ -62,7 +64,10 @@ const styles = StyleSheet.create({
     color: 'white',
     fontSize: 15,
     width: width / 1.25,
-
+  },
+  dropdown: {
+    width: width / 1.4,
+    backgroundColor: "gray",
   },
   stand:{
     width: width / 1.25,
