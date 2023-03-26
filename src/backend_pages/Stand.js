@@ -206,6 +206,7 @@ const Stand = ({day, navigation}) => {
           searchicon={<Icon name="search" size={20} color={'white'} />} 
           closeicon={<Icon name="close" size={20} color={'white'} />} 
           search={true}
+          dropdownStyles={styles.dropdown}
         />
         <SelectList 
           setSelected={(val) => setPerson1(val)} 
@@ -225,6 +226,7 @@ const Stand = ({day, navigation}) => {
           searchicon={<Icon name="search" size={20} color={'white'} />} 
           closeicon={<Icon name="close" size={20} color={'white'} />} 
           search={true}
+          dropdownStyles={styles.dropdown}
         />
         <SelectList 
           setSelected={(val) => setPerson2(val)} 
@@ -244,6 +246,7 @@ const Stand = ({day, navigation}) => {
           searchicon={<Icon name="search" size={20} color={'white'} />} 
           closeicon={<Icon name="close" size={20} color={'white'} />} 
           search={true}
+          dropdownStyles={styles.dropdown}
         />
         <SelectList 
           setSelected={(val) => setTime(val)} 
@@ -263,6 +266,7 @@ const Stand = ({day, navigation}) => {
           searchicon={<Icon name="search" size={20} color={'white'} />} 
           closeicon={<Icon name="close" size={20} color={'white'} />} 
           search={true}
+          dropdownStyles={styles.dropdown}
         />
         <ScheduleBtn onPress={() => setStand(person1, person2, time, place)}/>
         </View>

@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { Text, View } from 'react-native'
 import { AuthContext } from '../context/AuthContext';
-import { MultipleSelectList  } from 'react-native-dropdown-select-list';
+import { SelectList  } from 'react-native-dropdown-select-list';
 import Icon from "react-native-vector-icons/Ionicons";
 import { useIsFocused } from '@react-navigation/native';
 import { LanguageContext } from '../context/LanguageContext';
@@ -10,7 +10,7 @@ import TalkBtn from '../buttons/TalkBtn';
 import { styles } from '../styles/Styles';
 import ShowStuff from './ShowStuff';
 
-const Music = ({day, navigation}) => {
+const Music = ({day, week_ago, navigation}) => {
 
     const {proxy, congr, stuff} = useContext(AuthContext);
     const c = congr()
@@ -49,7 +49,7 @@ const Music = ({day, navigation}) => {
         const data = await resp.json();
         if(data){
           setDateMusic(data)
-          setSelected([])
+          setSelected('')
         }  
   }
 
@@ -67,11 +67,10 @@ const Music = ({day, navigation}) => {
 
   const setMusic = async(selected) => {
     let datas = JSON.parse(await AsyncStorage.getItem("asyncUserData"))
-    selected.map((e) => {
       for(let k in USERS){  
-        if(e === USERS[k]){
+        if(selected === USERS[k]){
 
-          const resp = fetch(`${proxy}/backend/set_calendar/${k}/`, {
+          const resp = fetch(`${proxy}/backend/set_calendar/${k}/${week_ago}/`, {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json'
@@ -86,7 +85,6 @@ const Music = ({day, navigation}) => {
           })   
         }
       }
-    })
     const body = {'date': day, 'action': 'Music', 'congregation': datas.congregation}
     const resp = await fetch(`${proxy}/backend/get_calendar_date/`, {
       method: 'POST',
@@ -108,7 +106,7 @@ const Music = ({day, navigation}) => {
   return (
     <View>
     <View style={styles.row}>
-      <MultipleSelectList 
+      <SelectList 
         setSelected={(val) => setSelected(val)} 
         data={data} 
         save="value" 

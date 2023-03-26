@@ -6,13 +6,14 @@ const { width, height } = Dimensions.get('window');
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'black',
+    // backgroundColor: 'black',
     flexDirection: 'column',
     alignItems: 'center',
     gap: 25,
     paddingTop: 25,
   },
   scroll: {
+    // backgroundColor: '#050929',
     backgroundColor: 'black',
     width: width,
     height: height,
@@ -21,6 +22,10 @@ const styles = StyleSheet.create({
   text: {
     color: 'white',
     fontSize: 10,
+  },
+  text_: {
+    color: 'white',
+    fontSize: 20,
   },
   topic:{
     width: width / 1.4,
@@ -46,6 +51,15 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     borderColor: "#19868a",
   },
+    event_:{
+    width: 320,
+    margin: 5,
+    padding: 10,
+    color: 'white',
+    fontSize: 20,
+    zIndex: 999,
+    backgroundColor: "transparent",
+    },
   box:{
     flex: 1,
     flexDirection: 'column',
@@ -67,7 +81,9 @@ const styles = StyleSheet.create({
   },
   dropdown: {
     width: width / 1.4,
-    backgroundColor: "gray",
+    borderColor: "#19868a",
+    borderWidth: 2,
+    // backgroundColor: "#2D455E",
   },
   stand:{
     width: width / 1.25,

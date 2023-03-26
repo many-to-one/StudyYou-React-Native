@@ -8,8 +8,9 @@ import { LanguageContext } from '../context/LanguageContext';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { styles } from '../styles/Styles';
 import TalkBtn from '../buttons/TalkBtn';
+import ShowStuff from './ShowStuff';
 
-const WeekBibleStudy = ({day, navigation}) => {
+const WeekBibleStudy = ({day, week_ago, navigation}) => {
 
     const {proxy, stuff} = useContext(AuthContext);
     const {trans} = useContext(LanguageContext);
@@ -67,7 +68,7 @@ const WeekBibleStudy = ({day, navigation}) => {
       for(let k in USERS){  
         if(selected === USERS[k]){
 
-          const resp = fetch(`${proxy}/backend/set_calendar/${k}/`, {
+          const resp = fetch(`${proxy}/backend/set_calendar/${k}/${week_ago}/`, {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json'
@@ -97,81 +98,112 @@ const WeekBibleStudy = ({day, navigation}) => {
     getCalendarDatesByDate()
   }
 
-  const deleteWeekBibleStudy = async(user) => {
-    const resp = await fetch(`${proxy}/backend/delete_calendar/${user.id}/`, {
-      method: 'DELETE',
-      headers: {
-          'Content-Type': 'application/json'
-      },
-    })
-    if(resp.status === 200){
-      console.log('deleted', user)
-      setSelected([])
-      setWeekBibleStudy([])      
-      getCalendarDatesByDate()
-    }
-  }
 
   console.log('dateWeekBibleStudy:', dateWeekBibleStudy, day)
 
-if(dateWeekBibleStudy.length === 1 && stuff === true){
-  return ( 
-    dateWeekBibleStudy.map((e) => {
-      if(e.date === day && e.action === 'BibleStudyLeader'){  
-          return  <View style={styles.user}>
-          <Icon name='md-library' size={20} color={'#F9F9B5'} />
-          <Text style={styles.user_text}>{USERS[e.user]}</Text>
-              <Icon 
-                  name="close-circle-outline" 
-                  size={20} 
-                  color={'white'} 
-                  onPress={() => deleteWeekBibleStudy(e)}     
-                  />
-          </View>  
-                              
-      }
-  }) 
 
-  )
-     
-}else if(dateWeekBibleStudy.length === 0 && stuff === true){
-        return (
-            <View style={styles.row}>
-              <SelectList 
-                setSelected={(val) => setSelected(val)} 
-                data={data} 
-                save="value"
-                // onSelect={(value) => alert(`${value}`)} 
-                placeholder={
-                  <View style={styles.placeholder}>
-                    <Icon name='md-library' size={20} color={'white'} />
-                    <Text style={styles.text}>{trans.BibleStudyLeader}</Text>
-                  </View>
-                }
-                boxStyles={styles.event}
-                inputStyles={styles.input}
-                dropdownItemStyles={{color: 'white'}}
-                dropdownTextStyles={{color: 'white'}}
-                arrowicon={<Icon name="chevron-down" size={20} color={'white'} />} 
-                searchicon={<Icon name="search" size={20} color={'white'} />} 
-                closeicon={<Icon name="close" size={20} color={'white'} />} 
-                search={true}
-              />
-              <TalkBtn onPress={() => setWeekBibleStudy(selected)} />
+  return(
+    <View>
+      <View style={styles.row}>
+        <SelectList 
+          setSelected={(val) => setSelected(val)} 
+          data={data} 
+          save="value"
+          // onSelect={(value) => alert(`${value}`)} 
+          placeholder={
+            <View style={styles.placeholder}>
+              <Icon name='md-library' size={20} color={'white'} />
+              <Text style={styles.text}>{trans.BibleStudyLeader}</Text>
             </View>
-        )
-  }if(dateWeekBibleStudy.length === 1 && stuff === false){
-    return ( 
-      dateWeekBibleStudy.map((e) => {
-        if(e.date === day && e.action === 'BibleStudyLeader'){  
-            return  <View style={styles.user}>
-            <Icon name='md-library' size={20} color={'#F9F9B5'} />
-            <Text style={styles.user_text}>{USERS[e.user]}</Text>
-            </View>                                
-        }
-    }) 
-    )    
-  }
+          }
+          boxStyles={styles.event}
+          inputStyles={styles.input}
+          dropdownItemStyles={{color: 'white'}}
+          dropdownTextStyles={{color: 'white'}}
+          arrowicon={<Icon name="chevron-down" size={20} color={'white'} />} 
+          searchicon={<Icon name="search" size={20} color={'white'} />} 
+          closeicon={<Icon name="close" size={20} color={'white'} />} 
+          search={true}
+          dropdownStyles={styles.dropdown}
+        />
+        <TalkBtn onPress={() => setWeekBibleStudy(selected)} />
+      </View>
+      <View>
+        {dateWeekBibleStudy.map((person, index) => (
+          <ShowStuff 
+          key={person.id}
+          person={person}
+          USERS={USERS}
+          action={'BibleStudyLeader'} 
+          day={day}
+          stuff={stuff}
+        />
+        ))}
+      </View>
+    </View>
+  )
+
+
+
+// if(dateWeekBibleStudy.length === 1 && stuff === true){
+//   return ( 
+//     dateWeekBibleStudy.map((e) => {
+//       if(e.date === day && e.action === 'BibleStudyLeader'){  
+//           return  <View style={styles.user}>
+//           <Icon name='md-library' size={20} color={'#F9F9B5'} />
+//           <Text style={styles.user_text}>{USERS[e.user]}</Text>
+//               <Icon 
+//                   name="close-circle-outline" 
+//                   size={20} 
+//                   color={'white'} 
+//                   onPress={() => deleteWeekBibleStudy(e)}     
+//                   />
+//           </View>  
+                              
+//       }
+//   }) 
+
+//   )
+     
+// }else if(dateWeekBibleStudy.length === 0 && stuff === true){
+//         return (
+//             <View style={styles.row}>
+//               <SelectList 
+//                 setSelected={(val) => setSelected(val)} 
+//                 data={data} 
+//                 save="value"
+//                 // onSelect={(value) => alert(`${value}`)} 
+//                 placeholder={
+//                   <View style={styles.placeholder}>
+//                     <Icon name='md-library' size={20} color={'white'} />
+//                     <Text style={styles.text}>{trans.BibleStudyLeader}</Text>
+//                   </View>
+//                 }
+//                 boxStyles={styles.event}
+//                 inputStyles={styles.input}
+//                 dropdownItemStyles={{color: 'white'}}
+//                 dropdownTextStyles={{color: 'white'}}
+//                 arrowicon={<Icon name="chevron-down" size={20} color={'white'} />} 
+//                 searchicon={<Icon name="search" size={20} color={'white'} />} 
+//                 closeicon={<Icon name="close" size={20} color={'white'} />} 
+//                 search={true}
+//                 dropdownStyles={styles.dropdown}
+//               />
+//               <TalkBtn onPress={() => setWeekBibleStudy(selected)} />
+//             </View>
+//         )
+//   }if(dateWeekBibleStudy.length === 1 && stuff === false){
+//     return ( 
+//       dateWeekBibleStudy.map((e) => {
+//         if(e.date === day && e.action === 'BibleStudyLeader'){  
+//             return  <View style={styles.user}>
+//             <Icon name='md-library' size={20} color={'#F9F9B5'} />
+//             <Text style={styles.user_text}>{USERS[e.user]}</Text>
+//             </View>                                
+//         }
+//     }) 
+//     )    
+//   }
 }
 
 export default WeekBibleStudy

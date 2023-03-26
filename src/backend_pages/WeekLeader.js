@@ -8,8 +8,9 @@ import { LanguageContext } from '../context/LanguageContext';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import TalkBtn from '../buttons/TalkBtn';
 import { styles } from '../styles/Styles';
+import ShowStuff from './ShowStuff';
 
-const WeekLeader = ({day, navigation}) => {
+const WeekLeader = ({day, week_ago, navigation}) => {
 
     const {proxy, stuff} = useContext(AuthContext);
     const {trans} = useContext(LanguageContext);
@@ -67,7 +68,7 @@ const WeekLeader = ({day, navigation}) => {
     let datas = JSON.parse(await AsyncStorage.getItem("asyncUserData"))
       for(let k in USERS){  
         if(selected === USERS[k]){
-          fetch(`${proxy}/backend/set_calendar/${k}/`, {
+          fetch(`${proxy}/backend/set_calendar/${k}/${week_ago}/`, {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json'
@@ -114,29 +115,10 @@ const WeekLeader = ({day, navigation}) => {
 
   console.log('dateLeaderWeek:', dateLeaderWeek, day, stuff)
 
-if(dateLeaderWeek.length === 1 && stuff === true){
-  return ( 
-    dateLeaderWeek.map((e) => {
-      if(e.date === day && e.action === 'LeaderAndIntroductoryRemarks'){  
-          return  <View style={styles.user}>
-          <Icon name='person-outline' size={20} color={'#F9F9B5'} />
-          <Text style={styles.user_text}>{USERS[e.user]}</Text>
-              <Icon 
-                  name="close-circle-outline" 
-                  size={20} 
-                  color={'white'} 
-                  onPress={() => deleteLeaderWeek(e)}     
-                  />
-          </View>  
-                              
-      }
-  }) 
 
-  )
-     
-}else if(dateLeaderWeek.length === 0 && stuff === true){
-        return (
-            <View style={styles.row}>
+  return(
+    <View>
+      <View style={styles.row}>
               <SelectList 
                 setSelected={(val) => setSelected(val)} 
                 data={data} 
@@ -156,22 +138,86 @@ if(dateLeaderWeek.length === 1 && stuff === true){
                 searchicon={<Icon name="search" size={20} color={'white'} />} 
                 closeicon={<Icon name="close" size={20} color={'white'} />} 
                 search={true}
+                dropdownStyles={styles.dropdown}
               />
               <TalkBtn onPress={() => setLeaderWeek(selected)}/>
             </View>
-      )}else if(dateLeaderWeek.length === 1 && stuff === false){
-        return ( 
-          dateLeaderWeek.map((e) => {
-            if(e.date === day && e.action === 'LeaderAndIntroductoryRemarks'){  
-              return  <View style={styles.user}>
-              <Icon name='person-outline' size={20} color={'#F9F9B5'} />
-              <Text style={styles.user_text}>{USERS[e.user]}</Text>
-              </View>  
+            <View>
+            {dateLeaderWeek.map((person, index) => (
+              <ShowStuff 
+              key={person.id}
+              person={person}
+              USERS={USERS}
+              action={'LeaderAndIntroductoryRemarks'}
+              day={day}
+              stuff={stuff}
+            />
+            ))}
+      </View>
+    </View>
+  )
+
+
+
+// if(dateLeaderWeek.length === 1 && stuff === true){
+//   return ( 
+//     dateLeaderWeek.map((e) => {
+//       if(e.date === day && e.action === 'LeaderAndIntroductoryRemarks'){  
+//           return  <View style={styles.user}>
+//           <Icon name='person-outline' size={20} color={'#F9F9B5'} />
+//           <Text style={styles.user_text}>{USERS[e.user]}</Text>
+//               <Icon 
+//                   name="close-circle-outline" 
+//                   size={20} 
+//                   color={'white'} 
+//                   onPress={() => deleteLeaderWeek(e)}     
+//                   />
+//           </View>  
+                              
+//       }
+//   }) 
+
+//   )
+     
+// }else if(dateLeaderWeek.length === 0 && stuff === true){
+//         return (
+//             <View style={styles.row}>
+//               <SelectList 
+//                 setSelected={(val) => setSelected(val)} 
+//                 data={data} 
+//                 save="value"
+//                 // onSelect={(value) => alert(`${value}`)} 
+//                 placeholder={
+//                   <View style={styles.placeholder}>
+//                     <Icon name='person-outline' size={20} color={'white'} />
+//                     <Text style={styles.text}>{trans.LeaderAndIntroductoryRemarks}</Text>
+//                   </View>
+//                 }
+//                 boxStyles={styles.event}
+//                 inputStyles={styles.input}
+//                 dropdownItemStyles={{color: 'white'}}
+//                 dropdownTextStyles={{color: 'white'}}
+//                 arrowicon={<Icon name="chevron-down" size={20} color={'white'} />} 
+//                 searchicon={<Icon name="search" size={20} color={'white'} />} 
+//                 closeicon={<Icon name="close" size={20} color={'white'} />} 
+//                 search={true}
+//                 dropdownStyles={styles.dropdown}
+//               />
+//               <TalkBtn onPress={() => setLeaderWeek(selected)}/>
+//             </View>
+//       )}else if(dateLeaderWeek.length === 1 && stuff === false){
+//         return ( 
+//           dateLeaderWeek.map((e) => {
+//             if(e.date === day && e.action === 'LeaderAndIntroductoryRemarks'){  
+//               return  <View style={styles.user}>
+//               <Icon name='person-outline' size={20} color={'#F9F9B5'} />
+//               <Text style={styles.user_text}>{USERS[e.user]}</Text>
+//               </View>  
                                     
-            }
-          }) 
-        )     
-      }
+//             }
+//           }) 
+//         )     
+//       }
 }
 
 export default WeekLeader

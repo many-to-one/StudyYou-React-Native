@@ -8,8 +8,9 @@ import { LanguageContext } from '../context/LanguageContext';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import TalkBtn from '../buttons/TalkBtn';
 import { styles } from '../styles/Styles';
+import ShowStuff from './ShowStuff';
 
-const WeekLocalNeeds = ({day, navigation}) => {
+const WeekLocalNeeds = ({day, week_ago, navigation}) => {
 
     const {proxy, stuff} = useContext(AuthContext);
     const {trans} = useContext(LanguageContext);
@@ -66,7 +67,7 @@ const WeekLocalNeeds = ({day, navigation}) => {
     let datas = JSON.parse(await AsyncStorage.getItem("asyncUserData"))
       for(let k in USERS){  
         if(selected === USERS[k]){
-          fetch(`${proxy}/backend/set_calendar/${k}/`, {
+          fetch(`${proxy}/backend/set_calendar/${k}/${week_ago}/`, {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json'
@@ -96,82 +97,112 @@ const WeekLocalNeeds = ({day, navigation}) => {
     getCalendarDatesByDate()
   }
 
-  const deleteWeekLocalNeeds = async(user) => {
-    const resp = await fetch(`${proxy}/backend/delete_calendar/${user.id}/`, {
-      method: 'DELETE',
-      headers: {
-          'Content-Type': 'application/json'
-      },
-    })
-    if(resp.status === 200){
-      console.log('deleted', user)
-      setSelected([])
-      setDateWeekLocalNeeds([])      
-      getCalendarDatesByDate()
-    }
-  }
-
   console.log('dateWeekLocalNeeds:', dateWeekLocalNeeds, stuff)
 
-if(dateWeekLocalNeeds.length === 1 && stuff === true){
-  return ( 
-    dateWeekLocalNeeds.map((e) => {
-      if(e.date === day && e.action === 'LocalNeeds'){  
-          return  <View style={styles.user}>
-          <Icon name='md-file-tray-full' size={20} color={'#F9F9B5'} />
-          <Text style={styles.user_text}>{USERS[e.user]}</Text>
-              <Icon 
-                  name="close-circle-outline" 
-                  size={20} 
-                  color={'white'} 
-                  onPress={() => deleteWeekLocalNeeds(e)}     
-                  />
-          </View>  
-                              
-      }
-  }) 
 
-  )
-     
-}else if(dateWeekLocalNeeds.length === 0 && stuff === true){
-        return (
-            <View style={styles.row}>
-              <SelectList
-                setSelected={(val) => setSelected(val)} 
-                data={data} 
-                save="value"
-                // onSelect={(value) => alert(`${value}`)} 
-                placeholder={
-                  <View style={styles.placeholder}>
-                    <Icon name='md-file-tray-full' size={20} color={'white'} />
-                    <Text style={styles.text}>{trans.LocalNeeds}</Text>
-                  </View>
-                }
-                boxStyles={styles.event}
-                inputStyles={styles.input}
-                dropdownItemStyles={{color: 'white'}}
-                dropdownTextStyles={{color: 'white'}}
-                arrowicon={<Icon name="chevron-down" size={20} color={'white'} />} 
-                searchicon={<Icon name="search" size={20} color={'white'} />} 
-                closeicon={<Icon name="close" size={20} color={'white'} />} 
-                search={true}
-              />
-              <TalkBtn onPress={() => setWeekLocalNeeds(selected)}/>
+  return(
+    <View>
+      <View style={styles.row}>
+        <SelectList
+          setSelected={(val) => setSelected(val)} 
+          data={data} 
+          save="value"
+          // onSelect={(value) => alert(`${value}`)} 
+          placeholder={
+            <View style={styles.placeholder}>
+              <Icon name='md-file-tray-full' size={20} color={'white'} />
+              <Text style={styles.text}>{trans.LocalNeeds}</Text>
             </View>
-        )
-  }else if(dateWeekLocalNeeds.length === 1 && stuff === false){
-    return ( 
-      dateWeekLocalNeeds.map((e) => {
-        if(e.date === day && e.action === 'LocalNeeds'){  
-            return  <View style={styles.user}>
-            <Icon name='md-file-tray-full' size={20} color={'#F9F9B5'} />
-            <Text style={styles.user_text}>{USERS[e.user]}</Text>
-            </View>  
+          }
+          boxStyles={styles.event}
+          inputStyles={styles.input}
+          dropdownItemStyles={{color: 'white'}}
+          dropdownTextStyles={{color: 'white'}}
+          arrowicon={<Icon name="chevron-down" size={20} color={'white'} />} 
+          searchicon={<Icon name="search" size={20} color={'white'} />} 
+          closeicon={<Icon name="close" size={20} color={'white'} />} 
+          search={true}
+          dropdownStyles={styles.dropdown}
+        />
+        <TalkBtn onPress={() => setWeekLocalNeeds(selected)}/>
+      </View>
+      <View>
+        {dateWeekLocalNeeds.map((person, index) => (
+          <ShowStuff 
+          key={person.id}
+          person={person}
+          USERS={USERS}
+          action={'LocalNeeds'} 
+          day={day}
+          stuff={stuff}
+        />
+        ))}
+      </View>
+    </View>
+  )
+
+
+
+// if(dateWeekLocalNeeds.length === 1 && stuff === true){
+//   return ( 
+//     dateWeekLocalNeeds.map((e) => {
+//       if(e.date === day && e.action === 'LocalNeeds'){  
+//           return  <View style={styles.user}>
+//           <Icon name='md-file-tray-full' size={20} color={'#F9F9B5'} />
+//           <Text style={styles.user_text}>{USERS[e.user]}</Text>
+//               <Icon 
+//                   name="close-circle-outline" 
+//                   size={20} 
+//                   color={'white'} 
+//                   onPress={() => deleteWeekLocalNeeds(e)}     
+//                   />
+//           </View>  
+                              
+//       }
+//   }) 
+
+//   )
+     
+// }else if(dateWeekLocalNeeds.length === 0 && stuff === true){
+//         return (
+//             <View style={styles.row}>
+//               <SelectList
+//                 setSelected={(val) => setSelected(val)} 
+//                 data={data} 
+//                 save="value"
+//                 // onSelect={(value) => alert(`${value}`)} 
+//                 placeholder={
+//                   <View style={styles.placeholder}>
+//                     <Icon name='md-file-tray-full' size={20} color={'white'} />
+//                     <Text style={styles.text}>{trans.LocalNeeds}</Text>
+//                   </View>
+//                 }
+//                 boxStyles={styles.event}
+//                 inputStyles={styles.input}
+//                 dropdownItemStyles={{color: 'white'}}
+//                 dropdownTextStyles={{color: 'white'}}
+//                 arrowicon={<Icon name="chevron-down" size={20} color={'white'} />} 
+//                 searchicon={<Icon name="search" size={20} color={'white'} />} 
+//                 closeicon={<Icon name="close" size={20} color={'white'} />} 
+//                 search={true}
+//                 dropdownStyles={styles.dropdown}
+//               />
+//               <TalkBtn onPress={() => setWeekLocalNeeds(selected)}/>
+//             </View>
+//         )
+//   }else if(dateWeekLocalNeeds.length === 1 && stuff === false){
+//     return ( 
+//       dateWeekLocalNeeds.map((e) => {
+//         if(e.date === day && e.action === 'LocalNeeds'){  
+//             return  <View style={styles.user}>
+//             <Icon name='md-file-tray-full' size={20} color={'#F9F9B5'} />
+//             <Text style={styles.user_text}>{USERS[e.user]}</Text>
+//             </View>  
                                 
-        }
-    }) 
-    )     
-  }
+//         }
+//     }) 
+//     )     
+//   }
 }
 
 export default WeekLocalNeeds

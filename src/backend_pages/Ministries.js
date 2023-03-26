@@ -8,7 +8,7 @@ import Ministry from './Ministry';
 
 const Ministries = ({route, navigation}) => {
 
-    const {day} = route.params;
+    const {day, week_ago} = route.params;
     const {trans} = useContext(LanguageContext);
 
   return (
@@ -16,7 +16,10 @@ const Ministries = ({route, navigation}) => {
         <View style={styles.container}>
         <View style={styles.event}>
           <Text style={styles.text}>{trans.MinistryLeaders}</Text>
-          <Ministry  day={day}/>
+          <Ministry  
+            day={day} 
+            week_ago={week_ago}
+          />
         </View>
       </View>
       </ScrollView>

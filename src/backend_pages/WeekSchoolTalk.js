@@ -8,8 +8,9 @@ import { LanguageContext } from '../context/LanguageContext';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import TalkBtn from '../buttons/TalkBtn';
 import { styles } from '../styles/Styles';
+import ShowStuff from './ShowStuff';
 
-const WeekSchoolTalk = ({day, navigation}) => {
+const WeekSchoolTalk = ({day, week_ago, navigation}) => {
 
     const {proxy, stuff} = useContext(AuthContext);
     const {trans} = useContext(LanguageContext);
@@ -66,7 +67,7 @@ const WeekSchoolTalk = ({day, navigation}) => {
     let datas = JSON.parse(await AsyncStorage.getItem("asyncUserData"))
       for(let k in USERS){  
         if(selected === USERS[k]){
-          fetch(`${proxy}/backend/set_calendar/${k}/`, {
+          fetch(`${proxy}/backend/set_calendar/${k}/${week_ago}/`, {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json'
@@ -96,80 +97,113 @@ const WeekSchoolTalk = ({day, navigation}) => {
     getCalendarDatesByDate()
   }
 
-  const deleteWeekSchoolTalk = async(user) => {
-    const resp = await fetch(`${proxy}/backend/delete_calendar/${user.id}/`, {
-      method: 'DELETE',
-      headers: {
-          'Content-Type': 'application/json'
-      },
-    })
-    if(resp.status === 200){
-      console.log('deleted', user)
-      setSelected([])
-      setDateWeekFindTreasures([])      
-      getCalendarDatesByDate()
-    }
-  }
 
   console.log('dateWeekSchoolTalk:', dateWeekSchoolTalk, day)
 
-if(dateWeekSchoolTalk.length === 1 && stuff === true){
-  return ( 
-    dateWeekSchoolTalk.map((e) => {
-      if(e.date === day && e.action === 'SchoolTalk'){  
-          return  <View style={styles.user}>
-          <Icon name='md-man-outline' size={20} color={'#F9F9B5'} />
-          <Text style={styles.user_text}>{USERS[e.user]}</Text>
-              <Icon 
-                  name="close-circle-outline" 
-                  size={20} 
-                  color={'white'} 
-                  onPress={() => deleteWeekSchoolTalk(e)}     
-                  />
-          </View>  
-                              
-      }
-  }) 
 
-  )
-     
-}else if(dateWeekSchoolTalk.length === 0 && stuff === true){
-        return (
-            <View style={styles.row}>
-              <SelectList 
-                setSelected={(val) => setSelected(val)} 
-                data={data} 
-                save="value"
-                // onSelect={(value) => alert(`${value}`)} 
-                placeholder={
-                  <View style={styles.placeholder}>
-                    <Icon name='md-man-outline' size={20} color={'white'} />
-                    <Text style={styles.text}>{trans.SchoolTalk}</Text>
-                  </View>
-                }
-                boxStyles={styles.event}
-                inputStyles={styles.input}
-                dropdownItemStyles={{color: 'white'}}
-                dropdownTextStyles={{color: 'white'}}
-                arrowicon={<Icon name="chevron-down" size={20} color={'white'} />} 
-                searchicon={<Icon name="search" size={20} color={'white'} />} 
-                closeicon={<Icon name="close" size={20} color={'white'} />} 
-                search={true}
-              />
-              <TalkBtn onPress={() => setWeekSchoolTalk(selected)}/>
+
+  return(
+    <View>
+      <View style={styles.row}>
+        <SelectList 
+          setSelected={(val) => setSelected(val)} 
+          data={data} 
+          save="value"
+          // onSelect={(value) => alert(`${value}`)} 
+          placeholder={
+            <View style={styles.placeholder}>
+              <Icon name='md-man-outline' size={20} color={'white'} />
+              <Text style={styles.text}>{trans.SchoolTalk}</Text>
             </View>
-  )}else if(dateWeekSchoolTalk.length === 1 && stuff === false){
-    return ( 
-      dateWeekSchoolTalk.map((e) => {
-        if(e.date === day && e.action === 'SchoolTalk'){  
-          return  <View style={styles.user}>
-          <Icon name='md-man-outline' size={20} color={'#F9F9B5'} />
-          <Text style={styles.user_text}>{USERS[e.user]}</Text>
-          </View>                          
-        }
-      }) 
-    )     
-  }
+          }
+          boxStyles={styles.event}
+          inputStyles={styles.input}
+          dropdownItemStyles={{color: 'white'}}
+          dropdownTextStyles={{color: 'white'}}
+          arrowicon={<Icon name="chevron-down" size={20} color={'white'} />} 
+          searchicon={<Icon name="search" size={20} color={'white'} />} 
+          closeicon={<Icon name="close" size={20} color={'white'} />} 
+          search={true}
+          dropdownStyles={styles.dropdown}
+        />
+        <TalkBtn onPress={() => setWeekSchoolTalk(selected)}/>
+      </View>
+      <View>
+        {dateWeekSchoolTalk.map((person, index) => (
+          <ShowStuff 
+          key={person.id}
+          person={person}
+          USERS={USERS}
+          action={'SchoolTalk'} 
+          day={day}
+          stuff={stuff}
+        />
+        ))}
+      </View>
+    </View>
+  )
+
+
+
+
+// if(dateWeekSchoolTalk.length === 1 && stuff === true){
+//   return ( 
+//     dateWeekSchoolTalk.map((e) => {
+//       if(e.date === day && e.action === 'SchoolTalk'){  
+//           return  <View style={styles.user}>
+//           <Icon name='md-man-outline' size={20} color={'#F9F9B5'} />
+//           <Text style={styles.user_text}>{USERS[e.user]}</Text>
+//               <Icon 
+//                   name="close-circle-outline" 
+//                   size={20} 
+//                   color={'white'} 
+//                   onPress={() => deleteWeekSchoolTalk(e)}     
+//                   />
+//           </View>  
+                              
+//       }
+//   }) 
+
+//   )
+     
+// }else if(dateWeekSchoolTalk.length === 0 && stuff === true){
+//         return (
+//             <View style={styles.row}>
+//               <SelectList 
+//                 setSelected={(val) => setSelected(val)} 
+//                 data={data} 
+//                 save="value"
+//                 // onSelect={(value) => alert(`${value}`)} 
+//                 placeholder={
+//                   <View style={styles.placeholder}>
+//                     <Icon name='md-man-outline' size={20} color={'white'} />
+//                     <Text style={styles.text}>{trans.SchoolTalk}</Text>
+//                   </View>
+//                 }
+//                 boxStyles={styles.event}
+//                 inputStyles={styles.input}
+//                 dropdownItemStyles={{color: 'white'}}
+//                 dropdownTextStyles={{color: 'white'}}
+//                 arrowicon={<Icon name="chevron-down" size={20} color={'white'} />} 
+//                 searchicon={<Icon name="search" size={20} color={'white'} />} 
+//                 closeicon={<Icon name="close" size={20} color={'white'} />} 
+//                 search={true}
+//                 dropdownStyles={styles.dropdown}
+//               />
+//               <TalkBtn onPress={() => setWeekSchoolTalk(selected)}/>
+//             </View>
+//   )}else if(dateWeekSchoolTalk.length === 1 && stuff === false){
+//     return ( 
+//       dateWeekSchoolTalk.map((e) => {
+//         if(e.date === day && e.action === 'SchoolTalk'){  
+//           return  <View style={styles.user}>
+//           <Icon name='md-man-outline' size={20} color={'#F9F9B5'} />
+//           <Text style={styles.user_text}>{USERS[e.user]}</Text>
+//           </View>                          
+//         }
+//       }) 
+//     )     
+//   }
 }
 
 export default WeekSchoolTalk

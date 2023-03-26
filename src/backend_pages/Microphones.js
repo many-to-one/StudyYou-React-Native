@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { Text, View } from 'react-native'
 import { AuthContext } from '../context/AuthContext';
-import { MultipleSelectList  } from 'react-native-dropdown-select-list';
+import { SelectList  } from 'react-native-dropdown-select-list';
 import Icon from "react-native-vector-icons/Ionicons";
 import { useIsFocused } from '@react-navigation/native';
 import { LanguageContext } from '../context/LanguageContext';
@@ -10,7 +10,7 @@ import TalkBtn from '../buttons/TalkBtn';
 import { styles } from '../styles/Styles';
 import ShowStuff from './ShowStuff';
 
-const Microphones = ({day, navigation}) => {
+const Microphones = ({day, week_ago, navigation}) => {
 
     const {proxy, congr, stuff} = useContext(AuthContext); //////////////////
     const c = congr() /////////////////////
@@ -48,9 +48,10 @@ const Microphones = ({day, navigation}) => {
           body:JSON.stringify(body),
         });
         const data = await resp.json();
+        console.log('MIcrophones', data)
         if(data){
           setDateMicrophones(data)
-          setSelected([])
+          setSelected('')
         }  
   }
 
@@ -68,11 +69,11 @@ const Microphones = ({day, navigation}) => {
 
   const setMicrophones = async(selected) => {
     let datas = JSON.parse(await AsyncStorage.getItem("asyncUserData"))  
-    selected.map((e) => {
+    // selected.map((e) => {
       for(let k in USERS){  
-        if(e === USERS[k]){
+        if(selected === USERS[k]){
 
-          const resp = fetch(`${proxy}/backend/set_calendar/${k}/`, {
+          const resp = fetch(`${proxy}/backend/set_calendar/${k}/${week_ago}/`, {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json'
@@ -84,10 +85,13 @@ const Microphones = ({day, navigation}) => {
               'groupe': null,
               'icon': 'mic',
             })
-          })   
+          })  
+          if(resp){
+            // console.log('MIcrophones', resp)
+          } 
         }
       }
-    })
+    // })
     const body = {'date': day, 'action': 'Microphones', 'congregation': datas.congregation}  
     const resp = await fetch(`${proxy}/backend/get_calendar_date/`, {
       method: 'POST',
@@ -101,6 +105,7 @@ const Microphones = ({day, navigation}) => {
           setDateMicrophones(data)
         }
     getCalendarDatesByDate()
+    setSelected('')
   }
 
 console.log('dateMicrophones:', dateMicrophones, stuff)
@@ -108,7 +113,7 @@ console.log('dateMicrophones:', dateMicrophones, stuff)
 return (
   <View>
   <View style={styles.row}>
-    <MultipleSelectList 
+    <SelectList 
       setSelected={(val) => setSelected(val)} 
       data={data} 
       save="value" 
@@ -147,6 +152,7 @@ return (
     </View>
   </View>
       )
+
 
 // if(dateMicrophones.length > 1 && stuff === true){
 //   return ( 

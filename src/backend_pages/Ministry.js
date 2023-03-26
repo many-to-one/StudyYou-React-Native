@@ -10,7 +10,7 @@ import TalkBtn from '../buttons/TalkBtn';
 import ShowStuff  from './ShowStuff'
 import { styles } from '../styles/Styles';
 
-const Ministry = ({day, navigation}) => {
+const Ministry = ({day, week_ago, navigation}) => {
 
   const {proxy, stuff} = useContext(AuthContext);
   const {trans} = useContext(LanguageContext);
@@ -26,7 +26,7 @@ const Ministry = ({day, navigation}) => {
 
   const getUsers = async() => {
     let datas = JSON.parse(await AsyncStorage.getItem("asyncUserData"))
-    const resp = await fetch(`${proxy}/users/users/${datas.congregation}/`)
+    const resp = await fetch(`${proxy}/users/users_by_ministry/${datas.congregation}/`)
       const data = await resp.json();
       if(resp.status === 200){
         setUsers(data)
@@ -69,7 +69,7 @@ const Ministry = ({day, navigation}) => {
       for(let k in USERS){  
         if(e === USERS[k]){
 
-          const resp = fetch(`${proxy}/backend/set_calendar/${k}/`, {
+          const resp = fetch(`${proxy}/backend/set_calendar/${k}/${week_ago}/`, {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json'

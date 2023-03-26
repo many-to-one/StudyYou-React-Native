@@ -6,10 +6,11 @@ import { LanguageContext } from '../context/LanguageContext';
 
 const CreateCalendarEvent = ({route, navigation}) => {
 
-  const {day} = route.params;
+  const {day, week_ago} = route.params;
   const {
     trans,
   } = useContext(LanguageContext);
+
 
     return (
       <ScrollView style={styles.scroll}>
@@ -21,7 +22,7 @@ const CreateCalendarEvent = ({route, navigation}) => {
               name="people-sharp" 
               size={50} 
               color={'#78D7D9'} 
-              onPress={() => navigation.navigate('Service', {day: day})}     
+              onPress={() => navigation.navigate('Service', {day: day, week_ago: week_ago})}     
             />
             <Text style={styles.text}>{trans.TechnicalSupport}</Text>
           </View>
@@ -33,7 +34,7 @@ const CreateCalendarEvent = ({route, navigation}) => {
               name="people-circle-outline" 
               size={50} 
               color={'#78D7D9'} 
-              onPress={() => navigation.navigate('Ministries', {day: day})}     
+              onPress={() => navigation.navigate('Ministries', {day: day, week_ago: week_ago})}     
             />
             <Text style={styles.text}>{trans.MinistryLeaders}</Text>
           </View>
@@ -45,7 +46,7 @@ const CreateCalendarEvent = ({route, navigation}) => {
               name="reader" 
               size={50} 
               color={'#78D7D9'} 
-              onPress={() => navigation.navigate('MiddleOfTheWeek', {day: day})}     
+              onPress={() => navigation.navigate('MiddleOfTheWeek', {day: day, week_ago: week_ago})}     
             />
             <Text style={styles.text}>{trans.MidweekMeetings}</Text>
           </View>
@@ -57,7 +58,7 @@ const CreateCalendarEvent = ({route, navigation}) => {
               name="newspaper" 
               size={50} 
               color={'#78D7D9'} 
-              onPress={() => navigation.navigate('WeekendMeetings', {day: day})}     
+              onPress={() => navigation.navigate('WeekendMeetings', {day: day, week_ago: week_ago})}     
             />
             <Text style={styles.text}>{trans.WeekendMeetings}</Text>
           </View>

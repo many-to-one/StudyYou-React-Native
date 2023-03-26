@@ -93,8 +93,10 @@ const MinistryWith = ({day, navigation}) => {
             'date': `${day}`,
             'action': 'MinistryWith',
             'person': `${selected}`,
-            'time': `${time}`,
+            'time': `${day}`,
+            'at_time': `${time}`,
             'congregation': userData.congregation,
+            'icon': 'briefcase-sharp',
           })
         })
 
@@ -107,8 +109,10 @@ const MinistryWith = ({day, navigation}) => {
           'date': `${day}`,
           'action': 'MinistryWith',
           'person': `${userData.id}`,
-          'time': `${time}`,
+          'time': `${day}`,
+          'at_time': `${time}`,
           'congregation': userData.congregation,
+          'icon': 'briefcase-sharp',
         })
       })
 
@@ -155,6 +159,7 @@ return(
           searchicon={<Icon name="search" size={20} color={'white'} />} 
           closeicon={<Icon name="close" size={20} color={'white'} />} 
           search={true}
+          dropdownStyles={styles.dropdown}
         />
         <SelectList 
           setSelected={(val) => setTime(val)} 
@@ -174,6 +179,7 @@ return(
           searchicon={<Icon name="search" size={20} color={'white'} />} 
           closeicon={<Icon name="close" size={20} color={'white'} />} 
           search={true}
+          dropdownStyles={styles.dropdown}
         />
         <SheduleBtn onPress={() => setMinistryWith(selected, time)}/>
         </View>

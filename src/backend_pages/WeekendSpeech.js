@@ -245,6 +245,7 @@ if(dateWeekendSpeach.length === 1 && stuff === true && person === null){
           searchicon={<Icon name="search" size={20} color={'white'} />} 
           closeicon={<Icon name="close" size={20} color={'white'} />} 
           search={true}
+          dropdownStyles={styles.dropdown}
         />
           <TalkBtn onPress={() => setWeekendSpeach(selected)}/>
         </View>

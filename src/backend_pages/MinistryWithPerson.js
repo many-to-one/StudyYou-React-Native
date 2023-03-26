@@ -25,7 +25,7 @@ const MinistryWithPerson = ({person, day}) => {
         return  <View style={styles.user}>
         <Icon name='briefcase-sharp' size={20} color={'#F9F9B5'} />
         <Text style={styles.user_text}>{person.person}</Text>
-        <Text style={styles.user_text}>{person.time}</Text>
+        <Text style={styles.user_text}>{person.at_time}</Text>
           <Icon 
             name="close-circle-outline" 
             size={20} 

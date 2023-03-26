@@ -44,6 +44,7 @@ const Calendar_ = (props) => {
       const data = await resp.json()
       setDs(data.data)
       const ar = data.data
+      console.log('ar:', ar)
 
       ar.map((date) => {
         if(date.date < moment().format('YYYY-MM-DD')){
@@ -73,7 +74,9 @@ const Calendar_ = (props) => {
   }, [isFocused])
 
   const setDate = (day) => {
-    navigation.navigate('CreateCalendarEvent', {day: day})
+    let duration = moment.duration({ 'days': 7 });
+    let _week_ago = moment(day).subtract(duration)
+    navigation.navigate('CreateCalendarEvent', {day: day, week_ago:  moment(_week_ago._d).format('YYYY-MM-DD')})
     console.log(day)
   }
 
@@ -82,7 +85,7 @@ const Calendar_ = (props) => {
     <Calendar 
       onDayPress={(day) =>  setDate(day.dateString)}
       // onDayPress={(day) =>  marked.push(day.dateString)}
-      firstDay = { 1 } 
+      firstDay = { 7 } 
       style={styles.event}
       theme={{
         calendarBackground: 'transparent',

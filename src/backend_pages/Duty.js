@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { Text, View } from 'react-native'
 import { AuthContext } from '../context/AuthContext';
-import { MultipleSelectList  } from 'react-native-dropdown-select-list';
+import { SelectList  } from 'react-native-dropdown-select-list';
 import Icon from "react-native-vector-icons/Ionicons";
 import { useIsFocused } from '@react-navigation/native';
 import { LanguageContext } from '../context/LanguageContext';
@@ -10,7 +10,7 @@ import TalkBtn from '../buttons/TalkBtn';
 import { styles } from '../styles/Styles';
 import ShowStuff from './ShowStuff';
 
-const Duty = ({day, navigation}) => {
+const Duty = ({day, week_ago, navigation}) => {
 
     const {proxy, stuff} = useContext(AuthContext);
     const {trans} = useContext(LanguageContext);
@@ -26,7 +26,7 @@ const Duty = ({day, navigation}) => {
 
   const getUsers = async() => {
       let datas = JSON.parse(await AsyncStorage.getItem("asyncUserData"))
-      const resp = await fetch(`${proxy}/users/users_by_helper/${datas.congregation}/`)
+      const resp = await fetch(`${proxy}/users/users_by_service/${datas.congregation}/`)
       const data = await resp.json();
       if(resp.status === 200){
         setUsers(data)
@@ -66,11 +66,10 @@ const Duty = ({day, navigation}) => {
   const setDuty = async(selected) => {
     console.log('selected', selected)
     let datas = JSON.parse(await AsyncStorage.getItem("asyncUserData"))
-    selected.map((e) => {
       for(let k in USERS){  
-        if(e === USERS[k]){
+        if(selected === USERS[k]){
 
-          const resp = fetch(`${proxy}/backend/set_calendar/${k}/`, {
+          const resp = fetch(`${proxy}/backend/set_calendar/${k}/${week_ago}/`, {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json'
@@ -86,7 +85,6 @@ const Duty = ({day, navigation}) => {
           })   
         }
       }
-    })
     const body = {'date': day, 'action': 'Duty', 'congregation': datas.congregation}
     const resp = await fetch(`${proxy}/backend/get_calendar_date/`, {
       method: 'POST',
@@ -112,7 +110,7 @@ const Duty = ({day, navigation}) => {
   return(
     <View>
     <View style={styles.row}>
-      <MultipleSelectList 
+      <SelectList 
         setSelected={(val) => setSelected(val)} 
         data={data} 
         save="value" 

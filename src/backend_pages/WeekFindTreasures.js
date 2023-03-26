@@ -9,8 +9,9 @@ import { LanguageContext } from '../context/LanguageContext';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { styles } from '../styles/Styles';
 import TalkBtn from '../buttons/TalkBtn';
+import ShowStuff from './ShowStuff';
 
-const WeekFindTreasures = ({day, navigation}) => {
+const WeekFindTreasures = ({day, week_ago, navigation}) => {
 
     const {proxy, stuff} = useContext(AuthContext);
     const {trans} = useContext(LanguageContext);
@@ -67,7 +68,7 @@ const WeekFindTreasures = ({day, navigation}) => {
     let datas = JSON.parse(await AsyncStorage.getItem("asyncUserData"))
       for(let k in USERS){  
         if(selected === USERS[k]){
-          fetch(`${proxy}/backend/set_calendar/${k}/`, {
+          fetch(`${proxy}/backend/set_calendar/${k}/${week_ago}/`, {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json'
@@ -114,66 +115,111 @@ const WeekFindTreasures = ({day, navigation}) => {
 
   console.log('dateWeekFindTreasures:', dateWeekFindTreasures, stuff)
 
-if(dateWeekFindTreasures.length === 1 && stuff === true){
-  return ( 
-    dateWeekFindTreasures.map((e) => {
-      if(e.date === day && e.action === 'TreasuresFromGodsWord'){  
-          return  <View style={styles.user}>
-          <Icon name='albums' size={20} color={'#F9F9B5'} />
-          <Text style={styles.user_text}>{USERS[e.user]}</Text>
-              <Icon 
-                  name="close-circle-outline" 
-                  size={20} 
-                  color={'white'} 
-                  onPress={() => deleteWeekFindTreasures(e)}     
-                  />
-          </View>  
-                              
-      }
-  }) 
 
-  )
-     
-}else if(dateWeekFindTreasures.length === 0 && stuff === true){
-        return (
-            <View style={styles.row}>
-              <SelectList 
-                setSelected={(val) => setSelected(val)} 
-                data={data} 
-                save="value"
-                // onSelect={(value) => alert(`${value}`)} 
-                placeholder={
-                  <View style={styles.placeholder}>
-                    <Icon name='albums' size={20} color={'white'} />
-                    <Text style={styles.text}>{trans.SpiritualGems}</Text>
-                  </View>
-                }
-                boxStyles={styles.event}
-                inputStyles={styles.input}
-                dropdownItemStyles={{color: 'white'}}
-                dropdownTextStyles={{color: 'white'}}
-                arrowicon={<Icon name="chevron-down" size={20} color={'white'} />} 
-                searchicon={<Icon name="search" size={20} color={'white'} />} 
-                closeicon={<Icon name="close" size={20} color={'white'} />} 
-                search={true}
-              />
-              <TalkBtn onPress={() => setWeekFindTreasures(selected)}/>
+  return(
+    <View>
+      <View style={styles.row}>
+        <SelectList 
+          setSelected={(val) => setSelected(val)} 
+          data={data} 
+          save="value"
+          // onSelect={(value) => alert(`${value}`)} 
+          placeholder={
+            <View style={styles.placeholder}>
+              <Icon name='albums' size={20} color={'white'} />
+              <Text style={styles.text}>{trans.SpiritualGems}</Text>
             </View>
-        )
-}if(dateWeekFindTreasures.length === 1 && stuff === false){
-  return ( 
-    dateWeekFindTreasures.map((e) => {
-      if(e.date === day && e.action === 'TreasuresFromGodsWord'){  
-          return  <View style={styles.user}>
-          <Icon name='albums' size={20} color={'#F9F9B5'} />
-          <Text style={styles.user_text}>{USERS[e.user]}</Text>
-          </View>  
-                              
-      }
-  }) 
+          }
+          boxStyles={styles.event}
+          inputStyles={styles.input}
+          dropdownItemStyles={{color: 'white'}}
+          dropdownTextStyles={{color: 'white'}}
+          arrowicon={<Icon name="chevron-down" size={20} color={'white'} />} 
+          searchicon={<Icon name="search" size={20} color={'white'} />} 
+          closeicon={<Icon name="close" size={20} color={'white'} />} 
+          search={true}
+          dropdownStyles={styles.dropdown}
+        />
+        <TalkBtn onPress={() => setWeekFindTreasures(selected)}/>
+      </View>
+      <View>
+        {dateWeekFindTreasures.map((person, index) => (
+          <ShowStuff 
+          key={person.id}
+          person={person}
+          USERS={USERS}
+          action={'TreasuresFromGodsWord'} 
+          day={day}
+          stuff={stuff}
+        />
+        ))}
+      </View>
+    </View>
+  )
 
-  )    
-}
+
+
+// if(dateWeekFindTreasures.length === 1 && stuff === true){
+//   return ( 
+//     dateWeekFindTreasures.map((e) => {
+//       if(e.date === day && e.action === 'TreasuresFromGodsWord'){  
+//           return  <View style={styles.user}>
+//           <Icon name='albums' size={20} color={'#F9F9B5'} />
+//           <Text style={styles.user_text}>{USERS[e.user]}</Text>
+//               <Icon 
+//                   name="close-circle-outline" 
+//                   size={20} 
+//                   color={'white'} 
+//                   onPress={() => deleteWeekFindTreasures(e)}     
+//                   />
+//           </View>  
+                              
+//       }
+//   }) 
+
+//   )
+     
+// }else if(dateWeekFindTreasures.length === 0 && stuff === true){
+//         return (
+//             <View style={styles.row}>
+//               <SelectList 
+//                 setSelected={(val) => setSelected(val)} 
+//                 data={data} 
+//                 save="value"
+//                 // onSelect={(value) => alert(`${value}`)} 
+//                 placeholder={
+//                   <View style={styles.placeholder}>
+//                     <Icon name='albums' size={20} color={'white'} />
+//                     <Text style={styles.text}>{trans.SpiritualGems}</Text>
+//                   </View>
+//                 }
+//                 boxStyles={styles.event}
+//                 inputStyles={styles.input}
+//                 dropdownItemStyles={{color: 'white'}}
+//                 dropdownTextStyles={{color: 'white'}}
+//                 arrowicon={<Icon name="chevron-down" size={20} color={'white'} />} 
+//                 searchicon={<Icon name="search" size={20} color={'white'} />} 
+//                 closeicon={<Icon name="close" size={20} color={'white'} />} 
+//                 search={true}
+//                 dropdownStyles={styles.dropdown}
+//               />
+//               <TalkBtn onPress={() => setWeekFindTreasures(selected)}/>
+//             </View>
+//         )
+// }if(dateWeekFindTreasures.length === 1 && stuff === false){
+//   return ( 
+//     dateWeekFindTreasures.map((e) => {
+//       if(e.date === day && e.action === 'TreasuresFromGodsWord'){  
+//           return  <View style={styles.user}>
+//           <Icon name='albums' size={20} color={'#F9F9B5'} />
+//           <Text style={styles.user_text}>{USERS[e.user]}</Text>
+//           </View>  
+                              
+//       }
+//   }) 
+
+//   )    
+// }
 }
 
 export default WeekFindTreasures
