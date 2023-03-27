@@ -104,46 +104,65 @@ const WeekVisit1 = ({day, week_ago, navigation}) => {
   console.log('dateWeekVisit1:', dateWeekVisit1, stuff)
 
 
-  return(
-    <View>
-      <View style={styles.row}>
-        <SelectList 
-          setSelected={(val) => setSelected(val)} 
-          data={data} 
-          save="value"
-          // onSelect={(value) => alert(`${value}`)} 
-          placeholder={
-            <View style={styles.placeholder}>
-              <Icon name='people-outline' size={20} color={'white'} />
-              <Text style={styles.text}>{trans.InitialCall}</Text>
-            </View>
-          }
-          boxStyles={styles.event}
-          inputStyles={styles.input}
-          dropdownItemStyles={{color: 'white'}}
-          dropdownTextStyles={{color: 'white'}}
-          arrowicon={<Icon name="chevron-down" size={20} color={'white'} />} 
-          searchicon={<Icon name="search" size={20} color={'white'} />} 
-          closeicon={<Icon name="close" size={20} color={'white'} />} 
-          search={true}
-          dropdownStyles={styles.dropdown}
-        />
-        <TalkBtn onPress={() => setWeekVisit1(selected)}/>
-      </View>
+  if(stuff === true){
+    return(
       <View>
-        {dateWeekVisit1.map((person, index) => (
-          <ShowStuff 
-          key={person.id}
-          person={person}
-          USERS={USERS}
-          action={'InitialCall'} 
-          day={day}
-          stuff={stuff}
-        />
-        ))}
+        <View style={styles.row}>
+          <SelectList 
+            setSelected={(val) => setSelected(val)} 
+            data={data} 
+            save="value"
+            // onSelect={(value) => alert(`${value}`)} 
+            placeholder={
+              <View style={styles.placeholder}>
+                <Icon name='people-outline' size={20} color={'white'} />
+                <Text style={styles.text}>{trans.InitialCall}</Text>
+              </View>
+            }
+            boxStyles={styles.event}
+            inputStyles={styles.input}
+            dropdownItemStyles={{color: 'white'}}
+            dropdownTextStyles={{color: 'white'}}
+            arrowicon={<Icon name="chevron-down" size={20} color={'white'} />} 
+            searchicon={<Icon name="search" size={20} color={'white'} />} 
+            closeicon={<Icon name="close" size={20} color={'white'} />} 
+            search={true}
+            dropdownStyles={styles.dropdown}
+          />
+          <TalkBtn onPress={() => setWeekVisit1(selected)}/>
+        </View>
+        <View>
+          {dateWeekVisit1.map((person, index) => (
+            <ShowStuff 
+            key={person.id}
+            person={person}
+            USERS={USERS}
+            action={'InitialCall'} 
+            day={day}
+            stuff={stuff}
+          />
+          ))}
+        </View>
       </View>
-    </View>
-  )
+    )
+  }else{
+    return(
+      <View>
+        <View>
+          {dateWeekVisit1.map((person, index) => (
+            <ShowStuff 
+            key={person.id}
+            person={person}
+            USERS={USERS}
+            action={'InitialCall'} 
+            day={day}
+            stuff={stuff}
+          />
+          ))}
+        </View>
+      </View>
+    )
+  }
 
 
 

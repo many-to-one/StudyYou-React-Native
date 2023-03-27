@@ -6,7 +6,7 @@ const { width, height } = Dimensions.get('window');
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    // backgroundColor: 'black',
+    backgroundColor: 'black',
     flexDirection: 'column',
     alignItems: 'center',
     gap: 25,
@@ -112,6 +112,27 @@ const styles = StyleSheet.create({
     borderRadius: 15,
     backgroundColor: "transparent",
     gap: 10,
+    shadowColor: '#19868a',
+      shadowOpacity: 1,
+      shadowOffset: {
+        width: 0,
+        height: 0,
+      },
+      shadowRadius: 8
+  },
+  _user: {
+    width: width / 1.25,
+    flexDirection: 'row',
+    alignItems: 'center',
+    padding: 10,
+    marginBottom: 10,
+    borderWidth: 2,
+    borderColor: '#19868a',
+    borderRadius: 10,
+    height: 50,
+    borderRadius: 15,
+    backgroundColor: "transparent",
+    gap: 20,
     shadowColor: '#19868a',
       shadowOpacity: 1,
       shadowOffset: {

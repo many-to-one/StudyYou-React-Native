@@ -12,7 +12,7 @@ import StandWithPerson from './StandWithPerson';
 
 const Stand = ({day, navigation}) => {
 
-    const {proxy, userData} = useContext(AuthContext);
+    const {proxy, userData, stuff} = useContext(AuthContext);
     const {trans} = useContext(LanguageContext);
     const [person1, setPerson1] = useState('')
     const [person2, setPerson2] = useState('')
@@ -185,103 +185,120 @@ const Stand = ({day, navigation}) => {
   console.log('dateDuty:', dateDuty, day, place)
 
 
-  return(
-    <View>
+  if(stuff === true){
+    return(
       <View>
-        <SelectList 
-          setSelected={(val) => setPlace(val)} 
-          data={dataPlaces} 
-          save="value" 
-          placeholder={
-            <View style={styles.placeholder}>
-              <Icon name='business' size={20} color={'white'} />
-              <Text style={styles.text}>{trans.Stand}</Text>
-            </View>
-          }
-          boxStyles={styles.stand}
-          inputStyles={styles.input}
-          dropdownItemStyles={{color: 'white'}}
-          dropdownTextStyles={{color: 'white'}}
-          arrowicon={<Icon name="chevron-down" size={20} color={'white'} />} 
-          searchicon={<Icon name="search" size={20} color={'white'} />} 
-          closeicon={<Icon name="close" size={20} color={'white'} />} 
-          search={true}
-          dropdownStyles={styles.dropdown}
-        />
-        <SelectList 
-          setSelected={(val) => setPerson1(val)} 
-          data={data} 
-          save="value" 
-          placeholder={
-            <View style={styles.placeholder}>
-              <Icon name='business' size={20} color={'white'} />
-              <Text style={styles.text}>{trans.Stand}</Text>
-            </View>
-          }
-          boxStyles={styles.stand}
-          inputStyles={styles.input}
-          dropdownItemStyles={{color: 'white'}}
-          dropdownTextStyles={{color: 'white'}}
-          arrowicon={<Icon name="chevron-down" size={20} color={'white'} />} 
-          searchicon={<Icon name="search" size={20} color={'white'} />} 
-          closeicon={<Icon name="close" size={20} color={'white'} />} 
-          search={true}
-          dropdownStyles={styles.dropdown}
-        />
-        <SelectList 
-          setSelected={(val) => setPerson2(val)} 
-          data={data} 
-          save="value" 
-          placeholder={
-            <View style={styles.placeholder}>
-              <Icon name='business' size={20} color={'white'} />
-              <Text style={styles.text}>{trans.Stand}</Text>
-            </View>
-          }
-          boxStyles={styles.stand}
-          inputStyles={styles.input}
-          dropdownItemStyles={{color: 'white'}}
-          dropdownTextStyles={{color: 'white'}}
-          arrowicon={<Icon name="chevron-down" size={20} color={'white'} />} 
-          searchicon={<Icon name="search" size={20} color={'white'} />} 
-          closeicon={<Icon name="close" size={20} color={'white'} />} 
-          search={true}
-          dropdownStyles={styles.dropdown}
-        />
-        <SelectList 
-          setSelected={(val) => setTime(val)} 
-          data={TIME} 
-          save="value" 
-          placeholder={
-            <View style={styles.placeholder}>
-              <Icon name='business' size={20} color={'white'} />
-              <Text style={styles.text}>{trans.Time}</Text>
-            </View>
-          }
-          boxStyles={styles.stand}
-          inputStyles={styles.input}
-          dropdownItemStyles={{color: 'white'}}
-          dropdownTextStyles={{color: 'white'}}
-          arrowicon={<Icon name="chevron-down" size={20} color={'white'} />} 
-          searchicon={<Icon name="search" size={20} color={'white'} />} 
-          closeicon={<Icon name="close" size={20} color={'white'} />} 
-          search={true}
-          dropdownStyles={styles.dropdown}
-        />
-        <ScheduleBtn onPress={() => setStand(person1, person2, time, place)}/>
-        </View>
         <View>
-          {dateDuty.map((person, index) => (
-            
-          <StandWithPerson 
-            key={person.id}
-            person={person}
-            day={day}
+          <SelectList 
+            setSelected={(val) => setPlace(val)} 
+            data={dataPlaces} 
+            save="value" 
+            placeholder={
+              <View style={styles.placeholder}>
+                <Icon name='business' size={20} color={'white'} />
+                <Text style={styles.text}>{trans.Stand}</Text>
+              </View>
+            }
+            boxStyles={styles.stand}
+            inputStyles={styles.input}
+            dropdownItemStyles={{color: 'white'}}
+            dropdownTextStyles={{color: 'white'}}
+            arrowicon={<Icon name="chevron-down" size={20} color={'white'} />} 
+            searchicon={<Icon name="search" size={20} color={'white'} />} 
+            closeicon={<Icon name="close" size={20} color={'white'} />} 
+            search={true}
+            dropdownStyles={styles.dropdown}
           />
-          ))}
+          <SelectList 
+            setSelected={(val) => setPerson1(val)} 
+            data={data} 
+            save="value" 
+            placeholder={
+              <View style={styles.placeholder}>
+                <Icon name='business' size={20} color={'white'} />
+                <Text style={styles.text}>{trans.Stand}</Text>
+              </View>
+            }
+            boxStyles={styles.stand}
+            inputStyles={styles.input}
+            dropdownItemStyles={{color: 'white'}}
+            dropdownTextStyles={{color: 'white'}}
+            arrowicon={<Icon name="chevron-down" size={20} color={'white'} />} 
+            searchicon={<Icon name="search" size={20} color={'white'} />} 
+            closeicon={<Icon name="close" size={20} color={'white'} />} 
+            search={true}
+            dropdownStyles={styles.dropdown}
+          />
+          <SelectList 
+            setSelected={(val) => setPerson2(val)} 
+            data={data} 
+            save="value" 
+            placeholder={
+              <View style={styles.placeholder}>
+                <Icon name='business' size={20} color={'white'} />
+                <Text style={styles.text}>{trans.Stand}</Text>
+              </View>
+            }
+            boxStyles={styles.stand}
+            inputStyles={styles.input}
+            dropdownItemStyles={{color: 'white'}}
+            dropdownTextStyles={{color: 'white'}}
+            arrowicon={<Icon name="chevron-down" size={20} color={'white'} />} 
+            searchicon={<Icon name="search" size={20} color={'white'} />} 
+            closeicon={<Icon name="close" size={20} color={'white'} />} 
+            search={true}
+            dropdownStyles={styles.dropdown}
+          />
+          <SelectList 
+            setSelected={(val) => setTime(val)} 
+            data={TIME} 
+            save="value" 
+            placeholder={
+              <View style={styles.placeholder}>
+                <Icon name='business' size={20} color={'white'} />
+                <Text style={styles.text}>{trans.Time}</Text>
+              </View>
+            }
+            boxStyles={styles.stand}
+            inputStyles={styles.input}
+            dropdownItemStyles={{color: 'white'}}
+            dropdownTextStyles={{color: 'white'}}
+            arrowicon={<Icon name="chevron-down" size={20} color={'white'} />} 
+            searchicon={<Icon name="search" size={20} color={'white'} />} 
+            closeicon={<Icon name="close" size={20} color={'white'} />} 
+            search={true}
+            dropdownStyles={styles.dropdown}
+          />
+          <ScheduleBtn onPress={() => setStand(person1, person2, time, place)}/>
+          </View>
+          <View>
+            {dateDuty.map((person, index) => (
+              
+            <StandWithPerson 
+              key={person.id}
+              person={person}
+              day={day}
+            />
+            ))}
+          </View>
         </View>
+  )
+  }else{
+    return(
+      <View>
+        <View>
+            {dateDuty.map((person, index) => (
+              
+            <StandWithPerson 
+              key={person.id}
+              person={person}
+              day={day}
+            />
+            ))}
+          </View>
       </View>
-)
+    )
+  }
 
 
 }

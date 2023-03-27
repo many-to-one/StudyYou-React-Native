@@ -110,6 +110,7 @@ console.log('selected:', selected)
 
 
 
+ if(stuff === true){
   return (
     <View>
     <View style={styles.row}>
@@ -151,7 +152,25 @@ console.log('selected:', selected)
         ))}
       </View>
     </View>
-        )
+  )
+ }else{
+  return(
+    <View>
+      <View>
+        {dateMinistry.map((person, index) => (
+          <ShowStuff 
+          key={person.id}
+          person={person}
+          USERS={USERS}
+          action={'MinistryLeader'}
+          day={day}
+          stuff={stuff}
+        />
+        ))}
+      </View>
+    </View>
+  )
+ }
 
 
 

@@ -275,7 +275,7 @@ if(dateWeekendSpeach.length === 1 && stuff === true && person === null){
       dateWeekendSpeach.map((e) => {
         if(e.date === day && e.action === 'WeekendSpeach'){  
           return  <View>
-            <View style={styles.user}>
+            <View style={styles._user}>
               <Icon name='md-man-outline' size={20} color={'#F9F9B5'} />
               <Text style={styles.user_text}>{USERS[e.user]}</Text>
             </View> 
@@ -290,7 +290,7 @@ if(dateWeekendSpeach.length === 1 && stuff === true && person === null){
     dateWeekendSpeach.map((e) => {
       if(e.date === day && e.action === 'WeekendSpeach'){  
         return  <View>
-          <View style={styles.user}>
+          <View style={styles._user}>
             <Icon name='md-man-outline' size={20} color={'#F9F9B5'} />
             <Text style={styles.user_text}>{e.person}</Text>
           </View> 

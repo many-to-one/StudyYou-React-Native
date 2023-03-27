@@ -17,7 +17,7 @@ const Cleaning = ({day, week_ago, navigation}) => {
     const {trans} = useContext(LanguageContext);
     const [selected, setSelected] = useState('')
     const [users, setUsers] = useState([])
-    const [dateMicrophones, setDateMicrophones] = useState([])
+    const [dateCleaning, setDateCleaning] = useState([])
     const USERS = {}
     const [congregation, setCongregation] = useState(true)
     const isFocused = useIsFocused();
@@ -54,10 +54,9 @@ const Cleaning = ({day, week_ago, navigation}) => {
         const data = await resp.json();
         if(data){
           console.log('dateCl', data)
-          setDateMicrophones(data)
+          setDateCleaning(data)
           setUsers(data)
           setSelected([])
-          // setDateMicrophones([])
         }  
   }
 
@@ -126,66 +125,71 @@ const Cleaning = ({day, week_ago, navigation}) => {
     getCalendarDatesByDate()
   }
 
-  const deleteMicrophone = async(user) => {
-    const resp = await fetch(`${proxy}/backend/delete_calendar/${user.id}/`, {
-      method: 'DELETE',
-      headers: {
-          'Content-Type': 'application/json'
-      },
-    })
-    if(resp.status === 200){
-      console.log('deleted', user)
-      setSelected([])
-      setDateMicrophones([])
-      getCalendarDatesByDate()
-    }
-  }
 
-console.log('dateCleaning:', dateMicrophones, stuff)
+console.log('dateCleaning:', dateCleaning, stuff)
 
 
-return(
-  <View>
-  <View style={styles.row}>
-    <SelectList 
-      setSelected={(val) => setSelected(val)} 
-      data={groups} 
-      save="value" 
-      placeholder={
-        <View style={styles.placeholder}>
-          <Icon name='briefcase-sharp' size={20} color={'white'} />
-          <Text style={styles.text}>{trans.Duty}</Text>
-        </View>
-      }
-      boxStyles={styles.event}
-      inputStyles={styles.input}
-      dropdownItemStyles={{color: 'white'}}
-      dropdownTextStyles={{color: 'white'}}
-      arrowicon={<Icon name="chevron-down" size={20} color={'white'} />} 
-      searchicon={<Icon name="search" size={20} color={'white'} />} 
-      closeicon={<Icon name="close" size={20} color={'white'} />} 
-      search={true}
-      dropdownStyles={styles.dropdown}
-      disabledItemStyles={{width: 300}}
-      disabledCheckBoxStyles={{color: 'white'}}
-      dropdownShown={false}
-    />
-    <TalkBtn onPress={() => setCleaning(selected)}/>
-    </View>
+if(stuff === true){
+  return(
     <View>
-      {dateMicrophones.map((person, index) => (
-        <ShowStuff 
-        key={person.id}
-        person={person}
-        USERS={USERS}
-        action={'Cleaning'}
-        day={day}
-        stuff={stuff}
+    <View style={styles.row}>
+      <SelectList 
+        setSelected={(val) => setSelected(val)} 
+        data={groups} 
+        save="value" 
+        placeholder={
+          <View style={styles.placeholder}>
+            <Icon name='briefcase-sharp' size={20} color={'white'} />
+            <Text style={styles.text}>{trans.Cleaning}</Text>
+          </View>
+        }
+        boxStyles={styles.event}
+        inputStyles={styles.input}
+        dropdownItemStyles={{color: 'white'}}
+        dropdownTextStyles={{color: 'white'}}
+        arrowicon={<Icon name="chevron-down" size={20} color={'white'} />} 
+        searchicon={<Icon name="search" size={20} color={'white'} />} 
+        closeicon={<Icon name="close" size={20} color={'white'} />} 
+        search={true}
+        dropdownStyles={styles.dropdown}
+        disabledItemStyles={{width: 300}}
+        disabledCheckBoxStyles={{color: 'white'}}
+        dropdownShown={false}
       />
-      ))}
+      <TalkBtn onPress={() => setCleaning(selected)}/>
+      </View>
+      <View>
+        {dateCleaning.map((person, index) => (
+          <ShowStuff 
+          key={person.id}
+          person={person}
+          USERS={USERS}
+          action={'Cleaning'}
+          day={day}
+          stuff={stuff}
+        />
+        ))}
+      </View>
     </View>
-  </View>
-)
+  )
+}else{
+  return(
+    <View>
+      <View>
+        {dateCleaning.map((person, index) => (
+          <ShowStuff 
+          key={person.id}
+          person={person}
+          USERS={USERS}
+          action={'Cleaning'}
+          day={day}
+          stuff={stuff}
+        />
+        ))}
+      </View>
+    </View>
+  )
+}
 
 
 // if(dateMicrophones.length > 1 && stuff === true){

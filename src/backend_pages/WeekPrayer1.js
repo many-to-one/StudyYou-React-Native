@@ -115,46 +115,65 @@ const WeekPrayer1 = ({day, week_ago, navigation}) => {
   console.log('dateWeekPrayer1:', dateWeekPrayer1, stuff)
 
 
-  return(
-    <View>
-      <View style={styles.row}>
-          <SelectList 
-            setSelected={(val) => setSelected(val)} 
-            data={data} 
-            save="value"
-            // onSelect={(value) => alert(`${value}`)} 
-            placeholder={
-              <View style={styles.placeholder}>
-                <Icon name='ios-layers' size={20} color={'white'} />
-                <Text style={styles.text}>{trans.FirstPrayer}</Text>
-              </View>
-            }
-            boxStyles={styles.event}
-            inputStyles={styles.input}
-            dropdownItemStyles={{color: 'white'}}
-            dropdownTextStyles={{color: 'white'}}
-            arrowicon={<Icon name="chevron-down" size={20} color={'white'} />} 
-            searchicon={<Icon name="search" size={20} color={'white'} />} 
-            closeicon={<Icon name="close" size={20} color={'white'} />} 
-            search={true}
-            dropdownStyles={styles.dropdown}
+  if(stuff === true){
+    return(
+      <View>
+        <View style={styles.row}>
+            <SelectList 
+              setSelected={(val) => setSelected(val)} 
+              data={data} 
+              save="value"
+              // onSelect={(value) => alert(`${value}`)} 
+              placeholder={
+                <View style={styles.placeholder}>
+                  <Icon name='ios-layers' size={20} color={'white'} />
+                  <Text style={styles.text}>{trans.FirstPrayer}</Text>
+                </View>
+              }
+              boxStyles={styles.event}
+              inputStyles={styles.input}
+              dropdownItemStyles={{color: 'white'}}
+              dropdownTextStyles={{color: 'white'}}
+              arrowicon={<Icon name="chevron-down" size={20} color={'white'} />} 
+              searchicon={<Icon name="search" size={20} color={'white'} />} 
+              closeicon={<Icon name="close" size={20} color={'white'} />} 
+              search={true}
+              dropdownStyles={styles.dropdown}
+            />
+            <TalkBtn onPress={() => setWeekPrayer1(selected)}/>
+          </View>
+          <View>
+          {dateWeekPrayer1.map((person, index) => (
+            <ShowStuff 
+            key={person.id}
+            person={person}
+            USERS={USERS}
+            action={'FirstPrayer'}
+            day={day}
+            stuff={stuff}
           />
-          <TalkBtn onPress={() => setWeekPrayer1(selected)}/>
+          ))}
         </View>
-        <View>
-        {dateWeekPrayer1.map((person, index) => (
-          <ShowStuff 
-          key={person.id}
-          person={person}
-          USERS={USERS}
-          action={'FirstPrayer'}
-          day={day}
-          stuff={stuff}
-        />
-        ))}
       </View>
-    </View>
-  )
+    )
+  }else{
+    return(
+      <View>
+        <View>
+          {dateWeekPrayer1.map((person, index) => (
+            <ShowStuff 
+            key={person.id}
+            person={person}
+            USERS={USERS}
+            action={'FirstPrayer'}
+            day={day}
+            stuff={stuff}
+          />
+          ))}
+        </View>
+      </View>
+    )
+  }
 
 
 // if(dateWeekPrayer1.length === 1 && stuff === true){

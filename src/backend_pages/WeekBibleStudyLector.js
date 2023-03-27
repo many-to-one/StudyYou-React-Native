@@ -101,46 +101,65 @@ const WeekBibleStudyLector = ({day, week_ago, navigation}) => {
   console.log('dateWeekBibleStudyLector:', dateWeekBibleStudyLector, day)
 
 
-  return(
-    <View>
-      <View style={styles.row}>
-        <SelectList 
-          setSelected={(val) => setSelected(val)} 
-          data={data} 
-          save="value"
-          // onSelect={(value) => alert(`${value}`)} 
-          placeholder={
-            <View style={styles.placeholder}>
-              <Icon name='md-reader' size={20} color={'white'} />
-              <Text style={styles.text}>{trans.BibleStudyLector}</Text>
-            </View>
-          }
-          boxStyles={styles.event}
-          inputStyles={styles.input}
-          dropdownItemStyles={{color: 'white'}}
-          dropdownTextStyles={{color: 'white'}}
-          arrowicon={<Icon name="chevron-down" size={20} color={'white'} />} 
-          searchicon={<Icon name="search" size={20} color={'white'} />} 
-          closeicon={<Icon name="close" size={20} color={'white'} />} 
-          search={true}
-          dropdownStyles={styles.dropdown}
-        />
-        <TalkBtn onPress={() => setWeekBibleStudyLector(selected)}/>
-      </View>
+  if(stuff === true){
+    return(
       <View>
-        {dateWeekBibleStudyLector.map((person, index) => (
-          <ShowStuff 
-          key={person.id}
-          person={person}
-          USERS={USERS}
-          action={'BibleStudyLector'} 
-          day={day}
-          stuff={stuff}
-        />
-        ))}
+        <View style={styles.row}>
+          <SelectList 
+            setSelected={(val) => setSelected(val)} 
+            data={data} 
+            save="value"
+            // onSelect={(value) => alert(`${value}`)} 
+            placeholder={
+              <View style={styles.placeholder}>
+                <Icon name='md-reader' size={20} color={'white'} />
+                <Text style={styles.text}>{trans.BibleStudyLector}</Text>
+              </View>
+            }
+            boxStyles={styles.event}
+            inputStyles={styles.input}
+            dropdownItemStyles={{color: 'white'}}
+            dropdownTextStyles={{color: 'white'}}
+            arrowicon={<Icon name="chevron-down" size={20} color={'white'} />} 
+            searchicon={<Icon name="search" size={20} color={'white'} />} 
+            closeicon={<Icon name="close" size={20} color={'white'} />} 
+            search={true}
+            dropdownStyles={styles.dropdown}
+          />
+          <TalkBtn onPress={() => setWeekBibleStudyLector(selected)}/>
+        </View>
+        <View>
+          {dateWeekBibleStudyLector.map((person, index) => (
+            <ShowStuff 
+            key={person.id}
+            person={person}
+            USERS={USERS}
+            action={'BibleStudyLector'} 
+            day={day}
+            stuff={stuff}
+          />
+          ))}
+        </View>
       </View>
-    </View>
-  )
+    )
+  }else{
+    return(
+      <View>
+        <View>
+          {dateWeekBibleStudyLector.map((person, index) => (
+            <ShowStuff 
+            key={person.id}
+            person={person}
+            USERS={USERS}
+            action={'BibleStudyLector'} 
+            day={day}
+            stuff={stuff}
+          />
+          ))}
+        </View>
+      </View>
+    )
+  }
 
 
 

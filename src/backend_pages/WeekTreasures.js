@@ -97,24 +97,11 @@ const WeekTreasures = ({day, week_ago, navigation}) => {
     getCalendarDatesByDate()
   }
 
-  const deleteWeekTreasures = async(user) => {
-    const resp = await fetch(`${proxy}/backend/delete_calendar/${user.id}/`, {
-      method: 'DELETE',
-      headers: {
-          'Content-Type': 'application/json'
-      },
-    })
-    if(resp.status === 200){
-      console.log('deleted', user)
-      setSelected([])
-      setDateWeekTreasures([])      
-      getCalendarDatesByDate()
-    }
-  }
 
   console.log('dateWeekTreasures:', dateWeekTreasures, day)
 
 
+if(stuff === true){
   return(
     <View>
       <View style={styles.row}>
@@ -155,6 +142,24 @@ const WeekTreasures = ({day, week_ago, navigation}) => {
       </View>
     </View>
   )
+}else{
+  return(
+    <View>
+      <View>
+        {dateWeekTreasures.map((person, index) => (
+          <ShowStuff 
+          key={person.id}
+          person={person}
+          USERS={USERS}
+          action={'SpiritualGems'}
+          day={day}
+          stuff={stuff}
+        />
+        ))}
+      </View>
+    </View>
+  )
+}
 
 
 

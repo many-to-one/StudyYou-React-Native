@@ -105,50 +105,67 @@ const Duty = ({day, week_ago, navigation}) => {
   console.log('dateDuty:', dateDuty, day)
 
 
-
-
-  return(
-    <View>
-    <View style={styles.row}>
-      <SelectList 
-        setSelected={(val) => setSelected(val)} 
-        data={data} 
-        save="value" 
-        placeholder={
-          <View style={styles.placeholder}>
-            <Icon name='briefcase-sharp' size={20} color={'white'} />
-            <Text style={styles.text}>{trans.Duty}</Text>
-          </View>
-        }
-        boxStyles={styles.event}
-        inputStyles={styles.input}
-        dropdownItemStyles={{color: 'white'}}
-        dropdownTextStyles={{color: 'white'}}
-        arrowicon={<Icon name="chevron-down" size={20} color={'white'} />} 
-        searchicon={<Icon name="search" size={20} color={'white'} />} 
-        closeicon={<Icon name="close" size={20} color={'white'} />} 
-        search={true}
-        dropdownStyles={styles.dropdown}
-        disabledItemStyles={{width: 300}}
-        disabledCheckBoxStyles={{color: 'white'}}
-        dropdownShown={false}
-      />
-      <TalkBtn onPress={() => setDuty(selected)}/>
-      </View>
+  if(stuff === true){
+    return(
       <View>
-        {dateDuty.map((person, index) => (
-          <ShowStuff 
-          key={person.id}
-          person={person}
-          USERS={USERS}
-          action={'Duty'}
-          day={day}
-          stuff={stuff}
+      <View style={styles.row}>
+        <SelectList 
+          setSelected={(val) => setSelected(val)} 
+          data={data} 
+          save="value" 
+          placeholder={
+            <View style={styles.placeholder}>
+              <Icon name='briefcase-sharp' size={20} color={'white'} />
+              <Text style={styles.text}>{trans.Duty}</Text>
+            </View>
+          }
+          boxStyles={styles.event}
+          inputStyles={styles.input}
+          dropdownItemStyles={{color: 'white'}}
+          dropdownTextStyles={{color: 'white'}}
+          arrowicon={<Icon name="chevron-down" size={20} color={'white'} />} 
+          searchicon={<Icon name="search" size={20} color={'white'} />} 
+          closeicon={<Icon name="close" size={20} color={'white'} />} 
+          search={true}
+          dropdownStyles={styles.dropdown}
+          disabledItemStyles={{width: 300}}
+          disabledCheckBoxStyles={{color: 'white'}}
+          dropdownShown={false}
         />
-        ))}
+        <TalkBtn onPress={() => setDuty(selected)}/>
+        </View>
+        <View>
+          {dateDuty.map((person, index) => (
+            <ShowStuff 
+            key={person.id}
+            person={person}
+            USERS={USERS}
+            action={'Duty'}
+            day={day}
+            stuff={stuff}
+          />
+          ))}
+        </View>
       </View>
-    </View>
-  )
+    )
+  }else{
+    return(
+      <View>
+        <View>
+          {dateDuty.map((person, index) => (
+            <ShowStuff 
+            key={person.id}
+            person={person}
+            USERS={USERS}
+            action={'Duty'}
+            day={day}
+            stuff={stuff}
+          />
+          ))}
+        </View>
+      </View>
+    )
+  }
 
 
 
