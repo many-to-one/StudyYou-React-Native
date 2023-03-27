@@ -85,42 +85,38 @@ const Cleaning = ({day, week_ago, navigation}) => {
     {key: '10', value: '10'},
   ]
 
-  console.log('USERS', USERS)
+  // console.log('USERS', USERS)
   console.log('selected', selected)
 
   const setCleaning = async(selected) => {
     let datas = JSON.parse(await AsyncStorage.getItem("asyncUserData"))  /////////////////////
-    // selected.map((e) => {
-      for(let k in USERS){  
-        if(selected === USERS[k]){
+    console.log('USERS', USERS)
 
-          const resp = fetch(`${proxy}/backend/set_calendar/${k}/${week_ago}/`, {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-              'date': `${day}`,
-              'action': 'Cleaning',
-              'congregation': datas.congregation, 
-              'groupe': `${selected}`, 
-              'icon': 'ios-water',
-            })
-          })   
-        }
-      }
-    // })
+      const resp1 = await fetch(`${proxy}/backend/set_calendar/${selected}/${week_ago}/`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          'date': `${day}`,
+          'action': 'Cleaning',
+          'congregation': datas.congregation, 
+          'groupe': `${selected}`, 
+          'icon': 'ios-water',
+        })
+      })   
+
     const body = {'date': day, 'action': 'Cleaning', 'congregation': datas.congregation}   /////////////////////////
-    const resp = await fetch(`${proxy}/backend/get_calendar_date/`, {
+    const resp2 = await fetch(`${proxy}/backend/get_calendar_date/`, {
       method: 'POST',
           headers: {
             'Content-Type': 'application/json'
           },
           body:JSON.stringify(body),
         });
-        const data = await resp.json();
+        const data = await resp2.json();
         if(data){
-          setDateMicrophones(data)
+          setDateCleaning(data)
         }
     getCalendarDatesByDate()
   }

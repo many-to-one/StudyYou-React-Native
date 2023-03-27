@@ -22,7 +22,7 @@ const ShowStuff = ({person, USERS, action, day, stuff}) => {
       }
 
       //  ################################ FOR ADMIN ################################## //
-    if(live === true && person.date === day && person.action === action && stuff === true && person.time === day){  
+    if(live === true && person.date === day && person.action === action && stuff === true && person.time === day && person.check_arr_icon === false){  
         return  <View style={styles.user}>
         <Icon name={person.icon} size={20} color={'#F9F9B5'} />
         <Text style={styles.user_text}>{USERS[person.user]}</Text>
@@ -56,20 +56,14 @@ const ShowStuff = ({person, USERS, action, day, stuff}) => {
       </View> 
 
       //  ################################ FOR USER (CLEANING) ################################## //
-    }else if(live === true && person.date === day && person.action === 'Cleaning' && stuff === false){  
+    }else if(live === true && person.date === day && person.action === 'Cleaning' && stuff === false && person.time === day){  
       return  <View style={styles.user}>
       <Icon name={person.icon} size={20} color={'#F9F9B5'} />
       <Text style={styles.user_text}>{person.groupe}</Text>
-      <Icon 
-            name="close-circle-outline" 
-            size={20} 
-            color={'#F9F9B5'} 
-            onPress={() => deleteMinistryLeader(person)}     
-          />
       </View>
 
       //  ################################ FOR ADMIN (WEEK AGO) ################################## //
-    }else if(live === true && person.date === day && person.action === action && stuff === true && person.time === 'user week ago'){  
+    }else if(live === true && person.date === day && person.action === action && stuff === true && person.time !== 'user week ago' && person.check_arr_icon === false){  
       return  <View style={styles.user}>
       <Icon name={person.icon} size={20} color={'#F9F9B5'} />
       <Text style={styles.user_text}>{USERS[person.user]} was week ago</Text>
@@ -82,10 +76,43 @@ const ShowStuff = ({person, USERS, action, day, stuff}) => {
       </View> 
 
       //  ################################ FOR USER (WEEK AGO) ################################## //
-    }else if(live === true && person.date === day && person.action === action && stuff === FALSE && person.time === 'user week ago'){  
+    }else if(live === true && person.date === day && person.action === action && stuff === false && person.time === 'user week ago'){  
       return  <View style={styles.user}>
       <Icon name={person.icon} size={20} color={'#F9F9B5'} />
       <Text style={styles.user_text}>{USERS[person.user]}</Text>
+      </View>
+
+      //  ################################ FOR ADMIN (ARR_LIST) ################################## //
+    }else if(live === true && person.date === day && person.action === action && stuff === true && person.time === day && person.check_arr_icon === true){  
+      return  <View style={styles.user}>
+      <Icon name={person.icon} size={20} color={'#F9F9B5'} />
+      <Text style={styles.user_text}>{USERS[person.user]}</Text>
+      <Icon name={person.arr_icon[0]} size={15} color={'green'} />
+      <Icon name={person.arr_icon[1]} size={15} color={'red'} />
+      <Icon name={person.arr_icon[2]} size={15} color={'blue'} />
+      <Icon name={person.arr_icon[3]} size={15} color={'green'} />
+      <Icon name={person.arr_icon[4]} size={15} color={'green'} />
+      <Icon name={person.arr_icon[5]} size={15} color={'green'} />
+      <Icon 
+            name="close-circle-outline" 
+            size={20} 
+            color={'#F9F9B5'} 
+            onPress={() => deleteMinistryLeader(person)}     
+          />
+      </View> 
+    
+
+      //  ################################ FOR ADMIN (ARR_LIST & WEEK AGO) ################################## //
+    }else if(live === true && person.date === day && person.action === action && stuff === true && person.time === 'user week ago' && person.check_arr_icon === true){  
+      return  <View style={styles.user}>
+      <Icon name={person.icon} size={20} color={'#F9F9B5'} />
+      <Text style={styles.user_text}>{USERS[person.user]} was week ago</Text>
+      {/* <Icon name={person.arr_icon[0]} size={15} color={'green'} /> */}
+      <Icon name={person.arr_icon[1]} size={15} color={'red'} />
+      <Icon name={person.arr_icon[2]} size={15} color={'blue'} />
+      <Icon name={person.arr_icon[3]} size={15} color={'green'} />
+      <Icon name={person.arr_icon[4]} size={15} color={'green'} />
+      <Icon name={person.arr_icon[5]} size={15} color={'green'} />
       <Icon 
             name="close-circle-outline" 
             size={20} 
