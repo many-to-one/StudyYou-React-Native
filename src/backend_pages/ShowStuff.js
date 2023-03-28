@@ -89,8 +89,8 @@ const ShowStuff = ({person, USERS, action, day, stuff}) => {
       <Text style={styles.user_text}>{USERS[person.user]}</Text>
       <Icon name={person.arr_icon[0]} size={15} color={'green'} />
       <Icon name={person.arr_icon[1]} size={15} color={'red'} />
-      <Icon name={person.arr_icon[2]} size={15} color={'blue'} />
-      <Icon name={person.arr_icon[3]} size={15} color={'green'} />
+      <Icon name={person.arr_icon[2]} size={15} color={'yellow'} />
+      <Icon name={person.arr_icon[3]} size={15} color={'orange'} />
       <Icon name={person.arr_icon[4]} size={15} color={'green'} />
       <Icon name={person.arr_icon[5]} size={15} color={'green'} />
       <Icon 

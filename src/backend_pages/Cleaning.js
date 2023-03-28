@@ -92,7 +92,7 @@ const Cleaning = ({day, week_ago, navigation}) => {
     let datas = JSON.parse(await AsyncStorage.getItem("asyncUserData"))  /////////////////////
     console.log('USERS', USERS)
 
-      const resp1 = await fetch(`${proxy}/backend/set_calendar/${selected}/${week_ago}/`, {
+      const resp1 = await fetch(`${proxy}/backend/set_calendar/${datas.id}/${week_ago}/`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
