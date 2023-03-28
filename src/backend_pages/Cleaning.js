@@ -43,7 +43,7 @@ const Cleaning = ({day, week_ago, navigation}) => {
 
   const getCalendarDatesByDate = async() => {
     let datas = JSON.parse(await AsyncStorage.getItem("asyncUserData"))  /////////////////
-    const body = {'date': day, 'action': 'Cleaning', 'congregation': datas.congregation}  ////////////////
+    const body = {'date': day, 'action': 'Cleaning', 'groupe': `${selected}`, 'congregation': datas.congregation}  ////////////////
     const resp = await fetch(`${proxy}/backend/get_calendar_date/`, {
       method: 'POST',
           headers: {
@@ -106,7 +106,7 @@ const Cleaning = ({day, week_ago, navigation}) => {
         })
       })   
 
-    const body = {'date': day, 'action': 'Cleaning', 'congregation': datas.congregation}   /////////////////////////
+    const body = {'date': day, 'action': 'Cleaning', 'groupe': `${selected}`, 'congregation': datas.congregation}   /////////////////////////
     const resp2 = await fetch(`${proxy}/backend/get_calendar_date/`, {
       method: 'POST',
           headers: {
