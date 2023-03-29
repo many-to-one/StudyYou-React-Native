@@ -147,7 +147,8 @@ export const LanguageProvider = ({children}) => {
                 'PioneerStandard': 'Norma pioniera pełnoczasowego',
                 'OverallScore': 'Wynik ogólny',
                 'BibleStudies': 'Studia Biblijne',
-                'PlacesStand': 'Tereny (Stojak)'
+                'PlacesStand': 'Tereny (Stojak)',
+                'UsersManagment': 'Zarządzanie użytkwnikamy',
             })
             setDaynames(['Pon', 'Wt', 'Śr', 'Czw', 'Pt', 'Sob', 'Niedz'])
             setMonthnames([
@@ -238,7 +239,8 @@ export const LanguageProvider = ({children}) => {
                 'PioneerStandard': 'Норма полновременного пионера',
                 'OverallScore': 'Общий результат',
                 'BibleStudies': 'Изучения Библии',
-                'PlacesStand': 'Участки (стенд)'
+                'PlacesStand': 'Участки (стенд)',
+                'UsersManagment': 'Управление пользователями',
             })
             setDaynames(['Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб', 'Вс'])
             setMonthnames([
@@ -328,7 +330,8 @@ export const LanguageProvider = ({children}) => {
                 'PioneerStandard': 'Норма повночасного піонера',
                 'OverallScore': 'Загальний результат',
                 'BibleStudies': 'Bивчення Біблії',
-                'PlacesStand': 'Місця (стенд)'
+                'PlacesStand': 'Місця (стенд)',
+                'UsersManagment': 'Керування користувачами',
             })
             setDaynames(['Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб', 'Нд'])
             setMonthnames([

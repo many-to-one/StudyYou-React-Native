@@ -159,7 +159,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     height: 50,
     borderRadius: 15,
-    backgroundColor: "transparent",
+    backgroundColor: "#18909C80",
     gap: 20,
     shadowColor: '#19868a',
       shadowOpacity: 1,
@@ -211,6 +211,15 @@ animated: {
   },
   shadowRadius: 4
 },  
+checkbox: {
+  alignSelf: 'center',
+  borderWidth: 2,
+  borderColor: '#19868a',
+},
+delete: {
+  color: '#F9F9B5',
+  fontSize: 30,
+},
 });
 
 export {styles}

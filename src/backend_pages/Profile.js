@@ -293,6 +293,27 @@ const Profile = ({navigation}) => {
          <View />
         }
 
+        {profileData.editor ? 
+
+          <TouchableOpacity onPress={() => navigation.navigate('UsersManagment')}> 
+          <Animated.View style={styles.animated}>
+            <ImageBackground
+              source={require('../../assets/card.png')}
+              style={styles.img}
+            >
+              <View style={styles.inside}>
+                <Icon name="md-star" size={20} color={'#a1efff'} />
+                <Text style={styles.text}>
+                {trans.UsersManagment}
+                </Text>
+              </View>
+            </ImageBackground>
+          </Animated.View>
+          </TouchableOpacity>
+          :
+          <View />
+          }
+
         {profileData.helper ? 
 
           <TouchableOpacity onPress={() => navigation.navigate('PlacesStand')}>

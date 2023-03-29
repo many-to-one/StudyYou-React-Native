@@ -33,6 +33,8 @@ import ForgotPassword from '../backend_pages/ForgotPassword';
 import Stand from '../backend_pages/Stand';
 import MinistryWithStand from '../backend_pages/MinistryWithStand';
 import PlacesStand from '../backend_pages/PlacesStand';
+import UsersManagment from '../backend_pages/UsersManagment';
+import User from '../backend_pages/User';
 const Tab = createBottomTabNavigator();
 
 function BottomNavigator() {
@@ -570,6 +572,44 @@ function BottomNavigator() {
           component={PlacesStand} 
           options={({ navigation }) => ({
             title: `${trans.PlacesStand}`,
+            headerTtleStyle: {
+              color: 'white',
+              marginLeft: width / 3.5,
+            },
+            headerStyle: {
+              backgroundColor: 'black',
+            },
+            tabBarVisible: false, // hide the button
+            tabBarButton: (props) => null, // hide the button
+            headerLeft: () => (
+              <BackButton onPress={() => navigation.navigate('Profile')} />
+            ),
+          })}
+        />
+        <Tab.Screen 
+          name="UsersManagment" 
+          component={UsersManagment} 
+          options={({ navigation }) => ({
+            title: `${trans.UsersManagment}`,
+            headerTtleStyle: {
+              color: 'white',
+              marginLeft: width / 3.5,
+            },
+            headerStyle: {
+              backgroundColor: 'black',
+            },
+            tabBarVisible: false, // hide the button
+            tabBarButton: (props) => null, // hide the button
+            headerLeft: () => (
+              <BackButton onPress={() => navigation.navigate('Profile')} />
+            ),
+          })}
+        />
+        <Tab.Screen 
+          name="User" 
+          component={User} 
+          options={({ navigation }) => ({
+            title: `${trans.UsersManagment}`,
             headerTtleStyle: {
               color: 'white',
               marginLeft: width / 3.5,
