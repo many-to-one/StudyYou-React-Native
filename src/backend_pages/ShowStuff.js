@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react'
-import { StyleSheet, Text, View } from 'react-native';
+import { Animated, ImageBackground, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import Icon from "react-native-vector-icons/Ionicons";
 import { AuthContext } from '../context/AuthContext';
 import { styles } from '../styles/Styles';
@@ -23,7 +23,7 @@ const ShowStuff = ({person, USERS, action, day, stuff}) => {
 
       //  ################################ FOR ADMIN ################################## //
     if(live === true && person.date === day && person.action === action && stuff === true && person.time === day && person.check_arr_icon === false){  
-        return  <View style={styles.user}>
+        return <View style={styles.user}>
         <Icon name={person.icon} size={20} color={'#F9F9B5'} />
         <Text style={styles.user_text}>{USERS[person.user]}</Text>
         <Text style={styles.user_text}>{person.groupe}</Text>
@@ -36,7 +36,7 @@ const ShowStuff = ({person, USERS, action, day, stuff}) => {
         </View> 
 
       //  ################################ FOR USER ################################## //
-    }else if(live === true && person.date === day && person.action === action && stuff === false){  
+    }else if(live === true && person.date === day && person.action === action  && person.action !== 'Cleaning' && stuff === false){  
       return  <View style={styles._user}>
       <Icon name={person.icon} size={20} color={'#F9F9B5'} />
       <Text style={styles.user_text}>{USERS[person.user]}</Text>
@@ -60,6 +60,7 @@ const ShowStuff = ({person, USERS, action, day, stuff}) => {
       return  <View style={styles.user}>
       <Icon name={person.icon} size={20} color={'#F9F9B5'} />
       <Text style={styles.user_text}>{person.groupe}</Text>
+      <Icon name={person.icon} size={20} color={'#F9F9B5'} />
       </View>
 
       //  ################################ FOR ADMIN (WEEK AGO) ################################## //

@@ -13,11 +13,40 @@ const styles = StyleSheet.create({
     paddingTop: 25,
   },
   scroll: {
-    // backgroundColor: '#050929',
+    // backgroundColor: '#283747', 
     backgroundColor: 'black',
     width: width,
     height: height,
     padding: 20,
+  },
+  cont: {
+    width: width,
+    height: height,
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    justifyContent: 'center',
+    gap: 15,
+    paddingTop: 25,
+    padding: 20,
+  
+  },
+  cub:{
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: 140,
+    height: 140,
+    borderRadius: 10,
+    borderWidth: 1,
+    borderColor: '#19868a',
+    margin: 5,
+    backgroundColor: '#18909C80',
+    shadowColor: '#19868a',
+      shadowOpacity: 1,
+      shadowOffset: {
+        width: 0,
+        height: 0,
+      },
+      shadowRadius: 8
   },
   text: {
     color: 'white',
@@ -45,8 +74,7 @@ const styles = StyleSheet.create({
     padding: 1,
     color: 'white',
     fontSize: 20,
-    zIndex: 999,
-    backgroundColor: "transparent",
+    backgroundColor: '#18909C80',
     borderWidth: 2,
     borderRadius: 20,
     borderColor: "#19868a",
@@ -83,7 +111,7 @@ const styles = StyleSheet.create({
     width: width / 1.4,
     borderColor: "#19868a",
     borderWidth: 2,
-    // backgroundColor: "#2D455E",
+    backgroundColor: "#18909C80",
   },
   stand:{
     width: width / 1.25,
@@ -93,7 +121,7 @@ const styles = StyleSheet.create({
     color: 'white',
     fontSize: 20,
     zIndex: 999,
-    backgroundColor: "transparent",
+    backgroundColor: '#18909C80',
     borderWidth: 2,
     borderRadius: 20,
     borderColor: "#19868a",
@@ -110,7 +138,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     height: 50,
     borderRadius: 15,
-    backgroundColor: "transparent",
+    backgroundColor: '#18909C80',
     gap: 10,
     shadowColor: '#19868a',
       shadowOpacity: 1,
@@ -172,7 +200,17 @@ row: {
   flexDirection: 'row',
   alignItems: 'center',
   gap: 10,
-},   
+},  
+animated: {
+  borderRadius: 25,
+  shadowColor: 'white',
+  shadowOpacity: 1,
+  shadowOffset: {
+    width: 0,
+    height: 0,
+  },
+  shadowRadius: 4
+},  
 });
 
 export {styles}

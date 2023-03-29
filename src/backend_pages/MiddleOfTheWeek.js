@@ -1,5 +1,5 @@
 import React, { useContext } from 'react'
-import { Dimensions, ScrollView, StyleSheet, Text, View } from 'react-native'
+import { Animated, Dimensions, SafeAreaView, ScrollView, StyleSheet, Text, View } from 'react-native'
 import { LanguageContext } from '../context/LanguageContext';
 import WeekBibleStudy from './WeekBibleStudy';
 import WeekBibleStudyLector from './WeekBibleStudyLector';
@@ -22,8 +22,17 @@ const MiddleOfTheWeek = ({route, navigation}) => {
     const {day, week_ago} = route.params;
     const {trans} = useContext(LanguageContext);
   return (
-    <ScrollView style={styles.scroll}>
-        <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
+      <Animated.Image 
+         source={require("../../assets/meeting_ibg.png")}
+          style={[
+            StyleSheet.absoluteFillObject,
+          ]}
+          blurRadius={5}
+      />
+
+      <ScrollView>
+        <View>
 
         <View style={styles.event_}>
           <Text style={styles.text_}>{trans.LeaderAndIntroductoryRemarks}:</Text>
@@ -147,6 +156,8 @@ const MiddleOfTheWeek = ({route, navigation}) => {
 
       </View>
       </ScrollView>
+
+    </SafeAreaView>
   )
 }
 

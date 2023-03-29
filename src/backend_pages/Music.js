@@ -113,7 +113,7 @@ const Music = ({day, week_ago, navigation}) => {
           save="value" 
           placeholder={
             <View style={styles.placeholder}>
-              <Icon name='briefcase-sharp' size={20} color={'white'} />
+              <Icon name='md-headset' size={20} color={'white'} />
               <Text style={styles.text}>{trans.Music}</Text>
             </View>
           }
@@ -165,113 +165,6 @@ const Music = ({day, week_ago, navigation}) => {
       )
     }
 
-
-
-
-// if(dateMusic.length > 1 && stuff === true){
-//   return ( 
-//     dateMusic.map((e) => {
-//       if(e.date === day && e.action === 'Music'){  
-//           return  <View style={styles.user}>
-//           <Icon name='md-headset' size={20} color={'#F9F9B5'} />
-//           <Text style={styles.user_text}>{USERS[e.user]}</Text>
-//               <Icon 
-//                   name="close-circle-outline" 
-//                   size={20} 
-//                   color={'white'} 
-//                   onPress={() => deleteMicrophone(e)}     
-//                   />
-//           </View>  
-                              
-//       }
-//   }) 
-
-//   )
-//     }else if(dateMusic.length === 0 && stuff === true){
-//         return (
-//             <View style={styles.row}>
-//               <MultipleSelectList 
-//                 setSelected={(val) => setSelected(val)} 
-//                 data={data} 
-//                 save="value"
-//                 // onSelect={(value) => alert(`${value}`)} 
-//                 placeholder={
-//                   <View style={styles.placeholder}>
-//                     <Icon name='md-headset' size={20} color={'white'} />
-//                     <Text style={styles.text}>{trans.Music}</Text>
-//                   </View>
-//                 }
-//                 boxStyles={styles.event}
-//                 inputStyles={styles.input}
-//                 dropdownItemStyles={{color: 'white'}}
-//                 dropdownTextStyles={{color: 'white'}}
-//                 arrowicon={<Icon name="chevron-down" size={20} color={'white'} />} 
-//                 searchicon={<Icon name="search" size={20} color={'white'} />} 
-//                 closeicon={<Icon name="close" size={20} color={'white'} />} 
-//                 search={true}
-//               />
-//               <TalkBtn onPress={() => setMicrophones(selected)}/>
-//             </View>
-//         )
-//     }else if(dateMusic.length == 1 && stuff === true){
-//         return ( 
-//             dateMusic.map((e) => {
-//               if(e.date === day && e.action === 'Music'){  
-//                   return  <View>
-//                     <View style={styles.user}>
-//                     <Icon name='md-headset' size={20} color={'#F9F9B5'} />
-//                       <Text style={styles.user_text}>{USERS[e.user]}</Text>
-//                           <Icon 
-//                               name="close-circle-outline" 
-//                               size={20} 
-//                               color={'white'} 
-//                               onPress={() => deleteMicrophone(e)}     
-//                               />
-//                     </View>
-//                     <View style={styles.row}>
-//                       <MultipleSelectList 
-//                       setSelected={(val) => setSelected(val)} 
-//                       data={data} 
-//                       save="value"
-//                       // onSelect={() => alert('selected')} 
-//                       placeholder={
-//                         <View style={styles.placeholder}>
-//                           <Icon name='md-headset' size={20} color={'white'} />
-//                           <Text style={styles.text}>Music</Text>
-//                         </View>
-//                       }
-//                       boxStyles={styles.event}
-//                       inputStyles={styles.input}
-//                       dropdownItemStyles={{color: 'white'}}
-//                       dropdownTextStyles={{color: 'white'}}
-//                       arrowicon={<Icon name="chevron-down" size={20} color={'white'} />} 
-//                       searchicon={<Icon name="search" size={20} color={'white'} />} 
-//                       closeicon={<Icon name="close" size={20} color={'white'} />} 
-//                       search={true}
-//                       />
-//                       <TalkBtn onPress={() => setMicrophones(selected)}/>
-//                     </View>
-//                   </View>
-                  
-                                      
-//               }
-//           })  
-  
-//           )
-//   }else if(dateMusic.length >= 1 && stuff === false){
-//     return ( 
-//       dateMusic.map((e) => {
-//         if(e.date === day && e.action === 'Music'){  
-//             return  <View style={styles.user}>
-//             <Icon name='md-headset' size={20} color={'#F9F9B5'} />
-//             <Text style={styles.user_text}>{USERS[e.user]}</Text>
-//             </View>  
-                                
-//         }
-//     }) 
-  
-//     )
-//       }
 }
 
 export default Music

@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { Text, View } from 'react-native'
 import { AuthContext } from '../context/AuthContext';
-import { MultipleSelectList, SelectList  } from 'react-native-dropdown-select-list'; // react-native-multiple-select-list (also good)
+import { SelectList  } from 'react-native-dropdown-select-list'; // react-native-multiple-select-list (also good)
 import Icon from "react-native-vector-icons/Ionicons";
 import { useIsFocused } from '@react-navigation/native';
 import { LanguageContext } from '../context/LanguageContext';
@@ -65,9 +65,8 @@ const Ministry = ({day, week_ago, navigation}) => {
 
   const setMinistryUsers = async(selected) => {
     let datas = JSON.parse(await AsyncStorage.getItem("asyncUserData"))
-    selected.map((e) => {
       for(let k in USERS){  
-        if(e === USERS[k]){
+        if(selected === USERS[k]){
 
           const resp = fetch(`${proxy}/backend/set_calendar/${k}/${week_ago}/`, {
             method: 'POST',
@@ -88,7 +87,6 @@ const Ministry = ({day, week_ago, navigation}) => {
           }    
         }
       }
-    })
     const body = {'date': day, 'action': 'MinistryLeader', 'congregation': datas.congregation,}
     const resp = await fetch(`${proxy}/backend/get_calendar_date/`, {
       method: 'POST',
@@ -114,7 +112,7 @@ console.log('selected:', selected)
   return (
     <View>
     <View style={styles.row}>
-      <MultipleSelectList 
+      <SelectList 
         setSelected={(val) => setSelected(val)} 
         data={data} 
         save="value" 
@@ -171,108 +169,6 @@ console.log('selected:', selected)
     </View>
   )
  }
-
-
-
-
-// if(dateMinistry.length > 1 && stuff === true){
-//   return ( 
-//     dateMinistry.map((e) => {
-//         if(e.date === day && e.action === 'MinistryLeader'){  
-//           return <View style={styles.user}>
-//             <Icon name='people-circle-outline' size={20} color={'#F9F9B5'} />
-//             <Text style={styles.user_text}>{USERS[e.user]}</Text>
-//               <Icon 
-//                 name="close-circle-outline" 
-//                 size={20} 
-//                 color={'#F9F9B5'} 
-//                 onPress={() => deleteMinistry(e)}     
-//                 />
-//             </View>  
-//         }
-//     }) 
-//   )
-//     }else if(dateMinistry.length === 0 && stuff === true){
-//         return (
-//             <View style={styles.row}>
-//               <MultipleSelectList 
-//                 setSelected={(val) => setSelected(val)} 
-//                 data={data} 
-//                 save="value"
-//                 // onSelect={(value) => alert(`${value}`)} 
-//                 placeholder={
-//                   <View style={styles.placeholder}>
-//                     <Icon name='people-circle-outline' size={20} color={'white'} />
-//                     <Text style={styles.text}>{trans.MinistryLeaders}</Text>
-//                   </View>
-//               }
-//                 boxStyles={styles.event}
-//                 inputStyles={styles.input}
-//                 dropdownItemStyles={{color: 'white'}}
-//                 dropdownTextStyles={{color: 'white'}}
-//                 arrowicon={<Icon name="chevron-down" size={20} color={'white'} />} 
-//                 searchicon={<Icon name="search" size={20} color={'white'} />} 
-//                 closeicon={<Icon name="close" size={20} color={'white'} />} 
-//                 search={true}
-//               />
-//               <TalkBtn onPress={() => setMinistryUsers(selected)}/>
-//             </View>
-//         )
-//     }else if(dateMinistry.length === 1 && stuff === true){
-//         return ( 
-//           dateMinistry.map((e) => {
-//               if(e.date === day && e.action === 'MinistryLeader'){  
-//                   return  <View>
-//                     <View style={styles.user}>
-//                     <Icon name='people-circle-outline' size={20} color={'#F9F9B5'} />
-//                       <Text style={styles.user_text}>{USERS[e.user]}</Text>
-//                           <Icon 
-//                               name="close-circle-outline" 
-//                               size={20} 
-//                               color={'#F9F9B5'} 
-//                               onPress={() => deleteMinistry(e)}     
-//                               />
-//                     </View>
-//                     <View style={styles.row}>
-//                       <MultipleSelectList 
-//                         setSelected={(val) => setSelected(val)} 
-//                         data={data} 
-//                         save="value"
-//                         // onSelect={(value) => alert(`${value}`)} 
-//                         placeholder={
-//                           <View style={styles.placeholder}>
-//                             <Icon name='people-circle-outline' size={20} color={'white'} />
-//                             <Text style={styles.text}>{trans.MinistryLeaders}</Text>
-//                           </View>
-//                       }
-//                         boxStyles={styles.event}
-//                         inputStyles={styles.input}
-//                         dropdownItemStyles={{color: 'white'}}
-//                         dropdownTextStyles={{color: 'white'}}
-//                         arrowicon={<Icon name="chevron-down" size={20} color={'white'} />} 
-//                         searchicon={<Icon name="search" size={20} color={'white'} />} 
-//                         closeicon={<Icon name="close" size={20} color={'white'} />} 
-//                         search={true}
-//                       />
-//                       <TalkBtn onPress={() => setMinistryUsers(selected)}/>
-//                     </View>
-//                   </View>                                  
-//               }
-//           }) 
-//         )
-//       }
-//       else if(dateMinistry.length >= 1 && stuff === false){
-//         return ( 
-//           dateMinistry.map((e) => {
-//             if(e.date === day && e.action === 'MinistryLeader'){  
-//               return <View style={styles.user}>
-//                 <Icon name='people-circle-outline' size={20} color={'#F9F9B5'} />
-//                 <Text style={styles.user_text}>{USERS[e.user]}</Text>
-//                 </View>  
-//             }
-//           }) 
-//         )
-//       }
 }
 
 export default Ministry

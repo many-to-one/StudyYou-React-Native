@@ -85,7 +85,6 @@ const Cleaning = ({day, week_ago, navigation}) => {
     {key: '10', value: '10'},
   ]
 
-  // console.log('USERS', USERS)
   console.log('selected', selected)
 
   const setCleaning = async(selected) => {
@@ -121,7 +120,6 @@ const Cleaning = ({day, week_ago, navigation}) => {
     getCalendarDatesByDate()
   }
 
-
 console.log('dateCleaning:', dateCleaning, stuff)
 
 
@@ -155,7 +153,7 @@ if(stuff === true){
       <TalkBtn onPress={() => setCleaning(selected)}/>
       </View>
       <View>
-        {dateCleaning.map((person, index) => (
+        {dateCleaning.slice(0, 1).map((person, index) => (
           <ShowStuff 
           key={person.id}
           person={person}
@@ -172,7 +170,7 @@ if(stuff === true){
   return(
     <View>
       <View>
-        {dateCleaning.map((person, index) => (
+        {dateCleaning.slice(0, 1).map((person, index) => (
           <ShowStuff 
           key={person.id}
           person={person}
@@ -187,89 +185,6 @@ if(stuff === true){
   )
 }
 
-
-// if(dateMicrophones.length > 1 && stuff === true){
-//   return ( 
-//     dateMicrophones.map((e) => {
-//         if(e.date === day && e.action === 'Cleaning'){  
-//             return  <View style={styles.user}>
-//             <Icon name='ios-water' size={20} color={'#F9F9B5'} />
-//             <Text style={styles.user_text}>{e.groupe}</Text>
-//                 <Icon 
-//                     name="close-circle-outline" 
-//                     size={20} 
-//                     color={'#F9F9B5'} 
-//                     onPress={() => deleteMicrophone(e)}     
-//                     />
-//             </View>  
-
-//         }
-//     }) 
-
-//   )
-//     }else if(dateMicrophones.length === 0 && stuff === true){
-//         return (
-//             <View style={styles.row}>
-//               <MultipleSelectList 
-//                 setSelected={(val) => setSelected(val)} 
-//                 data={groups} 
-//                 save="value"
-//                 onSelect={() => getUsersByGroupe()} 
-//                 placeholder={
-//                   <View style={styles.placeholder}>
-//                     <Icon name='ios-water' size={20} color={'white'} />
-//                     <Text style={styles.text}>{trans.Cleaning}</Text>
-//                   </View>
-//                 }
-//                 boxStyles={styles.event}
-//                 inputStyles={styles.input}
-//                 dropdownItemStyles={{color: 'white'}}
-//                 dropdownTextStyles={{color: 'white'}}
-//                 arrowicon={<Icon name="chevron-down" size={20} color={'white'} />} 
-//                 searchicon={<Icon name="search" size={20} color={'white'} />} 
-//                 closeicon={<Icon name="close" size={20} color={'white'} />} 
-//                 search={true}
-//                 dropdownStyles={styles.dropdown}
-//               />
-//               <TalkBtn onPress={() => setCleaning(selected)}/>
-//             </View>
-//         )
-//     }else if(dateMicrophones.length === 1 && stuff === true){
-//         return ( 
-//           dateMicrophones.map((e) => {
-//               if(e.date === day && e.action === 'Cleaning'){  
-//                   return  <View>
-//                     <View style={styles.user}>
-//                     <Icon name='ios-water' size={20} color={'#F9F9B5'} />
-//                       <Text style={styles.user_text}>{e.groupe}</Text>
-//                           <Icon 
-//                               name="close-circle-outline" 
-//                               size={20} 
-//                               color={'#F9F9B5'} 
-//                               onPress={() => deleteMicrophone(e)}     
-//                               />
-//                     </View>
-//                   </View>
-                  
-                                      
-//               }
-//           }) 
-  
-//           )
-//   }else if(dateMicrophones.length >= 1 && stuff === false){
-//     return ( 
-//       dateMicrophones.map((e) => {
-//           if(e.date === day && e.action === 'Cleaning'){  
-//               return  <View style={styles.user}>
-//               <Icon name='ios-water' size={20} color={'#F9F9B5'} />
-//               <Text style={styles.user_text}>{e.groupe}</Text>
-//               </View>  
-  
-//           }
-//       }) 
-  
-//     )
-//       }
 }
 
 export default Cleaning

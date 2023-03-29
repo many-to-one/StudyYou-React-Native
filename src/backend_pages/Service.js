@@ -1,11 +1,12 @@
 import React, { useContext } from 'react'
-import { Button, Dimensions, ScrollView, StyleSheet, Text, View } from 'react-native'
+import { Animated, Button, Dimensions, ScrollView, StyleSheet, Text, View } from 'react-native'
 import Microphones from '../backend_pages/Microphones';
 import Music from '../backend_pages/Music';
 import { LanguageContext } from '../context/LanguageContext';
 import Cleaning from './Cleaning';
 import Duty from './Duty';
 import { styles } from '../styles/Styles';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 const Service = ({route, navigation}) => {
 
@@ -13,8 +14,16 @@ const Service = ({route, navigation}) => {
     const {trans} = useContext(LanguageContext);
 
   return (
-    <ScrollView style={styles.scroll}>
-      <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
+      <Animated.Image 
+        source={require("../../assets/service_ibg.png")}
+          style={[
+            StyleSheet.absoluteFillObject,
+          ]}
+          blurRadius={5}
+      />
+      <ScrollView >  
+      <View style={styles.cont}>
         <View style={styles.event_}>
           <Text style={styles.text_}>{trans.Microphones}:</Text>
           <Microphones  
@@ -45,60 +54,9 @@ const Service = ({route, navigation}) => {
         </View>
       </View>
       </ScrollView>
+
+    </SafeAreaView>
   )
 }
-
-// const { width, height } = Dimensions.get('window');
-// const styles = StyleSheet.create({
-//   scroll: {
-//     backgroundColor: '#050929'
-//   },
-//   container: {
-//     flex: 1,
-//     flexDirection: 'column',
-//     alignItems: 'center',
-//     gap: 25,
-//     paddingTop: 25,
-//   },
-//   text: {
-//     color: 'white',
-//     fontSize: 20,
-//   },
-//   event:{
-//     width: 320,
-//     margin: 5,
-//     padding: 10,
-//     color: 'white',
-//     fontSize: 20,
-//     zIndex: 999,
-//     backgroundColor: "transparent",
-//   },
-//   input:{
-//     width: 230,
-//     height: 50,
-//     borderRadius: 10,
-//     borderWidth: 2,
-//     borderColor: '#78D7D9',
-//     margin: 5,
-//     padding: 10,
-//     color: 'white',
-//     fontSize: 20,
-//     zIndex: 999,
-//     backgroundColor: "#a6a6a6"
-//   },
-//   button: {
-//     alignItems: 'center',
-//     justifyContent: 'center',
-//     width: 320,
-//     height: 50,
-//     borderRadius: 10,
-//     borderWidth: 2,
-//     borderColor: '#78F5FA',
-//     margin: 5,
-//     padding: 10,
-//     backgroundColor: '#F9F9B5',
-//     zIndex: 999,
-// },    
-// })
 
 export default Service
