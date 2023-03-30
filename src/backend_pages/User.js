@@ -1,21 +1,23 @@
 import React, { useContext, useState } from 'react'
-import { Text, View, CheckBox, ScrollView, SafeAreaView} from 'react-native';
+import { Text, View, CheckBox, ScrollView, SafeAreaView, TouchableOpacity} from 'react-native';
 import TalkBtn from '../buttons/TalkBtn';
 import { LanguageContext } from '../context/LanguageContext';
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import { styles } from '../styles/Styles';
+import { AuthContext } from '../context/AuthContext';
 
 const User = ({route, navigation}) => {
     const {user} = route.params;
-    const {proxy, userData} = useContext(LanguageContext)
+    const {proxy, userData} = useContext(AuthContext)
     const {trans} = useContext(LanguageContext)
     const [selected, setSelected] = useState(false);
     const [edit, setEdit] = useState(false);
 
-    const editAdmin = async(selected) => {
-        console.log('sel', selected)
+    const editAdmin = async() => {
+        console.log('sel', selected, userData)
         const body = {'admin': selected}
-        const resp = await fetch(`${proxy}/users/users/${userData.id}`, {
+        // let datas = JSON.parse(await AsyncStorage.getItem("asyncUserData"))
+        const resp = await fetch(`${proxy}/users/user/${userData.id}/`, {
         method: 'POST',
           headers: {
             'Content-Type': 'application/json'
@@ -58,22 +60,16 @@ const User = ({route, navigation}) => {
                     <Text style={styles.user_text}>{user.last_login}</Text>
                 </View>
 
-                <View style={styles.user}>
-                    <CheckBox
-                      value={selected}
-                      onValueChange={setSelected}
-                      style={styles.checkbox}
-                    />
-                    <Text style={styles.user_text}>Admin</Text>
-                    <View style={styles.row}>
-                        <TalkBtn onPress={() => editAdmin(selected)}/>
-                        <Icon 
-                          name='delete-forever' 
-                          onPress={() => deleteEvent()} 
-                          style={styles.delete}  
-                        />
-                    </View>
-                </View>
+                <TouchableOpacity onPress={() => editAdmin()}>
+                  <View style={styles._user}>
+                      <CheckBox
+                        value={selected}
+                        onValueChange={setSelected}
+                        style={styles.checkbox}
+                      />
+                      <Text style={styles.user_text}>Admin</Text>
+                  </View>
+                </TouchableOpacity>
 
                 <View style={styles._user}>
                     <CheckBox
