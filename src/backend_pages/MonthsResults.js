@@ -2,9 +2,7 @@ import React, { useCallback, useContext, useEffect, useState } from 'react'
 import { AuthContext } from '../context/AuthContext'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { FlatList, ScrollView, StyleSheet, View, Animated, Image, Dimensions, RefreshControl } from 'react-native';
-import BackButton from '../buttons/BackButton';
 import MonthsResultsItem from './MonthsResultsItem';
-import { LinearGradient } from 'expo-linear-gradient';
 import { useFocusEffect, useIsFocused } from '@react-navigation/native';
 
 const MonthsResults = ({navigation}) => {
@@ -36,15 +34,6 @@ const MonthsResults = ({navigation}) => {
                 ]}
                 blurRadius={5}
             />
-            {/* <LinearGradient
-                colors={['rgba(0, 0, 0, 0)', '#393939']}
-                style={{
-                height,
-                width,
-                position: 'absolute',
-                bottom: -50,
-                }}
-            /> */}
             <ScrollView>
             {result.map((res, index) => (
                 <MonthsResultsItem key={res.id} res={res}/>

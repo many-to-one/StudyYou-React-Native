@@ -35,6 +35,7 @@ import MinistryWithStand from '../backend_pages/MinistryWithStand';
 import PlacesStand from '../backend_pages/PlacesStand';
 import UsersManagment from '../backend_pages/UsersManagment';
 import User from '../backend_pages/User';
+import ShowResultsForLeader from '../backend_pages/ShowResultsForLeader';
 const Tab = createBottomTabNavigator();
 
 function BottomNavigator() {
@@ -608,6 +609,25 @@ function BottomNavigator() {
         <Tab.Screen 
           name="User" 
           component={User} 
+          options={({ navigation }) => ({
+            title: `${trans.UsersManagment}`,
+            headerTtleStyle: {
+              color: 'white',
+              marginLeft: width / 3.5,
+            },
+            headerStyle: {
+              backgroundColor: 'black',
+            },
+            tabBarVisible: false, // hide the button
+            tabBarButton: (props) => null, // hide the button
+            headerLeft: () => (
+              <BackButton onPress={() => navigation.navigate('Profile')} />
+            ),
+          })}
+        />
+        <Tab.Screen 
+          name="ShowResultsForLeader" 
+          component={ShowResultsForLeader} 
           options={({ navigation }) => ({
             title: `${trans.UsersManagment}`,
             headerTtleStyle: {
