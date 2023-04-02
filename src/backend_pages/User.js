@@ -16,18 +16,28 @@ const User = ({route, navigation}) => {
     const [ministryEvent, setMinistryEvent] = useState(null);
     const [service, setService] = useState(null);
     const [editor, setEditor] = useState(null);
+    const [report, setReport] = useState(null);
     const isFocused = useIsFocused();
 
     useEffect(() => {
-      console.log(user)
-      setAdmin(user.admin)
-      setLeader(user.leader)
-      setHelper(user.helper)
-      setMinistryEvent(user.ministry_event)
-      setService(user.service)
-      setEditor(user.editor)
+      getUserInfo()
       getMonthsResults()
     },[isFocused])
+
+    const getUserInfo = async() => {
+      const resp = await fetch(`${proxy}/users/user/${user.id}/`)
+      const data = await resp.json()
+      if(data){
+        console.log('user', data)
+        setAdmin(data.admin)
+        setLeader(data.data.leader)
+        setHelper(data.data.helper)
+        setMinistryEvent(data.data.ministry_event)
+        setService(data.data.service)
+        setEditor(data.data.editor)
+        setReport(data.data.report)
+      }
+    }
 
     const getMonthsResults = async() => {
       const resp = await fetch(`${proxy}/backend/get_months_results/${user.id}/`)
@@ -179,6 +189,33 @@ const User = ({route, navigation}) => {
         });
       }   
     }
+
+
+    const editReport = async() => {
+
+      if(report === false){
+        const body = {'report': true}
+        const resp = await fetch(`${proxy}/users/user/${user.id}/`, {
+        method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body:JSON.stringify(body),
+        });
+        getMonthsResults()
+
+      }else{
+        const body = {'report': false}
+        const resp = await fetch(`${proxy}/users/user/${user.id}/`, {
+        method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body:JSON.stringify(body),
+        });
+        getMonthsResults
+      }   
+    }
     
 
   return (
@@ -218,7 +255,7 @@ const User = ({route, navigation}) => {
                         onValueChange={setAdmin}
                         style={styles.checkbox}
                       />
-                      <Text style={styles.user_text}>Admin</Text>
+                      <Text style={styles.user_text}>{trans.Admin}</Text>
                   </View>
                 </TouchableOpacity>
 
@@ -229,7 +266,7 @@ const User = ({route, navigation}) => {
                         onValueChange={setLeader}
                         style={styles.checkbox}
                       />
-                      <Text style={styles.user_text}>Leader</Text>
+                      <Text style={styles.user_text}>{trans.Leader}</Text>
                   </View>
                 </TouchableOpacity>
 
@@ -240,7 +277,7 @@ const User = ({route, navigation}) => {
                         onValueChange={setHelper}
                         style={styles.checkbox}
                       />
-                      <Text style={styles.user_text}>Helper</Text>
+                      <Text style={styles.user_text}>{trans.Helper}</Text>
                   </View>
                 </TouchableOpacity>
 
@@ -251,7 +288,7 @@ const User = ({route, navigation}) => {
                         onValueChange={setMinistryEvent}
                         style={styles.checkbox}
                       />
-                      <Text style={styles.user_text}>Ministry Event</Text>
+                      <Text style={styles.user_text}>{trans.Ministry}</Text>
                   </View>
                 </TouchableOpacity>
 
@@ -262,7 +299,7 @@ const User = ({route, navigation}) => {
                         onValueChange={setService}
                         style={styles.checkbox}
                       />
-                      <Text style={styles.user_text}>Service</Text>
+                      <Text style={styles.user_text}>{trans.Service}</Text>
                   </View>
                 </TouchableOpacity>
 
@@ -273,13 +310,24 @@ const User = ({route, navigation}) => {
                         onValueChange={setEditor}
                         style={styles.checkbox}
                       />
-                      <Text style={styles.user_text}>Editor</Text>
+                      <Text style={styles.user_text}>{trans.Editor}</Text>
+                  </View>
+                </TouchableOpacity>
+
+                <TouchableOpacity onPress={() => editReport()}>
+                  <View style={styles._user}>
+                      <CheckBox
+                        value={report}
+                        onValueChange={setReport}
+                        style={styles.checkbox}
+                      />
+                      <Text style={styles.user_text}>{trans.Report}</Text>
                   </View>
                 </TouchableOpacity>
 
                 <TouchableOpacity onPress={() => navigation.navigate('ShowResultsForLeader', {results: results})}>
                   <View style={styles._user}>
-                      <Text style={styles.user_text}>getMonthsResults</Text>
+                      <Text style={styles.user_text}>{trans.getMonthsResults}</Text>
                   </View>
                 </TouchableOpacity>
 

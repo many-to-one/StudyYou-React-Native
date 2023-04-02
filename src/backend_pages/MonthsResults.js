@@ -8,7 +8,7 @@ import { useFocusEffect, useIsFocused } from '@react-navigation/native';
 const MonthsResults = ({navigation}) => {
     
     const { width, height } = Dimensions.get('window');
-    const {proxy} = useContext(AuthContext);
+    const {proxy, userData} = useContext(AuthContext);
     const [ result, setResults ] = useState([]);
     const isFocused = useIsFocused();
 
@@ -23,7 +23,24 @@ const MonthsResults = ({navigation}) => {
         setResults(data.data)
         await AsyncStorage.setItem("monthsResult", JSON.stringify(data.data));
         console.log('getMonthsResults', data)
+        let i = 0
+        data.data.map((e) => {
+            i += 1
+            if(i == 14){
+                deleteAllMonthResults()
+                console.log('deleted number:', i)
+            }
+        })
     };
+
+    const deleteAllMonthResults = async() => {
+        let datas = JSON.parse(await AsyncStorage.getItem("asyncUserData"))
+        const resp = await fetch(`${proxy}/backend/delete_all_months_results/${datas.id}/`, {
+            method: 'DELETE'
+        })
+        const data = await resp.json()
+        console.log('deleted data', data)
+    }
 
     return (
          <View style={styles.container}>
@@ -47,7 +64,6 @@ const MonthsResults = ({navigation}) => {
     const styles = StyleSheet.create({
         container:{
             flex:1,
-
             backgroundColor: 'black',
             justifyContent: 'center',
             alignItems: 'center',

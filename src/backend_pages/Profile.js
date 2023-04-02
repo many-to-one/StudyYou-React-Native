@@ -504,7 +504,6 @@ const styles = StyleSheet.create({
     container: {
       flex: 1,
       width: width,
-      // backgroundColor: '#050929',
       backgroundColor: 'black',
       flexDirection: 'column',
       justifyContent: 'center',
@@ -611,6 +610,7 @@ const styles = StyleSheet.create({
       // backgroundGradientFrom: "#fb8c00",
       // backgroundGradientTo: "#ffa726",
       // decimalPlaces: 2, // optional, defaults to 2dp
+      backgroundColor: "#18909C80",
       opacity: 0.8,
       color: (opacity = 1) => `rgba(114, 159, 172, ${opacity})`,
       labelColor: (opacity = 1) => `rgba(114, 159, 172, ${opacity})`,

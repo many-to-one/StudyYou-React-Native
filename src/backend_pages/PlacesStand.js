@@ -44,7 +44,7 @@ const PlacesStand = ({navigation}) => {
       if(data.status === 200){
         console.log('data', data)
         await getPlacesStand()
-        setPlace([])
+        // setPlace([])
       }
     }
 

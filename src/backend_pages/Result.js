@@ -9,10 +9,15 @@ import { LanguageContext } from '../context/LanguageContext';
 
 const Result = ({navigation}) => {
 
-    const { width, height } = Dimensions.get('window');
-    const {proxy} = useContext(AuthContext);
+    const {proxy, userData} = useContext(AuthContext);
     const {trans} = useContext(LanguageContext);
+    const [ month, setMonth ] = useState('');
     const [ result, setResult ] = useState([]);
+    const [ hours, setHours ] = useState(null);
+    const [ minutes, setMinutes ] = useState(null);
+    const [ publications, setPublications ] = useState(null);
+    const [ visits, setVisits ] = useState(null);
+    const [ films, setFilms ] = useState(null);
     const [ studies, setStudies ] = useState(0);
     const isFocused = useIsFocused();
 
@@ -25,10 +30,16 @@ const Result = ({navigation}) => {
         const resp = await fetch(`${proxy}/backend/results/${datas.id}/`)
         const data = await resp.json()
         setResult(data)
+        setHours(data.hours)
+        setMinutes(data.minutes)
+        setPublications(data.publications)
+        setVisits(data.visits)
+        setFilms(data.films)
         console.log('data', data)
-        console.log('userId', datas.id)
+        console.log('userId', userData.id)
     }
     console.log('result', result)
+    console.log('films', films)
 
     const deleteAll = async(datas) => {
       const resp = await fetch(`${proxy}/backend/event/delete-all/${datas.id}/`, {
@@ -44,7 +55,14 @@ const Result = ({navigation}) => {
     const saveMonthResult = async() => {
         let lng = await AsyncStorage.getItem('language')
         let datas = JSON.parse(await AsyncStorage.getItem("asyncUserData"))
-        const resp = await fetch(`${proxy}/backend/month/create/${datas.id}/${lng}/${studies}/`)
+        const body = {'films': films}
+        const resp = await fetch(`${proxy}/backend/month/create/${datas.id}/${lng}/${studies}/${month}/`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body:JSON.stringify(body),
+        });
         const data = await resp.json()
         console.log('std', data)
         if (resp.status === 200){
@@ -72,31 +90,42 @@ const Result = ({navigation}) => {
             }}
           /> */}
         <ScrollView>
+
+          <View style={styles.row}>
+            <TextInput 
+              placeholder={trans.month}
+              placeholderTextColor="#D50000"
+              value={month}
+              onChangeText={(e) => {setMonth(e)}}
+              style={styles.month}
+            />
+          </View>
+
           <View style={styles.row}>
             <View style={styles.left_row}>
               <Text style={styles.text}>
                 {trans.Hours}:
               </Text>
             </View>
-            <View style={styles.input}>
-              <Text style={styles.text_res}>
-                {result.hours}
-              </Text>
-            </View>
-           </View>  
+            <TextInput 
+              value={hours}
+              onChangeText={(e) => {setHours(e)}}
+              style={styles.input}
+            />
+          </View>  
 
-          <View style={styles.row}>
+           <View style={styles.row}>
             <View style={styles.left_row}>
               <Text style={styles.text}>
                 {trans.Minutes}:
               </Text>
             </View>
-            <View style={styles.input}>
-              <Text style={styles.text_res}>
-                {result.minutes}
-              </Text>
-            </View>
-          </View>   
+            <TextInput 
+              value={minutes}
+              onChangeText={(e) => {setMinutes(e)}}
+              style={styles.input}
+            />
+          </View>  
 
           <View style={styles.row}>
             <View style={styles.left_row}>
@@ -104,12 +133,12 @@ const Result = ({navigation}) => {
                 {trans.Publications}:
               </Text>
             </View>
-            <View style={styles.input}>
-              <Text style={styles.text_res}>
-                {result.publications}
-              </Text>
-            </View>
-          </View>  
+            <TextInput 
+              value={publications}
+              onChangeText={(e) => {setPublications(e)}}
+              style={styles.input}
+            />
+          </View>
 
           <View style={styles.row}>
             <View style={styles.left_row}>
@@ -117,14 +146,14 @@ const Result = ({navigation}) => {
                 {trans.Visits}:
               </Text>
             </View>
-            <View style={styles.input}>
-              <Text style={styles.text_res}>
-                {result.visits}
-              </Text>
-            </View>
-          </View>  
+            <TextInput 
+              value={visits}
+              onChangeText={(e) => {setVisits(e)}}
+              style={styles.input}
+            />
+          </View> 
 
-          <View style={styles.row}>
+          {/* <View style={styles.row}>
             <View style={styles.left_row}>
               <Text style={styles.text}>
                 {trans.Films}:
@@ -135,6 +164,19 @@ const Result = ({navigation}) => {
                 {result.films}
               </Text>
             </View>
+          </View> */}
+
+          <View style={styles.row}>
+            <View style={styles.left_row}>
+              <Text style={styles.text}>
+                {trans.Films}:
+              </Text>
+            </View>
+            <TextInput 
+              value={films}
+              onChangeText={(e) => {setFilms(e)}}
+              style={styles.input}
+            />
           </View>
 
           <View style={styles.row}>
@@ -156,6 +198,7 @@ const Result = ({navigation}) => {
       )
     }
     
+    const { width, height } = Dimensions.get('window');
     const styles = StyleSheet.create({
       container: {
         flex: 1,
@@ -183,6 +226,24 @@ const Result = ({navigation}) => {
         fontSize: 25,
         // padding: 20,
       }, 
+      month: {
+        width: width * 0.8,
+        height:50,
+        borderRadius: 10,
+        margin: 5,
+        // alignItems: 'center',
+        justifyContent: 'center',
+        paddingLeft: 10,
+        color: 'white',
+        fontSize: 25,
+        shadowColor: '#a1efff',
+        shadowOpacity: 1,
+        shadowOffset: {
+        width: 0,
+        height: 0,
+        },
+        shadowRadius: 6
+      },
       left_row: {
         width: 250,
         height:50,

@@ -5,70 +5,70 @@ export const LanguageContext = createContext();
 
 export const LanguageProvider = ({children}) => {
 
-    const [Hours, setHours] = useState('')
-    const [Minutes, setMinutes] = useState('')
-    const [Visits, setVisits] = useState('')
-    const [Publications, setPublications] = useState('')
-    const [Films, setFilms] = useState('')
-    const [Menu_, setMenu] = useState('')
-    const [Events_, setEvents] = useState('')
-    const [Profile_, setProfile] = useState('')
-    const [Timer_, setTimer] = useState('')
-    const [Result_, setResult] = useState('')
-    const [History_, setHistory] = useState('')
-    const [AddEvent_, setAddEvent] = useState('')
-    const [UpdateEvent_, setUpdateEvent] = useState('')
-    const [AllEvents_, setAllEvents] = useState('')
+    // const [Hours, setHours] = useState('')
+    // const [Minutes, setMinutes] = useState('')
+    // const [Visits, setVisits] = useState('')
+    // const [Publications, setPublications] = useState('')
+    // const [Films, setFilms] = useState('')
+    // const [Menu_, setMenu] = useState('')
+    // const [Events_, setEvents] = useState('')
+    // const [Profile_, setProfile] = useState('')
+    // const [Timer_, setTimer] = useState('')
+    // const [Result_, setResult] = useState('')
+    // const [History_, setHistory] = useState('')
+    // const [AddEvent_, setAddEvent] = useState('')
+    // const [UpdateEvent_, setUpdateEvent] = useState('')
+    // const [AllEvents_, setAllEvents] = useState('')
     const [dayNames, setDaynames] = useState([])
     const [monthNames, setMonthnames] = useState([])
-    const [technicalSupport_, setTechnicalSupport] = useState([])
-    const [ministryLeaders_, setMinistryLeaders] = useState([])
-    const [ministryLeader_, setMinistryLeader] = useState([])
-    const [midweekMeetings_, setMidweekMeetings] = useState([])
-    const [weekendMeetings_, setWeekendMeetings] = useState([])
-    const [leaderAndIntroductoryRemarks_, setLeaderAndIntroductoryRemarks] = useState([])
-    const [firstPrayer_, setFirstPrayer] = useState([])
-    const [treasuresFromGodsWord_, setTreasuresFromGodsWord] = useState([])
-    const [spiritualGems_, setSpiritualGems] = useState([])
-    const [bibleReading_, setBibleReading] = useState([])
-    const [schoolLeader_, setSchoolLeader] = useState([])
-    const [initialCall_, setInitialCall] = useState([])
-    const [returnVisit_, setReturnVisit] = useState([])
-    const [schoolStudy_, setSchoolStudy] = useState([])
-    const [schoolTalk_, setSchoolTalk] = useState([])
-    const [discussion_, setDiscussion] = useState([])
-    const [localNeeds_, setLocalNeeds] = useState([])
-    const [bibleStudyLeader_, setBibleStudyLeader] = useState([])
-    const [bibleStudyLector_, setBibleStudyLector] = useState([])
-    const [lastPrayer_, setLastPrayer] = useState([])
-    const [weekendLeader_, setWeekendLeader] = useState([])
-    const [weekendSpeach_, setWeekendSpeach] = useState([])
-    const [watchTowerLeader_, setWatchTowerLeader] = useState([])
-    const [watchTowerLector_, setWatchTowerLector] = useState([])
-    const [login_, setLogin] = useState([])
-    const [registration_, setRegistration] = useState([])
-    const [Logout_, setLogout] = useState('')
-    const [Changepassword_, setChangepassword] = useState('')
-    const [forgotPassword_, setForgotPassword] = useState('')
-    const [dhaccount_, setDhaccount] = useState('')
-    const [submit_, setSubmit] = useState('')
-    const [click_, setClick] = useState('')
-    const [requestResetMail_, setRequestResetMail] = useState([])
-    const [createCalendarEvent_, setCreateCalendarEvent] = useState([])
-    const [microphones_, setMicrophones] = useState([])
-    const [music_, setMusic] = useState([])
-    const [duty_, setDuty] = useState([])
-    const [ministryWith_, setMinistryWith] = useState([])
-    const [PROFILE_, setPROFILE] = useState([])
-    const [TIMER_, setTIMER] = useState([])
-    const [EVENTS_, setEVENTS] = useState([])
-    const [RESULT_, setRESULT] = useState([])
-    const [HISTORY_, setHISTORY] = useState([])
-    const [with_, setWith] = useState([])
-    const [time_, setTime] = useState([])
-    const [delHistory_, setDelHistory] = useState([])
-    const [yes_, setYes] = useState([])
-    const [no_, setNo] = useState([]) 
+    // const [technicalSupport_, setTechnicalSupport] = useState([])
+    // const [ministryLeaders_, setMinistryLeaders] = useState([])
+    // const [ministryLeader_, setMinistryLeader] = useState([])
+    // const [midweekMeetings_, setMidweekMeetings] = useState([])
+    // const [weekendMeetings_, setWeekendMeetings] = useState([])
+    // const [leaderAndIntroductoryRemarks_, setLeaderAndIntroductoryRemarks] = useState([])
+    // const [firstPrayer_, setFirstPrayer] = useState([])
+    // const [treasuresFromGodsWord_, setTreasuresFromGodsWord] = useState([])
+    // const [spiritualGems_, setSpiritualGems] = useState([])
+    // const [bibleReading_, setBibleReading] = useState([])
+    // const [schoolLeader_, setSchoolLeader] = useState([])
+    // const [initialCall_, setInitialCall] = useState([])
+    // const [returnVisit_, setReturnVisit] = useState([])
+    // const [schoolStudy_, setSchoolStudy] = useState([])
+    // const [schoolTalk_, setSchoolTalk] = useState([])
+    // const [discussion_, setDiscussion] = useState([])
+    // const [localNeeds_, setLocalNeeds] = useState([])
+    // const [bibleStudyLeader_, setBibleStudyLeader] = useState([])
+    // const [bibleStudyLector_, setBibleStudyLector] = useState([])
+    // const [lastPrayer_, setLastPrayer] = useState([])
+    // const [weekendLeader_, setWeekendLeader] = useState([])
+    // const [weekendSpeach_, setWeekendSpeach] = useState([])
+    // const [watchTowerLeader_, setWatchTowerLeader] = useState([])
+    // const [watchTowerLector_, setWatchTowerLector] = useState([])
+    // const [login_, setLogin] = useState([])
+    // const [registration_, setRegistration] = useState([])
+    // const [Logout_, setLogout] = useState('')
+    // const [Changepassword_, setChangepassword] = useState('')
+    // const [forgotPassword_, setForgotPassword] = useState('')
+    // const [dhaccount_, setDhaccount] = useState('')
+    // const [submit_, setSubmit] = useState('')
+    // const [click_, setClick] = useState('')
+    // const [requestResetMail_, setRequestResetMail] = useState([])
+    // const [createCalendarEvent_, setCreateCalendarEvent] = useState([])
+    // const [microphones_, setMicrophones] = useState([])
+    // const [music_, setMusic] = useState([])
+    // const [duty_, setDuty] = useState([])
+    // const [ministryWith_, setMinistryWith] = useState([])
+    // const [PROFILE_, setPROFILE] = useState([])
+    // const [TIMER_, setTIMER] = useState([])
+    // const [EVENTS_, setEVENTS] = useState([])
+    // const [RESULT_, setRESULT] = useState([])
+    // const [HISTORY_, setHISTORY] = useState([])
+    // const [with_, setWith] = useState([])
+    // const [time_, setTime] = useState([])
+    // const [delHistory_, setDelHistory] = useState([])
+    // const [yes_, setYes] = useState([])
+    // const [no_, setNo] = useState([]) 
     const [trans, setTrans] = useState({})
 
 
@@ -76,6 +76,7 @@ export const LanguageProvider = ({children}) => {
         let lng = await AsyncStorage.getItem('language')
         if(lng === 'PL'){
             setTrans({
+                'Month': 'Miesiąc',
                 'Hours': 'Godziny',
                 'Minutes': 'Minuty',
                 'Visits': 'Odwiedziny',
@@ -148,7 +149,15 @@ export const LanguageProvider = ({children}) => {
                 'OverallScore': 'Wynik ogólny',
                 'BibleStudies': 'Studia Biblijne',
                 'PlacesStand': 'Tereny (Stojak)',
-                'UsersManagment': 'Zarządzanie użytkwnikamy',
+                'UsersManagment': 'Zarządzaj użytkownikami',
+                'Admin': 'Administrator',
+                'Leader': 'Starszy',
+                'Helper': 'Przywileje',
+                'Ministry': 'Prowadzoncy zbiorek',
+                'Editor': 'Redaktor',
+                'Report': 'Owoc',
+                'Service': 'Serwis',
+                'getMonthsResults': 'Raportacja(historia)',
             })
             setDaynames(['Pon', 'Wt', 'Śr', 'Czw', 'Pt', 'Sob', 'Niedz'])
             setMonthnames([
@@ -168,6 +177,7 @@ export const LanguageProvider = ({children}) => {
 
         }else if(lng === 'RU'){
             setTrans({
+                'Month': 'Месяц',
                 'Hours': 'Часы',
                 'Minutes': 'Минуты',
                 'Visits': 'Повторы',
@@ -241,6 +251,14 @@ export const LanguageProvider = ({children}) => {
                 'BibleStudies': 'Изучения Библии',
                 'PlacesStand': 'Участки (стенд)',
                 'UsersManagment': 'Управление пользователями',
+                'Admin': 'Администратор',
+                'Leader': 'Старейшина',
+                'Helper': 'Помощник',
+                'Ministry': 'Встречи для проповеди ',
+                'Editor': 'Редактор',
+                'Report': 'Отчёт',
+                'Service': 'Сервис',
+                'getMonthsResults': 'История отчётов',
             })
             setDaynames(['Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб', 'Вс'])
             setMonthnames([
@@ -259,6 +277,7 @@ export const LanguageProvider = ({children}) => {
 
         }else if(lng === 'UA'){
             setTrans({
+                'Month': 'Мiсяц',
                 'Hours': 'Години',
                 'Minutes': 'Минуты',
                 'Visits': 'Повтори',
@@ -332,6 +351,14 @@ export const LanguageProvider = ({children}) => {
                 'BibleStudies': 'Bивчення Біблії',
                 'PlacesStand': 'Місця (стенд)',
                 'UsersManagment': 'Керування користувачами',
+                'Admin': 'Адміністратор',
+                'Leader': 'Старійшина',
+                'Helper': 'Помічник',
+                'Ministry': 'Зустрічі для проповіді',
+                'Editor': 'Редактор',
+                'Report': 'Звіт',
+                'Service': 'Сервіс',
+                'getMonthsResults': 'Історія звітів',
             })
             setDaynames(['Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб', 'Нд'])
             setMonthnames([
@@ -355,70 +382,8 @@ export const LanguageProvider = ({children}) => {
    
         <LanguageContext.Provider value={{
             setLanguage,
-            forgotPassword_,
-            dhaccount_,
-            submit_,
-            click_,
-            Hours,
-            Minutes,
-            Visits,
-            Publications,
-            Films,
-            Menu_,
-            Events_,
-            Profile_,
-            Timer_,
-            Result_,
-            History_,
-            AddEvent_,
-            UpdateEvent_,
-            AllEvents_,
-            Logout_,
-            login_,
-            registration_,
-            requestResetMail_,
-            Changepassword_,
             dayNames,
             monthNames,
-            technicalSupport_,
-            ministryLeaders_,
-            ministryLeader_,
-            midweekMeetings_,
-            weekendMeetings_,
-            leaderAndIntroductoryRemarks_,
-            firstPrayer_,
-            treasuresFromGodsWord_,
-            spiritualGems_,
-            bibleReading_,
-            schoolLeader_,
-            initialCall_,
-            returnVisit_,
-            schoolStudy_,
-            schoolTalk_,
-            discussion_,
-            localNeeds_,
-            bibleStudyLeader_,
-            bibleStudyLector_,
-            lastPrayer_,
-            weekendLeader_,
-            weekendSpeach_,
-            watchTowerLeader_,
-            watchTowerLector_,
-            createCalendarEvent_,
-            microphones_,
-            music_,
-            ministryWith_,
-            duty_,
-            PROFILE_,
-            TIMER_,
-            EVENTS_,
-            RESULT_,
-            HISTORY_,
-            with_,
-            time_,
-            delHistory_,
-            no_,
-            yes_,
             trans,
         }}>
             {children}

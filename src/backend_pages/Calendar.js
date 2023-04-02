@@ -59,8 +59,8 @@ const Calendar_ = (props) => {
         marked[day.toString()] = {
           selected: true,
           marked: true,
-          selectedColor: 'blue',
-          // selectedTextColor: 'white',
+          selectedColor: '#F9F9B5',
+          selectedTextColor: 'black',
         }
       })
 
@@ -103,24 +103,23 @@ const { width, height } = Dimensions.get('window');
 const styles = StyleSheet.create({
   event:{
     width: width / 1.2,
-    height: 350,
+    height: 380,
     borderRadius: 10,
-    // borderWidth: 1,
-    // borderColor: '#78D7D9',
-    // borderColor: 'white',
+    borderWidth: 1,
+    borderColor: '#19868a',
     marginTop: 15,
     padding: 10,
     color: 'white',
     fontSize: 20,
     zIndex: 999,
-    backgroundColor: 'transparent',
-    shadowColor: 'white',
-    shadowOpacity: 1,
-    shadowOffset: {
-      width: 0,
-      height: 0,
-    },
-    shadowRadius: 4,
+    backgroundColor: '#18909C80',
+    shadowColor: '#19868a',
+      shadowOpacity: 1,
+      shadowOffset: {
+        width: 0,
+        height: 0,
+      },
+    shadowRadius: 8,
     marginBottom: 20,
   }
 })

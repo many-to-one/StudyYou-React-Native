@@ -1,7 +1,7 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useIsFocused } from '@react-navigation/native';
 import React, { useContext, useEffect, useState } from 'react'
-import { Animated, ImageBackground, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import { Animated, Dimensions, ImageBackground, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import { AuthContext } from '../context/AuthContext';
 import Icon from "react-native-vector-icons/Ionicons";
 import BackButton from '../buttons/BackButton';
@@ -62,13 +62,7 @@ const Timetable = ({navigation}) => {
     return(
       sortedAsc.map((e) => {
         if(e.action === 'Stand'){
-          return <TouchableOpacity>
-         <Animated.View style={styles.animated}>
-           <ImageBackground
-             source={require('../../assets/card_p.png')}
-             style={styles.img}
-           >
-             <View style={styles.event}>
+             return <View style={styles.user}>
                <Icon name={e.icon} size={20} color={'#F9F9B5'} />
                <Text style={styles.text}>
                  {e.time}
@@ -77,20 +71,11 @@ const Timetable = ({navigation}) => {
                  {trans[e.action]}
                </Text>
                <Text style={styles.text}>
-                 {e.place}
+                 {e.place.slice(0, 30)}
                </Text>
              </View>
-           </ImageBackground>
-         </Animated.View>
-        </TouchableOpacity>
         }else{
-          return <TouchableOpacity>
-         <Animated.View style={styles.animated}>
-           <ImageBackground
-             source={require('../../assets/card_p.png')}
-             style={styles.img}
-           >
-             <View style={styles.event}>
+             return <View style={styles.user}>
                <Icon name={e.icon} size={20} color={'#F9F9B5'} />
                <Text style={styles.text}>
                  {e.time}
@@ -99,16 +84,27 @@ const Timetable = ({navigation}) => {
                  {trans[e.action]}
                </Text>
              </View>
-           </ImageBackground>
-         </Animated.View>
-        </TouchableOpacity>
         }
       })
     )
 
 }
 
+const { width, height } = Dimensions.get('window');
 const styles = StyleSheet.create({
+  user: {
+    width: width / 1.25,
+    height: 55,
+    flexDirection: 'row',
+    alignItems: 'center',
+    padding: 10,
+    marginBottom: 10,
+    borderWidth: 2,
+    borderColor: '#19868a',
+    borderRadius: 15,
+    backgroundColor: '#18909C80',
+    gap: 15,
+  },
     text: {
         color: 'white',
         fontSize: 13,

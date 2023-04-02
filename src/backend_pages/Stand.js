@@ -129,7 +129,7 @@ const Stand = ({day, navigation}) => {
         'action': 'Stand',
         'place': place,
         'person': `${person1}`,
-        'time': `${time}`,
+        'time': `${day} ${time}`,
         'icon': 'business',
         'congregation': userData.congregation,
       })
@@ -145,7 +145,7 @@ const Stand = ({day, navigation}) => {
       'action': 'Stand',
       'place': place,
       'person': `${person2}`,
-      'time': `${time}`,
+      'time': `${day} ${time}`,
       'icon': 'business',
       'congregation': userData.congregation,
     })

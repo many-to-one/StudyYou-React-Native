@@ -27,7 +27,7 @@ const StandWithPerson = ({person, day}) => {
             <Icon name='business' size={20} color={'#F9F9B5'} />
             <Text style={styles.user_text_stand}>{person.place}</Text>
             <Text style={styles.user_text_stand}>{person.person}</Text>
-            <Text style={styles.user_text_stand}>{person.time}</Text>
+            <Text style={styles.user_text_stand}>{person.time.slice(11, 16)}</Text>
               <Icon 
                 name="close-circle-outline" 
                 size={20} 
@@ -42,7 +42,7 @@ const StandWithPerson = ({person, day}) => {
             <Icon name='business' size={20} color={'#F9F9B5'} />
             <Text style={styles.user_text_stand}>{person.place}</Text>
             <Text style={styles.user_text_stand}>{person.person}</Text>
-            <Text style={styles.user_text_stand}>{person.time}</Text>
+            <Text style={styles.user_text_stand}>{person.time.slice(11, 16)}</Text>
           </View>
         </View> 
     }else if(live === false){
