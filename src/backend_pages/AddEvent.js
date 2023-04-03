@@ -48,7 +48,7 @@ const AddEvent = ({ navigation }) => {
         });
         const data = await resp.json()
         if(resp.status === 200){
-          navigation.navigate('Home')
+          navigation.navigate('Result')
         }else{
           alert('Something went wrong...')
         }

@@ -24,19 +24,12 @@ const Calendar_ = (props) => {
 
   LocaleConfig.locales['pl'] = {
     monthNames: monthNames,
-    // monthNames: ['Janvier','Février','Mars','Avril','Mai','Juin','Juillet','Août','Septembre','Octobre','Novembre','Décembre'],
     monthNamesShort: ['Janv.','Févr.','Mars','Avril','Mai','Juin','Juil.','Août','Sept.','Oct.','Nov.','Déc.'],
-    // dayNames: ['Dimanche','Lundi','Mardi','Mercredi','Jeudi','Vendredi','Samedi'],
     dayNames: dayNames,
     dayNamesShort: dayNames,
-    // dayNamesShort: ['Dim.','Lun.','Mar.','Mer.','Jeu.','Ven.','Sam.'],
     today: 'Aujourd\'hui'
   };
   LocaleConfig.defaultLocale = 'pl';
-
-
-// let test = {}
-
 
   const getMarked = async() => {
     const resp = await fetch(`${proxy}/backend/get_calendar/`)
@@ -45,7 +38,7 @@ const Calendar_ = (props) => {
       setDs(data.data)
       const ar = data.data
       console.log('ar:', ar)
-
+      
       ar.map((date) => {
         if(date.date < moment().format('YYYY-MM-DD')){
           return "null";

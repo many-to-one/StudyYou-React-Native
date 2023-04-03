@@ -1,14 +1,14 @@
-import React, { useCallback, useContext, useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { AuthContext } from '../context/AuthContext'
 import AsyncStorage from '@react-native-async-storage/async-storage'
-import { FlatList, ScrollView, StyleSheet, View, Animated, Image, Dimensions, RefreshControl } from 'react-native';
+import { ScrollView, StyleSheet, View, Animated, Image, Dimensions, RefreshControl } from 'react-native';
 import MonthsResultsItem from './MonthsResultsItem';
-import { useFocusEffect, useIsFocused } from '@react-navigation/native';
+import { useIsFocused } from '@react-navigation/native';
 
 const MonthsResults = ({navigation}) => {
     
     const { width, height } = Dimensions.get('window');
-    const {proxy, userData} = useContext(AuthContext);
+    const {proxy} = useContext(AuthContext);
     const [ result, setResults ] = useState([]);
     const isFocused = useIsFocused();
 
@@ -20,7 +20,10 @@ const MonthsResults = ({navigation}) => {
         let datas = JSON.parse(await AsyncStorage.getItem("asyncUserData"))
         const resp = await fetch(`${proxy}/backend/get_months_results/${datas.id}/`)
         const data = await resp.json()
-        setResults(data.data)
+        const reverse_data = data.data
+        reverse_data.sort()
+        reverse_data.reverse()
+        setResults(reverse_data)
         await AsyncStorage.setItem("monthsResult", JSON.stringify(data.data));
         console.log('getMonthsResults', data)
         let i = 0

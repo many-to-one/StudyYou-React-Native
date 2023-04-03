@@ -35,6 +35,7 @@ const Profile = ({navigation}) => {
     const [studiesData, setStudiesData] = useState([])
     const [months, setMonths] = useState([]);
     const [monthsHours, setMonthsHours] = useState([]);
+    const mo = []
 
     const dataLanguage = [
       {key: 'PL', value: 'PL'},
@@ -90,14 +91,13 @@ const Profile = ({navigation}) => {
       const data2 = await resp2.json()
       if(data2.status === 200){
         setResult(data2)
-        setMonths(data2.date)
         setMonthsHours(data2.hours)
         setVisits(data2.visits)
         setPublications(data2.publications)
         setFilms(data2.films)
-        // setStudies(data2.studies.slice(-1)[0])
         setStudiesData(data2.studies)
         console.log('data2', data2)
+        console.log('mo', mo)
       }
     }
 
@@ -105,7 +105,7 @@ const Profile = ({navigation}) => {
       labels: result.months,
       datasets: [
         {
-          data: monthsHours.slice(-4)
+          data: monthsHours
         }
       ]
     };
@@ -114,7 +114,7 @@ const Profile = ({navigation}) => {
       labels: result.months,
       datasets: [
         {
-          data: visits.slice(-4)
+          data: visits
         }
       ]
     };
@@ -123,7 +123,7 @@ const Profile = ({navigation}) => {
       labels: result.months,
       datasets: [
         {
-          data: publications.slice(-4)
+          data: publications
         }
       ]
     };
@@ -132,7 +132,7 @@ const Profile = ({navigation}) => {
       labels: result.months,
       datasets: [
         {
-          data: films.slice(-4)
+          data: films
         }
       ]
     };
@@ -141,7 +141,7 @@ const Profile = ({navigation}) => {
       labels: result.months,
       datasets: [
         {
-          data: studiesData.slice(-4)
+          data: studiesData
         }
       ]
     };
@@ -347,8 +347,8 @@ const Profile = ({navigation}) => {
         <Calendar />
 
         <Text style={styles.text}>
-            {trans.PioneerStandard}
-          </Text>
+          {trans.PioneerStandard}
+        </Text>
         <View style={styles.diagram}>
           <PieChart
             data={progresData}
@@ -606,14 +606,13 @@ const styles = StyleSheet.create({
         marginLeft: 30,
     },
     chartConfig: {
-      // backgroundColor: "#e26a00",
-      // backgroundGradientFrom: "#fb8c00",
-      // backgroundGradientTo: "#ffa726",
-      // decimalPlaces: 2, // optional, defaults to 2dp
+      backgroundGradientFrom: "#101011",
+      backgroundGradientTo: "#2b7e83",
+      decimalPlaces: 2, // optional, defaults to 2dp
       backgroundColor: "#18909C80",
       opacity: 0.8,
-      color: (opacity = 1) => `rgba(114, 159, 172, ${opacity})`,
-      labelColor: (opacity = 1) => `rgba(114, 159, 172, ${opacity})`,
+      color: (opacity = 1) => `rgba(237, 233, 104, ${opacity})`, 
+      labelColor: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
       style: {
         borderRadius: 16
       },
@@ -639,7 +638,8 @@ const styles = StyleSheet.create({
       color: 'white',
       fontSize: 20,
       zIndex: 999,
-      backgroundColor: 'transparent',
+      // backgroundColor: 'transparent',
+      backgroundColor: "#18909C80",
       shadowColor: 'white',
       shadowOpacity: 1,
       shadowOffset: {
@@ -656,7 +656,8 @@ const styles = StyleSheet.create({
       color: 'white',
       fontSize: 20,
       zIndex: 999,
-      backgroundColor: 'transparent',
+      // backgroundColor: 'transparent',
+      backgroundColor: "#18909C80",
       shadowColor: 'white',
       shadowOpacity: 1,
       shadowOffset: {

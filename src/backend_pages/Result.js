@@ -1,9 +1,8 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { StyleSheet, Text, View, ScrollView, Animated, Dimensions, TextInput } from 'react-native';
+import { StyleSheet, Text, View, ScrollView, Animated, Dimensions, TextInput, ActivityIndicator } from 'react-native';
 import { AuthContext } from '../context/AuthContext';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import SaveButton from '../buttons/SaveButton';
-import { LinearGradient } from 'expo-linear-gradient';
 import { useIsFocused } from '@react-navigation/native';
 import { LanguageContext } from '../context/LanguageContext';
 
@@ -19,6 +18,7 @@ const Result = ({navigation}) => {
     const [ visits, setVisits ] = useState(null);
     const [ films, setFilms ] = useState(null);
     const [ studies, setStudies ] = useState(0);
+    const [ live, setLive ] = useState(true);
     const isFocused = useIsFocused();
 
     useEffect(() => {
@@ -30,6 +30,7 @@ const Result = ({navigation}) => {
         const resp = await fetch(`${proxy}/backend/results/${datas.id}/`)
         const data = await resp.json()
         setResult(data)
+        setMonth('')
         setHours(data.hours)
         setMinutes(data.minutes)
         setPublications(data.publications)
@@ -53,6 +54,7 @@ const Result = ({navigation}) => {
     };
 
     const saveMonthResult = async() => {
+        setLive(false)
         let lng = await AsyncStorage.getItem('language')
         let datas = JSON.parse(await AsyncStorage.getItem("asyncUserData"))
         const body = {'films': films}
@@ -66,136 +68,131 @@ const Result = ({navigation}) => {
         const data = await resp.json()
         console.log('std', data)
         if (resp.status === 200){
-          deleteAll(datas)
+          deleteAll(datas)  
+          setLive(true)
           navigation.navigate('Menu')
         }
     };
 
-    return (
-        <View style={styles.container}>
-          <Animated.Image 
-          source={require("../../assets/result_i.png")}
-          style={[
-            StyleSheet.absoluteFillObject,
-          ]}
-          blurRadius={5}
+if(live === true){
+
+  return (
+    <View style={styles.container}>
+      <Animated.Image 
+      source={require("../../assets/result_i.png")}
+      style={[
+        StyleSheet.absoluteFillObject,
+      ]}
+      blurRadius={5}
+    />
+
+    <ScrollView>
+
+      <View style={styles.row}>
+        <TextInput 
+          placeholder={trans.month}
+          placeholderTextColor="#D50000"
+          value={month}
+          onChangeText={(e) => {setMonth(e)}}
+          style={styles.month}
         />
-        {/* <LinearGradient
-            colors={['rgba(0, 0, 0, 0)', '#393939']}
-            style={{
-            height,
-            width,
-            position: 'absolute',
-            bottom: -50,
-            }}
-          /> */}
-        <ScrollView>
+      </View>
 
-          <View style={styles.row}>
-            <TextInput 
-              placeholder={trans.month}
-              placeholderTextColor="#D50000"
-              value={month}
-              onChangeText={(e) => {setMonth(e)}}
-              style={styles.month}
-            />
-          </View>
-
-          <View style={styles.row}>
-            <View style={styles.left_row}>
-              <Text style={styles.text}>
-                {trans.Hours}:
-              </Text>
-            </View>
-            <TextInput 
-              value={hours}
-              onChangeText={(e) => {setHours(e)}}
-              style={styles.input}
-            />
-          </View>  
-
-           <View style={styles.row}>
-            <View style={styles.left_row}>
-              <Text style={styles.text}>
-                {trans.Minutes}:
-              </Text>
-            </View>
-            <TextInput 
-              value={minutes}
-              onChangeText={(e) => {setMinutes(e)}}
-              style={styles.input}
-            />
-          </View>  
-
-          <View style={styles.row}>
-            <View style={styles.left_row}>
-              <Text style={styles.text}>
-                {trans.Publications}:
-              </Text>
-            </View>
-            <TextInput 
-              value={publications}
-              onChangeText={(e) => {setPublications(e)}}
-              style={styles.input}
-            />
-          </View>
-
-          <View style={styles.row}>
-            <View style={styles.left_row}>
-              <Text style={styles.text}>
-                {trans.Visits}:
-              </Text>
-            </View>
-            <TextInput 
-              value={visits}
-              onChangeText={(e) => {setVisits(e)}}
-              style={styles.input}
-            />
-          </View> 
-
-          {/* <View style={styles.row}>
-            <View style={styles.left_row}>
-              <Text style={styles.text}>
-                {trans.Films}:
-              </Text>
-            </View>
-            <View style={styles.input}>
-              <Text style={styles.text_res}>
-                {result.films}
-              </Text>
-            </View>
-          </View> */}
-
-          <View style={styles.row}>
-            <View style={styles.left_row}>
-              <Text style={styles.text}>
-                {trans.Films}:
-              </Text>
-            </View>
-            <TextInput 
-              value={films}
-              onChangeText={(e) => {setFilms(e)}}
-              style={styles.input}
-            />
-          </View>
-
-          <View style={styles.row}>
-            <View style={styles.left_row}>
-              <Text style={styles.text}>
-                {trans.BibleStudies}:
-              </Text>
-            </View>
-            <TextInput 
-              value={studies}
-              onChangeText={(e) => {setStudies(e)}}
-              style={styles.input}
-            />
-          </View>
-    
-          <SaveButton onPress={() => saveMonthResult()}/>
-        </ScrollView>
+      <View style={styles.row}>
+        <View style={styles.left_row}>
+          <Text style={styles.text}>
+            {trans.Hours}:
+          </Text>
         </View>
-      )
+        <TextInput 
+          value={hours}
+          onChangeText={(e) => {setHours(e)}}
+          style={styles.input}
+        />
+      </View>  
+
+       <View style={styles.row}>
+        <View style={styles.left_row}>
+          <Text style={styles.text}>
+            {trans.Minutes}:
+          </Text>
+        </View>
+        <TextInput 
+          value={minutes}
+          onChangeText={(e) => {setMinutes(e)}}
+          style={styles.input}
+        />
+      </View>  
+
+      <View style={styles.row}>
+        <View style={styles.left_row}>
+          <Text style={styles.text}>
+            {trans.Publications}:
+          </Text>
+        </View>
+        <TextInput 
+          value={publications}
+          onChangeText={(e) => {setPublications(e)}}
+          style={styles.input}
+        />
+      </View>
+
+      <View style={styles.row}>
+        <View style={styles.left_row}>
+          <Text style={styles.text}>
+            {trans.Visits}:
+          </Text>
+        </View>
+        <TextInput 
+          value={visits}
+          onChangeText={(e) => {setVisits(e)}}
+          style={styles.input}
+        />
+      </View> 
+
+
+      <View style={styles.row}>
+        <View style={styles.left_row}>
+          <Text style={styles.text}>
+            {trans.Films}:
+          </Text>
+        </View>
+        <TextInput 
+          value={films}
+          onChangeText={(e) => {setFilms(e)}}
+          style={styles.input}
+        />
+      </View>
+
+      <View style={styles.row}>
+        <View style={styles.left_row}>
+          <Text style={styles.text}>
+            {trans.BibleStudies}:
+          </Text>
+        </View>
+        <TextInput 
+          value={studies}
+          onChangeText={(e) => {setStudies(e)}}
+          style={styles.input}
+        />
+      </View>
+
+      <SaveButton onPress={() => saveMonthResult()}/>
+    </ScrollView>
+    </View>
+   )
+
+}else{
+
+  return(
+    <View style={[styles.container, styles.horizontal]}>
+      <ActivityIndicator size="large" color="#a1efff" />
+      <Text style={styles.text_load}>Wysyłam...</Text>
+    </View>
+  )
+
+}
+
     }
     
     const { width, height } = Dimensions.get('window');
@@ -214,24 +211,18 @@ const Result = ({navigation}) => {
         flexDirection: 'row',
       },
       text: {
-        // justifyContent: 'center',
-        // alignItems: 'center',
         color: '#FAFAE6',
         fontSize: 20,
       },
       text_res: {
-        // justifyContent: 'center',
-        // alignItems: 'center',
         color: '#FAFAE6',
         fontSize: 25,
-        // padding: 20,
       }, 
       month: {
         width: width * 0.8,
         height:50,
         borderRadius: 10,
         margin: 5,
-        // alignItems: 'center',
         justifyContent: 'center',
         paddingLeft: 10,
         color: 'white',
@@ -265,7 +256,6 @@ const Result = ({navigation}) => {
         height:50,
         borderRadius: 10,
         margin: 5,
-        // alignItems: 'center',
         justifyContent: 'center',
         paddingLeft: 10,
         color: 'white',
@@ -280,6 +270,15 @@ const Result = ({navigation}) => {
       },
       backbtn: {
         marginLeft: 100,
+      },
+      horizontal: {
+        flexDirection: 'column',
+        justifyContent: 'center',
+        padding: 10,
+      },
+      text_load: {
+        fontSize: 15,
+        color: '#a1efff'
       },
     });
     
