@@ -52,7 +52,6 @@ const StandWithPerson = ({person, day, users}) => {
 
     if(live === true && person.date === day && stuff === true && isModalVisible === false){  
         return  <View>
-        {/* <TouchableOpacity onPress={() => showModal()}> */}
           <View style={styles.user}>
             <Icon name='business' size={20} color={'#F9F9B5'} />
             <Text style={styles.user_text_stand}>{person.place}</Text>
@@ -70,7 +69,6 @@ const StandWithPerson = ({person, day, users}) => {
               onPress={() => deleteMinistryWith(person)}     
             />
           </View>
-        {/* </TouchableOpacity>  */}
       </View>
     }else if(live === true && person.date === day && stuff === false && isModalVisible === false){
         return  <View>

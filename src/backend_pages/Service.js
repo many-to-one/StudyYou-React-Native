@@ -7,6 +7,7 @@ import Cleaning from './Cleaning';
 import Duty from './Duty';
 import { styles } from '../styles/Styles';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import ScheduleBtn from '../buttons/ScheduleBtn';
 
 const Service = ({route, navigation}) => {
 
@@ -52,6 +53,10 @@ const Service = ({route, navigation}) => {
             week_ago={week_ago}
           />
         </View>
+        <ScheduleBtn 
+          onPress={() => navigation.navigate('AutoService')}
+          title={'Auto'}
+        />
       </View>
       </ScrollView>
 

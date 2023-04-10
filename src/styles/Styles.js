@@ -28,6 +28,17 @@ const styles = StyleSheet.create({
     gap: 15,
     paddingTop: 25,
     padding: 20,
+  },
+  auto_cont: {
+    width: width,
+    height: height,
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    justifyContent: 'center',
+    gap: 15,
+    paddingTop: 25,
+    padding: 20,
+    backgroundColor: 'black',
   
   },
   cub:{

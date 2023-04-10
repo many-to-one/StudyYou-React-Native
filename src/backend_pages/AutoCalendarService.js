@@ -8,7 +8,7 @@ import { LanguageContext } from '../context/LanguageContext';
 import ScheduleBtn from '../buttons/ScheduleBtn';
 import { styles } from '../styles/Styles';
 
-const AutoCalendar = (props) => {
+const AutoCalendarService = (props) => {
 
   const navigation = useNavigation();
   const {proxy, userData} = useContext(AuthContext);
@@ -75,15 +75,13 @@ const AutoCalendar = (props) => {
   }
 
   const sendDates = async(days) => {
-    const resp = await fetch(`${proxy}/backend/set_random_stand_big/`,{
+    const resp = await fetch(`${proxy}/backend/set_random_service/`,{
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({
           'date': `${days}`,
-          'action': 'Stand',
-          'icon': 'business',
           'congregation': `${userData.congregation}`,
         })
     }) 
@@ -142,29 +140,4 @@ const AutoCalendar = (props) => {
   
 }
 
-// const { width, height } = Dimensions.get('window');
-// const styles = StyleSheet.create({
-//   event:{
-//     width: width / 1.2,
-//     height: 380,
-//     borderRadius: 10,
-//     borderWidth: 1,
-//     borderColor: '#19868a',
-//     marginTop: 15,
-//     padding: 10,
-//     color: 'white',
-//     fontSize: 20,
-//     zIndex: 999,
-//     backgroundColor: '#18909C80',
-//     shadowColor: '#19868a',
-//       shadowOpacity: 1,
-//       shadowOffset: {
-//         width: 0,
-//         height: 0,
-//       },
-//     shadowRadius: 8,
-//     marginBottom: 20,
-//   }
-// })
-
-export default AutoCalendar
+export default AutoCalendarService

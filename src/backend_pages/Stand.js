@@ -172,21 +172,21 @@ const Stand = ({day}) => {
     getCalendarDatesByDate()
   }
 
-  const deleteStand = async(user) => {
-    const resp = await fetch(`${proxy}/backend/delete_calendar/${user.id}/`, {
-      method: 'DELETE',
-      headers: {
-          'Content-Type': 'application/json'
-      },
-    })
-    if(resp.status === 200){
-      console.log('deleted', user)
-      setPerson1('')
-      setPerson2('')
-      setDateDuty([])
-      getCalendarDatesByDate()
-    }
-  }
+  // const deleteStand = async(user) => {
+  //   const resp = await fetch(`${proxy}/backend/delete_calendar/${user.id}/`, {
+  //     method: 'DELETE',
+  //     headers: {
+  //         'Content-Type': 'application/json'
+  //     },
+  //   })
+  //   if(resp.status === 200){
+  //     console.log('deleted', user)
+  //     setPerson1('')
+  //     setPerson2('')
+  //     setDateDuty([])
+  //     getCalendarDatesByDate()
+  //   }
+  // }
 
   console.log('dateDuty:', dateDuty, day, place)
 

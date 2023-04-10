@@ -38,6 +38,7 @@ import User from '../backend_pages/User';
 import ShowResultsForLeader from '../backend_pages/ShowResultsForLeader';
 import AutoStand from '../backend_pages/AutoStand';
 import AutoCalendar from '../backend_pages/AutoCalendar';
+import AutoService from '../backend_pages/AutoService';
 const Tab = createBottomTabNavigator();
 
 function BottomNavigator() {
@@ -668,6 +669,25 @@ function BottomNavigator() {
         <Tab.Screen 
           name="AutoCalendar" 
           component={AutoCalendar} 
+          options={({ navigation }) => ({
+            title: `${trans.UsersManagment}`,
+            headerTtleStyle: {
+              color: 'white',
+              marginLeft: width / 3.5,
+            },
+            headerStyle: {
+              backgroundColor: 'black',
+            },
+            tabBarVisible: false, // hide the button
+            tabBarButton: (props) => null, // hide the button
+            headerLeft: () => (
+              <BackButton onPress={() => navigation.navigate('Profile')} />
+            ),
+          })}
+        />
+        <Tab.Screen 
+          name="AutoService" 
+          component={AutoService} 
           options={({ navigation }) => ({
             title: `${trans.UsersManagment}`,
             headerTtleStyle: {
