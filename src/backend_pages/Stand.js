@@ -9,9 +9,12 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { styles } from '../styles/Styles';
 import ScheduleBtn from '../buttons/ScheduleBtn';
 import StandWithPerson from './StandWithPerson';
+import moment from 'moment';
+import { useNavigation } from '@react-navigation/native';
 
-const Stand = ({day, navigation}) => {
+const Stand = ({day}) => {
 
+    const navigation = useNavigation();
     const {proxy, userData, stuff} = useContext(AuthContext);
     const {trans} = useContext(LanguageContext);
     const [person1, setPerson1] = useState('')
@@ -47,8 +50,11 @@ const Stand = ({day, navigation}) => {
       {key:'2', value:'22:00'},
     ]
 
+    const Day = moment(day)._d.toString().slice(0, 3)
+
     useEffect(() => {
       getUsers()
+      console.log('day_', Day)
   }, [isFocused])
 
   useEffect(() => {
@@ -269,7 +275,14 @@ const Stand = ({day, navigation}) => {
             search={true}
             dropdownStyles={styles.dropdown}
           />
-          <ScheduleBtn onPress={() => setStand(person1, person2, time, place)}/>
+          <ScheduleBtn 
+            onPress={() => setStand(person1, person2, time, place)}
+            title={trans.Submit}
+          />
+          <ScheduleBtn 
+            onPress={() => navigation.navigate('AutoStand')}
+            title={'Auto'}
+          />
           </View>
           <View>
             {dateDuty.map((person, index) => (
@@ -278,6 +291,7 @@ const Stand = ({day, navigation}) => {
               key={person.id}
               person={person}
               day={day}
+              users={data}
             />
             ))}
           </View>
@@ -293,6 +307,7 @@ const Stand = ({day, navigation}) => {
               key={person.id}
               person={person}
               day={day}
+              users={data}
             />
             ))}
           </View>

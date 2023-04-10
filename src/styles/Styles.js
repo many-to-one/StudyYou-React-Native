@@ -176,6 +176,14 @@ const styles = StyleSheet.create({
     fontSize: 10,
     color: 'white',
   },
+  user_text_stand_edit: {
+    borderRadius: 10,
+    borderColor: 'black',
+    borderLeftWidth: 1,
+    backgroundColor: 'white',
+    fontSize: 15,
+    color: 'black',
+  },
   button: {
     alignItems: 'center',
     justifyContent: 'center',
@@ -218,6 +226,12 @@ checkbox: {
 delete: {
   color: '#F9F9B5',
   fontSize: 30,
+},
+cont_modal: {
+  flex: 1,
+  alignItems: 'center',
+  justifyContent: 'center',
+  backgroundColor: 'transparent',
 },
 });
 

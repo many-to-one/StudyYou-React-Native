@@ -21,7 +21,9 @@ const MinistryWithStand = ({route, navigation}) => {
 
         <View style={styles.event_}>
           <Text style={styles.text}>{trans.Stand}:</Text>
-          <Stand day={day}/>
+          <Stand 
+            day={day}
+          />
         </View>
 
       </View>

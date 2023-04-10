@@ -2,12 +2,12 @@ import React, { useContext } from 'react';
 import { Text, StyleSheet, TouchableOpacity, Dimensions } from 'react-native';
 import { LanguageContext } from '../context/LanguageContext';
 
-export default function ScheduleBtn({onPress}) {
+export default function ScheduleBtn({onPress, title}) {
   const {trans} = useContext(LanguageContext);
 
   return (
     <TouchableOpacity style={styles.button} onPress={onPress}>
-      <Text style={styles.text}>{trans.Submit}</Text>
+      <Text style={styles.text}>{title}</Text>
     </TouchableOpacity>
   );
 }

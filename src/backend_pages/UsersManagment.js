@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react'
-import { Text, TouchableOpacity, View } from 'react-native';
+import { ScrollView, Text, TouchableOpacity, View } from 'react-native';
 import { AuthContext } from '../context/AuthContext'
 import { LanguageContext } from '../context/LanguageContext';
 import { styles } from '../styles/Styles';
@@ -24,7 +24,8 @@ const UsersManagment = ({navigation}) => {
     console.log('users', users)
 
   return (
-    <View style={styles.container}>
+    <ScrollView>
+        <View style={styles.container}>
         {users.map((user, index) => (
             <TouchableOpacity onPress={() => navigation.navigate('User', {user: user})}>
                 <View style={styles.container}>
@@ -35,6 +36,7 @@ const UsersManagment = ({navigation}) => {
             </TouchableOpacity>
     ))}
     </View>
+    </ScrollView>
   )
 }
 

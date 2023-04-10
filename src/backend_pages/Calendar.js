@@ -69,6 +69,7 @@ const Calendar_ = (props) => {
   const setDate = (day) => {
     let duration = moment.duration({ 'days': 7 });
     let _week_ago = moment(day).subtract(duration)
+    let day_ = day
     navigation.navigate('CreateCalendarEvent', {day: day, week_ago:  moment(_week_ago._d).format('YYYY-MM-DD')})
     console.log(day)
   }
@@ -78,7 +79,7 @@ const Calendar_ = (props) => {
     <Calendar 
       onDayPress={(day) =>  setDate(day.dateString)}
       // onDayPress={(day) =>  marked.push(day.dateString)}
-      firstDay = { 7 } 
+      firstDay = { 1 } 
       style={styles.event}
       theme={{
         calendarBackground: 'transparent',

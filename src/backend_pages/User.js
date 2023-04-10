@@ -17,6 +17,7 @@ const User = ({route, navigation}) => {
     const [service, setService] = useState(null);
     const [editor, setEditor] = useState(null);
     const [report, setReport] = useState(null);
+    const [stand, setStand] = useState(null);
     const isFocused = useIsFocused();
 
     useEffect(() => {
@@ -29,7 +30,8 @@ const User = ({route, navigation}) => {
       const data = await resp.json()
       if(data){
         console.log('user', data)
-        setAdmin(data.admin)
+        setStand(data.data.stand)
+        setAdmin(data.data.admin)
         setLeader(data.data.leader)
         setHelper(data.data.helper)
         setMinistryEvent(data.data.ministry_event)
@@ -45,6 +47,30 @@ const User = ({route, navigation}) => {
       setResults(data.data)
       console.log('getMonthsResults', data.data)
   };
+
+    const editStand = async() => {
+
+      if(stand === false){
+        const body = {'stand': true}
+        const resp = await fetch(`${proxy}/users/user/${user.id}/`, {
+        method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body:JSON.stringify(body),
+        });
+
+      }else{
+        const body = {'stand': false}
+        const resp = await fetch(`${proxy}/users/user/${user.id}/`, {
+        method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body:JSON.stringify(body),
+        });
+      }   
+    }
 
     const editAdmin = async() => {
 
@@ -247,6 +273,17 @@ const User = ({route, navigation}) => {
                     <Text style={styles.user_text}>{user.last_login.slice(0, 10)}</Text>
                     <Text style={styles.user_text}>{user.last_login.slice(11, 19)}</Text>
                 </View>
+
+                <TouchableOpacity onPress={() => editStand()}>
+                  <View style={styles._user}>
+                      <CheckBox
+                        value={stand}
+                        onValueChange={setStand}
+                        style={styles.checkbox}
+                      />
+                      <Text style={styles.user_text}>{trans.Stand}</Text>
+                  </View>
+                </TouchableOpacity>
 
                 <TouchableOpacity onPress={() => editAdmin()}>
                   <View style={styles._user}>
