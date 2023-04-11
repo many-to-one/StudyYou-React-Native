@@ -1,9 +1,6 @@
 import React, { useContext } from 'react'
-import { Animated, Button, Dimensions, SafeAreaView, ScrollView, StyleSheet, Text, View } from 'react-native'
-import Microphones from '../backend_pages/Microphones';
-import Music from '../backend_pages/Music';
+import { Animated, SafeAreaView, ScrollView, StyleSheet, Text, View } from 'react-native'
 import { LanguageContext } from '../context/LanguageContext';
-import Duty from './Duty';
 import Ministry from './Ministry';
 import { styles } from '../styles/Styles';
 
@@ -28,6 +25,7 @@ const Ministries = ({route, navigation}) => {
           <Ministry  
             day={day} 
             week_ago={week_ago}
+            navigation={navigation}
           />
         </View>
       </View>

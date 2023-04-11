@@ -13,6 +13,7 @@ const StandWithPerson = ({person, day, users}) => {
     const [live, setLive] = useState(true)
     const [pers, setPers] = useState('')
     const [isModalVisible, setIsModalVisible] = useState(false)
+    const [edit, setEdit] = useState(false)
 
     useEffect(() => {
       setIsModalVisible(false)
@@ -33,8 +34,8 @@ const StandWithPerson = ({person, day, users}) => {
           'person': `${pers}`,
         })
       })
+      setEdit(true)
       setIsModalVisible(false)
-      navigation.navigate('Profile')
     }
 
     const deleteMinistryWith = async(user) => {
@@ -50,7 +51,7 @@ const StandWithPerson = ({person, day, users}) => {
         }
       }
 
-    if(live === true && person.date === day && stuff === true && isModalVisible === false){  
+    if(live === true && person.date === day && stuff === true && isModalVisible === false && edit === false){  
         return  <View>
           <View style={styles.user}>
             <Icon name='business' size={20} color={'#F9F9B5'} />
@@ -70,7 +71,7 @@ const StandWithPerson = ({person, day, users}) => {
             />
           </View>
       </View>
-    }else if(live === true && person.date === day && stuff === false && isModalVisible === false){
+    }else if(live === true && person.date === day && stuff === false && isModalVisible === false && edit === false){
         return  <View>
           <View style={styles.user}>
             <Icon name='business' size={20} color={'#F9F9B5'} />
@@ -81,9 +82,8 @@ const StandWithPerson = ({person, day, users}) => {
         </View> 
     }else if(live === false && isModalVisible === false){
       return  <View></View> 
-  }else if(live === true && person.date === day && stuff === true && isModalVisible === true){  
+  }else if(live === true && person.date === day && stuff === true && isModalVisible === true && edit === false){  
     return  <View>
-    {/* <TouchableOpacity onPress={() => showModal()}> */}
       <View style={styles.user}>
         <Icon name='business' size={20} color={'#F9F9B5'} />
         <TextInput style={styles.user_text_stand_edit}
@@ -96,8 +96,27 @@ const StandWithPerson = ({person, day, users}) => {
           onPress={() => updateUser(person.id)}     
         />
       </View>
-    {/* </TouchableOpacity>  */}
   </View>
+}else if(live === true && person.date === day && edit === true && isModalVisible === false){  
+  return  <View>
+    <View style={styles.user}>
+      <Icon name='business' size={20} color={'#F9F9B5'} />
+      <Text style={styles.user_text_stand}>{person.place}</Text>
+      <Text style={styles.user_text_stand}>{pers}</Text>
+      <Text style={styles.user_text_stand}>{person.time.slice(11, 16)}</Text>
+      <Icon 
+        name='create-outline'
+        onPress={() => showModal()}
+        style={styles.delete}
+      />
+      <Icon 
+        name="close-circle-outline" 
+        size={20} 
+        color={'#F9F9B5'} 
+        onPress={() => deleteMinistryWith(person)}     
+      />
+    </View>
+</View>
 }
 
 }

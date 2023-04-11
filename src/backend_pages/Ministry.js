@@ -9,6 +9,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import TalkBtn from '../buttons/TalkBtn';
 import ShowStuff  from './ShowStuff'
 import { styles } from '../styles/Styles';
+import ScheduleBtn from '../buttons/ScheduleBtn';
 
 const Ministry = ({day, week_ago, navigation}) => {
 
@@ -149,6 +150,10 @@ console.log('selected:', selected)
         />
         ))}
       </View>
+        <ScheduleBtn 
+          onPress={() => navigation.navigate('AutoMinistry')}
+          title={'Auto'}
+        />
     </View>
   )
  }else{
