@@ -40,6 +40,9 @@ import AutoStand from '../backend_pages/AutoStand';
 import AutoCalendar from '../backend_pages/AutoCalendar';
 import AutoService from '../backend_pages/AutoService';
 import AutoMinistry from '../backend_pages/AutoMinistry';
+import AutoWeek from '../backend_pages/AutoWeek';
+import LoadingPage from '../backend_pages/LoadingPage';
+import AutoWeekend from '../backend_pages/AutoWeekend';
 const Tab = createBottomTabNavigator();
 
 function BottomNavigator() {
@@ -708,6 +711,63 @@ function BottomNavigator() {
         <Tab.Screen 
           name="AutoMinistry" 
           component={AutoMinistry} 
+          options={({ navigation }) => ({
+            title: `${trans.UsersManagment}`,
+            headerTtleStyle: {
+              color: 'white',
+              marginLeft: width / 3.5,
+            },
+            headerStyle: {
+              backgroundColor: 'black',
+            },
+            tabBarVisible: false, // hide the button
+            tabBarButton: (props) => null, // hide the button
+            headerLeft: () => (
+              <BackButton onPress={() => navigation.navigate('Profile')} />
+            ),
+          })}
+        />
+        <Tab.Screen 
+          name="AutoWeek" 
+          component={AutoWeek} 
+          options={({ navigation }) => ({
+            title: `${trans.UsersManagment}`,
+            headerTtleStyle: {
+              color: 'white',
+              marginLeft: width / 3.5,
+            },
+            headerStyle: {
+              backgroundColor: 'black',
+            },
+            tabBarVisible: false, // hide the button
+            tabBarButton: (props) => null, // hide the button
+            headerLeft: () => (
+              <BackButton onPress={() => navigation.navigate('Profile')} />
+            ),
+          })}
+        />
+        <Tab.Screen 
+          name="LoadingPage" 
+          component={LoadingPage} 
+          options={({ navigation }) => ({
+            title: `${trans.UsersManagment}`,
+            headerTtleStyle: {
+              color: 'white',
+              marginLeft: width / 3.5,
+            },
+            headerStyle: {
+              backgroundColor: 'black',
+            },
+            tabBarVisible: false, // hide the button
+            tabBarButton: (props) => null, // hide the button
+            headerLeft: () => (
+              <BackButton onPress={() => navigation.navigate('Profile')} />
+            ),
+          })}
+        />
+        <Tab.Screen 
+          name="AutoWeekend" 
+          component={AutoWeekend} 
           options={({ navigation }) => ({
             title: `${trans.UsersManagment}`,
             headerTtleStyle: {

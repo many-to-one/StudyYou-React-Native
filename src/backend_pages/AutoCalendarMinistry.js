@@ -58,7 +58,6 @@ const AutoCalendarMinistry = (props) => {
         selectedTextColor: 'black',
       }
     // navigation.navigate('CreateCalendarEvent', {day: day, week_ago:  moment(_week_ago._d).format('YYYY-MM-DD')})
-    console.log(day.toString())
     setLive(true)
   }
 
@@ -73,6 +72,7 @@ const AutoCalendarMinistry = (props) => {
   }
 
   const sendDates = async(days) => {
+    navigation.navigate('LoadingPage')
     const resp = await fetch(`${proxy}/backend/set_random_ministry/`,{
         method: 'POST',
         headers: {

@@ -17,10 +17,13 @@ import WeekTreasures from './WeekTreasures';
 import WeekVisit1 from './WeekVisit1';
 import WeekVisit2 from './WeekVisit2';
 import { styles } from '../styles/Styles';
+import { AuthContext } from '../context/AuthContext';
+import ScheduleBtn from '../buttons/ScheduleBtn';
 
 const MiddleOfTheWeek = ({route, navigation}) => {
     const {day, week_ago} = route.params;
     const {trans} = useContext(LanguageContext);
+    const {userData} = useContext(AuthContext);
   return (
     <SafeAreaView style={styles.container}>
       <Animated.Image 
@@ -36,7 +39,7 @@ const MiddleOfTheWeek = ({route, navigation}) => {
 
         <View style={styles.event_}>
           <Text style={styles.text_}>{trans.LeaderAndIntroductoryRemarks}:</Text>
-          <WeekLeader  
+          <WeekLeader   
             day={day}
             week_ago={week_ago}
           />
@@ -153,6 +156,15 @@ const MiddleOfTheWeek = ({route, navigation}) => {
             week_ago={week_ago}
           />
         </View>
+
+        {userData.admin ?
+          <ScheduleBtn 
+            onPress={() => navigation.navigate('AutoWeek')}
+            title={'Auto'}
+          />
+        : 
+        <View />
+        }
 
       </View>
       </ScrollView>

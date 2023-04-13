@@ -43,7 +43,6 @@ const AutoCalendarService = (props) => {
         selectedTextColor: 'black',
       }
     // navigation.navigate('CreateCalendarEvent', {day: day, week_ago:  moment(_week_ago._d).format('YYYY-MM-DD')})
-    console.log(day.toString())
     setLive(false)
   }
 
@@ -59,7 +58,6 @@ const AutoCalendarService = (props) => {
         selectedTextColor: 'black',
       }
     // navigation.navigate('CreateCalendarEvent', {day: day, week_ago:  moment(_week_ago._d).format('YYYY-MM-DD')})
-    console.log(day.toString())
     setLive(true)
   }
 
@@ -70,11 +68,11 @@ const AutoCalendarService = (props) => {
         key
       )
     }
-    console.log('days', days)
     sendDates(days)
   }
 
   const sendDates = async(days) => {
+    navigation.navigate('LoadingPage')
     const resp = await fetch(`${proxy}/backend/set_random_service/`,{
         method: 'POST',
         headers: {
@@ -86,8 +84,6 @@ const AutoCalendarService = (props) => {
         })
     }) 
     const data = await resp.json()
-    console.log('marked', marked)
-    console.log('data', data)
     navigation.navigate('Profile')
   }
 

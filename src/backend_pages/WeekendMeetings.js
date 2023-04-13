@@ -6,11 +6,14 @@ import WatchTowerLector from './WatchTowerLector';
 import WeekendLeader from './WeekendLeader';
 import WeekendSpeach from './WeekendSpeech';
 import { styles } from '../styles/Styles';
+import { AuthContext } from '../context/AuthContext';
+import ScheduleBtn from '../buttons/ScheduleBtn';
 
 
 const WeekendMeetings = ({route, navigation}) => {
     const {day, week_ago} = route.params;
     const {trans} = useContext(LanguageContext);
+    const {userData} = useContext(AuthContext);
 
   return (
     <SafeAreaView style={styles.container}>
@@ -57,6 +60,14 @@ const WeekendMeetings = ({route, navigation}) => {
           />
         </View>
 
+        {userData.admin ?
+          <ScheduleBtn 
+            onPress={() => navigation.navigate('AutoWeekend')}
+            title={'Auto'}
+          />
+        : 
+        <View />
+        }
 
       </View>
       </ScrollView>

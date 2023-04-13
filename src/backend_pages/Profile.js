@@ -314,7 +314,7 @@ const Profile = ({navigation}) => {
           <View />
           }
 
-        {profileData.helper ? 
+        {profileData.editor ? 
 
           <TouchableOpacity onPress={() => navigation.navigate('PlacesStand')}>
           <Animated.View style={styles.animated}>
